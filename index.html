@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL_ELAX.DEV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-en">
+
+    <canvas id="matrix-bg"></canvas>
+    <div id="cursor-glow"></div>
+    <div class="crt-vignette"></div>
+
+    <div id="boot-loader">
+        <div class="boot-container">
+            <div class="boot-header">ELAX_OS_KERNEL v1.0</div>
+            <div id="boot-log" class="boot-log"></div>
+            <div class="boot-progress-wrapper">
+                <span class="boot-label">LOADING_MODULES:</span>
+                <div class="boot-progress-bar">
+                    <div id="boot-fill"></div>
+                </div>
+                <span id="boot-percent">0%</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="scanlines"></div>
+
+    <nav class="system-nav">
+        <div class="logo">ELAX_OS_v1.0</div>
+        <div class="nav-controls">
+            <span class="system-status">SYSTEM_ACTIVE</span>
+            <button id="lang-toggle" class="cmd-btn">MODE: EN</button>
+        </div>
+    </nav>
+
+    <main class="terminal-container">
+        <section class="console-block hero">
+            <div class="hero-layout">
+                
+                <div class="hero-text">
+                    <div class="cmd-line">>> RUN bio.sh</div>
+                    <h1 class="glitch-text" data-text="ĐỖ NGỌC THIÊN BẢO (elax)">
+                        <span class="content-vi">ĐỖ NGỌC THIÊN BẢO (elax)</span>
+                        <span class="content-en">DO NGOC THIEN BAO (elax)</span>
+                    </h1>
+                    
+                    <div class="slogan-box">
+                        <span id="slogan-text"></span><span class="cursor">_</span>
+                    </div>
+
+                    <p class="sub-text">
+                        <span class="content-vi">[Vị trí]: Solo/Indie Game Developer</span>
+                        <span class="content-en">[Role]: Solo/Indie Game Developer</span>
+                    </p>
+                </div>
+
+                <div class="hero-avatar-wrapper">
+                    <div class="avatar-frame">
+                        <img src="https://i.ibb.co/JWB345nM/IMG-20260117-192118.png" alt="OPERATOR_IMG" class="avatar-img">
+                        <div class="avatar-scanline"></div>
+                    </div>
+                    <div class="avatar-caption">:: OPERATOR_ID ::</div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="console-block hidden-section">
+            <div class="cmd-line">>> LIST --skills</div>
+            <div class="brutal-grid">
+                <div class="skill-box">
+                    <span class="code-num">01</span>
+                    <h3 class="content-vi">Học hỏi nhanh</h3>
+                    <h3 class="content-en">Fast Learner</h3>
+                    <p class="content-vi">Nắm bắt công nghệ & engine cực nhanh để thực hiện dự án.</p>
+                    <p class="content-en">Grasp tech & engines rapidly for project execution.</p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">02</span>
+                    <h3 class="content-vi">Tư duy logic</h3>
+                    <h3 class="content-en">Logic Thinking</h3>
+                    <p class="content-vi">Xây dựng luồng game mạch lạc, tối ưu hóa thuật toán phức tạp.</p>
+                    <p class="content-en">Build coherent flows, optimizing complex algorithms.</p>
+                </div>
+                <div class="skill-box">
+                    <span class="code-num">03</span>
+                    <h3 class="content-vi">Tính kỹ càng</h3>
+                    <h3 class="content-en">Meticulous</h3>
+                    <p class="content-vi">Tỉ mỉ trong từng dòng code, fix bug và polish sản phẩm.</p>
+                    <p class="content-en">Detail-oriented in code, bug fixing, and polishing.</p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">04</span>
+                    <h3 class="content-vi">Ghi nhớ lâu</h3>
+                    <h3 class="content-en">Long-term memory</h3>
+                    <p class="content-vi">Khả năng ghi nhớ thông tin trong một thời gian dài.</p>
+                    <p class="content-en">The ability to remember informations for a very long time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block hidden-section">
+    <div class="cmd-line">>> EXECUTE EXPLORER.EXE</div>
+    
+    <div class="window-frame">
+        <div class="window-header">
+            <span class="win-title">:: PROJECT_EXPLORER ::</span>
+            <div class="win-controls">
+                <span class="win-btn">_</span>
+                <span class="win-btn">□</span>
+                <span class="win-btn close">X</span>
+            </div>
+        </div>
+
+        <div class="window-bar">
+            <button id="btn-back" class="nav-btn" onclick="navigateUp()">[<]</button>
+            <div class="address-input">C:\USERS\ELAX\PROJECTS\<span id="current-path">ROOT</span></div>
+        </div>
+
+        <div class="window-body">
+            <div class="sidebar">
+                <div class="sidebar-item active">MY PC</div>
+                <div class="sidebar-item">DISK (C:)</div>
+                <div class="sidebar-item">NETWORK</div>
+            </div>
+
+            <div id="file-grid" class="file-grid">
+                </div>
+        </div>
+        
+        <div class="window-footer">
+            <span id="item-count">0 OBJECTS</span>
+        </div>
+    </div>
+</section>
+
+        <section class="console-block god-only-section">
+    <div class="cmd-line" style="color: var(--accent);">>> ACCESSING CLASSIFIED_ARCHIVES...</div>
+    <div class="project-brutal-card" style="border-color: var(--accent); border-style: dashed;">
+        <div class="project-header" style="background: var(--accent);">⚠️ RESTRICTED_PROJECT_001</div>
+        <div class="project-body">
+            <div class="project-desc">
+                <h3 style="color: var(--text);">ℹ️ INFORMATION</h3>
+                <p>This section is invisible to normal users.</p>
+                <p>Status: <span class="status-blink">CLASSIFIED</span></p>
+                <p>Notes: You found the Easter Egg! This is where I keep my experimental prototypes & other hidden stuff.</p>
+            </div>
+        </div>
+    </div>
+                    <div class="project-brutal-card" style="border-color: var(--accent); border-style: dashed;">
+    <div class="project-header" style="background: var(--accent);">⚠️ RESTRICTED_PROJECT_002</div>
+    <div class="project-body">
+        <div class="project-desc">
+            <h3 style="color: var(--text);">PROJECT: GRADE 11 - SEMESTER 1</h3>
+            <p>My Semester 1 result of grade 11th.</p>
+            <p>Status: <span class="status-blink">CLASSIFIED</span></p>
+            <p>Notes: Fuck you Literature... you robbed me...</p>
+            
+            <a href="pages/gradesReport/report_Grade11_Semester1.html" class="launch-btn" style="border-color: var(--accent); color: var(--accent);">
+                >> ACCESS_REPORT_FILE
+            </a>
+            
+        </div>
+    </div>
+</div>
+</section>
+
+        <section class="console-block hidden-section">
+    <div class="cmd-line">>> ESTABLISH_CONNECTION</div>
+    <div style="border: 1px dashed var(--text); padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+            <h3 style="color: var(--accent);">SOCIAL_MEDIA_HUB</h3>
+            <p class="content-vi">Các trang Mạng Xã Hội của mình!</p>
+            <p class="content-en">My Social Media Accounts!</p>
+        </div>
+        <a href="pages/comm_link.html" class="launch-btn" style="margin-top: 0;">
+            ACCESS_HUB >>
+        </a>
+    </div>
+</section>
+        <section class="console-block hidden-section">
+            <div class="contact-terminal">
+                <div class="contact-row">
+                    <span class="label">EMAIL:</span>
+                    <a href="mailto:ngocthienbaod@gmail.com" class="value">ngocthienbaod@gmail.com</a>
+                </div>
+                <div class="contact-row">
+                    <span class="label">GITHUB:</span>
+                    <a href="https://github.com/elaxuwu" target="_blank" class="value">github.com/elaxuwu</a>
+                </div>
+                <div class="contact-row status-blink">
+                    <span class="label">STATUS:</span>
+                    <span class="value">
+                        <span class="content-vi">Available</span>
+                        <span class="content-en">Available</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="system-footer">
+    <div class="sys-info-bar">
+        <span id="sys-time">TIME: --:--:--</span>
+        <span class="separator">|</span>
+        <span id="sys-battery">BATTERY: DETECTING...</span>
+    </div>
+    <p>[CONNECTION_SECURE]</p>
+    <p>TERMINAL_ID: DO_NGOC_THIÊN_BẢO_(ELAX) // 2026</p>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
