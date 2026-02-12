@@ -1,0 +1,38 @@
+body {
+    background-color: #000; /* Black background */
+    color: #0f0; /* Green text color */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #0f0; /* Green headings */
+}
+
+a {
+    color: #0ff; /* Cyan links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+
+.container {
+    max-width: 800px; /* Maximum width for the content */
+    margin: auto; /* Center the container */
+    background: rgba(0, 0, 0, 0.8); /* Slightly transparent container */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+}
+
+.code {
+    background: #222; /* Dark background for code blocks */
+    color: #fff; /* White text */
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners for code blocks */
+    display: block;
+    overflow-x: auto; /* Scroll for long code lines */
+}
