@@ -34,50 +34,39 @@ function toggleDetail(element) {
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- A. BOOT SEQUENCE ---
-    const logBox = document.getElementById('boot-log');
-    const fill = document.getElementById('boot-fill');
-    const percent = document.getElementById('boot-percent');
+    // --- A. BOOT SEQUENCE (CREATIVE TERMINAL LOADER) ---
     const loader = document.getElementById('boot-loader');
-    
-    const logData = [
-        "LOADING ELAX_OS_KERNEL...",
-        "MOUNTING VIRTUAL_DRIVE/PROJECTS...",
-        "INITIALIZING GRAPHICS_ADAPTER...",
-        "ESTABLISHING SECURE_CONNECTION...",
-        "LOADING SKILLS_MODULE...",
-        "SYSTEM CHECK: OK",
-        "ACCESS GRANTED: WELCOME ADMINISTRATOR"
-    ];
+    const loaderStatus = document.getElementById('loader-status');
 
-    if (loader) {
-        let p = 0;
-        let lIndex = 0;
+    if (loader && loaderStatus) {
+        const statusMessages = [
+            'INITIALIZING SYSTEMS',
+            'LOADING MODULES',
+            'ESTABLISHING CONNECTION',
+            'SYSTEM READY'
+        ];
+        let currentStatus = 0;
 
-        const interval = setInterval(() => {
-            p += Math.floor(Math.random() * 7) + 2;
-            if (p > 100) p = 100;
-            
-            fill.style.width = p + "%";
-            percent.innerText = p + "%";
-
-            if (p > (lIndex * 15) && lIndex < logData.length) {
-                const line = document.createElement('div');
-                line.innerText = "> " + logData[lIndex];
-                logBox.appendChild(line);
-                lIndex++;
+        // Change status text every 550ms
+        const statusInterval = setInterval(() => {
+            if (currentStatus < statusMessages.length) {
+                loaderStatus.textContent = statusMessages[currentStatus];
+                currentStatus++;
             }
+        }, 550);
 
-            if (p >= 100) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    loader.classList.add('loaded-complete');
-                    setTimeout(() => loader.remove(), 800);
-                    // Start slogan after boot
-                    typeWriterEffect(); 
-                }, 500);
-            }
-        }, 100);
+        // Hide loader after 2.2 seconds
+        setTimeout(() => {
+            clearInterval(statusInterval);
+            loader.classList.add('loaded-complete');
+            setTimeout(() => {
+                if (loader.parentNode) {
+                    loader.remove();
+                }
+            }, 500);
+            // Start slogan after boot
+            typeWriterEffect();
+        }, 2200);
     }
 
     // --- B. LANGUAGE SWITCHER ---

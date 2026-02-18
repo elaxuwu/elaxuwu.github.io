@@ -56,19 +56,210 @@ body.lang-en .content-vi { display: none; }
 }
 
 /* ==========================================================================
-   3. BOOT LOADER SEQUENCE
+   3. BOOT LOADER SEQUENCE - CREATIVE ASCII TERMINAL LOADER
    ========================================================================== */
 #boot-loader {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg); z-index: 100000;
-    display: flex; justify-content: center; align-items: center; padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
-.boot-container { width: 100%; max-width: 600px; }
-.boot-header { border-bottom: 1px solid var(--text); color: var(--accent); margin-bottom: 15px; font-weight: bold; }
-.boot-log { height: 120px; overflow: hidden; font-size: 0.8rem; display: flex; flex-direction: column; justify-content: flex-end; margin-bottom: 20px; }
-.boot-progress-bar { height: 15px; border: 1px solid var(--text); padding: 2px; margin: 10px 0; }
-#boot-fill { height: 100%; width: 0%; background: var(--text); }
-.loaded-complete { opacity: 0; pointer-events: none; transition: 0.8s ease; }
+
+#boot-loader.loaded-complete {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    animation: loaderPulse 0.8s ease-out;
+}
+
+@keyframes loaderPulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Terminal ASCII Logo */
+.logo-container {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.terminal-logo {
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 2.2vw, 1.2rem);
+    line-height: 1.5;
+    color: var(--text);
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    animation: logoAppear 0.6s ease-out;
+    letter-spacing: 0.05em;
+}
+
+@keyframes logoAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+        filter: blur(2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.logo-line {
+    white-space: pre;
+    position: relative;
+    animation: lineTyping 0.5s ease-out forwards;
+    opacity: 0;
+    font-weight: normal;
+}
+
+.logo-line:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.logo-line:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.logo-line:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.logo-line:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes lineTyping {
+    to {
+        opacity: 1;
+    }
+}
+
+.logo-text {
+    color: var(--text);
+    font-weight: bold;
+    letter-spacing: 0.4em;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+    animation: textGlow 2s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes textGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(0, 255, 65, 1), 0 0 30px rgba(0, 255, 65, 0.5);
+    }
+}
+
+.logo-cursor {
+    display: inline-block;
+    color: var(--accent);
+    animation: cursorBlink 0.8s step-end infinite;
+    text-shadow: 0 0 8px rgba(255, 0, 60, 0.8);
+    font-weight: bold;
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.logo-dev {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+/* Loading Bar */
+.loading-bar-container {
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+.loading-bar {
+    width: 100%;
+    max-width: 300px;
+    height: 4px;
+    background: rgba(0, 255, 65, 0.2);
+    border: 1px solid var(--text);
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loading-fill {
+    height: 100%;
+    background: linear-gradient(90deg,
+        var(--text) 0%,
+        var(--accent) 50%,
+        var(--text) 100%);
+    background-size: 200% 100%;
+    animation: loadingProgress 2.2s ease-in-out forwards,
+               loadingShine 1s linear infinite;
+    width: 0%;
+    box-shadow: 0 0 10px var(--text);
+}
+
+@keyframes loadingProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes loadingShine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Loader Text */
+.loader-text {
+    margin-top: 25px;
+}
+
+#loader-status {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: statusFlicker 3s ease-in-out infinite;
+    font-family: var(--font-mono);
+}
+
+@keyframes statusFlicker {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0.6;
+    }
+}
 
 /* ==========================================================================
    4. LAYOUT & NAVIGATION
