@@ -164,8 +164,31 @@
 .separator { margin: 0 10px; opacity: 0.5; }
     </style>
 </head>
-<body class="lang-en"> <div id="cursor-glow"></div>
+<body class="lang-en">
+    <canvas id="matrix-bg"></canvas>
+    <div id="cursor-glow"></div>
     <div class="crt-vignette"></div>
+
+    <div id="boot-loader">
+        <div class="loader-content">
+            <div class="logo-container">
+                <div class="terminal-logo">
+                    <div class="logo-line">╔════════════════╗</div>
+                    <div class="logo-line">║   <span class="logo-text">E L A X</span> <span class="logo-dev">.DEV</span>  ║</div>
+                    <div class="logo-line">╚════════════════╝</div>
+                </div>
+                <div class="loading-bar-container">
+                    <div class="loading-bar">
+                        <div class="loading-fill"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="loader-text">
+                <span id="loader-status">INITIALIZING SYSTEMS</span>
+            </div>
+        </div>
+    </div>
+
     <div class="scanlines"></div>
 
     <nav class="system-nav">
