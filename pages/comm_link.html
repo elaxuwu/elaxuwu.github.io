@@ -124,6 +124,57 @@
         /* Màu riêng cho từng nền tảng khi hover */
         .social-node.yt:hover { border-color: #ff0000; color: #ff0000; }
         .social-node.yt:hover .node-icon { text-shadow: 0 0 10px #ff0000; }
+
+        /* Dead / inactive channel */
+        .social-node.yt-dead {
+            border: 1px solid rgba(200, 30, 30, 0.55);
+            background:
+                linear-gradient(180deg, rgba(160, 0, 0, 0.10), rgba(60, 0, 0, 0.30)),
+                rgba(0, 0, 0, 0.65);
+            box-shadow: 0 0 12px rgba(200, 0, 0, 0.15), inset 0 0 18px rgba(140, 0, 0, 0.10);
+        }
+        .social-node.yt-dead::before {
+            border-color: rgba(200, 30, 30, 0.20);
+        }
+        .social-node.yt-dead .node-icon {
+            color: rgba(255, 80, 80, 0.75);
+            text-shadow: 0 0 10px rgba(200, 0, 0, 0.55);
+            opacity: 0.75;
+        }
+        .social-node.yt-dead .node-name {
+            color: rgba(255, 100, 100, 0.85);
+        }
+        .social-node.yt-dead .node-handle {
+            color: rgba(255, 80, 80, 0.65);
+            text-decoration: line-through;
+            text-decoration-color: rgba(200, 50, 50, 0.7);
+        }
+        .social-node.yt-dead .node-header {
+            border-bottom-color: rgba(200, 30, 30, 0.30);
+        }
+        .social-node.yt-dead:hover {
+            transform: translateY(-4px) scale(1.005);
+            border-color: rgba(220, 40, 40, 0.80);
+            box-shadow:
+                0 0 0 1px rgba(220, 40, 40, 0.45),
+                0 0 22px rgba(200, 0, 0, 0.22),
+                inset 0 0 18px rgba(160, 0, 0, 0.14);
+            color: rgba(255, 90, 90, 0.90);
+        }
+        .social-node.yt-dead:hover .node-icon {
+            text-shadow: 0 0 14px rgba(220, 0, 0, 0.75);
+        }
+        .dead-notice {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            color: rgba(255, 90, 90, 0.90);
+            background: rgba(160, 0, 0, 0.18);
+            border: 1px solid rgba(200, 30, 30, 0.45);
+            padding: 2px 7px;
+            letter-spacing: 1.2px;
+        }
         
         .social-node.tt:hover { border-color: #00f2ea; color: #00f2ea; }
         .social-node.tt:hover .node-icon { text-shadow: 2px 2px 0 #ff0050; }
@@ -232,21 +283,22 @@
                     </div>
                 </a>
 
-                <a href="https://www.youtube.com/@elaxendfield/" target="_blank" class="social-node yt hidden-section">
+                <a href="https://www.youtube.com/@elaxendfield/" target="_blank" class="social-node yt-dead hidden-section">
                     <div class="node-header">
                         <i class="fab fa-youtube node-icon"></i>
                         <div class="node-id">
                             ID: YTB_GAME<br>
-                            STATUS: LIVE
+                            STATUS: TERMINATED
                         </div>
                     </div>
                     <div>
                         <span class="node-name">YouTube</span>
                         <span class="node-handle">@ElaxEndfield</span>
+                        <span class="dead-notice">⚠ CHANNEL NO LONGER ACTIVE</span>
                     </div>
                     <div class="node-stats">
-                        <span>SIGNAL: <span class="ping-val">||||||||||</span> 100%</span>
-                        <span>LATENCY: 67ms</span>
+                        <span>SIGNAL: <span class="ping-val">..........</span> 0%</span>
+                        <span>LATENCY: N/A</span>
                     </div>
                 </a>
 
@@ -333,6 +385,7 @@
         setInterval(() => {
             const latencies = document.querySelectorAll('.node-stats span:last-child');
             latencies.forEach(el => {
+                if (el.closest('.yt-dead')) return; // dead channel stays N/A
                 const ms = Math.floor(Math.random() * 50) + 10;
                 el.innerText = `LATENCY: ${ms}ms`;
             });
