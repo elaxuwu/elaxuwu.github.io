@@ -6,7 +6,11 @@
     <title>TERMINAL_ELAX.DEV</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="lang-en">
+<body class="lang-en"
+      data-nav-logo="ELAX_OS_v1.0"
+      data-nav-status="SYSTEM_ACTIVE"
+      data-footer-line1="[CONNECTION_SECURE]"
+      data-footer-line2="TERMINAL_ID: DO_NGOC_THIEN_BAO_(ELAX) // 2026">
 
     <canvas id="matrix-bg"></canvas>
     <div id="cursor-glow"></div>
@@ -34,13 +38,7 @@
     
     <div class="scanlines"></div>
 
-    <nav class="system-nav">
-        <div class="logo">ELAX_OS_v1.0</div>
-        <div class="nav-controls">
-            <span class="system-status">SYSTEM_ACTIVE</span>
-            <button id="lang-toggle" class="cmd-btn">MODE: EN</button>
-        </div>
-    </nav>
+    <nav class="system-nav"></nav>
 
     <main class="terminal-container">
         <section class="console-block hero">
@@ -213,16 +211,9 @@
 
     </main>
 
-    <footer class="system-footer">
-    <div class="sys-info-bar">
-        <span id="sys-time">TIME: --:--:--</span>
-        <span class="separator">|</span>
-        <span id="sys-battery">BATTERY: DETECTING...</span>
-    </div>
-    <p>[CONNECTION_SECURE]</p>
-    <p>TERMINAL_ID: DO_NGOC_THIEN_BAO_(ELAX) // 2026</p>
-</footer>
+    <footer class="system-footer"></footer>
 
+    <script src="components.js"></script>
     <script src="script.js"></script>
 </body>
 

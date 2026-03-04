@@ -6,8 +6,13 @@
     <title>ACADEMIC_LOGS_HK1</title>
     <link rel="stylesheet" href="../../style.css">
 </head>
-<body class="lang-en">
+<body class="lang-en"
+      data-nav-back="../../index.html"
+      data-nav-status="SECURE_MODE"
+      data-footer-line1="[END_OF_FILE]"
+      data-footer-line2="ENCRYPTED_BY: ELAX_OS // 2026">
 
+    <canvas id="matrix-bg"></canvas>
     <div id="cursor-glow"></div>
     <div class="crt-vignette"></div>
 
@@ -33,15 +38,7 @@
     
     <div class="scanlines"></div>
 
-    <nav class="system-nav">
-        <a href="../../index.html" class="logo" style="text-decoration: none; color: var(--text);">
-            << RETURN_ROOT
-        </a>
-        <div class="nav-controls">
-            <span class="system-status">SECURE_MODE</span>
-            <button id="lang-toggle" class="cmd-btn">MODE: EN</button>
-        </div>
-    </nav>
+    <nav class="system-nav"></nav>
 
     <main class="terminal-container">
         <section class="console-block hero">
@@ -351,11 +348,9 @@
         
     </main>
 
-    <footer class="system-footer">
-        <p>[END_OF_FILE]</p>
-        <p>ENCRYPTED_BY: ELAX_OS // 2026</p>
-    </footer>
+    <footer class="system-footer"></footer>
 
+    <script src="../../components.js"></script>
     <script src="../../script.js"></script>
 </body>
 
