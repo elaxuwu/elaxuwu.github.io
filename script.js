@@ -85,6 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // System flash effect
             body.style.opacity = "0.7";
             setTimeout(() => body.style.opacity = "1", 50);
+
+            // Sync data-text attribute on glitch headings so hover effect matches active language
+            const isVi = body.classList.contains('lang-vi');
+            document.querySelectorAll('.glitch-text').forEach(el => {
+                const viSpan = el.querySelector('.content-vi');
+                const enSpan = el.querySelector('.content-en');
+                const activeSpan = isVi ? viSpan : enSpan;
+                if (activeSpan) el.setAttribute('data-text', activeSpan.textContent.trim());
+            });
             
             // Retype slogan on change
             typeWriterEffect();
