@@ -13,17 +13,17 @@
     var body = document.body;
     var d = body.dataset;
 
-    var navLogo     = d.navLogo     || 'ELAX_OS_v1.0';
-    var navStatus   = d.navStatus   || 'SYSTEM_ACTIVE';
+    var navLogo     = d.navLogo     || 'ELAX.DEV';
+    var navStatus   = d.navStatus   || 'Online';
     var navBack     = d.navBack     || '';
-    var footerLine1 = d.footerLine1 || '[CONNECTION_SECURE]';
-    var footerLine2 = d.footerLine2 || 'TERMINAL_ID: ELAX_OS // 2026';
+    var footerLine1 = d.footerLine1 || '[Secure Connection]';
+    var footerLine2 = d.footerLine2 || 'Built by Elax — 2026';
 
     // ── Navigation ────────────────────────────────────────────────────────
     var nav = document.querySelector('nav.system-nav');
     if (nav) {
         var logoHtml = navBack
-            ? '<a href="' + navBack + '" class="logo" style="text-decoration:none;color:var(--text);">&lt;&lt; RETURN_ROOT</a>'
+            ? '<a href="' + navBack + '" class="logo" style="text-decoration:none;color:var(--text);">← Back</a>'
             : '<div class="logo">' + navLogo + '</div>';
 
         nav.innerHTML =
