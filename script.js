@@ -40,10 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loader && loaderStatus) {
         const statusMessages = [
-            'INITIALIZING SYSTEMS',
+            'INITIALIZING',
             'LOADING MODULES',
-            'ESTABLISHING CONNECTION',
-            'SYSTEM READY'
+            'CONNECTING',
+            'READY'
         ];
         let currentStatus = 0;
 
@@ -259,15 +259,15 @@ function activateGodMode() {
     const isGod = document.body.classList.contains('god-mode');
 
     if(isGod) {
-        alert(">> SYSTEM OVERRIDE: GOD MODE ACTIVATED");
-        if(cmdLine) cmdLine.innerText = ">> ROOT_ACCESS_GRANTED";
+        alert("🔓 God Mode Activated — Welcome to the HUD");
+        if(cmdLine) cmdLine.innerText = "🔐 Elevated Access Granted";
         
         // START THE RAIN
         if(matrixInterval) clearInterval(matrixInterval);
         if(canvas && ctx) matrixInterval = setInterval(drawMatrix, 50);
 
     } else {
-        if(cmdLine) cmdLine.innerText = ">> USER_MODE_RESTORED";
+        if(cmdLine) cmdLine.innerText = "Standard Mode Restored";
         
         // STOP THE RAIN
         clearInterval(matrixInterval);
