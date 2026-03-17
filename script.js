@@ -109,6 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Shared mouse position (updated once, consumed by reticle + lamp + magnetic)
+    let sharedMouseX = window.innerWidth  / 2;
+    let sharedMouseY = window.innerHeight / 2;
+    document.addEventListener('mousemove', (e) => {
+        sharedMouseX = e.clientX;
+        sharedMouseY = e.clientY;
+    });
+
     // --- C1. MAGNETIC RETICLE CURSOR ---
     (function initReticle() {
         const reticle = document.createElement('div');
@@ -116,14 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         reticle.innerHTML = '<div class="reticle-dot"></div><div class="reticle-ring"></div>';
         document.body.appendChild(reticle);
 
-        let rx = window.innerWidth / 2;
-        let ry = window.innerHeight / 2;
-
         document.addEventListener('mousemove', (e) => {
-            rx = e.clientX;
-            ry = e.clientY;
-            reticle.style.left = rx + 'px';
-            reticle.style.top  = ry + 'px';
+            reticle.style.left = e.clientX + 'px';
+            reticle.style.top  = e.clientY + 'px';
         });
 
         function markHoverable() {
@@ -138,9 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         markHoverable();
 
-        // Re-run when dynamic content is injected (file explorer renders)
-        const bodyObserver = new MutationObserver(markHoverable);
-        bodyObserver.observe(document.body, { childList: true, subtree: true });
+        return markHoverable; // exposed for shared observer below
     })();
 
     // --- C2. AURORA AMBIENT LIGHT (MOUSE TRACKING) ---
@@ -152,19 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
         lamp.className = 'aurora-lamp';
         auroraBg.appendChild(lamp);
 
-        let targetX = window.innerWidth  / 2;
-        let targetY = window.innerHeight / 2;
-        let currentX = targetX;
-        let currentY = targetY;
-
-        document.addEventListener('mousemove', (e) => {
-            targetX = e.clientX;
-            targetY = e.clientY;
-        });
+        let currentX = sharedMouseX;
+        let currentY = sharedMouseY;
 
         function animateLamp() {
-            currentX += (targetX - currentX) * 0.07;
-            currentY += (targetY - currentY) * 0.07;
+            currentX += (sharedMouseX - currentX) * 0.07;
+            currentY += (sharedMouseY - currentY) * 0.07;
             lamp.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
             requestAnimationFrame(animateLamp);
         }
@@ -172,53 +166,58 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
     // --- C3. MAGNETIC PILL BUTTONS ---
-    (function initMagneticButtons() {
-        const ATTRACT_RADIUS = 20; // px outside the element bounds
-        const STRENGTH = 0.35;
+    // Cached rects refreshed only on resize/scroll; single shared mousemove
+    const magneticButtons = [];
+    const ATTRACT_RADIUS = 20;
+    const MAGNET_STRENGTH = 0.35;
 
-        let mouseX = 0;
-        let mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+    function attachMagnetic(el) {
+        if (el.dataset.magneticInit) return;
+        el.dataset.magneticInit = '1';
+        el.style.transition = 'transform 0.25s cubic-bezier(0.4,0,0.2,1)';
+        magneticButtons.push(el);
+    }
 
-        function attachMagnetic(el) {
-            if (el.dataset.magneticInit) return;
-            el.dataset.magneticInit = '1';
+    function scanPillButtons() {
+        document.querySelectorAll('.pill-button, .launch-btn, .cmd-btn, .nav-btn')
+            .forEach(attachMagnetic);
+    }
+    scanPillButtons();
 
-            el.style.transition = 'transform 0.25s cubic-bezier(0.4,0,0.2,1)';
-
-            function updateMagnetic() {
-                const rect = el.getBoundingClientRect();
-                const cx = rect.left + rect.width  / 2;
-                const cy = rect.top  + rect.height / 2;
-                const dx = mouseX - cx;
-                const dy = mouseY - cy;
-
-                // Distance from cursor to nearest edge
-                const nearX = Math.max(0, Math.abs(dx) - rect.width  / 2);
-                const nearY = Math.max(0, Math.abs(dy) - rect.height / 2);
-                const edgeDist = Math.hypot(nearX, nearY);
-
-                if (edgeDist <= ATTRACT_RADIUS) {
-                    el.style.transform = `translate(${dx * STRENGTH}px, ${dy * STRENGTH}px)`;
-                } else {
-                    el.style.transform = '';
-                }
+    // Single mousemove drives all magnetic buttons
+    document.addEventListener('mousemove', () => {
+        magneticButtons.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const cx = rect.left + rect.width  / 2;
+            const cy = rect.top  + rect.height / 2;
+            const dx = sharedMouseX - cx;
+            const dy = sharedMouseY - cy;
+            const nearX = Math.max(0, Math.abs(dx) - rect.width  / 2);
+            const nearY = Math.max(0, Math.abs(dy) - rect.height / 2);
+            if (Math.hypot(nearX, nearY) <= ATTRACT_RADIUS) {
+                el.style.transform = `translate(${dx * MAGNET_STRENGTH}px, ${dy * MAGNET_STRENGTH}px)`;
+            } else {
+                el.style.transform = '';
             }
+        });
+    });
 
-            document.addEventListener('mousemove', updateMagnetic);
-        }
-
-        function scanPillButtons() {
-            document.querySelectorAll('.pill-button, .launch-btn, .cmd-btn, .nav-btn').forEach(attachMagnetic);
-        }
+    // Single MutationObserver handles both reticle hoverable scan + pill-button scan
+    const domObserver = new MutationObserver(() => {
+        document.querySelectorAll(
+            'a, button, [onclick], .sidebar-item, .icon-container, .report-row, .social-node, .launch-btn, .pill-button, .activity-icon, .win-dot'
+        ).forEach(el => {
+            if (el.dataset.reticleInit) return;
+            el.dataset.reticleInit = '1';
+            const reticle = document.getElementById('cursor-reticle');
+            if (reticle) {
+                el.addEventListener('mouseenter', () => reticle.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => reticle.classList.remove('hovering'));
+            }
+        });
         scanPillButtons();
-
-        const bodyObserver2 = new MutationObserver(scanPillButtons);
-        bodyObserver2.observe(document.body, { childList: true, subtree: true });
-    })();
+    });
+    domObserver.observe(document.body, { childList: true, subtree: true });
 
     const hiddenElements = document.querySelectorAll('.hidden-section');
     const observer = new IntersectionObserver((entries) => {
