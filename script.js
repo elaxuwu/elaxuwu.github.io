@@ -124,9 +124,20 @@ document.addEventListener('DOMContentLoaded', () => {
         reticle.innerHTML = '<div class="reticle-dot"></div><div class="reticle-ring"></div>';
         document.body.appendChild(reticle);
 
+        let rafPending = false;
+        let pendingX = 0, pendingY = 0;
+
         document.addEventListener('mousemove', (e) => {
-            reticle.style.left = e.clientX + 'px';
-            reticle.style.top  = e.clientY + 'px';
+            pendingX = e.clientX;
+            pendingY = e.clientY;
+            if (!rafPending) {
+                rafPending = true;
+                requestAnimationFrame(() => {
+                    reticle.style.left = pendingX + 'px';
+                    reticle.style.top  = pendingY + 'px';
+                    rafPending = false;
+                });
+            }
         });
 
         function markHoverable() {
@@ -421,66 +432,58 @@ function drawMatrix() {
    FILE EXPLORER LOGIC
    ========================================================================== */
 
+// SVG icon templates (monochrome, stroke-based)
+const ICONS = {
+    folder: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
+    game:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="5"/><path d="M7 12h4m-2-2v4"/><circle cx="17" cy="11" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/></svg>`,
+    app:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+    ai:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m-4.5 4.5L12 12l4.5 4.5"/></svg>`,
+    file:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
+};
+
+function getIcon(item) {
+    if (item.type === 'folder') return ICONS.folder;
+    const n = item.name.toLowerCase();
+    if (n.endsWith('.exe')) return ICONS.game;
+    if (n.endsWith('.app')) return ICONS.app;
+    if (n.endsWith('.py'))  return ICONS.ai;
+    return ICONS.file;
+}
+
 // 1. DATA STRUCTURE (Edit your projects here)
 const fileSystem = {
     "ROOT": [
-        { type: 'folder', name: 'GAME PROJECTS', icon: '📁' },
-        { type: 'folder', name: 'APP PROJECTS', icon: '📁' },
-        { type: 'folder', name: 'AI PROJECTS', icon: '📁' },
-        { type: 'file', name: 'readme.txt', icon: '📄', link: '#', desc: 'Welcome to Elax OS' }
+        { type: 'folder', name: 'GAME PROJECTS' },
+        { type: 'folder', name: 'APP PROJECTS' },
+        { type: 'folder', name: 'AI PROJECTS' },
+        { type: 'file',   name: 'readme.txt',       link: '#',                                         desc: 'Welcome to Elax OS' }
     ],
     "GAME PROJECTS": [
-        { 
-            type: 'file', 
-            name: 'Fruit_Ninja.exe', 
-            icon: '🎮', 
-            link: 'https://elaxuwu.github.io/TemuFruitNinja/', 
-            tag: 'UNITY WEBGL' 
-        },
-        // Add more games here
+        { type: 'file', name: 'Fruit_Ninja.exe', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL' }
     ],
     "APP PROJECTS": [
-        { 
-            type: 'file', 
-            name: 'Zalo_Sender.app', 
-            icon: '🔧', 
-            link: 'pages/projects/zalo_auto_sender_page.html', 
-            tag: 'WPF/C#' 
-        }
+        { type: 'file', name: 'Zalo_Sender.app', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C#' }
     ],
     "AI PROJECTS": [
-        { 
-            type: 'file', 
-            name: 'AI-LAX.py', 
-            icon: '🧠', 
-            link: 'https://github.com/elaxuwu/AILAX', 
-            tag: 'PYTHON' 
-        }
+        { type: 'file', name: 'AI-LAX.py', link: 'https://github.com/elaxuwu/AILAX', tag: 'PYTHON' }
     ]
 };
 
 // 2. STATE MANAGEMENT
 let currentPath = "ROOT";
 const gridEl = document.getElementById('file-grid');
-const pathEl = document.getElementById('current-path');
 const countEl = document.getElementById('item-count');
 
 // 3. RENDER FUNCTION
 function renderFiles(folderName) {
     if (!gridEl) return;
-    
-    // Clear current grid
-    gridEl.innerHTML = '';
-    
-    // Get data
-    const items = fileSystem[folderName] || [];
-    
-    // Update UI Elements
-    currentPath = folderName;
-    if(pathEl) pathEl.innerText = currentPath;
-    if(countEl) countEl.innerText = `${items.length} OBJECTS`;
 
-    // Create Icons
+    gridEl.innerHTML = '';
+
+    const items = fileSystem[folderName] || [];
+    currentPath = folderName;
+    if (countEl) countEl.innerText = `${items.length} ITEM${items.length !== 1 ? 'S' : ''}`;
+
     items.forEach(item => {
         const div = document.createElement('div');
         div.className = 'icon-container';
@@ -488,7 +491,7 @@ function renderFiles(folderName) {
 
         const iconDisplay = document.createElement('div');
         iconDisplay.className = 'icon-img';
-        iconDisplay.innerText = item.icon;
+        iconDisplay.innerHTML = getIcon(item);
 
         const label = document.createElement('div');
         label.className = 'icon-label';
@@ -497,15 +500,14 @@ function renderFiles(folderName) {
         div.appendChild(iconDisplay);
         div.appendChild(label);
 
-        if(item.tag) {
+        if (item.tag) {
             const tag = document.createElement('div');
             tag.className = 'icon-tag';
             tag.innerText = item.tag;
             div.appendChild(tag);
         }
 
-        // Animation delay for cool effect
-        div.style.animation = "fadeIn 0.3s ease";
+        div.style.animation = 'fadeIn 0.3s ease';
         gridEl.appendChild(div);
     });
 }
@@ -513,26 +515,36 @@ function renderFiles(folderName) {
 // 4. CLICK HANDLER
 function handleItemClick(item) {
     if (item.type === 'folder') {
-        // Play sound if you have the playSound function
-        if(typeof playSound === "function") playSound('click');
-        renderFiles(item.name);
+        if (typeof playSound === 'function') playSound('click');
+        explorerNav(item.name, null);
     } else {
-        // It's a file
         if (item.link && item.link !== '#') {
-            if(typeof playSound === "function") playSound('click');
+            if (typeof playSound === 'function') playSound('click');
             window.open(item.link, '_blank');
         } else {
-            alert(">> SYSTEM MESSAGE: Access Denied or File Corrupted.");
+            alert('>> SYSTEM MESSAGE: Access Denied or File Corrupted.');
         }
     }
 }
 
-// 5. NAVIGATION UP
-function navigateUp() {
-    if(typeof playSound === "function") playSound('click');
-    if (currentPath !== "ROOT") {
-        renderFiles("ROOT");
+// 5. SIDEBAR NAVIGATION
+function explorerNav(folder, el) {
+    if (typeof playSound === 'function') playSound('click');
+    // Update active state on sidebar items
+    document.querySelectorAll('.explorer-cat').forEach(c => c.classList.remove('active'));
+    if (el) {
+        el.classList.add('active');
+    } else {
+        // When navigating via folder icon click, match by data-folder attribute
+        const match = document.querySelector(`.explorer-cat[data-folder="${CSS.escape(folder)}"]`);
+        if (match) match.classList.add('active');
     }
+    renderFiles(folder);
+}
+
+// 6. NAVIGATE UP (kept for backward compatibility)
+function navigateUp() {
+    explorerNav('ROOT', document.querySelector('.explorer-cat[data-folder="ROOT"]'));
 }
 
 // 6. INITIALIZE

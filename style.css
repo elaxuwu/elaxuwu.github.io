@@ -34,8 +34,10 @@
     --blur-glass: blur(24px);
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
 html { scroll-behavior: smooth; }
+
+a, button, input, textarea, select, label, [onclick], [tabindex] { cursor: none !important; }
 
 body {
     background: var(--bg);
@@ -67,6 +69,7 @@ body.lang-en .content-vi { display: none; }
     position: absolute;
     border-radius: 50%;
     filter: blur(120px);
+    will-change: transform;
 }
 
 .aurora-orb.orb-1 {
@@ -123,6 +126,7 @@ body.lang-en .content-vi { display: none; }
     pointer-events: none;
     z-index: 999999;
     transform: translate(-50%, -50%);
+    will-change: transform, left, top;
 }
 
 .reticle-dot {
@@ -416,6 +420,7 @@ body.lang-en .content-vi { display: none; }
     border-radius: var(--radius-card);
     padding: 48px;
     box-shadow: var(--shadow-card);
+    will-change: transform, opacity;
 }
 
 /* Remove old hacker divider — sections now float as cards */
@@ -791,200 +796,76 @@ h3 {
 .contact-row:hover .value { color: var(--text-muted); }
 
 /* ==========================================================================
-   FILE EXPLORER — FUTURISTIC IDE SIDEBAR AESTHETIC
+   FILE EXPLORER — MINIMALIST GLASS TWO-PANE LAYOUT
    ========================================================================== */
-.window-frame {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-    margin-top: 12px;
+.explorer-panel {
     display: flex;
-    flex-direction: column;
-    height: 520px;
-    border-radius: var(--radius-card);
+    height: 460px;
+    border-radius: var(--radius-lg);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
     overflow: hidden;
+    margin-top: 12px;
+    will-change: transform, opacity;
 }
 
-/* macOS-style title bar */
-.window-titlebar {
-    background: rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 0 16px;
-    height: 42px;
+/* Left sidebar — narrow category navigation */
+.explorer-sidebar {
+    width: 140px;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 18px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.explorer-sidebar-title {
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0 8px 12px;
+}
+
+.explorer-cat {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
-    position: relative;
-    flex-shrink: 0;
+    gap: 9px;
     user-select: none;
 }
 
-.win-traffic-lights {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.win-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    transition: var(--transition);
-    opacity: 0.85;
-    flex-shrink: 0;
-}
-
-.dot-close { background: #FF5F57; }
-.dot-min   { background: #FFBD2E; }
-.dot-max   { background: #28CA41; }
-
-.win-dot:hover { opacity: 1; transform: scale(1.15); }
-
-.win-title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    pointer-events: none;
-}
-
-/* Title-bar spacer fills the right side to keep title centered */
-.win-title-spacer { flex: 1; }
-
-/* Toolbar / address bar */
-.window-bar {
-    display: flex;
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--glass-border);
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.01);
-    flex-shrink: 0;
-}
-
-.nav-btn {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--glass-border);
-    color: var(--text-muted);
-    cursor: pointer;
-    font-family: var(--font-sans);
-    border-radius: var(--radius-pill);
-    padding: 4px 14px;
-    font-size: 0.77rem;
-    transition: var(--transition);
-    flex-shrink: 0;
-}
-.nav-btn:hover {
-    background: rgba(255, 255, 255, 0.10);
-    color: var(--text);
-    border-color: var(--glass-border-strong);
-    transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 0 14px rgba(255, 255, 255, 0.08);
-}
-
-.address-input {
-    flex-grow: 1;
-    border: 1px solid var(--glass-border);
-    padding: 4px 16px;
-    font-size: 0.77rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--radius-pill);
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    letter-spacing: 0.04em;
-    transition: var(--transition);
-}
-
-/* Window body */
-.window-body {
-    display: flex;
-    flex-grow: 1;
-    overflow: hidden;
-}
-
-/* IDE Activity Bar — narrow vertical icon strip */
-.ide-activity-bar {
-    width: 48px;
-    border-right: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    gap: 6px;
-    background: rgba(0,0,0,0.35);
-    flex-shrink: 0;
-}
-
-.activity-icon {
-    width: 36px; height: 36px;
-    border-radius: var(--radius-pill);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    cursor: pointer;
-    color: var(--text-dim);
-    transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
-    flex-shrink: 0;
-}
-
-.activity-icon:hover {
-    background: rgba(255,255,255,0.08);
-    color: var(--text);
-    box-shadow: 0 0 12px rgba(255,255,255,0.12);
-}
-
-.activity-icon.active {
-    background: rgba(255,255,255,0.10);
-    color: var(--text);
-    box-shadow: 0 0 16px rgba(255,255,255,0.15);
-}
-
-/* Sidebar — translucent glass blur panel */
-.sidebar {
-    width: 155px;
-    border-right: 1px solid var(--glass-border);
-    padding: 14px 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    background: rgba(255, 255, 255, 0.015);
-    flex-shrink: 0;
-}
-
-.sidebar-section-title {
-    font-size: 0.58rem;
-    color: var(--text-dim);
-    letter-spacing: 0.14em;
-    padding: 4px 10px 8px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.sidebar-item {
-    padding: 7px 12px;
-    cursor: pointer;
-    font-size: 0.77rem;
-    color: var(--text-muted);
-    border-radius: var(--radius-md);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.sidebar-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text);
-}
-.sidebar-item.active {
-    background: rgba(255, 255, 255, 0.07);
+.explorer-cat:hover {
+    background: rgba(255, 255, 255, 0.06);
     color: var(--text);
 }
 
-/* File Grid Area */
+.explorer-cat.active {
+    background: rgba(255, 255, 255, 0.09);
+    color: var(--text);
+}
+
+.explorer-cat svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.explorer-cat.active svg,
+.explorer-cat:hover svg {
+    opacity: 1;
+}
+
+/* Right pane — spacious project grid */
 .file-grid {
     flex-grow: 1;
     padding: 20px;
@@ -1000,7 +881,6 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
     text-align: center;
     padding: 14px 10px;
     border: 1px solid transparent;
@@ -1009,19 +889,23 @@ h3 {
 }
 
 .icon-container:hover {
-    border-color: rgba(255,255,255,0.14);
+    border-color: rgba(255, 255, 255, 0.14);
     background: rgba(255, 255, 255, 0.06);
     transform: translateY(-2px);
-    box-shadow: 0 0 18px rgba(255,255,255,0.10), var(--shadow-sm);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.10), var(--shadow-sm);
 }
 
 .icon-img {
-    font-size: 2.2rem;
+    width: 36px; height: 36px;
     margin-bottom: 8px;
     user-select: none;
     transition: transform 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255, 255, 255, 0.75);
 }
-.icon-container:hover .icon-img { transform: scale(1.08); }
+
+.icon-img svg { width: 100%; height: 100%; }
+.icon-container:hover .icon-img { transform: scale(1.1); color: rgba(255, 255, 255, 0.95); }
 
 .icon-label {
     font-size: 0.72rem;
@@ -1030,6 +914,7 @@ h3 {
     color: var(--text-muted);
     transition: color 0.3s ease;
 }
+
 .icon-container:hover .icon-label { color: var(--text); }
 
 .icon-tag {
@@ -1043,22 +928,26 @@ h3 {
     letter-spacing: 0.06em;
 }
 
-/* Window Footer / status bar */
-.window-footer {
-    border-top: 1px solid var(--glass-border);
-    padding: 6px 16px;
+/* Explorer status bar */
+.explorer-status {
+    margin-top: 10px;
     font-size: 0.63rem;
-    background: rgba(255, 255, 255, 0.01);
     color: var(--text-dim);
     letter-spacing: 0.1em;
     font-family: var(--font-mono);
-    flex-shrink: 0;
+    padding: 0 4px;
 }
 
 /* Scrollbar */
 .file-grid::-webkit-scrollbar { width: 5px; }
 .file-grid::-webkit-scrollbar-track { background: transparent; }
 .file-grid::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-pill); }
+
+@media (max-width: 600px) {
+    .explorer-panel { height: 400px; }
+    .explorer-sidebar { width: 110px; }
+    .file-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+}
 
 /* ==========================================================================
    REPORT & GRADES PAGE
@@ -1266,17 +1155,12 @@ body.god-mode .system-nav {
     border-color: rgba(0, 0, 0, 0.10);
 }
 
-body.god-mode .window-frame {
+body.god-mode .explorer-panel {
     background: rgba(240, 240, 240, 0.9);
     border-color: rgba(0, 0, 0, 0.10);
 }
 
-body.god-mode .window-titlebar {
-    background: rgba(0, 0, 0, 0.03);
-    border-bottom-color: rgba(0, 0, 0, 0.08);
-}
-
-body.god-mode .sidebar {
+body.god-mode .explorer-sidebar {
     background: rgba(0, 0, 0, 0.02);
     border-right-color: rgba(0, 0, 0, 0.08);
 }
