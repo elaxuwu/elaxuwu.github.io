@@ -5,14 +5,14 @@
 
 :root {
     --bg: #050505;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --bg-card: rgba(0, 0, 0, 0.4);
+    --bg-card-hover: rgba(0, 0, 0, 0.5);
     --glass: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-strong: rgba(255, 255, 255, 0.14);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border-strong: rgba(255, 255, 255, 0.18);
     --text: #FFFFFF;
-    --text-muted: #A0A0A0;
-    --text-dim: #484848;
+    --text-muted: #D1D1D6;
+    --text-dim: #888888;
     --accent: #E0E0E0;
     --accent-glow: rgba(255, 255, 255, 0.08);
     --accent2: #888888;
@@ -24,11 +24,13 @@
     --radius-sm: 10px;
     --radius-md: 16px;
     --radius-lg: 24px;
+    --radius-card: 32px;
     --radius-pill: 9999px;
-    --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.6);
-    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.7);
-    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.85);
-    --transition: all 0.3s ease;
+    --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.65);
+    --shadow-lg: 0 24px 72px rgba(0, 0, 0, 0.85);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --blur-glass: blur(24px);
 }
 
@@ -76,14 +78,14 @@ body.lang-en .content-vi { display: none; }
 
 .aurora-orb.orb-2 {
     width: 650px; height: 650px;
-    background: radial-gradient(circle, rgba(230,230,255,0.14) 0%, rgba(180,190,210,0.06) 50%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(180,190,210,0.07) 50%, transparent 70%);
     top: 15%; right: -150px;
     animation: orbDrift2 28s ease-in-out infinite alternate;
 }
 
 .aurora-orb.orb-3 {
     width: 560px; height: 560px;
-    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(200,220,210,0.05) 50%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(200,220,210,0.06) 50%, transparent 70%);
     bottom: -120px; left: 25%;
     animation: orbDrift3 34s ease-in-out infinite alternate;
 }
@@ -111,6 +113,19 @@ body.lang-en .content-vi { display: none; }
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 9999; pointer-events: none;
     opacity: 0;
+}
+
+/* Filmic grain texture overlay */
+.grain-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 300px 300px;
 }
 
 /* ==========================================================================
@@ -317,39 +332,63 @@ body.lang-en .content-vi { display: none; }
     letter-spacing: 0.05em;
 }
 .cmd-btn:hover {
-    background: rgba(255, 255, 255, 0.10);
-    border-color: rgba(255, 255, 255, 0.18);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.10);
 }
 
 .terminal-container {
     position: relative;
-    z-index: 1;
-    max-width: 1100px;
+    z-index: 4;
+    max-width: 960px;
     margin: 0 auto;
     padding: 130px 32px 100px;
 }
 
-.console-block { margin-bottom: 120px; }
+.console-block {
+    margin-bottom: 80px;
+    background: var(--bg-card);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-card);
+    padding: 48px;
+    box-shadow: var(--shadow-card);
+}
 
-/* Thin connecting line between sections */
+/* Remove old hacker divider — sections now float as cards */
 .console-block + .console-block {
-    padding-top: 40px;
-    border-top: 1px solid var(--divider);
+    border-top: none;
+}
+
+.console-block.hero {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
 }
 
 .cmd-line {
-    color: var(--text-dim);
-    font-weight: 400;
-    margin-bottom: 28px;
-    font-family: var(--font-mono);
-    letter-spacing: 0.06em;
-    font-size: 0.78rem;
+    display: inline-block;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-family: var(--font-sans);
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    padding: 5px 14px;
+    border-radius: var(--radius-pill);
 }
 
 .system-footer {
     position: relative;
-    z-index: 1;
+    z-index: 4;
     text-align: center;
     padding: 52px 32px;
     border-top: 1px solid var(--divider);
@@ -359,9 +398,21 @@ body.lang-en .content-vi { display: none; }
     letter-spacing: 0.03em;
 }
 
-/* Scroll Reveal */
-.hidden-section { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+/* Scroll Reveal — staggered fade-in-up */
+.hidden-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
 .show-section { opacity: 1; transform: translateY(0); }
+
+/* Stagger delay for consecutive hidden sections */
+.hidden-section:nth-child(2) { transition-delay: 0.05s; }
+.hidden-section:nth-child(3) { transition-delay: 0.1s; }
+.hidden-section:nth-child(4) { transition-delay: 0.15s; }
+.hidden-section:nth-child(5) { transition-delay: 0.2s; }
+.hidden-section:nth-child(6) { transition-delay: 0.25s; }
 
 /* ==========================================================================
    TYPOGRAPHY — MASSIVE, BOLD, TIGHTLY TRACKED
@@ -472,13 +523,13 @@ h3 {
 
 .avatar-frame {
     width: 190px; height: 190px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 4px;
     position: relative;
     overflow: hidden;
     background: var(--bg-card);
-    border-radius: var(--radius-pill);
-    box-shadow: var(--shadow-md);
+    border-radius: 24px;
+    box-shadow: var(--shadow-md), 0 0 20px rgba(255, 255, 255, 0.15);
     backdrop-filter: var(--blur-glass);
 }
 
@@ -487,7 +538,7 @@ h3 {
     object-fit: cover;
     filter: none;
     mix-blend-mode: normal;
-    border-radius: var(--radius-pill);
+    border-radius: 20px;
 }
 
 .avatar-scanline {
@@ -498,12 +549,14 @@ h3 {
 }
 
 .avatar-caption {
-    margin-top: 2px;
-    font-size: 0.58rem;
-    color: var(--text-dim);
+    margin-top: 8px;
+    font-size: 0.65rem;
+    color: var(--text-muted);
     text-align: center;
-    letter-spacing: 0.18em;
-    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 @keyframes scanFace {
@@ -536,8 +589,8 @@ h3 {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    border-radius: var(--radius-lg);
-    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    background: rgba(255, 255, 255, 0.04);
     backdrop-filter: var(--blur-glass);
     box-shadow: var(--shadow-sm);
 }
@@ -567,10 +620,12 @@ h3 {
     font-size: 0.64rem;
     display: block;
     margin-bottom: 10px;
-    opacity: 0.35;
-    font-family: var(--font-mono);
+    opacity: 0.7;
+    font-family: var(--font-sans);
     color: var(--text-muted);
     letter-spacing: 0.12em;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 /* ==========================================================================
@@ -579,11 +634,11 @@ h3 {
 .project-brutal-card {
     border: 1px solid var(--glass-border);
     transition: var(--transition);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-card);
     overflow: hidden;
     background: var(--bg-card);
     backdrop-filter: var(--blur-glass);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-card);
 }
 
 .project-brutal-card:hover {
@@ -631,10 +686,10 @@ h3 {
     letter-spacing: 0.05em;
 }
 .launch-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.14);
     border-color: var(--glass-border-strong);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.12), var(--shadow-sm);
 }
 
 @media (max-width: 768px) {
@@ -649,19 +704,20 @@ h3 {
     padding: 36px;
     background: var(--bg-card);
     backdrop-filter: var(--blur-glass);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
 }
 
 .contact-row { margin-bottom: 16px; display: flex; gap: 20px; align-items: center; }
 
 .label {
     color: var(--text-muted);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.8rem;
     min-width: 80px;
     letter-spacing: 0.08em;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
+    text-transform: uppercase;
 }
 
 .value {
@@ -686,7 +742,7 @@ h3 {
     display: flex;
     flex-direction: column;
     height: 520px;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-card);
     overflow: hidden;
 }
 
@@ -763,9 +819,11 @@ h3 {
     flex-shrink: 0;
 }
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.10);
     color: var(--text);
     border-color: var(--glass-border-strong);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.08);
 }
 
 .address-input {
@@ -908,6 +966,18 @@ h3 {
 /* ==========================================================================
    REPORT & GRADES PAGE
    ========================================================================== */
+/* Prevent double-nested card styling inside containers */
+.report-container .console-block,
+.project-brutal-card .console-block {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
 .report-container {
     border: 1px solid var(--glass-border);
     padding: 16px;
@@ -915,8 +985,8 @@ h3 {
     margin-bottom: 40px;
     background: var(--bg-card);
     backdrop-filter: var(--blur-glass);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
 }
 
 .report-header {
@@ -992,7 +1062,7 @@ h3 {
     min-height: 100px;
     background: var(--bg-card);
     backdrop-filter: var(--blur-glass);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-card);
     box-shadow: var(--shadow-sm);
 }
 
@@ -1010,9 +1080,9 @@ h3 {
     backdrop-filter: var(--blur-glass);
     font-family: var(--font-sans);
     font-size: 0.85rem;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-card);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-card);
 }
 
 .log-header {
@@ -1158,9 +1228,9 @@ body.god-mode .god-only-section {
     display: flex;
     flex-direction: column;
     min-height: 190px;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-node:hover {
@@ -1223,7 +1293,8 @@ body.god-mode .god-only-section {
 .back-link:hover {
     background: rgba(255, 255, 255, 0.12);
     border-color: var(--glass-border-strong);
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.10);
 }
 
 /* ==========================================================================
