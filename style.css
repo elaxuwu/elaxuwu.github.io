@@ -5,13 +5,13 @@
 
 :root {
     --bg: #050505;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --bg-card: rgba(0, 0, 0, 0.4);
+    --bg-card-hover: rgba(0, 0, 0, 0.5);
     --glass: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-border-strong: rgba(255, 255, 255, 0.14);
     --text: #FFFFFF;
-    --text-muted: #A0A0A0;
+    --text-muted: #D1D1D6;
     --text-dim: #484848;
     --accent: #E0E0E0;
     --accent-glow: rgba(255, 255, 255, 0.08);
@@ -76,14 +76,14 @@ body.lang-en .content-vi { display: none; }
 
 .aurora-orb.orb-2 {
     width: 650px; height: 650px;
-    background: radial-gradient(circle, rgba(230,230,255,0.14) 0%, rgba(180,190,210,0.06) 50%, transparent 70%);
+    background: radial-gradient(circle, rgba(230,230,255,0.15) 0%, rgba(180,190,210,0.06) 50%, transparent 70%);
     top: 15%; right: -150px;
     animation: orbDrift2 28s ease-in-out infinite alternate;
 }
 
 .aurora-orb.orb-3 {
     width: 560px; height: 560px;
-    background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, rgba(200,220,210,0.05) 50%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(200,220,210,0.05) 50%, transparent 70%);
     bottom: -120px; left: 25%;
     animation: orbDrift3 34s ease-in-out infinite alternate;
 }
@@ -339,7 +339,7 @@ body.lang-en .content-vi { display: none; }
 }
 
 .cmd-line {
-    color: var(--text-dim);
+    color: var(--text);
     font-weight: 400;
     margin-bottom: 28px;
     font-family: var(--font-mono);
@@ -567,7 +567,7 @@ h3 {
     font-size: 0.64rem;
     display: block;
     margin-bottom: 10px;
-    opacity: 0.35;
+    opacity: 0.7;
     font-family: var(--font-mono);
     color: var(--text-muted);
     letter-spacing: 0.12em;
