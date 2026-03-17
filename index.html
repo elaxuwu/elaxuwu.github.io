@@ -13,6 +13,11 @@
       data-footer-line2="Built by Đỗ Ngọc Thiên Bảo (Elax) — 2026">
 
     <canvas id="matrix-bg"></canvas>
+    <div class="aurora-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+    </div>
     <div id="cursor-glow"></div>
     <div class="crt-vignette"></div>
 
@@ -108,33 +113,38 @@
 
         <section class="console-block hidden-section">
     <div class="cmd-line">>> EXECUTE EXPLORER.EXE</div>
-    
+
     <div class="window-frame">
-        <div class="window-header">
-            <span class="win-title">:: PROJECT_EXPLORER ::</span>
-            <div class="win-controls">
-                <span class="win-btn">_</span>
-                <span class="win-btn">□</span>
-                <span class="win-btn close">X</span>
+        <!-- macOS-style title bar -->
+        <div class="window-titlebar">
+            <div class="win-traffic-lights">
+                <span class="win-dot dot-close"></span>
+                <span class="win-dot dot-min"></span>
+                <span class="win-dot dot-max"></span>
             </div>
+            <span class="win-title">PROJECT_EXPLORER</span>
+            <div class="win-title-spacer"></div>
         </div>
 
+        <!-- Navigation / address bar -->
         <div class="window-bar">
-            <button id="btn-back" class="nav-btn" onclick="navigateUp()">[<]</button>
-            <div class="address-input">C:\USERS\ELAX\PROJECTS\<span id="current-path">ROOT</span></div>
+            <button id="btn-back" class="nav-btn" onclick="navigateUp()">← Back</button>
+            <div class="address-input">~/elax/projects/<span id="current-path">ROOT</span></div>
         </div>
 
+        <!-- Main content -->
         <div class="window-body">
             <div class="sidebar">
-                <div class="sidebar-item active">MY PC</div>
-                <div class="sidebar-item">DISK (C:)</div>
-                <div class="sidebar-item">NETWORK</div>
+                <div class="sidebar-section-title">Favorites</div>
+                <div class="sidebar-item active">📁 My PC</div>
+                <div class="sidebar-item">💿 Disk C:</div>
+                <div class="sidebar-item">🌐 Network</div>
             </div>
 
-            <div id="file-grid" class="file-grid">
-                </div>
+            <div id="file-grid" class="file-grid"></div>
         </div>
-        
+
+        <!-- Status bar -->
         <div class="window-footer">
             <span id="item-count">0 OBJECTS</span>
         </div>
