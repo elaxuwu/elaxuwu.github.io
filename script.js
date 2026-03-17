@@ -109,6 +109,117 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- C1. MAGNETIC RETICLE CURSOR ---
+    (function initReticle() {
+        const reticle = document.createElement('div');
+        reticle.id = 'cursor-reticle';
+        reticle.innerHTML = '<div class="reticle-dot"></div><div class="reticle-ring"></div>';
+        document.body.appendChild(reticle);
+
+        let rx = window.innerWidth / 2;
+        let ry = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (e) => {
+            rx = e.clientX;
+            ry = e.clientY;
+            reticle.style.left = rx + 'px';
+            reticle.style.top  = ry + 'px';
+        });
+
+        function markHoverable() {
+            document.querySelectorAll(
+                'a, button, [onclick], .sidebar-item, .icon-container, .report-row, .social-node, .launch-btn, .pill-button, .activity-icon, .win-dot'
+            ).forEach(el => {
+                if (el.dataset.reticleInit) return;
+                el.dataset.reticleInit = '1';
+                el.addEventListener('mouseenter', () => reticle.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => reticle.classList.remove('hovering'));
+            });
+        }
+        markHoverable();
+
+        // Re-run when dynamic content is injected (file explorer renders)
+        const bodyObserver = new MutationObserver(markHoverable);
+        bodyObserver.observe(document.body, { childList: true, subtree: true });
+    })();
+
+    // --- C2. AURORA AMBIENT LIGHT (MOUSE TRACKING) ---
+    (function initAuroraLamp() {
+        const auroraBg = document.querySelector('.aurora-bg');
+        if (!auroraBg) return;
+
+        const lamp = document.createElement('div');
+        lamp.className = 'aurora-lamp';
+        auroraBg.appendChild(lamp);
+
+        let targetX = window.innerWidth  / 2;
+        let targetY = window.innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+
+        function animateLamp() {
+            currentX += (targetX - currentX) * 0.07;
+            currentY += (targetY - currentY) * 0.07;
+            lamp.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
+            requestAnimationFrame(animateLamp);
+        }
+        animateLamp();
+    })();
+
+    // --- C3. MAGNETIC PILL BUTTONS ---
+    (function initMagneticButtons() {
+        const ATTRACT_RADIUS = 20; // px outside the element bounds
+        const STRENGTH = 0.35;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function attachMagnetic(el) {
+            if (el.dataset.magneticInit) return;
+            el.dataset.magneticInit = '1';
+
+            el.style.transition = 'transform 0.25s cubic-bezier(0.4,0,0.2,1)';
+
+            function updateMagnetic() {
+                const rect = el.getBoundingClientRect();
+                const cx = rect.left + rect.width  / 2;
+                const cy = rect.top  + rect.height / 2;
+                const dx = mouseX - cx;
+                const dy = mouseY - cy;
+
+                // Distance from cursor to nearest edge
+                const nearX = Math.max(0, Math.abs(dx) - rect.width  / 2);
+                const nearY = Math.max(0, Math.abs(dy) - rect.height / 2);
+                const edgeDist = Math.hypot(nearX, nearY);
+
+                if (edgeDist <= ATTRACT_RADIUS) {
+                    el.style.transform = `translate(${dx * STRENGTH}px, ${dy * STRENGTH}px)`;
+                } else {
+                    el.style.transform = '';
+                }
+            }
+
+            document.addEventListener('mousemove', updateMagnetic);
+        }
+
+        function scanPillButtons() {
+            document.querySelectorAll('.pill-button, .launch-btn, .cmd-btn, .nav-btn').forEach(attachMagnetic);
+        }
+        scanPillButtons();
+
+        const bodyObserver2 = new MutationObserver(scanPillButtons);
+        bodyObserver2.observe(document.body, { childList: true, subtree: true });
+    })();
+
     const hiddenElements = document.querySelectorAll('.hidden-section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -268,7 +379,7 @@ function activateGodMode() {
     const isGod = document.body.classList.contains('god-mode');
 
     if(isGod) {
-        alert("🔓 God Mode Activated — Welcome to the HUD");
+        alert("🔓 God Mode Activated - Welcome to the HUD");
         if(cmdLine) cmdLine.innerText = "🔐 Elevated Access Granted";
         
         // START THE RAIN

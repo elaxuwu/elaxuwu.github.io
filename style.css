@@ -42,7 +42,7 @@ body {
     color: var(--text);
     font-family: var(--font-sans);
     line-height: 1.7;
-    cursor: default;
+    cursor: none;
     overflow-x: hidden;
     position: relative;
 }
@@ -101,6 +101,67 @@ body.lang-en .content-vi { display: none; }
 @keyframes orbDrift3 {
     0%   { transform: translate(0, 0) scale(1); }
     100% { transform: translate(50px, -60px) scale(1.09); }
+}
+
+/* Aurora Ambient Lamp — follows mouse */
+.aurora-lamp {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    filter: blur(100px);
+    background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(220,220,240,0.07) 45%, transparent 70%);
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* ==========================================================================
+   MAGNETIC RETICLE CURSOR
+   ========================================================================== */
+#cursor-reticle {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+}
+
+.reticle-dot {
+    position: absolute;
+    width: 5px; height: 5px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(255,255,255,0.9), 0 0 14px rgba(255,255,255,0.5);
+    transition: transform 0.18s ease;
+}
+
+.reticle-ring {
+    position: absolute;
+    width: 20px; height: 20px;
+    border: 1.5px solid rgba(255,255,255,0.85);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 6px rgba(255,255,255,0.35), inset 0 0 4px rgba(255,255,255,0.08);
+    transition: width 0.2s cubic-bezier(0.4,0,0.2,1),
+                height 0.2s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.2s ease;
+}
+
+#cursor-reticle.hovering .reticle-ring {
+    width: 34px; height: 34px;
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: 0 0 14px rgba(255,255,255,0.4);
+}
+
+#cursor-reticle.hovering .reticle-dot {
+    animation: reticleDotPulse 0.55s ease-in-out infinite alternate;
+}
+
+@keyframes reticleDotPulse {
+    from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    to   { transform: translate(-50%, -50%) scale(2); opacity: 0.6; }
 }
 
 /* ==========================================================================
@@ -730,13 +791,13 @@ h3 {
 .contact-row:hover .value { color: var(--text-muted); }
 
 /* ==========================================================================
-   FILE EXPLORER — FUTURISTIC MACOS-STYLE DARK FINDER
+   FILE EXPLORER — FUTURISTIC IDE SIDEBAR AESTHETIC
    ========================================================================== */
 .window-frame {
-    border: 1px solid var(--glass-border);
-    background: rgba(8, 8, 8, 0.85);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
     margin-top: 12px;
     display: flex;
@@ -846,6 +907,42 @@ h3 {
     overflow: hidden;
 }
 
+/* IDE Activity Bar — narrow vertical icon strip */
+.ide-activity-bar {
+    width: 48px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    gap: 6px;
+    background: rgba(0,0,0,0.35);
+    flex-shrink: 0;
+}
+
+.activity-icon {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-pill);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text-dim);
+    transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+    flex-shrink: 0;
+}
+
+.activity-icon:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+    box-shadow: 0 0 12px rgba(255,255,255,0.12);
+}
+
+.activity-icon.active {
+    background: rgba(255,255,255,0.10);
+    color: var(--text);
+    box-shadow: 0 0 16px rgba(255,255,255,0.15);
+}
+
 /* Sidebar — translucent glass blur panel */
 .sidebar {
     width: 155px;
@@ -912,10 +1009,10 @@ h3 {
 }
 
 .icon-container:hover {
-    border-color: var(--glass-border);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255,255,255,0.14);
+    background: rgba(255, 255, 255, 0.06);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 0 18px rgba(255,255,255,0.10), var(--shadow-sm);
 }
 
 .icon-img {

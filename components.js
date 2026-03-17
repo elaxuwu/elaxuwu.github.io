@@ -3,11 +3,11 @@
  * Injects shared nav and footer HTML into every page.
  *
  * Customise each page by adding data-* attributes to <body>:
- *   data-nav-logo     – logo text shown in the nav (home page only)
- *   data-nav-status   – status badge text
- *   data-nav-back     – relative URL for the "back" link (sub-pages only)
- *   data-footer-line1 – first info line in the footer
- *   data-footer-line2 – second info line in the footer
+ *   data-nav-logo     - logo text shown in the nav (home page only)
+ *   data-nav-status   - status badge text
+ *   data-nav-back     - relative URL for the "back" link (sub-pages only)
+ *   data-footer-line1 - first info line in the footer
+ *   data-footer-line2 - second info line in the footer
  */
 (function () {
     var body = document.body;
@@ -17,7 +17,7 @@
     var navStatus   = d.navStatus   || 'Online';
     var navBack     = d.navBack     || '';
     var footerLine1 = d.footerLine1 || '[Secure Connection]';
-    var footerLine2 = d.footerLine2 || 'Built by Elax — 2026';
+    var footerLine2 = d.footerLine2 || 'Built by Elax - 2026';
 
     // ── Navigation ────────────────────────────────────────────────────────
     var nav = document.querySelector('nav.system-nav');
