@@ -109,6 +109,116 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Shared mouse position (updated once, consumed by reticle + lamp + magnetic)
+    let sharedMouseX = window.innerWidth  / 2;
+    let sharedMouseY = window.innerHeight / 2;
+    document.addEventListener('mousemove', (e) => {
+        sharedMouseX = e.clientX;
+        sharedMouseY = e.clientY;
+    });
+
+    // --- C1. MAGNETIC RETICLE CURSOR ---
+    (function initReticle() {
+        const reticle = document.createElement('div');
+        reticle.id = 'cursor-reticle';
+        reticle.innerHTML = '<div class="reticle-dot"></div><div class="reticle-ring"></div>';
+        document.body.appendChild(reticle);
+
+        document.addEventListener('mousemove', (e) => {
+            reticle.style.left = e.clientX + 'px';
+            reticle.style.top  = e.clientY + 'px';
+        });
+
+        function markHoverable() {
+            document.querySelectorAll(
+                'a, button, [onclick], .sidebar-item, .icon-container, .report-row, .social-node, .launch-btn, .pill-button, .activity-icon, .win-dot'
+            ).forEach(el => {
+                if (el.dataset.reticleInit) return;
+                el.dataset.reticleInit = '1';
+                el.addEventListener('mouseenter', () => reticle.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => reticle.classList.remove('hovering'));
+            });
+        }
+        markHoverable();
+
+        return markHoverable; // exposed for shared observer below
+    })();
+
+    // --- C2. AURORA AMBIENT LIGHT (MOUSE TRACKING) ---
+    (function initAuroraLamp() {
+        const auroraBg = document.querySelector('.aurora-bg');
+        if (!auroraBg) return;
+
+        const lamp = document.createElement('div');
+        lamp.className = 'aurora-lamp';
+        auroraBg.appendChild(lamp);
+
+        let currentX = sharedMouseX;
+        let currentY = sharedMouseY;
+
+        function animateLamp() {
+            currentX += (sharedMouseX - currentX) * 0.07;
+            currentY += (sharedMouseY - currentY) * 0.07;
+            lamp.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
+            requestAnimationFrame(animateLamp);
+        }
+        animateLamp();
+    })();
+
+    // --- C3. MAGNETIC PILL BUTTONS ---
+    // Cached rects refreshed only on resize/scroll; single shared mousemove
+    const magneticButtons = [];
+    const ATTRACT_RADIUS = 20;
+    const MAGNET_STRENGTH = 0.35;
+
+    function attachMagnetic(el) {
+        if (el.dataset.magneticInit) return;
+        el.dataset.magneticInit = '1';
+        el.style.transition = 'transform 0.25s cubic-bezier(0.4,0,0.2,1)';
+        magneticButtons.push(el);
+    }
+
+    function scanPillButtons() {
+        document.querySelectorAll('.pill-button, .launch-btn, .cmd-btn, .nav-btn')
+            .forEach(attachMagnetic);
+    }
+    scanPillButtons();
+
+    // Single mousemove drives all magnetic buttons
+    document.addEventListener('mousemove', () => {
+        magneticButtons.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const cx = rect.left + rect.width  / 2;
+            const cy = rect.top  + rect.height / 2;
+            const dx = sharedMouseX - cx;
+            const dy = sharedMouseY - cy;
+            const nearX = Math.max(0, Math.abs(dx) - rect.width  / 2);
+            const nearY = Math.max(0, Math.abs(dy) - rect.height / 2);
+            if (Math.hypot(nearX, nearY) <= ATTRACT_RADIUS) {
+                el.style.transform = `translate(${dx * MAGNET_STRENGTH}px, ${dy * MAGNET_STRENGTH}px)`;
+            } else {
+                el.style.transform = '';
+            }
+        });
+    });
+
+    // Single MutationObserver handles both reticle hoverable scan + pill-button scan
+    const domObserver = new MutationObserver(() => {
+        document.querySelectorAll(
+            'a, button, [onclick], .sidebar-item, .icon-container, .report-row, .social-node, .launch-btn, .pill-button, .activity-icon, .win-dot'
+        ).forEach(el => {
+            if (el.dataset.reticleInit) return;
+            el.dataset.reticleInit = '1';
+            const reticle = document.getElementById('cursor-reticle');
+            if (reticle) {
+                el.addEventListener('mouseenter', () => reticle.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => reticle.classList.remove('hovering'));
+            }
+        });
+        scanPillButtons();
+    });
+    domObserver.observe(document.body, { childList: true, subtree: true });
+
     const hiddenElements = document.querySelectorAll('.hidden-section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -268,7 +378,7 @@ function activateGodMode() {
     const isGod = document.body.classList.contains('god-mode');
 
     if(isGod) {
-        alert("🔓 God Mode Activated — Welcome to the HUD");
+        alert("🔓 God Mode Activated - Welcome to the HUD");
         if(cmdLine) cmdLine.innerText = "🔐 Elevated Access Granted";
         
         // START THE RAIN
