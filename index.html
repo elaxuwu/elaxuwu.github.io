@@ -69,7 +69,7 @@
 
                 <div class="hero-avatar-wrapper">
                     <div class="avatar-frame">
-                        <img src="https://i.ibb.co/JWB345nM/IMG-20260117-192118.png" alt="OPERATOR_IMG" class="avatar-img">
+                        <img src="https://i.ibb.co/JWB345nM/IMG-20260117-192118.png" alt="OPERATOR_IMG" class="avatar-img" loading="lazy" decoding="async">
                         <div class="avatar-scanline"></div>
                     </div>
                     <div class="avatar-caption">:: OPERATOR_ID ::</div>
@@ -113,49 +113,35 @@
         </section>
 
         <section class="console-block hidden-section">
-    <div class="cmd-line">>> EXECUTE EXPLORER.EXE</div>
+    <div class="cmd-line">PROJECTS</div>
 
-    <div class="window-frame">
-        <!-- macOS-style title bar -->
-        <div class="window-titlebar">
-            <div class="win-traffic-lights">
-                <span class="win-dot dot-close"></span>
-                <span class="win-dot dot-min"></span>
-                <span class="win-dot dot-max"></span>
+    <div class="explorer-panel">
+        <div class="explorer-sidebar">
+            <div class="explorer-sidebar-title">Categories</div>
+
+            <div class="explorer-cat active" data-folder="ROOT" onclick="explorerNav('ROOT', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/></svg>
+                All
             </div>
-            <span class="win-title">PROJECT_EXPLORER</span>
-            <div class="win-title-spacer"></div>
-        </div>
-
-        <!-- Navigation / address bar -->
-        <div class="window-bar">
-            <button id="btn-back" class="nav-btn" onclick="navigateUp()">← Back</button>
-            <div class="address-input">~/elax/projects/<span id="current-path">ROOT</span></div>
-        </div>
-
-        <!-- Main content -->
-        <div class="window-body">
-            <div class="ide-activity-bar">
-                <div class="activity-icon active" title="Explorer">📁</div>
-                <div class="activity-icon" title="Search">🔍</div>
-                <div class="activity-icon" title="Source Control">🌿</div>
-                <div class="activity-icon" title="Terminal">⌨️</div>
+            <div class="explorer-cat" data-folder="GAME PROJECTS" onclick="explorerNav('GAME PROJECTS', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="5"/><path d="M7 12h4m-2-2v4"/><circle cx="17" cy="11" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/></svg>
+                Games
             </div>
-
-            <div class="sidebar">
-                <div class="sidebar-section-title">Favorites</div>
-                <div class="sidebar-item active">📁 My PC</div>
-                <div class="sidebar-item">💿 Disk C:</div>
-                <div class="sidebar-item">🌐 Network</div>
+            <div class="explorer-cat" data-folder="APP PROJECTS" onclick="explorerNav('APP PROJECTS', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                Apps
             </div>
-
-            <div id="file-grid" class="file-grid"></div>
+            <div class="explorer-cat" data-folder="AI PROJECTS" onclick="explorerNav('AI PROJECTS', this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m-4.5 4.5L12 12l4.5 4.5"/></svg>
+                AI
+            </div>
         </div>
 
-        <!-- Status bar -->
-        <div class="window-footer">
-            <span id="item-count">0 OBJECTS</span>
-        </div>
+        <div id="file-grid" class="file-grid"></div>
+    </div>
+
+    <div class="explorer-status">
+        <span id="item-count">0 ITEMS</span>
     </div>
 </section>
 
