@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAZY_NOTE.EXE</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body class="lang-en"
+      data-nav-back="../../index.html"
+      data-nav-status="AI Project"
+      data-footer-line1="[Context-Aware Engine Active]"
+      data-footer-line2="Architected by Elax - 2026">
+
+    <canvas id="matrix-bg"></canvas>
+    <div class="aurora-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+    </div>
+    <div class="grain-overlay"></div>
+    <div id="cursor-glow"></div>
+    <div class="crt-vignette"></div>
+
+    <div id="boot-loader">
+        <div class="loader-content">
+            <div class="logo-container">
+                <div class="terminal-logo">
+                    <div class="logo-line">&#8203;</div>
+                    <div class="logo-line"><span class="logo-text">E L A X</span> <span class="logo-dev">.DEV</span></div>
+                    <div class="logo-line">&#8203;</div>
+                </div>
+                <div class="loading-bar-container">
+                    <div class="loading-bar">
+                        <div class="loading-fill"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="loader-text">
+                <span id="loader-status">INITIALIZING LAZY_NOTE.EXE...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="scanlines"></div>
+
+    <nav class="system-nav"></nav>
+
+    <main class="terminal-container container">
+        <section class="console-block hero">
+            <div class="cmd-line">
+                <span class="content-vi">>> KHỞI CHẠY lazy_note.exe</span>
+                <span class="content-en">>> EXECUTE lazy_note.exe</span>
+            </div>
+            <h1 class="glitch-text" data-text="Lazy Note - Write Less, Understand More">
+                <span class="content-vi">Lazy Note - Viết Ít Hơn, Hiểu Nhiều Hơn</span>
+                <span class="content-en">Lazy Note - Write Less, Understand More</span>
+            </h1>
+
+            <div class="slogan-box">
+                <span class="content-vi">Một không gian học tập tích hợp AI giúp biến việc chép bài thụ động thành quá trình học chủ động, cá nhân hóa.</span>
+                <span class="content-en">An AI-powered study workspace that transforms rote transcription into active, personalized learning.</span>
+            </div>
+        </section>
+
+        <section class="console-block hidden-section">
+            <div class="cmd-line">
+                <span class="content-vi">>> ĐỌC CẤU HÌNH DỰ ÁN</span>
+                <span class="content-en">>> LOAD PROJECT PROFILE</span>
+            </div>
+            <section class="brutal-grid info-grid">
+                <div class="skill-box highlight">
+                    <span class="code-num">
+                        <span class="content-vi">VAI TRÒ</span>
+                        <span class="content-en">ROLE</span>
+                    </span>
+                    <h3>
+                        <span class="content-vi">Trưởng dự án & Kiến trúc sư Full-Stack</span>
+                        <span class="content-en">Project Lead & Full-Stack Architect</span>
+                    </h3>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">
+                        <span class="content-vi">NGĂN XẾP CÔNG NGHỆ</span>
+                        <span class="content-en">TECH STACK</span>
+                    </span>
+                    <p>
+                        <span class="content-vi">Vanilla JS, CSS3, Node.js, Render, Upstash Redis, OpenAI API, ElevenLabs TTS.</span>
+                        <span class="content-en">Vanilla JS, CSS3, Node.js, Render, Upstash Redis, OpenAI API, ElevenLabs TTS.</span>
+                    </p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">
+                        <span class="content-vi">PHÂN LOẠI</span>
+                        <span class="content-en">CATEGORY</span>
+                    </span>
+                    <h3>
+                        <span class="content-vi">Ứng dụng web tích hợp AI</span>
+                        <span class="content-en">AI-Driven Web App</span>
+                    </h3>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">
+                        <span class="content-vi">TRẠNG THÁI</span>
+                        <span class="content-en">STATUS</span>
+                    </span>
+                    <p>
+                        <span class="tag-new">[ACTIVE]</span>
+                        <span class="content-vi">Đã triển khai / Đang hoạt động</span>
+                        <span class="content-en">Deployed / Active</span>
+                    </p>
+                </div>
+            </section>
+        </section>
+
+        <section class="console-block hidden-section">
+            <div class="cmd-line">
+                <span class="content-vi">>> PHÂN TÍCH NGHỊCH LÝ GHI CHÚ</span>
+                <span class="content-en">>> ANALYZE NOTE-TAKING PARADOX</span>
+            </div>
+            <div class="project-brutal-card glass-panel">
+                <div class="project-header">
+                    <span class="content-vi">Bài toán & Giải pháp cốt lõi</span>
+                    <span class="content-en">The Problem & Core Solution</span>
+                </div>
+                <div class="project-body">
+                    <div class="project-desc" style="flex: 1 1 320px; border-right: 1px solid var(--glass-border);">
+                        <h3 style="margin-bottom: 14px;">
+                            <span class="content-vi">Vấn đề: Nghịch lý ghi chú</span>
+                            <span class="content-en">Problem: The Note-Taking Paradox</span>
+                        </h3>
+                        <p>
+                            <span class="content-vi">Học sinh dành khoảng 80% thời gian trên lớp để gõ và sắp xếp ghi chú một cách vội vã, nên chỉ còn 20% sự tập trung cho việc lắng nghe, hiểu bài và đặt câu hỏi đúng lúc.</span>
+                            <span class="content-en">Students spend roughly 80% of class time frantically typing and organizing notes, leaving only 20% of their attention for listening, understanding, and asking the right questions.</span>
+                        </p>
+                    </div>
+                    <div class="project-desc" style="flex: 1 1 320px;">
+                        <h3 style="margin-bottom: 14px;">
+                            <span class="content-vi">Giải pháp: Infinite Document Canvas</span>
+                            <span class="content-en">Solution: Infinite Document Canvas</span>
+                        </h3>
+                        <p>
+                            <span class="content-vi">Lazy Note giới thiệu một "Infinite Document Canvas" nơi người dùng dựng nhanh dàn ý cấp cao bằng kéo-thả, còn AI nhận thức ngữ cảnh sẽ đọc toàn bộ trạng thái tài liệu để tự điền các chi tiết nhỏ một cách mạch lạc và đúng bối cảnh.</span>
+                            <span class="content-en">Lazy Note features an "Infinite Document Canvas" where users assemble the high-level outline through drag-and-drop, while a context-aware AI reads the full document state to fill in granular details cohesively and in the right context.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block hidden-section">
+            <div class="cmd-line">
+                <span class="content-vi">>> LIỆT KÊ TÍNH NĂNG KỸ THUẬT</span>
+                <span class="content-en">>> ENUMERATE TECHNICAL FEATURES</span>
+            </div>
+            <div class="brutal-grid">
+                <div class="skill-box highlight">
+                    <span class="code-num">01</span>
+                    <h3>
+                        <span class="content-vi">AI nhận thức ngữ cảnh</span>
+                        <span class="content-en">Context-Aware AI Engine</span>
+                    </h3>
+                    <p>
+                        <span class="content-vi">Đọc toàn bộ notebook, tệp tải lên và nguồn web trực tiếp để tạo nội dung liền mạch thay vì chỉ phản hồi theo từng prompt rời rạc.</span>
+                        <span class="content-en">Reads the entire notebook, uploaded files, and live web sources to generate cohesive content instead of isolated prompt-by-prompt responses.</span>
+                    </p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">02</span>
+                    <h3>
+                        <span class="content-vi">Đồng bộ dàn ý động</span>
+                        <span class="content-en">Dynamic Outline Syncing</span>
+                    </h3>
+                    <p>
+                        <span class="content-vi">Logic kéo-thả phức tạp bằng Vanilla JS đồng bộ tức thời việc sắp xếp lại heading với toàn bộ nội dung AI tương ứng bên dưới.</span>
+                        <span class="content-en">Complex Vanilla JS drag-and-drop logic keeps heading reordering synchronized in real time with the AI-generated content attached to each section.</span>
+                    </p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">03</span>
+                    <h3>
+                        <span class="content-vi">Persona học tập tùy chỉnh</span>
+                        <span class="content-en">Custom Personas</span>
+                    </h3>
+                    <p>
+                        <span class="content-vi">Cho phép người học đổi giọng dạy của AI theo mục tiêu như "Ôn thi tốc độ" hoặc "Giải thích như cho trẻ 5 tuổi".</span>
+                        <span class="content-en">Lets users shift the AI teaching voice around goals such as "Exam Prep" or "Explain Like I'm 5".</span>
+                    </p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">04</span>
+                    <h3>
+                        <span class="content-vi">Hệ thống ôn tập đa phương thức</span>
+                        <span class="content-en">Multi-Modal Review System</span>
+                    </h3>
+                    <p>
+                        <span class="content-vi">Biến notebook thành podcast tóm tắt bằng âm thanh và tạo thẻ ghi nhớ 3D tương tác gần như tức thì.</span>
+                        <span class="content-en">Turns notebooks into podcast-style audio summaries and instantly generated interactive 3D flashcards.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block hidden-section">
+            <div class="cmd-line">
+                <span class="content-vi">>> MỞ NHẬT KÝ KIẾN TRÚC</span>
+                <span class="content-en">>> OPEN ARCHITECTURE LOG</span>
+            </div>
+            <div class="log-container">
+                <div class="log-header">
+                    <span>
+                        <span class="content-vi">MÔ-ĐUN</span>
+                        <span class="content-en">MODULE</span>
+                    </span>
+                    <span>
+                        <span class="content-vi">LỚP HỆ THỐNG</span>
+                        <span class="content-en">SYSTEM LAYER</span>
+                    </span>
+                    <span>
+                        <span class="content-vi">ĐÓNG GÓP</span>
+                        <span class="content-en">CONTRIBUTION</span>
+                    </span>
+                </div>
+
+                <div class="log-entry">
+                    <span class="log-date">AI-01</span>
+                    <span class="log-ver">OpenAI</span>
+                    <span class="log-msg">
+                        <span class="tag-new">[CORE]</span>
+                        <span class="content-vi">Tích hợp OpenAI API để xây dựng hệ thống sinh nội dung nhận thức ngữ cảnh theo toàn bộ trạng thái tài liệu.</span>
+                        <span class="content-en">Integrated the OpenAI API to engineer a context-aware generation system that reasons over the full document state.</span>
+                    </span>
+                </div>
+
+                <div class="log-entry">
+                    <span class="log-date">DB-02</span>
+                    <span class="log-ver">Redis</span>
+                    <span class="log-msg">
+                        <span class="tag-new">[STATE]</span>
+                        <span class="content-vi">Triển khai Upstash Redis cho lưu trữ serverless, khôi phục phiên học và cơ chế lưu ghi chú đáng tin cậy.</span>
+                        <span class="content-en">Implemented Upstash Redis for serverless persistence, session recovery, and reliable notebook saving.</span>
+                    </span>
+                </div>
+
+                <div class="log-entry">
+                    <span class="log-date">UI-03</span>
+                    <span class="log-ver">Front-End</span>
+                    <span class="log-msg">
+                        <span class="tag-new">[AURORA]</span>
+                        <span class="content-vi">Thiết kế giao diện "Premium Dark Aurora" và dựng toàn bộ trình soạn thảo ghi chú từ đầu mà không phụ thuộc framework nặng.</span>
+                        <span class="content-en">Designed the "Premium Dark Aurora" interface and built the complete note editor from scratch without heavy frameworks.</span>
+                    </span>
+                </div>
+
+                <div class="log-entry">
+                    <span class="log-date">IO-04</span>
+                    <span class="log-ver">Sources</span>
+                    <span class="log-msg">
+                        <span class="tag-new">[MULTI]</span>
+                        <span class="content-vi">Phát triển hệ thống nguồn dữ liệu đa phương thức để phân tích tệp, văn bản dán vào và tri thức nội bộ do AI hỗ trợ.</span>
+                        <span class="content-en">Developed the multi-modal source system for parsing files, pasted text, and internal AI-assisted knowledge.</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="system-footer"></footer>
+
+    <script src="../../components.js"></script>
+    <script src="../../script.js"></script>
+</body>
+</html>

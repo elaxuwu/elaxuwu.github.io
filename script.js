@@ -443,6 +443,7 @@ const ICONS = {
 
 function getIcon(item) {
     if (item.type === 'folder') return ICONS.folder;
+    if (item.icon && ICONS[item.icon]) return ICONS[item.icon];
     const n = item.name.toLowerCase();
     if (n.endsWith('.exe')) return ICONS.game;
     if (n.endsWith('.app')) return ICONS.app;
@@ -462,10 +463,11 @@ const fileSystem = {
         { type: 'file', name: 'Fruit_Ninja.exe', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL' }
     ],
     "APP PROJECTS": [
-        { type: 'file', name: 'Zalo_Sender.app', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C#' }
+        { type: 'file', name: 'Zalo_Sender.app', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION' }
     ],
     "AI PROJECTS": [
-        { type: 'file', name: 'AI-LAX.py', link: 'https://github.com/elaxuwu/AILAX', tag: 'PYTHON' }
+        { type: 'file', name: 'Lazy Note', icon: 'ai', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK' },
+        { type: 'file', name: 'AI-LAX.py', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT' }
     ]
 };
 
