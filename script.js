@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Start slogan after boot
             typeWriterEffect();
         }, 2200);
+    } else {
+        typeWriterEffect();
     }
 
     // --- B. LANGUAGE SWITCHER ---
