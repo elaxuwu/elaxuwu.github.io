@@ -172,65 +172,69 @@
 
         <section class="console-block">
             <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">
-                <span class="content-vi">NHẬT KÝ PHÁT TRIỂN</span>
-                <span class="content-en">DEVELOPMENT_LOGS</span>
+                <span class="content-vi">HỆ THỐNG CÔNG NGHỆ</span>
+                <span class="content-en">TECH STACK SUMMARY</span>
             </h2>
-            <div class="log-container">
-                <div class="log-entry">
-                    <span class="log-date">
-                        <span class="content-vi">ARCH</span>
-                        <span class="content-en">ARCH</span>
-                    </span>
-                    <span class="log-msg">
-                        <span class="tag-new">
-                            <span class="content-vi">[AI_ENGINE]</span>
-                            <span class="content-en">[AI_ENGINE]</span>
-                        </span>
-                        <span class="content-vi">Tích hợp OpenAI API để xây dựng hệ thống sinh nội dung có nhận thức ngữ cảnh.</span>
-                        <span class="content-en">Integrated OpenAI API to engineer a context-aware generation system.</span>
-                    </span>
-                </div>
-                <div class="log-entry">
-                    <span class="log-date">
-                        <span class="content-vi">ARCH</span>
-                        <span class="content-en">ARCH</span>
-                    </span>
-                    <span class="log-msg">
-                        <span class="tag-new">
-                            <span class="content-vi">[DATABASE]</span>
-                            <span class="content-en">[DATABASE]</span>
-                        </span>
-                        <span class="content-vi">Triển khai Upstash Redis cho khả năng lưu trữ dữ liệu serverless tốc độ cao.</span>
-                        <span class="content-en">Implemented Upstash Redis for high-speed, serverless data persistence.</span>
-                    </span>
-                </div>
-                <div class="log-entry">
-                    <span class="log-date">
-                        <span class="content-vi">ARCH</span>
-                        <span class="content-en">ARCH</span>
-                    </span>
-                    <span class="log-msg">
-                        <span class="tag-new">
-                            <span class="content-vi">[FRONTEND]</span>
-                            <span class="content-en">[FRONTEND]</span>
-                        </span>
-                        <span class="content-vi">Thiết kế giao diện "Premium Dark Aurora" và xây dựng trình soạn thảo ghi chú phức tạp hoàn toàn bằng Vanilla JS.</span>
-                        <span class="content-en">Designed "Premium Dark Aurora" UI and built the complex note editor entirely in Vanilla JS.</span>
-                    </span>
-                </div>
-                <div class="log-entry">
-                    <span class="log-date">
-                        <span class="content-vi">ARCH</span>
-                        <span class="content-en">ARCH</span>
-                    </span>
-                    <span class="log-msg">
-                        <span class="tag-new">
-                            <span class="content-vi">[SOURCES]</span>
-                            <span class="content-en">[SOURCES]</span>
-                        </span>
-                        <span class="content-vi">Phát triển hệ thống nguồn dữ liệu đa phương thức để phân tích tệp, văn bản dán vào và tri thức AI nội bộ.</span>
- tri thá»©c AI ná»™i bá»™.</span>
-  </section>
+            <div style="overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(10, 14, 24, 0.55);">
+                <table style="width: 100%; border-collapse: collapse; min-width: 680px;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--glass-border); background: rgba(110, 231, 183, 0.08);">
+                            <th style="text-align: left; padding: 12px; color: var(--text);">CATEGORY</th>
+                            <th style="text-align: left; padding: 12px; color: var(--text);">
+                                <span class="content-vi">THÀNH PHẦN ĐÃ DÙNG</span>
+                                <span class="content-en">USED COMPONENTS</span>
+                            </th>
+                            <th style="text-align: left; padding: 12px; color: var(--text);">
+                                <span class="content-vi">MỤC ĐÍCH</span>
+                                <span class="content-en">PURPOSE</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">AI Used</td>
+                            <td style="padding: 12px; color: var(--text-muted);">OpenAI, ElevenLabs</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Sinh nội dung theo ngữ cảnh và tạo tóm tắt giọng nói.</span>
+                                <span class="content-en">Context-aware note generation and voice-based summaries.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">API Used</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Exa API, Agora API, JigsawStack API</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Tìm kiếm web, xử lý dữ liệu thời gian thực và mở rộng tính năng AI.</span>
+                                <span class="content-en">Web retrieval, real-time processing, and extended AI workflows.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Backend</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Node.js, JavaScript</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Điều phối xử lý logic và tích hợp dịch vụ AI.</span>
+                                <span class="content-en">Core application logic and AI service orchestration.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Database</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Upstash Redis</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Lưu trữ trạng thái ghi chú nhanh, serverless và độ trễ thấp.</span>
+                                <span class="content-en">Low-latency serverless persistence for note state and sessions.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Deployment</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Render</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Triển khai và vận hành ứng dụng trực tuyến liên tục.</span>
+                                <span class="content-en">Continuous online deployment and hosting.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
 
     <footer class="system-footer"></footer>
