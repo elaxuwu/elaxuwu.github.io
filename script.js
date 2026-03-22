@@ -15,6 +15,59 @@ const fontSize = 14;
 // Typewriter Global Timeout
 let typingTimeout;
 
+const THEME_STORAGE_KEY = 'theme-preference';
+const THEME_ICONS = {
+    dark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"></path></svg>',
+    light: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>'
+};
+
+function getActiveTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+}
+
+function updateThemeToggle() {
+    const themeBtn = document.getElementById('theme-toggle');
+    if (!themeBtn) return;
+
+    const theme = getActiveTheme();
+    const nextAction = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+
+    themeBtn.innerHTML = THEME_ICONS[theme];
+    themeBtn.setAttribute('aria-label', nextAction);
+    themeBtn.setAttribute('title', nextAction);
+    themeBtn.dataset.theme = theme;
+}
+
+function applyTheme(theme) {
+    const activeTheme = theme === 'light' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', activeTheme);
+
+    try {
+        localStorage.setItem(THEME_STORAGE_KEY, activeTheme);
+    } catch (error) {
+        // Ignore storage failures and keep the in-memory theme.
+    }
+
+    updateThemeToggle();
+}
+
+function initThemeToggle() {
+    const themeBtn = document.getElementById('theme-toggle');
+    if (!document.documentElement.hasAttribute('data-theme')) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    updateThemeToggle();
+
+    if (!themeBtn || themeBtn.dataset.bound === '1') return;
+
+    themeBtn.dataset.bound = '1';
+    themeBtn.addEventListener('click', () => {
+        const nextTheme = getActiveTheme() === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+    });
+}
+
 /** * Report Page Logic (Must be global to work with onclick="toggleDetail(this)") 
  */
 function toggleDetail(element) {
@@ -70,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         typeWriterEffect();
     }
+
+    initThemeToggle();
 
     // --- B. LANGUAGE SWITCHER ---
     const langBtn = document.getElementById('lang-toggle');

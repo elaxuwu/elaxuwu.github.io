@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('theme-preference');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
     <title>LAZY_NOTE.EXE</title>
     <link rel="stylesheet" href="../../style.css">
 </head>
@@ -71,7 +81,7 @@
                     </span>
                     <span class="value" style="color: #4ade80;">
                         <span class="content-vi">ĐÃ TRIỂN KHAI / ĐANG HOẠT ĐỘNG</span>
-                        <span class="content-en">DEPLOYED / ACTIVE</span>
+                        <span class="content-en">ACTIVE</span>
                     </span>
                 </div>
             </div>
@@ -88,8 +98,8 @@
                     <span class="content-en">[?] The Problem</span>
                 </h3>
                 <p style="color: var(--text-muted); margin-bottom: 15px;">
-                    <span class="content-vi">Học sinh dành ~80% thời gian trên lớp để ghi chép trong vội vã, chỉ còn lại ~20% cho việc thực sự lắng nghe.</span>
-                    <span class="content-en">Students spend ~80% of class time frantically typing/taking notes, leaving only ~20% for actual listening.</span>
+                    <span class="content-vi">Học sinh (chúng tôi) thường dành ~80% thời gian trên lớp để ghi chép trong vội vã, chỉ còn lại ~20% cho việc thực sự lắng nghe.</span>
+                    <span class="content-en">Students (we) usually spend ~80% of class time frantically typing/taking notes, leaving only ~20% for actual listening.</span>
                 </p>
                 <h3 style="color: var(--accent);">
                     <span class="content-vi">[!] Giải Pháp</span>
@@ -175,10 +185,10 @@
                 <span class="content-vi">HỆ THỐNG CÔNG NGHỆ</span>
                 <span class="content-en">TECH STACK SUMMARY</span>
             </h2>
-            <div style="overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(10, 14, 24, 0.55);">
+            <div style="overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 12px; background: var(--panel-overlay);">
                 <table style="width: 100%; border-collapse: collapse; min-width: 680px;">
                     <thead>
-                        <tr style="border-bottom: 1px solid var(--glass-border); background: rgba(110, 231, 183, 0.08);">
+                        <tr style="border-bottom: 1px solid var(--glass-border); background: var(--accent-soft);">
                             <th style="text-align: left; padding: 12px; color: var(--text);">CATEGORY</th>
                             <th style="text-align: left; padding: 12px; color: var(--text);">
                                 <span class="content-vi">THÀNH PHẦN ĐÃ DÙNG</span>

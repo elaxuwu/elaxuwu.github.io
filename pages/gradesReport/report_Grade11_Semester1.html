@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('theme-preference');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
     <title>ACADEMIC_LOGS_HK1</title>
     <link rel="stylesheet" href="../../style.css">
 </head>
@@ -53,7 +63,7 @@
             <span class="content-vi">I. KẾ HOẠCH HỌC TẬP & RÈN LUYỆN</span>
             <span class="content-en">I. STUDY & TRAINING PLAN</span>
         </div>
-        <div class="project-desc" style="width: 100%; flex: none; background: rgba(0,255,65,0.02);">
+        <div class="project-desc" style="width: 100%; flex: none; background: var(--success-soft);">
             <ul style="list-style: none; padding-left: 0; font-family: var(--font-mono);">
                 <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
                     <span style="color: var(--accent); margin-right: 10px;">[TARGET_01]</span>
@@ -290,23 +300,23 @@
     
     <div class="brutal-grid" style="border: none; grid-gap: 20px;">
         
-        <div class="skill-box" style="border: 1px dashed var(--accent); background: rgba(255, 0, 60, 0.05);">
+        <div class="skill-box" style="border: 1px dashed var(--accent); background: var(--danger-soft);">
             <span class="code-num" style="color: var(--accent);">ERR_LOGS</span>
             <h3 class="content-vi" style="color: var(--accent); margin-bottom: 15px;">⚠️ KHÓ KHĂN (CHALLENGES)</h3>
             <h3 class="content-en" style="color: var(--accent); margin-bottom: 15px;">⚠️ CHALLENGES</h3>
             
             <p class="content-vi" style="margin-bottom: 10px;">
-                > <span style="color: #fff;">Quản lý thời gian:</span> Khối lượng bài tập các môn tự nhiên khá lớn, đôi khi gây quá tải CPU (Brain).
+                > <span style="color: var(--text);">Quản lý thời gian:</span> Khối lượng bài tập các môn tự nhiên khá lớn, đôi khi gây quá tải CPU (Brain).
             </p>
             <p class="content-en" style="margin-bottom: 10px;">
-                > <span style="color: #fff;">Time Management:</span> Heavy workload in science subjects causes occasional CPU (Brain) overload.
+                > <span style="color: var(--text);">Time Management:</span> Heavy workload in science subjects causes occasional CPU (Brain) overload.
             </p>
 
             <p class="content-vi">
-                > <span style="color: #fff;">Cân bằng:</span> Đôi khi mải mê code game mà quên mất thời gian nghỉ ngơi.
+                > <span style="color: var(--text);">Cân bằng:</span> Đôi khi mải mê code game mà quên mất thời gian nghỉ ngơi.
             </p>
             <p class="content-en">
-                > <span style="color: #fff;">Balance:</span> Sometimes get too absorbed in coding games and forget to rest.
+                > <span style="color: var(--text);">Balance:</span> Sometimes get too absorbed in coding games and forget to rest.
             </p>
         </div>
 
@@ -316,17 +326,17 @@
             <h3 class="content-en" style="color: var(--text); margin-bottom: 15px;">✨ WISH LIST</h3>
             
             <p class="content-vi" style="margin-bottom: 10px;">
-                > <span style="color: #fff;">Gia đình:</span> Tiếp tục ủng hộ con theo đuổi ngành Lập trình/Game Dev.
+                > <span style="color: var(--text);">Gia đình:</span> Tiếp tục ủng hộ con theo đuổi ngành Lập trình/Game Dev.
             </p>
             <p class="content-en" style="margin-bottom: 10px;">
-                > <span style="color: #fff;">Family:</span> Continue supporting my path in Programming/Game Dev.
+                > <span style="color: var(--text);">Family:</span> Continue supporting my path in Programming/Game Dev.
             </p>
 
             <p class="content-vi">
-                > <span style="color: #fff;">Đầu tư:</span> (Optional) Cân nhắc nâng cấp "phần cứng" (Laptop/PC) để chạy các Engine nặng hơn ^^.
+                > <span style="color: var(--text);">Đầu tư:</span> (Optional) Cân nhắc nâng cấp "phần cứng" (Laptop/PC) để chạy các Engine nặng hơn ^^.
             </p>
             <p class="content-en">
-                > <span style="color: #fff;">Investment:</span> (Optional) Consider hardware upgrade (Laptop/PC) for heavier Engines ^^.
+                > <span style="color: var(--text);">Investment:</span> (Optional) Consider hardware upgrade (Laptop/PC) for heavier Engines ^^.
             </p>
         </div>
     </div>

@@ -30,7 +30,8 @@
             logoHtml +
             '<div class="nav-controls">' +
                 '<span class="system-status">' + navStatus + '</span>' +
-                '<button id="lang-toggle" class="cmd-btn">MODE: EN</button>' +
+                '<button id="lang-toggle" class="cmd-btn" type="button">MODE: EN</button>' +
+                '<button id="theme-toggle" class="cmd-btn theme-toggle" type="button" aria-label="Toggle color theme"></button>' +
             '</div>';
     }
 
