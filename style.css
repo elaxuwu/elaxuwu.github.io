@@ -1478,6 +1478,205 @@ h3 {
 }
 
 /* ==========================================================================
+   PRODUCT PREVIEW SLIDESHOW
+   ========================================================================== */
+.product-preview-shell {
+    display: grid;
+    gap: 18px;
+}
+
+.product-preview-stage {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "prev frame next";
+    gap: 14px;
+    align-items: center;
+}
+
+.product-preview-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(180deg, var(--surface-08), rgba(var(--panel-rgb), 0.24));
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: var(--transition);
+    backdrop-filter: var(--blur-glass);
+    box-shadow: var(--shadow-sm);
+    touch-action: manipulation;
+}
+
+.product-preview-nav:hover {
+    color: var(--accent);
+    border-color: var(--glass-border-strong);
+    background: linear-gradient(180deg, var(--surface-12), rgba(var(--panel-rgb), 0.32));
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px var(--surface-10), var(--shadow-sm);
+}
+
+.product-preview-nav:focus-visible,
+.product-preview-shell:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.product-preview-nav-prev {
+    grid-area: prev;
+}
+
+.product-preview-nav-next {
+    grid-area: next;
+}
+
+.product-preview-frame {
+    grid-area: frame;
+    position: relative;
+    min-width: 0;
+    padding: 18px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background:
+        linear-gradient(180deg, var(--surface-07), rgba(var(--panel-rgb), 0.34)),
+        var(--bg-card);
+    box-shadow: var(--shadow-card);
+}
+
+.product-preview-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(var(--neutral-rgb), 0.04), transparent 24%),
+        repeating-linear-gradient(180deg, transparent 0 17px, rgba(var(--neutral-rgb), 0.02) 17px 18px);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.product-preview-hud,
+.product-preview-image {
+    position: relative;
+    z-index: 1;
+}
+
+.product-preview-hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.product-preview-hud-tag,
+.product-preview-counter,
+.product-preview-caption-label {
+    font-family: var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.product-preview-hud-tag {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+}
+
+.product-preview-counter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+    background: var(--surface-07);
+    color: var(--text);
+    font-size: 0.78rem;
+}
+
+.product-preview-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--glass-border);
+    border-radius: calc(var(--radius-md) - 6px);
+    background: var(--bg-card);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    transition: opacity 0.24s ease, transform 0.32s ease, filter 0.24s ease;
+}
+
+.product-preview-caption {
+    display: grid;
+    gap: 8px;
+    padding: 18px 20px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background:
+        linear-gradient(180deg, var(--surface-06), rgba(var(--panel-rgb), 0.22)),
+        var(--bg-card);
+    transition: opacity 0.24s ease, transform 0.32s ease, filter 0.24s ease;
+}
+
+.product-preview-caption-label {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+}
+
+.product-preview-caption-title {
+    color: var(--text);
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    line-height: 1.2;
+}
+
+.product-preview-caption-copy {
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.product-preview-shell.is-transitioning .product-preview-image,
+.product-preview-shell.is-transitioning .product-preview-caption {
+    opacity: 0.45;
+    transform: translateY(4px) scale(0.992);
+    filter: saturate(0.88);
+}
+
+@media (max-width: 720px) {
+    .product-preview-stage {
+        grid-template-columns: repeat(2, auto);
+        grid-template-areas:
+            "frame frame"
+            "prev next";
+        justify-content: center;
+    }
+
+    .product-preview-frame {
+        padding: 14px;
+    }
+
+    .product-preview-nav {
+        width: 56px;
+        height: 56px;
+    }
+
+    .product-preview-hud {
+        flex-wrap: wrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-preview-nav,
+    .product-preview-image,
+    .product-preview-caption {
+        transition: none;
+    }
+}
+
+/* ==========================================================================
    PROJECT CARDS
    ========================================================================== */
 .project-brutal-card {

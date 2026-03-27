@@ -247,10 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function scanPillButtons() {
-        document.querySelectorAll('.pill-button, .launch-btn, .cmd-btn, .nav-btn')
+        document.querySelectorAll('.pill-button, .launch-btn, .cmd-btn, .nav-btn, .product-preview-nav')
             .forEach(attachMagnetic);
     }
     scanPillButtons();
+    initProductPreviewSlideshow();
 
     // Single mousemove drives all magnetic buttons
     document.addEventListener('mousemove', () => {
@@ -483,6 +484,168 @@ function drawMatrix() {
         drops[i]++;
     }
 
+}
+
+// --- PRODUCT PREVIEW SLIDESHOW ---
+function initProductPreviewSlideshow() {
+    const root = document.querySelector('[data-product-preview]');
+    if (!root || root.dataset.bound === '1') return;
+
+    const imageEl = root.querySelector('[data-product-preview-image]');
+    const counterEl = root.querySelector('[data-product-preview-counter]');
+    const titleViEl = root.querySelector('[data-product-preview-title-vi]');
+    const titleEnEl = root.querySelector('[data-product-preview-title-en]');
+    const captionViEl = root.querySelector('[data-product-preview-caption-vi]');
+    const captionEnEl = root.querySelector('[data-product-preview-caption-en]');
+    const prevButtons = root.querySelectorAll('[data-product-preview-prev]');
+    const nextButtons = root.querySelectorAll('[data-product-preview-next]');
+
+    if (!imageEl || !counterEl || !titleViEl || !titleEnEl || !captionViEl || !captionEnEl) return;
+
+    root.dataset.bound = '1';
+
+    const slides = [
+        {
+            src: 'https://i.ibb.co/5hVMCv7G/image.png',
+            titleVi: 'Trang ch\u1ee7 ch\u00ednh',
+            titleEn: 'Main page',
+            captionVi: 'Giao di\u1ec7n t\u1ed5ng quan c\u1ee7a Lazy Note, n\u01a1i ng\u01b0\u1eddi d\u00f9ng b\u1eaft \u0111\u1ea7u v\u00e0o workspace ghi ch\u00fa t\u00edch h\u1ee3p AI.',
+            captionEn: 'The main Lazy Note overview where users enter the AI-powered note-taking workspace.',
+            altVi: '\u1ea2nh xem tr\u01b0\u1edbc trang ch\u1ee7 Lazy Note',
+            altEn: 'Lazy Note main page preview'
+        },
+        {
+            src: 'https://i.ibb.co/RpW26d6h/image.png',
+            titleVi: 'T\u1ea1o ghi ch\u00fa',
+            titleEn: 'Note creation',
+            captionVi: 'Lu\u1ed3ng t\u1ea1o ghi ch\u00fa m\u1edbi, gi\u00fap ng\u01b0\u1eddi d\u00f9ng kh\u1edfi \u0111\u1ed9ng notebook v\u00e0 x\u00e2y d\u1ef1ng n\u1ed9i dung nhanh h\u01a1n.',
+            captionEn: 'The note creation flow, designed to help users spin up a notebook and structure content faster.',
+            altVi: '\u1ea2nh xem tr\u01b0\u1edbc t\u00ednh n\u0103ng t\u1ea1o ghi ch\u00fa',
+            altEn: 'Lazy Note note creation preview'
+        },
+        {
+            src: 'https://i.ibb.co/zH5pjFZ3/image.png',
+            titleVi: 'Knowledge Vault',
+            titleEn: 'Knowledge Vault',
+            captionVi: 'Kho tri th\u1ee9c t\u1eadp trung \u0111\u1ec3 qu\u1ea3n l\u00fd t\u00e0i li\u1ec7u, d\u1eef li\u1ec7u tham kh\u1ea3o v\u00e0 ng\u1eef c\u1ea3nh h\u1ecdc t\u1eadp cho AI.',
+            captionEn: 'A centralized knowledge vault for documents, references, and the study context used by the AI.',
+            altVi: '\u1ea2nh xem tr\u01b0\u1edbc khu v\u1ef1c Knowledge Vault',
+            altEn: 'Lazy Note Knowledge Vault preview'
+        },
+        {
+            src: 'https://i.ibb.co/x8C3JPqK/image.png',
+            titleVi: 'H\u1ec7 th\u1ed1ng \u00f4n t\u1eadp',
+            titleEn: 'Note Review system',
+            captionVi: 'Ch\u1ebf \u0111\u1ed9 review h\u1ed7 tr\u1ee3 c\u1ee7ng c\u1ed1 ki\u1ebfn th\u1ee9c b\u1eb1ng c\u00e1c b\u01b0\u1edbc \u00f4n t\u1eadp c\u00f3 c\u1ea5u tr\u00fac r\u00f5 r\u00e0ng.',
+            captionEn: 'The review system helps reinforce knowledge through a more structured revision workflow.',
+            altVi: '\u1ea2nh xem tr\u01b0\u1edbc h\u1ec7 th\u1ed1ng \u00f4n t\u1eadp ghi ch\u00fa',
+            altEn: 'Lazy Note review system preview'
+        },
+        {
+            src: 'https://i.ibb.co/cc995xwX/image.png',
+            titleVi: 'Tr\u00ecnh ch\u1ec9nh s\u1eeda ghi ch\u00fa',
+            titleEn: 'Note editor',
+            captionVi: 'Khung editor \u0111\u1ec3 ch\u1ec9nh s\u1eeda, s\u1eafp x\u1ebfp v\u00e0 tinh ch\u1ec9nh n\u1ed9i dung ghi ch\u00fa trong m\u1ed9t b\u1ed1 c\u1ee5c linh ho\u1ea1t.',
+            captionEn: 'The note editor for refining, reorganizing, and polishing content inside a flexible layout.',
+            altVi: '\u1ea2nh xem tr\u01b0\u1edbc tr\u00ecnh ch\u1ec9nh s\u1eeda ghi ch\u00fa',
+            altEn: 'Lazy Note note editor preview'
+        },
+        {
+            src: 'https://i.ibb.co/S4Z7MdH0/image.png',
+            titleVi: 'Dark mode',
+            titleEn: 'Dark mode',
+            captionVi: 'Phi\u00ean b\u1ea3n giao di\u1ec7n t\u1ed1i gi\u1eef nguy\u00ean ch\u1ea5t li\u1ec7u terminal cao c\u1ea5p v\u00e0 gi\u1ea3m m\u1ec7t m\u1ecfi khi h\u1ecdc l\u00e2u.',
+            captionEn: 'The dark mode view preserves the premium terminal feel and reduces fatigue during long study sessions.',
+            altVi: '\u1ea2nh xem tr\u01b0\u1edbc giao di\u1ec7n t\u1ed1i Lazy Note',
+            altEn: 'Lazy Note dark mode preview'
+        }
+    ];
+
+    let currentIndex = 0;
+    let swapTimer = null;
+    let settleTimer = null;
+
+    slides.forEach(slide => {
+        const preloadedImage = new Image();
+        preloadedImage.src = slide.src;
+    });
+
+    function getCounterText(index) {
+        return `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    }
+
+    function getAltText(slide) {
+        return document.body.classList.contains('lang-vi') ? slide.altVi : slide.altEn;
+    }
+
+    function applySlide(slide, index) {
+        titleViEl.textContent = slide.titleVi;
+        titleEnEl.textContent = slide.titleEn;
+        captionViEl.textContent = slide.captionVi;
+        captionEnEl.textContent = slide.captionEn;
+        counterEl.textContent = getCounterText(index);
+        imageEl.src = slide.src;
+        imageEl.alt = getAltText(slide);
+    }
+
+    function renderSlide(index, options = {}) {
+        const normalizedIndex = (index + slides.length) % slides.length;
+        const slide = slides[normalizedIndex];
+
+        currentIndex = normalizedIndex;
+
+        if (swapTimer) window.clearTimeout(swapTimer);
+        if (settleTimer) window.clearTimeout(settleTimer);
+
+        if (options.immediate) {
+            applySlide(slide, currentIndex);
+            root.classList.remove('is-transitioning');
+            return;
+        }
+
+        root.classList.add('is-transitioning');
+
+        swapTimer = window.setTimeout(() => {
+            applySlide(slide, currentIndex);
+        }, 140);
+
+        settleTimer = window.setTimeout(() => {
+            root.classList.remove('is-transitioning');
+        }, 320);
+    }
+
+    function stepSlide(direction) {
+        renderSlide(currentIndex + direction);
+    }
+
+    prevButtons.forEach(button => {
+        button.addEventListener('click', () => stepSlide(-1));
+    });
+
+    nextButtons.forEach(button => {
+        button.addEventListener('click', () => stepSlide(1));
+    });
+
+    root.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            stepSlide(-1);
+        }
+
+        if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            stepSlide(1);
+        }
+    });
+
+    const langBtn = document.getElementById('lang-toggle');
+    if (langBtn) {
+        langBtn.addEventListener('click', () => {
+            imageEl.alt = getAltText(slides[currentIndex]);
+        });
+    }
+
+    renderSlide(0, { immediate: true });
 }
 
 /* ==========================================================================
