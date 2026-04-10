@@ -13,7 +13,7 @@
     var body = document.body;
     var d = body.dataset;
 
-    var navLogo     = d.navLogo     || 'ELAX.DEV';
+    var navLogo     = d.navLogo     || 'ELAX';
     var navStatus   = d.navStatus   || 'Online';
     var navBack     = d.navBack     || '';
     var footerLine1 = d.footerLine1 || '[Secure Connection]';
