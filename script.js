@@ -742,7 +742,7 @@ function handleItemClick(item) {
     } else {
         if (item.link && item.link !== '#') {
             if (typeof playSound === 'function') playSound('click');
-            window.open(item.link, '_blank');
+            window.open(item.link, '_blank', 'noopener,noreferrer');
         } else {
             alert('>> SYSTEM MESSAGE: Access Denied or File Corrupted.');
         }
