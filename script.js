@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const activeSpan = isVi ? viSpan : enSpan;
                 if (activeSpan) el.setAttribute('data-text', activeSpan.textContent.trim());
             });
-            
+
             // Retype slogan on change
             typeWriterEffect();
         });
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Shared mouse position (updated once, consumed by reticle + lamp + magnetic)
-    let sharedMouseX = window.innerWidth  / 2;
+    let sharedMouseX = window.innerWidth / 2;
     let sharedMouseY = window.innerHeight / 2;
     document.addEventListener('mousemove', (e) => {
         sharedMouseX = e.clientX;
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 rafPending = true;
                 requestAnimationFrame(() => {
                     reticle.style.left = pendingX + 'px';
-                    reticle.style.top  = pendingY + 'px';
+                    reticle.style.top = pendingY + 'px';
                     rafPending = false;
                 });
             }
@@ -257,11 +257,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', () => {
         magneticButtons.forEach(el => {
             const rect = el.getBoundingClientRect();
-            const cx = rect.left + rect.width  / 2;
-            const cy = rect.top  + rect.height / 2;
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
             const dx = sharedMouseX - cx;
             const dy = sharedMouseY - cy;
-            const nearX = Math.max(0, Math.abs(dx) - rect.width  / 2);
+            const nearX = Math.max(0, Math.abs(dx) - rect.width / 2);
             const nearY = Math.max(0, Math.abs(dy) - rect.height / 2);
             if (Math.hypot(nearX, nearY) <= ATTRACT_RADIUS) {
                 el.style.transform = `translate(${dx * MAGNET_STRENGTH}px, ${dy * MAGNET_STRENGTH}px)`;
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.classList.add('show-section');
             }
         });
-    }, { threshold: 0.1 }); 
+    }, { threshold: 0.1 });
 
     hiddenElements.forEach((el) => observer.observe(el));
 
@@ -317,15 +317,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (e) => {
         const key = e.key.toLowerCase();
-        
+
         if (key === cheatCode[cheatProgress]) {
             cheatProgress++;
             if (cheatProgress === cheatCode.length) {
                 activateGodMode();
-                cheatProgress = 0; 
+                cheatProgress = 0;
             }
         } else {
-            cheatProgress = 0; 
+            cheatProgress = 0;
         }
     });
 
@@ -338,15 +338,15 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.height = window.innerHeight;
         columns = canvas.width / fontSize;
         drops = [];
-        for(let x = 0; x < columns; x++) drops[x] = 1;
-        
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+
         // Handle Resize
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             columns = canvas.width / fontSize;
             drops = []; // Reset drops on resize
-            for(let x = 0; x < columns; x++) drops[x] = 1;
+            for (let x = 0; x < columns; x++) drops[x] = 1;
         });
     }
 });
@@ -358,13 +358,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- SOUND GENERATOR ---
 function playSound(type) {
     if (audioCtx.state === 'suspended') audioCtx.resume();
-    
+
     const osc = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
-    
+
     osc.connect(gainNode);
     gainNode.connect(audioCtx.destination);
-    
+
     if (type === 'hover') {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(800, audioCtx.currentTime);
@@ -387,22 +387,22 @@ function playSound(type) {
 function typeWriterEffect() {
     const sloganElement = document.getElementById('slogan-text');
     if (!sloganElement) return;
-    
+
     const isEnglish = document.body.classList.contains('lang-en');
     const textVi = '"Không có đường tắt nào dẫn đến thành công."';
     const textEn = '"There\'s no shortcut to success."';
     const textToType = isEnglish ? textEn : textVi;
-    
+
     if (typingTimeout) clearTimeout(typingTimeout);
-    
+
     sloganElement.innerText = '';
-    
+
     let i = 0;
     function type() {
         if (i < textToType.length) {
             sloganElement.innerText += textToType.charAt(i);
             i++;
-            typingTimeout = setTimeout(type, 50); 
+            typingTimeout = setTimeout(type, 50);
         }
     }
     type();
@@ -413,53 +413,53 @@ function updateSystemStats() {
     const now = new Date();
     const timeString = now.toLocaleTimeString('en-US', { hour12: false });
     const timeEl = document.getElementById('sys-time');
-    if(timeEl) timeEl.innerText = `TIME: ${timeString}`;
+    if (timeEl) timeEl.innerText = `TIME: ${timeString}`;
 
     if ('getBattery' in navigator) {
         navigator.getBattery().then(battery => {
             const level = Math.floor(battery.level * 100);
             const charging = battery.charging ? "[CHG]" : "[BAT]";
-            
+
             const batEl = document.getElementById('sys-battery');
-            if(batEl) {
+            if (batEl) {
                 batEl.innerText = `PWR: ${level}% ${charging}`;
-                if(level < 20 && !battery.charging) {
+                if (level < 20 && !battery.charging) {
                     batEl.style.color = 'red';
                     batEl.classList.add('status-blink');
                 } else {
-                    batEl.style.color = ''; 
+                    batEl.style.color = '';
                     batEl.classList.remove('status-blink');
                 }
             }
         });
     } else {
         const batEl = document.getElementById('sys-battery');
-        if(batEl) batEl.innerText = "PWR: EXTERNAL";
+        if (batEl) batEl.innerText = "PWR: EXTERNAL";
     }
 }
 
 // --- GOD MODE (MATRIX TRIGGER) ---
 function activateGodMode() {
-    playSound('click'); 
-    document.body.classList.toggle('god-mode'); 
-    
+    playSound('click');
+    document.body.classList.toggle('god-mode');
+
     const cmdLine = document.querySelector('.cmd-line');
     const isGod = document.body.classList.contains('god-mode');
 
-    if(isGod) {
+    if (isGod) {
         alert("🔓 God Mode Activated - Welcome to the HUD");
-        if(cmdLine) cmdLine.innerText = "🔐 Elevated Access Granted";
-        
+        if (cmdLine) cmdLine.innerText = "🔐 Elevated Access Granted";
+
         // START THE RAIN
-        if(matrixInterval) clearInterval(matrixInterval);
-        if(canvas && ctx) matrixInterval = setInterval(drawMatrix, 50);
+        if (matrixInterval) clearInterval(matrixInterval);
+        if (canvas && ctx) matrixInterval = setInterval(drawMatrix, 50);
 
     } else {
-        if(cmdLine) cmdLine.innerText = "Standard Mode Restored";
-        
+        if (cmdLine) cmdLine.innerText = "Standard Mode Restored";
+
         // STOP THE RAIN
         clearInterval(matrixInterval);
-        if(canvas && ctx) ctx.clearRect(0,0,canvas.width, canvas.height);
+        if (canvas && ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
 
@@ -474,11 +474,11 @@ function drawMatrix() {
     ctx.fillStyle = "#00ffff"; // Cyan color
     ctx.font = fontSize + "px monospace";
 
-    for(let i = 0; i < drops.length; i++) {
+    for (let i = 0; i < drops.length; i++) {
         const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
         drops[i]++;
@@ -491,101 +491,141 @@ function initProductPreviewSlideshow() {
     const root = document.querySelector('[data-product-preview]');
     if (!root || root.dataset.bound === '1') return;
 
+    const mediaEl = root.querySelector('.product-preview-media');
     const imageEl = root.querySelector('[data-product-preview-image]');
-    const counterEl = root.querySelector('[data-product-preview-counter]');
-    const titleViEl = root.querySelector('[data-product-preview-title-vi]');
-    const titleEnEl = root.querySelector('[data-product-preview-title-en]');
+    const videoEl = root.querySelector('[data-product-preview-video]');
+    const dotsEl = root.querySelector('[data-product-preview-dots]');
     const captionViEl = root.querySelector('[data-product-preview-caption-vi]');
     const captionEnEl = root.querySelector('[data-product-preview-caption-en]');
     const prevButtons = root.querySelectorAll('[data-product-preview-prev]');
     const nextButtons = root.querySelectorAll('[data-product-preview-next]');
 
-    if (!imageEl || !counterEl || !titleViEl || !titleEnEl || !captionViEl || !captionEnEl) return;
+    if (!mediaEl || !imageEl || !videoEl || !dotsEl || !captionViEl || !captionEnEl) return;
 
     root.dataset.bound = '1';
 
     const slides = [
         {
-            src: 'https://i.ibb.co/5hVMCv7G/image.png',
-            titleVi: 'Trang ch\u1ee7 ch\u00ednh',
-            titleEn: 'Main page',
-            captionVi: 'Giao di\u1ec7n t\u1ed5ng quan c\u1ee7a Lazy Note, n\u01a1i ng\u01b0\u1eddi d\u00f9ng b\u1eaft \u0111\u1ea7u v\u00e0o workspace ghi ch\u00fa t\u00edch h\u1ee3p AI.',
-            captionEn: 'The main Lazy Note overview where users enter the AI-powered note-taking workspace.',
-            altVi: '\u1ea2nh xem tr\u01b0\u1edbc trang ch\u1ee7 Lazy Note',
-            altEn: 'Lazy Note main page preview'
+            type: 'video',
+            embedSrc: 'https://www.youtube.com/embed/5lEdb85Zw0w?rel=0&modestbranding=1&playsinline=1',
+            captionVi: 'Product demo video.',
+            captionEn: 'Product demo video.',
+            title: 'Lazy Note product demo video',
+            altVi: 'Lazy Note product demo video',
+            altEn: 'Lazy Note product demo video'
         },
         {
-            src: 'https://i.ibb.co/RpW26d6h/image.png',
-            titleVi: 'T\u1ea1o ghi ch\u00fa',
-            titleEn: 'Note creation',
-            captionVi: 'Lu\u1ed3ng t\u1ea1o ghi ch\u00fa m\u1edbi, gi\u00fap ng\u01b0\u1eddi d\u00f9ng kh\u1edfi \u0111\u1ed9ng notebook v\u00e0 x\u00e2y d\u1ef1ng n\u1ed9i dung nhanh h\u01a1n.',
-            captionEn: 'The note creation flow, designed to help users spin up a notebook and structure content faster.',
-            altVi: '\u1ea2nh xem tr\u01b0\u1edbc t\u00ednh n\u0103ng t\u1ea1o ghi ch\u00fa',
+            type: 'image',
+            src: 'https://i.ibb.co/TB0CFqgr/gallery.jpg',
+            captionVi: 'Landing page.',
+            captionEn: 'Landing page.',
+            altVi: 'Lazy Note landing page preview',
+            altEn: 'Lazy Note landing page preview'
+        },
+        {
+            type: 'image',
+            src: 'https://i.ibb.co/Lh5fPjgB/gallery.jpg',
+            captionVi: 'Note creation with custom AI\'s writing tone/persona (customizable later on).',
+            captionEn: 'Note creation with custom AI\'s writing tone/persona (customizable later on).',
+            altVi: 'Lazy Note note creation preview',
             altEn: 'Lazy Note note creation preview'
         },
         {
-            src: 'https://i.ibb.co/zH5pjFZ3/image.png',
-            titleVi: 'Knowledge Vault',
-            titleEn: 'Knowledge Vault',
-            captionVi: 'Kho tri th\u1ee9c t\u1eadp trung \u0111\u1ec3 qu\u1ea3n l\u00fd t\u00e0i li\u1ec7u, d\u1eef li\u1ec7u tham kh\u1ea3o v\u00e0 ng\u1eef c\u1ea3nh h\u1ecdc t\u1eadp cho AI.',
-            captionEn: 'A centralized knowledge vault for documents, references, and the study context used by the AI.',
-            altVi: '\u1ea2nh xem tr\u01b0\u1edbc khu v\u1ef1c Knowledge Vault',
-            altEn: 'Lazy Note Knowledge Vault preview'
+            type: 'image',
+            src: 'https://i.ibb.co/v4ckWj5J/gallery-1.jpg',
+            captionVi: 'AI-suggested headings or do your own! Drag & Drop them to reorganize to your liking! (customizable later on)',
+            captionEn: 'AI-suggested headings or do your own! Drag & Drop them to reorganize to your liking! (customizable later on)',
+            altVi: 'Lazy Note heading organization preview',
+            altEn: 'Lazy Note heading organization preview'
         },
         {
-            src: 'https://i.ibb.co/x8C3JPqK/image.png',
-            titleVi: 'H\u1ec7 th\u1ed1ng \u00f4n t\u1eadp',
-            titleEn: 'Note Review system',
-            captionVi: 'Ch\u1ebf \u0111\u1ed9 review h\u1ed7 tr\u1ee3 c\u1ee7ng c\u1ed1 ki\u1ebfn th\u1ee9c b\u1eb1ng c\u00e1c b\u01b0\u1edbc \u00f4n t\u1eadp c\u00f3 c\u1ea5u tr\u00fac r\u00f5 r\u00e0ng.',
-            captionEn: 'The review system helps reinforce knowledge through a more structured revision workflow.',
-            altVi: '\u1ea2nh xem tr\u01b0\u1edbc h\u1ec7 th\u1ed1ng \u00f4n t\u1eadp ghi ch\u00fa',
-            altEn: 'Lazy Note review system preview'
+            type: 'image',
+            src: 'https://i.ibb.co/sdyVHHFM/gallery.jpg',
+            captionVi: 'New freshly made note.',
+            captionEn: 'New freshly made note.',
+            altVi: 'Lazy Note new note preview',
+            altEn: 'Lazy Note new note preview'
         },
         {
-            src: 'https://i.ibb.co/cc995xwX/image.png',
-            titleVi: 'Tr\u00ecnh ch\u1ec9nh s\u1eeda ghi ch\u00fa',
-            titleEn: 'Note editor',
-            captionVi: 'Khung editor \u0111\u1ec3 ch\u1ec9nh s\u1eeda, s\u1eafp x\u1ebfp v\u00e0 tinh ch\u1ec9nh n\u1ed9i dung ghi ch\u00fa trong m\u1ed9t b\u1ed1 c\u1ee5c linh ho\u1ea1t.',
-            captionEn: 'The note editor for refining, reorganizing, and polishing content inside a flexible layout.',
-            altVi: '\u1ea2nh xem tr\u01b0\u1edbc tr\u00ecnh ch\u1ec9nh s\u1eeda ghi ch\u00fa',
-            altEn: 'Lazy Note note editor preview'
+            type: 'image',
+            src: 'https://i.ibb.co/TMHBvkDD/gallery-1.jpg',
+            captionVi: 'AI Auto-highlight important stuff for you with just one click! Our note editor also support most AI\'s LaTeX and Markdowns!',
+            captionEn: 'AI Auto-highlight important stuff for you with just one click! Our note editor also support most AI\'s LaTeX and Markdowns!',
+            altVi: 'Lazy Note auto highlight preview',
+            altEn: 'Lazy Note auto highlight preview'
         },
         {
-            src: 'https://i.ibb.co/S4Z7MdH0/image.png',
-            titleVi: 'Dark mode',
-            titleEn: 'Dark mode',
-            captionVi: 'Phi\u00ean b\u1ea3n giao di\u1ec7n t\u1ed1i gi\u1eef nguy\u00ean ch\u1ea5t li\u1ec7u terminal cao c\u1ea5p v\u00e0 gi\u1ea3m m\u1ec7t m\u1ecfi khi h\u1ecdc l\u00e2u.',
-            captionEn: 'The dark mode view preserves the premium terminal feel and reduces fatigue during long study sessions.',
-            altVi: '\u1ea2nh xem tr\u01b0\u1edbc giao di\u1ec7n t\u1ed1i Lazy Note',
+            type: 'image',
+            src: 'https://i.ibb.co/k6szTpwT/gallery.jpg',
+            captionVi: 'Store your notes in your own private vault! (Cloud-sync available for logged-in users)',
+            captionEn: 'Store your notes in your own private vault! (Cloud-sync available for logged-in users)',
+            altVi: 'Lazy Note private vault preview',
+            altEn: 'Lazy Note private vault preview'
+        },
+        {
+            type: 'image',
+            src: 'https://i.ibb.co/M5fDFh76/gallery.jpg',
+            captionVi: 'Log-in to sync your notes to our cloud server, or stay anonymous and only save your notes in your browser\'s localStorage.',
+            captionEn: 'Log-in to sync your notes to our cloud server, or stay anonymous and only save your notes in your browser\'s localStorage.',
+            altVi: 'Lazy Note login sync preview',
+            altEn: 'Lazy Note login sync preview'
+        },
+        {
+            type: 'image',
+            src: 'https://i.ibb.co/G3N329cz/gallery.jpg',
+            captionVi: 'Dark mode theme (can toggle in Account Center)',
+            captionEn: 'Dark mode theme (can toggle in Account Center)',
+            altVi: 'Lazy Note dark mode preview',
             altEn: 'Lazy Note dark mode preview'
         }
     ];
 
     let currentIndex = 0;
+    let dotButtons = [];
     let swapTimer = null;
     let settleTimer = null;
 
-    slides.forEach(slide => {
+    slides.filter(slide => slide.type === 'image').forEach(slide => {
         const preloadedImage = new Image();
         preloadedImage.src = slide.src;
     });
-
-    function getCounterText(index) {
-        return `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-    }
 
     function getAltText(slide) {
         return document.body.classList.contains('lang-vi') ? slide.altVi : slide.altEn;
     }
 
+    function stopVideoPlayback() {
+        mediaEl.classList.remove('is-video-slide');
+        videoEl.hidden = true;
+        videoEl.src = '';
+    }
+
+    function updateDots(index) {
+        dotButtons.forEach((button, buttonIndex) => {
+            const isActive = buttonIndex === index;
+            button.classList.toggle('is-active', isActive);
+            button.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
+    }
+
     function applySlide(slide, index) {
-        titleViEl.textContent = slide.titleVi;
-        titleEnEl.textContent = slide.titleEn;
         captionViEl.textContent = slide.captionVi;
         captionEnEl.textContent = slide.captionEn;
-        counterEl.textContent = getCounterText(index);
-        imageEl.src = slide.src;
-        imageEl.alt = getAltText(slide);
+        stopVideoPlayback();
+
+        if (slide.type === 'video') {
+            mediaEl.classList.add('is-video-slide');
+            imageEl.hidden = true;
+            videoEl.title = slide.title;
+            videoEl.hidden = false;
+            videoEl.src = slide.embedSrc;
+        } else {
+            imageEl.hidden = false;
+            imageEl.src = slide.src;
+            imageEl.alt = getAltText(slide);
+        }
+
+        updateDots(index);
     }
 
     function renderSlide(index, options = {}) {
@@ -604,14 +644,11 @@ function initProductPreviewSlideshow() {
         }
 
         root.classList.add('is-transitioning');
-
-        swapTimer = window.setTimeout(() => {
-            applySlide(slide, currentIndex);
-        }, 140);
+        applySlide(slide, currentIndex);
 
         settleTimer = window.setTimeout(() => {
             root.classList.remove('is-transitioning');
-        }, 320);
+        }, 220);
     }
 
     function stepSlide(direction) {
@@ -638,10 +675,25 @@ function initProductPreviewSlideshow() {
         }
     });
 
+    dotButtons = slides.map((slide, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'product-preview-dot';
+        button.setAttribute('aria-label', `Show preview ${index + 1}`);
+        button.addEventListener('click', () => renderSlide(index));
+        dotsEl.appendChild(button);
+        return button;
+    });
+
     const langBtn = document.getElementById('lang-toggle');
     if (langBtn) {
         langBtn.addEventListener('click', () => {
-            imageEl.alt = getAltText(slides[currentIndex]);
+            const currentSlide = slides[currentIndex];
+            if (currentSlide.type === 'video') {
+                videoEl.title = currentSlide.title;
+            } else {
+                imageEl.alt = getAltText(currentSlide);
+            }
         });
     }
 
@@ -655,10 +707,11 @@ function initProductPreviewSlideshow() {
 // SVG icon templates (monochrome, stroke-based)
 const ICONS = {
     folder: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
-    game:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="5"/><path d="M7 12h4m-2-2v4"/><circle cx="17" cy="11" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/></svg>`,
-    app:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
-    ai:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m-4.5 4.5L12 12l4.5 4.5"/></svg>`,
-    file:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
+    game: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="5"/><path d="M7 12h4m-2-2v4"/><circle cx="17" cy="11" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/></svg>`,
+    app: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+    ai: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m-4.5 4.5L12 12l4.5 4.5"/></svg>`,
+    aiNotebook: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2.2"/><path d="M8 3.5v17"/><path d="M10.25 7.5h5.25"/><path d="M10.25 10.75h5.25"/><path d="M10.25 14h3.5"/></svg>`,
+    file: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
 };
 
 function getIcon(item) {
@@ -667,7 +720,7 @@ function getIcon(item) {
     const n = item.name.toLowerCase();
     if (n.endsWith('.exe')) return ICONS.game;
     if (n.endsWith('.app')) return ICONS.app;
-    if (n.endsWith('.py'))  return ICONS.ai;
+    if (n.endsWith('.py')) return ICONS.ai;
     return ICONS.file;
 }
 
@@ -677,17 +730,17 @@ const fileSystem = {
         { type: 'folder', name: 'GAME PROJECTS' },
         { type: 'folder', name: 'APP PROJECTS' },
         { type: 'folder', name: 'AI PROJECTS' },
-        { type: 'file',   name: 'readme.txt',       link: '#',                                         desc: 'Welcome to Elax OS' }
+        { type: 'file', name: 'readme.txt', link: '#', desc: 'hellu :3' }
     ],
     "GAME PROJECTS": [
-        { type: 'file', name: 'Fruit_Ninja.exe', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL' }
+        { type: 'file', name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL' }
     ],
     "APP PROJECTS": [
-        { type: 'file', name: 'Zalo_Sender.app', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION' }
+        { type: 'file', name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION' }
     ],
     "AI PROJECTS": [
-        { type: 'file', name: 'Lazy Note', icon: 'ai', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK' },
-        { type: 'file', name: 'AI-LAX.py', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT' }
+        { type: 'file', name: 'Lazy Note', icon: 'aiNotebook', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK', ribbon: 'WINNER' },
+        { type: 'file', name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT' }
     ]
 };
 
@@ -709,7 +762,15 @@ function renderFiles(folderName) {
     items.forEach(item => {
         const div = document.createElement('div');
         div.className = 'icon-container';
+        if (item.ribbon) div.classList.add('icon-container-featured');
         div.onclick = () => handleItemClick(item);
+
+        if (item.ribbon) {
+            const ribbon = document.createElement('div');
+            ribbon.className = 'icon-ribbon';
+            ribbon.innerText = item.ribbon;
+            div.appendChild(ribbon);
+        }
 
         const iconDisplay = document.createElement('div');
         iconDisplay.className = 'icon-img';

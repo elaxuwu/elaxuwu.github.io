@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +14,12 @@
             }
         }());
     </script>
-    <title>LAZY_NOTE.EXE</title>
+    <title>Lazy Note</title>
     <link rel="stylesheet" href="../../style.css">
 </head>
-<body class="lang-en"
-      data-nav-back="../../index.html"
-      data-nav-status="AI Project"
-      data-footer-line1="[Context-Aware Engine Active]"
-      data-footer-line2="Architected by Elax - 2026">
+
+<body class="lang-en" data-nav-back="../../index.html" data-nav-status="AI Project"
+    data-footer-line1="[Context-Aware Engine Active]" data-footer-line2="Architected by Elax - 2026">
 
     <canvas id="matrix-bg"></canvas>
     <div class="aurora-bg">
@@ -47,11 +46,13 @@
                 <span class="content-en">Write Less, Understand More. An AI-powered study workspace.</span>
             </p>
             <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
-                <a href="https://lazy-note.onrender.com/index.html" target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
+                <a href="https://lazy-note.pages.dev/" target="_blank" rel="noopener noreferrer"
+                    class="launch-btn award-inline-btn">
                     <span class="content-vi">🚀 KHỞI CHẠY ỨNG DỤNG</span>
                     <span class="content-en">🚀 LAUNCH LIVE APP</span>
                 </a>
-                <a href="https://devpost.com/software/lazy-note-grctxf?ref_content=user-portfolio&amp;ref_feature=in_progress" target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
+                <a href="https://devpost.com/software/lazy-note-grctxf?ref_content=user-portfolio&amp;ref_feature=in_progress"
+                    target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
                     <span class="content-vi">🏆 XEM BÀI DEVPOST</span>
                     <span class="content-en">🏆 VIEW DEVPOST SUBMISSION</span>
                 </a>
@@ -63,7 +64,7 @@
                 <div class="contact-row">
                     <span class="label">
                         <span class="content-vi">VAI TRÒ:</span>
-                        <span class="content-en">ROLE:</span>
+                        <span class="content-en">MY ROLE:</span>
                     </span>
                     <span class="value">
                         <span class="content-vi">Trưởng dự án & Kiến trúc sư Full-Stack</span>
@@ -76,8 +77,10 @@
                         <span class="content-en">STACK:</span>
                     </span>
                     <span class="value">
-                        <span class="content-vi">JS, Node.js, Render, Upstash Redis, OpenAI, ElevenLabs, Exa, Agora, JigsawStack</span>
-                        <span class="content-en">JS, Node.js, Render, Upstash Redis, OpenAI, ElevenLabs, Exa, Agora, JigsawStack</span>
+                        <span class="content-vi">JS, Node.js, Cloudflare Pages, Upstash Redis, OpenAI, ElevenLabs, Exa,
+                            Agora, JigsawStack</span>
+                        <span class="content-en">JS, Node.js, Cloudflare Pages, Upstash Redis, OpenAI, ElevenLabs, Exa,
+                            Agora, JigsawStack</span>
                     </span>
                 </div>
                 <div class="contact-row status-blink">
@@ -95,6 +98,154 @@
 
         <section class="console-block" style="margin-bottom: 3rem;">
             <div class="cmd-line">🏅 Awards</div>
+            <style>
+                .award-showcase {
+                    background: linear-gradient(145deg, var(--surface-09), transparent 52%), linear-gradient(180deg, var(--surface-07), rgba(var(--panel-rgb), 0.24));
+                    border: 1px solid var(--glass-border-strong);
+                    border-radius: calc(var(--radius-card) + 8px);
+                    padding: 42px;
+                    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 24px 40px;
+                    grid-template-areas:
+                        "kicker  metrics"
+                        "title   metrics"
+                        "desc    metrics"
+                        "slide   slide"
+                        "dots    dots"
+                        "actions caption";
+                    align-items: start;
+                }
+
+                @media (max-width: 900px) {
+                    .award-showcase {
+                        grid-template-columns: 1fr;
+                        grid-template-areas:
+                            "kicker"
+                            "title"
+                            "desc"
+                            "metrics"
+                            "slide"
+                            "dots"
+                            "caption"
+                            "actions";
+                        padding: 24px;
+                        gap: 16px;
+                    }
+                }
+
+                /* Unbox completely */
+                .award-summary,
+                .award-proof {
+                    display: contents !important;
+                }
+
+                .award-summary::before {
+                    display: none;
+                }
+
+                /* Remap areas */
+                .award-summary>.achievement-kicker {
+                    grid-area: kicker;
+                    align-self: end;
+                    margin-bottom: 0 !important;
+                }
+
+                .award-summary>h2 {
+                    grid-area: title;
+                    margin: 0 !important;
+                    font-size: clamp(2.2rem, 4.5vw, 3rem) !important;
+                    letter-spacing: -0.03em;
+                    line-height: 1.1;
+                }
+
+                .award-summary>p {
+                    grid-area: desc;
+                    margin: 0 !important;
+                    font-size: 1.1rem !important;
+                    line-height: 1.6;
+                    color: var(--text-muted);
+                    max-width: 48ch;
+                }
+
+                .award-metrics {
+                    grid-area: metrics;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    gap: 12px !important;
+                    margin: 0 !important;
+                    height: 100%;
+                    justify-content: center;
+                }
+
+                .award-metric {
+                    background: rgba(var(--panel-rgb), 0.3) !important;
+                    border: 1px solid var(--glass-border) !important;
+                    border-radius: 16px !important;
+                    padding: 18px 24px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 18px !important;
+                    flex-direction: row !important;
+                    /* Force horizontal */
+                }
+
+                .award-metric strong {
+                    font-size: 2.2rem !important;
+                    line-height: 1 !important;
+                    min-width: 100px !important;
+                    text-align: right !important;
+                    color: var(--text) !important;
+                    margin-bottom: 0 !important;
+                }
+
+                .award-metric span {
+                    font-size: 0.88rem !important;
+                    line-height: 1.4 !important;
+                    flex: 1;
+                }
+
+                .award-slideshow-container {
+                    grid-area: slide;
+                    margin-top: 12px;
+                    border-radius: var(--radius-card);
+                    overflow: hidden;
+                    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+                    border: 1px solid var(--glass-border-strong);
+                }
+
+                /* Override image borders inside the container */
+                .award-slideshow-container .award-slide {
+                    border-radius: 0 !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+
+                .award-indicators {
+                    grid-area: dots;
+                    margin-top: -12px !important;
+                }
+
+                .award-actions {
+                    grid-area: actions;
+                    margin: 0 !important;
+                    display: flex !important;
+                    gap: 16px !important;
+                    align-items: center !important;
+                    flex-direction: row !important;
+                    flex-wrap: wrap;
+                }
+
+                .award-proof-caption {
+                    grid-area: caption;
+                    margin: 0 !important;
+                    text-align: right !important;
+                    align-self: center;
+                    font-size: 0.9rem !important;
+                    opacity: 0.7;
+                }
+            </style>
             <div class="award-showcase">
                 <article class="award-summary">
                     <div class="achievement-kicker">LOTUSHACK 2026</div>
@@ -103,8 +254,10 @@
                         <span class="content-en">Lazy Note Awards</span>
                     </h2>
                     <p>
-                        <span class="content-vi">Lazy Note mang về hạng 30/217 chung cuộc tại LotusHack Hackathon 2026, đồng thời đạt hạng 1 bảng Secondary &amp; High School Track.</span>
-                        <span class="content-en">Lazy Note finished 30/217 overall at LotusHack Hackathon 2026 and also secured 1st place in the Secondary &amp; High School Track.</span>
+                        <span class="content-vi">Lazy Note mang về hạng 30/217 chung cuộc tại LotusHack Hackathon 2026,
+                            đồng thời đạt hạng 1 bảng Secondary &amp; High School Track.</span>
+                        <span class="content-en">Lazy Note finished 30/217 overall at LotusHack Hackathon 2026 and also
+                            secured 1st place in the Secondary &amp; High School Track.</span>
                     </p>
 
                     <div class="award-metrics">
@@ -126,11 +279,13 @@
                     </div>
 
                     <div class="award-actions">
-                        <a href="https://i.ibb.co/PvqKmQbC/image.png" target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
+                        <a href="https://i.ibb.co/Vcf4vNb2/4201c05b-73a5-4c2c-93fe-ecc7e1d716a5.jpg" target="_blank"
+                            rel="noopener noreferrer" class="launch-btn award-inline-btn">
                             <span class="content-vi">MỞ GIẤY CHỨNG NHẬN</span>
                             <span class="content-en">OPEN CERTIFICATE</span>
                         </a>
-                        <a href="https://devpost.com/software/lazy-note-grctxf?ref_content=user-portfolio&amp;ref_feature=in_progress" target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
+                        <a href="https://devpost.com/software/lazy-note-grctxf?ref_content=user-portfolio&amp;ref_feature=in_progress"
+                            target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
                             <span class="content-vi">MỞ BÀI DEVPOST</span>
                             <span class="content-en">OPEN DEVPOST SUBMISSION</span>
                         </a>
@@ -138,72 +293,159 @@
                 </article>
 
                 <article class="award-proof">
-                    <img src="https://i.ibb.co/PvqKmQbC/image.png" alt="LotusHack Hackathon 2026 certificate for Lazy Note" loading="lazy" decoding="async">
-                    <p class="award-proof-caption">
-                        <span class="content-vi">Giấy chứng nhận cho phần trình bày Lazy Note tại LotusHack Hackathon 2026.</span>
-                        <span class="content-en">Certificate issued for Lazy Note at LotusHack Hackathon 2026.</span>
+                    <style>
+                        .award-nav-btn:hover {
+                            background: rgba(0, 0, 0, 0.9) !important;
+                            transform: translateY(-50%) scale(1.1) !important;
+                        }
+
+                        .award-dot:hover {
+                            background: var(--text-muted) !important;
+                        }
+                    </style>
+                    <div class="award-slideshow-container" style="position: relative;">
+                        <img class="award-slide"
+                            src="https://i.ibb.co/Vcf4vNb2/4201c05b-73a5-4c2c-93fe-ecc7e1d716a5.jpg"
+                            alt="Award Ceremony Image 1"
+                            style="width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover;" loading="lazy"
+                            decoding="async">
+                        <img class="award-slide"
+                            src="https://i.ibb.co/sd3LgtbC/4dbaa417-f9ba-44dd-83be-937fee37c0fc.jpg"
+                            alt="Award Ceremony Image 2"
+                            style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;" loading="lazy"
+                            decoding="async">
+                        <img class="award-slide"
+                            src="https://i.ibb.co/wNhpgfmj/f5db204c-dc01-4744-aa28-6ac1f76e71cb.jpg"
+                            alt="Award Ceremony Image 3"
+                            style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;" loading="lazy"
+                            decoding="async">
+                        <img class="award-slide"
+                            src="https://i.ibb.co/tTYpXpXt/b144300d-278e-4188-8650-8a98bba4b482.jpg"
+                            alt="Award Ceremony Image 4"
+                            style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;" loading="lazy"
+                            decoding="async">
+                        <iframe class="award-slide" src="https://www.youtube.com/embed/7uIzzL31NqI"
+                            title="Award YouTube Short" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            style="width: 100%; display: none; aspect-ratio: 16/9; border-radius: calc(var(--radius-card) - 10px); border: 1px solid var(--glass-border); background: var(--surface-03); box-shadow: var(--shadow-sm);"></iframe>
+                        <img class="award-slide" src="https://i.ibb.co/PvqKmQbC/image.png"
+                            alt="LotusHack Hackathon 2026 certificate for Lazy Note"
+                            style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: contain; background: #000;"
+                            loading="lazy" decoding="async">
+
+                        <button type="button" class="award-nav-btn" onclick="changeAwardSlide(-1)"
+                            aria-label="Previous image"
+                            style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; z-index: 10; transition: all 0.2s ease;">&#10094;</button>
+                        <button type="button" class="award-nav-btn" onclick="changeAwardSlide(1)"
+                            aria-label="Next image"
+                            style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; z-index: 10; transition: all 0.2s ease;">&#10095;</button>
+                    </div>
+                    <div class="award-indicators"
+                        style="display: flex; justify-content: center; gap: 8px; margin-top: 12px;">
+                        <span class="award-dot"
+                            style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent); cursor: pointer; transition: background 0.2s ease;"
+                            onclick="setAwardSlide(0)"></span>
+                        <span class="award-dot"
+                            style="width: 8px; height: 8px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: background 0.2s ease;"
+                            onclick="setAwardSlide(1)"></span>
+                        <span class="award-dot"
+                            style="width: 8px; height: 8px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: background 0.2s ease;"
+                            onclick="setAwardSlide(2)"></span>
+                        <span class="award-dot"
+                            style="width: 8px; height: 8px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: background 0.2s ease;"
+                            onclick="setAwardSlide(3)"></span>
+                        <span class="award-dot"
+                            style="width: 8px; height: 8px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: background 0.2s ease;"
+                            onclick="setAwardSlide(4)"></span>
+                        <span class="award-dot"
+                            style="width: 8px; height: 8px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: background 0.2s ease;"
+                            onclick="setAwardSlide(5)"></span>
+                    </div>
+                    <p class="award-proof-caption" style="margin-top: 12px;">
+                        <span class="content-vi">Hình ảnh sự kiện và giấy chứng nhận tại LotusHack Hackathon
+                            2026.</span>
+                        <span class="content-en">Event photos and certificate at LotusHack Hackathon 2026.</span>
                     </p>
+                    <script>
+                        let currentAwardSlide = 0;
+                        function updateAwardSlides() {
+                            const slides = document.querySelectorAll('.award-slide');
+                            const dots = document.querySelectorAll('.award-dot');
+                            if (!slides.length) return;
+                            slides.forEach((slide, index) => {
+                                if (index === currentAwardSlide) {
+                                    slide.style.display = 'block';
+                                } else {
+                                    slide.style.display = 'none';
+                                    if (slide.tagName === 'IFRAME') {
+                                        // Reset iframe source to stop video playback when navigating away
+                                        const src = slide.getAttribute('src');
+                                        slide.setAttribute('src', '');
+                                        slide.setAttribute('src', src);
+                                    }
+                                }
+                            });
+                            dots.forEach((dot, index) => {
+                                dot.style.background = index === currentAwardSlide ? 'var(--accent)' : 'var(--glass-border-strong)';
+                            });
+                        }
+                        function changeAwardSlide(direction) {
+                            const slides = document.querySelectorAll('.award-slide');
+                            currentAwardSlide += direction;
+                            if (currentAwardSlide >= slides.length) currentAwardSlide = 0;
+                            if (currentAwardSlide < 0) currentAwardSlide = slides.length - 1;
+                            updateAwardSlides();
+                        }
+                        function setAwardSlide(index) {
+                            currentAwardSlide = index;
+                            updateAwardSlides();
+                        }
+                    </script>
                 </article>
             </div>
         </section>
 
         <section class="console-block" style="margin-bottom: 3rem;">
-            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
-                <span class="content-vi">&#7842;NH XEM TR&#431;&#7898;C S&#7842;N PH&#7848;M</span>
+            <h2
+                style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">PRODUCT PREVIEWS</span>
                 <span class="content-en">PRODUCT PREVIEWS</span>
             </h2>
 
             <div class="product-preview-shell" data-product-preview tabindex="0">
                 <div class="product-preview-stage">
-                    <button
-                        type="button"
-                        class="product-preview-nav product-preview-nav-prev"
-                        data-product-preview-prev
+                    <button type="button" class="product-preview-nav product-preview-nav-prev" data-product-preview-prev
                         aria-label="Show previous product preview">
                         <span aria-hidden="true">&lt;</span>
                     </button>
 
                     <div class="product-preview-frame">
-                        <div class="product-preview-hud">
-                            <span class="product-preview-hud-tag">
-                                <span class="content-vi">XEM_TR&#431;&#7898;C_GIAO_DI&#7878;N</span>
-                                <span class="content-en">UI_PREVIEW_FEED</span>
-                            </span>
-                            <span class="product-preview-counter" data-product-preview-counter>01 / 06</span>
+                        <div class="product-preview-media">
+                            <img class="product-preview-image" data-product-preview-image
+                                src="https://i.ibb.co/TB0CFqgr/gallery.jpg" alt="Lazy Note landing page preview" hidden
+                                loading="lazy" decoding="async">
+                            <iframe class="product-preview-video" data-product-preview-video
+                                src="https://www.youtube.com/embed/5lEdb85Zw0w?rel=0&modestbranding=1&playsinline=1"
+                                title="Lazy Note product demo video" loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
-
-                        <img
-                            class="product-preview-image"
-                            data-product-preview-image
-                            src="https://i.ibb.co/5hVMCv7G/image.png"
-                            alt="Lazy Note main page preview"
-                            loading="lazy"
-                            decoding="async">
                     </div>
 
-                    <button
-                        type="button"
-                        class="product-preview-nav product-preview-nav-next"
-                        data-product-preview-next
+                    <button type="button" class="product-preview-nav product-preview-nav-next" data-product-preview-next
                         aria-label="Show next product preview">
                         <span aria-hidden="true">&gt;</span>
                     </button>
                 </div>
 
+                <div class="product-preview-dots" data-product-preview-dots aria-label="Product preview navigation">
+                </div>
+
                 <div class="product-preview-caption" aria-live="polite">
-                    <div class="product-preview-caption-label">
-                        <span class="content-vi">M&#212; T&#7842; KHUNG H&#204;NH</span>
-                        <span class="content-en">FRAME DESCRIPTION</span>
-                    </div>
-
-                    <h3 class="product-preview-caption-title">
-                        <span class="content-vi" data-product-preview-title-vi>Trang ch&#7911; ch&#237;nh</span>
-                        <span class="content-en" data-product-preview-title-en>Main page</span>
-                    </h3>
-
                     <p class="product-preview-caption-copy">
-                        <span class="content-vi" data-product-preview-caption-vi>Giao di&#7879;n ch&#237;nh c&#7911;a Lazy Note v&#7899;i workspace ghi ch&#250; t&#237;ch h&#7907;p AI v&#224; t&#7893;ng quan lu&#7891;ng h&#7885;c t&#7853;p.</span>
-                        <span class="content-en" data-product-preview-caption-en>The main Lazy Note workspace, showing the AI-powered study environment and overall product flow.</span>
+                        <span class="content-vi" data-product-preview-caption-vi>Product demo video.</span>
+                        <span class="content-en" data-product-preview-caption-en>Product demo video.</span>
                     </p>
                 </div>
             </div>
@@ -220,16 +462,22 @@
                     <span class="content-en">[?] The Problem</span>
                 </h3>
                 <p style="color: var(--text-muted); margin-bottom: 15px;">
-                    <span class="content-vi">Học sinh (chúng tôi) thường dành ~80% thời gian trên lớp để ghi chép trong vội vã, chỉ còn lại ~20% cho việc thực sự lắng nghe.</span>
-                    <span class="content-en">Students (we) usually spend ~80% of class time frantically typing/taking notes, leaving only ~20% for actual listening.</span>
+                    <span class="content-vi">Học sinh (chúng tôi) thường dành ~80% thời gian trên lớp để ghi chép trong
+                        vội vã, chỉ còn lại ~20% cho việc thực sự lắng nghe.</span>
+                    <span class="content-en">Students (we) usually spend ~80% of class time frantically typing/taking
+                        notes, leaving only ~20% for actual listening.</span>
                 </p>
                 <h3 style="color: var(--accent);">
                     <span class="content-vi">[!] Giải Pháp</span>
                     <span class="content-en">[!] The Solution</span>
                 </h3>
                 <p style="color: var(--text-muted);">
-                    <span class="content-vi">Lazy Note sở hữu một "Infinite Document Canvas". Bạn dựng nhanh dàn ý (đề mục) cấp cao chỉ bằng việc kéo thả, còn AI nhận thức được ngữ cảnh sẽ đọc toàn bộ tài liệu (và dựa trên các nguồn tài liệu tùy chọn) để tự điền các chi tiết nhỏ một cách mạch lạc.</span>
-                    <span class="content-en">Lazy Note features an "Infinite Document Canvas". You build the high-level outline (headers) fast via drag-and-drop, and the context-aware AI fills in the granular details by reading the entire document state (based on customizable sources).</span>
+                    <span class="content-vi">Lazy Note sở hữu một "Infinite Document Canvas". Bạn dựng nhanh dàn ý (đề
+                        mục) cấp cao chỉ bằng việc kéo thả, còn AI nhận thức được ngữ cảnh sẽ đọc toàn bộ tài liệu (và
+                        dựa trên các nguồn tài liệu tùy chọn) để tự điền các chi tiết nhỏ một cách mạch lạc.</span>
+                    <span class="content-en">Lazy Note features an "Infinite Document Canvas". You build the high-level
+                        outline (headers) fast via drag-and-drop, and the context-aware AI fills in the granular details
+                        by reading the entire document state (based on customizable sources).</span>
                 </p>
             </div>
         </section>
@@ -250,8 +498,12 @@
                         <span class="content-en">Context-Aware Engine</span>
                     </h3>
                     <p style="color: var(--text-muted); font-size: 0.9rem;">
-                        <span class="content-vi">Hãy tải lên các tệp của bạn! Chúng tôi sẽ đọc toàn bộ notebook, tệp tải lên, nguồn web trực tiếp, và thậm chí là nghe các bài giảng trực tiếp để tạo ra nội dung liền mạch thay vì các phản hồi rời rạc.</span>
-                        <span class="content-en">Upload your own sources! Our engine will read the entire notebook, uploaded files, live web sources, and even listen to live lectures to generate cohesive text rather than isolated responses.</span>
+                        <span class="content-vi">Hãy tải lên các tệp của bạn! Chúng tôi sẽ đọc toàn bộ notebook, tệp tải
+                            lên, nguồn web trực tiếp, và thậm chí là nghe các bài giảng trực tiếp để tạo ra nội dung
+                            liền mạch thay vì các phản hồi rời rạc.</span>
+                        <span class="content-en">Upload your own sources! Our engine will read the entire notebook,
+                            uploaded files, live web sources, and even listen to live lectures to generate cohesive text
+                            rather than isolated responses.</span>
                     </p>
                 </div>
 
@@ -265,8 +517,10 @@
                         <span class="content-en">Easy Heading Reordering</span>
                     </h3>
                     <p style="color: var(--text-muted); font-size: 0.9rem;">
-                        <span class="content-vi">Logic kéo thả phức tạp bằng Vanilla JS giúp đồng bộ theo thời gian thực việc đổi vị trí heading với phần nội dung tương ứng.</span>
-                        <span class="content-en">Wanna change your heading's orders? Just drag and drop and our system will handle the rest!</span>
+                        <span class="content-vi">Logic kéo thả phức tạp bằng Vanilla JS giúp đồng bộ theo thời gian thực
+                            việc đổi vị trí heading với phần nội dung tương ứng.</span>
+                        <span class="content-en">Wanna change your heading's orders? Just drag and drop and our system
+                            will handle the rest!</span>
                     </p>
                 </div>
 
@@ -280,8 +534,10 @@
                         <span class="content-en">Customizable Writing Styles</span>
                     </h3>
                     <p style="color: var(--text-muted); font-size: 0.9rem;">
-                        <span class="content-vi">Cho phép người dùng hướng dẫn AI thay đổi cách ghi chép, ví dụ như "Ôn thi" hoặc "Giải thích như mình 5 tuổi".</span>
-                        <span class="content-en">Instructs the AI to change its writing style to anything you want! (e.g., "Exam Prep" or "Explain Like I'm 5")</span>
+                        <span class="content-vi">Cho phép người dùng hướng dẫn AI thay đổi cách ghi chép, ví dụ như "Ôn
+                            thi" hoặc "Giải thích như mình 5 tuổi".</span>
+                        <span class="content-en">Instructs the AI to change its writing style to anything you want!
+                            (e.g., "Exam Prep" or "Explain Like I'm 5")</span>
                     </p>
                 </div>
 
@@ -295,19 +551,23 @@
                         <span class="content-en">Multi-Modal Review</span>
                     </h3>
                     <p style="color: var(--text-muted); font-size: 0.9rem;">
-                        <span class="content-vi">Bao gồm tóm tắt âm thanh kiểu "Notebook-to-Podcast" và các Flashcard 3D tương tác được tạo gần như tức thì.</span>
-                        <span class="content-en">Features "Notebook-to-Podcast" audio summaries and instantly generates interactive 3D Flashcards.</span>
+                        <span class="content-vi">Bao gồm tóm tắt âm thanh kiểu "Notebook-to-Podcast" và các Flashcard 3D
+                            tương tác được tạo gần như tức thì.</span>
+                        <span class="content-en">Features "Notebook-to-Podcast" audio summaries and instantly generates
+                            interactive 3D Flashcards.</span>
                     </p>
                 </div>
             </div>
         </section>
 
         <section class="console-block">
-            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">
+            <h2
+                style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">
                 <span class="content-vi">HỆ THỐNG CÔNG NGHỆ</span>
                 <span class="content-en">TECH STACK SUMMARY</span>
             </h2>
-            <div style="overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 12px; background: var(--panel-overlay);">
+            <div
+                style="overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 12px; background: var(--panel-overlay);">
                 <table style="width: 100%; border-collapse: collapse; min-width: 680px;">
                     <thead>
                         <tr style="border-bottom: 1px solid var(--glass-border); background: var(--accent-soft);">
@@ -333,10 +593,13 @@
                         </tr>
                         <tr style="border-bottom: 1px solid var(--glass-border);">
                             <td style="padding: 12px; color: var(--accent); font-weight: 600;">API Used</td>
-                            <td style="padding: 12px; color: var(--text-muted);">Exa API, Agora API, JigsawStack API</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Exa API, Agora API, JigsawStack API
+                            </td>
                             <td style="padding: 12px; color: var(--text-muted);">
-                                <span class="content-vi">Tìm kiếm web, xử lý dữ liệu thời gian thực và mở rộng tính năng AI.</span>
-                                <span class="content-en">Web retrieval, real-time processing, and extended AI workflows.</span>
+                                <span class="content-vi">Tìm kiếm web, xử lý dữ liệu thời gian thực và mở rộng tính năng
+                                    AI.</span>
+                                <span class="content-en">Web retrieval, real-time processing, and extended AI
+                                    workflows.</span>
                             </td>
                         </tr>
                         <tr style="border-bottom: 1px solid var(--glass-border);">
@@ -351,13 +614,15 @@
                             <td style="padding: 12px; color: var(--accent); font-weight: 600;">Database</td>
                             <td style="padding: 12px; color: var(--text-muted);">Upstash Redis</td>
                             <td style="padding: 12px; color: var(--text-muted);">
-                                <span class="content-vi">Lưu trữ trạng thái ghi chú nhanh, serverless và độ trễ thấp.</span>
-                                <span class="content-en">Low-latency serverless persistence for note state and sessions.</span>
+                                <span class="content-vi">Lưu trữ trạng thái ghi chú nhanh, serverless và độ trễ
+                                    thấp.</span>
+                                <span class="content-en">Low-latency serverless persistence for note state and
+                                    sessions.</span>
                             </td>
                         </tr>
                         <tr>
                             <td style="padding: 12px; color: var(--accent); font-weight: 600;">Deployment</td>
-                            <td style="padding: 12px; color: var(--text-muted);">Render</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Cloudflare Pages</td>
                             <td style="padding: 12px; color: var(--text-muted);">
                                 <span class="content-vi">Triển khai và vận hành ứng dụng trực tuyến liên tục.</span>
                                 <span class="content-en">Continuous online deployment and hosting.</span>
@@ -374,4 +639,5 @@
     <script src="../../components.js"></script>
     <script src="../../script.js"></script>
 </body>
+
 </html>
