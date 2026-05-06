@@ -232,74 +232,471 @@
 
         <section class="console-block hidden-section">
             <div class="cmd-line">🏆 Achievements</div>
-            <div class="achievements-showcase">
-                <article class="achievement-spotlight">
-                    <div class="achievement-spotlight-copy">
-                        <div class="achievement-kicker">LOTUSHACK 2026</div>
 
-                        <div class="achievement-spotlight-heading">
-                            <h2 class="content-vi">Lazy Note t&#7841;i LotusHack 2026</h2>
-                            <h2 class="content-en">Lazy Note at LotusHack 2026</h2>
-                            <p class="content-vi">Lazy Note l&#224; &#7913;ng d&#7909;ng web ghi ch&#250; tự động được
-                                t&#237;ch h&#7907;p AI mang v&#7873; h&#7841;ng <strong>30/217</strong> chung cu&#7897;c
-                                v&#224; <strong>h&#7841;ng 1</strong> b&#7843;ng <strong>Secondary &amp; High School
-                                    Track</strong> t&#7841;i LotusHack Hackathon 2026.</p>
-                            <p class="content-en">Lazy Note is an AI auto note-taking web app that placed
-                                <strong>30/217</strong> overall and won <strong>1st place</strong> in the
-                                <strong>Secondary &amp; High School Track</strong> at LotusHack Hackathon 2026.</p>
-                        </div>
+            <!-- ── Achievement Carousel ── -->
+            <style>
+                /* Achievement carousel wrapper */
+                .achv-carousel {
+                    position: relative;
+                    overflow: hidden;
+                }
 
-                        <div class="achievement-tags">
-                            <span>LotusHack 2026</span>
-                            <span>Lazy Note</span>
-                            <span>AI Web App</span>
-                        </div>
+                .achv-slide {
+                    display: none;
+                    animation: achvFadeIn 0.45s ease;
+                }
 
-                        <div class="achievement-facts">
-                            <div class="achievement-fact">
-                                <span class="achievement-fact-value">30/217</span>
-                                <span class="content-vi">X&#7871;p h&#7841;ng chung cu&#7897;c</span>
-                                <span class="content-en">Overall placement</span>
+                .achv-slide.is-active {
+                    display: block;
+                }
+
+                @keyframes achvFadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(12px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                /* Achievement showcase grid — mirrors lazy_note.html */
+                .achv-showcase {
+                    background: linear-gradient(145deg, var(--surface-09), transparent 52%), linear-gradient(180deg, var(--surface-07), rgba(var(--panel-rgb), 0.24));
+                    border: 1px solid var(--glass-border-strong);
+                    border-radius: calc(var(--radius-card) + 8px);
+                    padding: 42px;
+                    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 24px 40px;
+                    grid-template-areas:
+                        "kicker  metrics"
+                        "title   metrics"
+                        "desc    metrics"
+                        "slide   slide"
+                        "dots    dots"
+                        "actions caption";
+                    align-items: start;
+                }
+
+                @media (max-width: 900px) {
+                    .achv-showcase {
+                        grid-template-columns: 1fr;
+                        grid-template-areas:
+                            "kicker"
+                            "title"
+                            "desc"
+                            "metrics"
+                            "slide"
+                            "dots"
+                            "caption"
+                            "actions";
+                        padding: 24px;
+                        gap: 16px;
+                    }
+                }
+
+                /* Unbox summary & proof into grid */
+                .achv-summary,
+                .achv-proof {
+                    display: contents !important;
+                }
+
+                .achv-summary::before {
+                    display: none;
+                }
+
+                /* Grid area assignments */
+                .achv-summary>.achievement-kicker {
+                    grid-area: kicker;
+                    align-self: end;
+                    margin-bottom: 0 !important;
+                }
+
+                .achv-summary>h2 {
+                    grid-area: title;
+                    margin: 0 !important;
+                    font-size: clamp(2.2rem, 4.5vw, 3rem) !important;
+                    letter-spacing: -0.03em;
+                    line-height: 1.1;
+                }
+
+                .achv-summary>p {
+                    grid-area: desc;
+                    margin: 0 !important;
+                    font-size: 1.1rem !important;
+                    line-height: 1.6;
+                    color: var(--text-muted);
+                    max-width: 48ch;
+                }
+
+                .achv-metrics {
+                    grid-area: metrics;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    gap: 12px !important;
+                    margin: 0 !important;
+                    height: 100%;
+                    justify-content: center;
+                }
+
+                .achv-metric {
+                    background: rgba(var(--panel-rgb), 0.3) !important;
+                    border: 1px solid var(--glass-border) !important;
+                    border-radius: 16px !important;
+                    padding: 18px 24px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 18px !important;
+                    flex-direction: row !important;
+                }
+
+                .achv-metric strong {
+                    font-size: 2.2rem !important;
+                    line-height: 1 !important;
+                    min-width: 100px !important;
+                    text-align: right !important;
+                    color: var(--text) !important;
+                    margin-bottom: 0 !important;
+                }
+
+                .achv-metric span {
+                    font-size: 0.88rem !important;
+                    line-height: 1.4 !important;
+                    flex: 1;
+                }
+
+                .achv-slideshow-container {
+                    grid-area: slide;
+                    margin-top: 12px;
+                    border-radius: var(--radius-card);
+                    overflow: hidden;
+                    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+                    border: 1px solid var(--glass-border-strong);
+                    position: relative;
+                }
+
+                .achv-slideshow-container .achv-img {
+                    border-radius: 0 !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+
+                .achv-indicators {
+                    grid-area: dots;
+                    display: flex;
+                    justify-content: center;
+                    gap: 8px;
+                    margin-top: -12px !important;
+                }
+
+                .achv-dot {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: var(--glass-border-strong);
+                    cursor: pointer;
+                    transition: background 0.2s ease;
+                    border: none;
+                    padding: 0;
+                }
+
+                .achv-dot.is-active {
+                    background: var(--accent);
+                }
+
+                .achv-dot:hover {
+                    background: var(--text-muted) !important;
+                }
+
+                .achv-actions {
+                    grid-area: actions;
+                    margin: 0 !important;
+                    display: flex !important;
+                    gap: 16px !important;
+                    align-items: center !important;
+                    flex-direction: row !important;
+                    flex-wrap: wrap;
+                }
+
+                .achv-proof-caption {
+                    grid-area: caption;
+                    margin: 0 !important;
+                    text-align: right !important;
+                    align-self: center;
+                    font-size: 0.9rem !important;
+                    opacity: 0.7;
+                }
+
+                .achv-nav-btn {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba(0, 0, 0, 0.6);
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 50%;
+                    width: 36px;
+                    height: 36px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                    z-index: 10;
+                    transition: all 0.2s ease;
+                }
+
+                .achv-nav-btn:hover {
+                    background: rgba(0, 0, 0, 0.9) !important;
+                    transform: translateY(-50%) scale(1.1) !important;
+                }
+
+                .achv-nav-btn--prev {
+                    left: 10px;
+                }
+
+                .achv-nav-btn--next {
+                    right: 10px;
+                }
+
+                /* ── Top-level achievement carousel nav ── */
+                .achv-carousel-nav {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 16px;
+                    margin-top: 24px;
+                }
+
+                .achv-carousel-btn {
+                    background: var(--surface-08);
+                    color: var(--text);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                }
+
+                .achv-carousel-btn:hover {
+                    background: var(--surface-14);
+                    border-color: var(--glass-border-strong);
+                    transform: scale(1.08);
+                }
+
+                .achv-carousel-counter {
+                    font-size: 0.78rem;
+                    color: var(--text-muted);
+                    letter-spacing: 0.1em;
+                    font-weight: 600;
+                    font-variant-numeric: tabular-nums;
+                }
+            </style>
+
+            <div class="achv-carousel" id="achv-carousel">
+
+                <!-- ═══ SLIDE 1 — Lazy Note ═══ -->
+                <div class="achv-slide is-active" data-achv-slide>
+                    <div class="achv-showcase">
+                        <article class="achv-summary">
+                            <div class="achievement-kicker">LOTUSHACK 2026</div>
+                            <h2>
+                                <span class="content-vi">Giải thưởng của Lazy Note</span>
+                                <span class="content-en">Lazy Note Awards</span>
+                            </h2>
+                            <p>
+                                <span class="content-vi">Lazy Note mang về hạng 30/217 chung cuộc tại LotusHack
+                                    Hackathon 2026,
+                                    đồng thời đạt hạng 1 bảng Secondary &amp; High School Track.</span>
+                                <span class="content-en">Lazy Note finished 30/217 overall at LotusHack Hackathon 2026
+                                    and also
+                                    secured 1st place in the Secondary &amp; High School Track.</span>
+                            </p>
+
+                            <div class="achv-metrics">
+                                <div class="achv-metric">
+                                    <strong>30/217</strong>
+                                    <span class="content-vi">Xếp hạng chung cuộc</span>
+                                    <span class="content-en">Overall placement</span>
+                                </div>
+                                <div class="achv-metric">
+                                    <strong>1st</strong>
+                                    <span class="content-vi">Secondary &amp; High School Track</span>
+                                    <span class="content-en">Secondary &amp; High School Track</span>
+                                </div>
+                                <div class="achv-metric">
+                                    <strong>2026</strong>
+                                    <span class="content-vi">LotusHack, hackathon lớn nhất Việt Nam trong năm
+                                        2026</span>
+                                    <span class="content-en">LotusHack, the largest hackathon in Vietnam in 2026</span>
+                                </div>
                             </div>
-                            <div class="achievement-fact">
-                                <span class="achievement-fact-value">1st</span>
-                                <span class="content-vi">Secondary &amp; High School Track</span>
-                                <span class="content-en">Secondary &amp; High School Track</span>
-                            </div>
-                            <div class="achievement-fact">
-                                <span class="achievement-fact-value">LotusHack</span>
-                                <span class="content-vi">Hackathon l&#7899;n nh&#7845;t Vi&#7879;t Nam trong n&#259;m
-                                    2026</span>
-                                <span class="content-en">The largest hackathon in Vietnam in 2026</span>
-                            </div>
-                        </div>
 
-                        <div class="achievement-proof-actions">
-                            <a href="https://i.ibb.co/PvqKmQbC/image.png" target="_blank" rel="noopener noreferrer"
-                                class="launch-btn award-inline-btn">
-                                <span class="content-vi">XEM GI&#7844;Y CH&#7912;NG NH&#7852;N</span>
-                                <span class="content-en">VIEW CERTIFICATE</span>
-                            </a>
-                            <a href="https://devpost.com/software/lazy-note-grctxf?ref_content=user-portfolio&amp;ref_feature=in_progress"
-                                target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
-                                <span class="content-vi">XEM B&#192;I DEVPOST</span>
-                                <span class="content-en">VIEW DEVPOST</span>
-                            </a>
-                        </div>
+                            <div class="achv-actions">
+                                <a href="pages/projects/lazy_note.html" class="launch-btn award-inline-btn">
+                                    <span class="content-vi">XEM DỰ ÁN</span>
+                                    <span class="content-en">VIEW PROJECT</span>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="achv-proof">
+                            <div class="achv-slideshow-container" data-achv-slideshow>
+                                <img class="achv-img"
+                                    src="https://i.ibb.co/Vcf4vNb2/4201c05b-73a5-4c2c-93fe-ecc7e1d716a5.jpg"
+                                    alt="Award Ceremony Image 1"
+                                    style="width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover;"
+                                    loading="lazy" decoding="async">
+                                <img class="achv-img"
+                                    src="https://i.ibb.co/sd3LgtbC/4dbaa417-f9ba-44dd-83be-937fee37c0fc.jpg"
+                                    alt="Award Ceremony Image 2"
+                                    style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;"
+                                    loading="lazy" decoding="async">
+                                <img class="achv-img"
+                                    src="https://i.ibb.co/wNhpgfmj/f5db204c-dc01-4744-aa28-6ac1f76e71cb.jpg"
+                                    alt="Award Ceremony Image 3"
+                                    style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;"
+                                    loading="lazy" decoding="async">
+                                <img class="achv-img"
+                                    src="https://i.ibb.co/tTYpXpXt/b144300d-278e-4188-8650-8a98bba4b482.jpg"
+                                    alt="Award Ceremony Image 4"
+                                    style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;"
+                                    loading="lazy" decoding="async">
+                                <iframe class="achv-img"
+                                    src="https://www.youtube.com/embed/7uIzzL31NqI" title="Award YouTube Short"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    style="width: 100%; display: none; aspect-ratio: 16/9; border-radius: calc(var(--radius-card) - 10px); border: 1px solid var(--glass-border); background: var(--surface-03); box-shadow: var(--shadow-sm);"></iframe>
+                                <img class="achv-img" src="https://i.ibb.co/PvqKmQbC/image.png"
+                                    alt="LotusHack Hackathon 2026 certificate for Lazy Note"
+                                    style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: contain; background: #000;"
+                                    loading="lazy" decoding="async">
+
+                                <button type="button" class="achv-nav-btn achv-nav-btn--prev"
+                                    aria-label="Previous image" data-achv-prev>&#10094;</button>
+                                <button type="button" class="achv-nav-btn achv-nav-btn--next" aria-label="Next image"
+                                    data-achv-next>&#10095;</button>
+                            </div>
+                            <div class="achv-indicators" data-achv-dots></div>
+                            <p class="achv-proof-caption">
+                                <span class="content-vi">Hình ảnh sự kiện và giấy chứng nhận tại LotusHack Hackathon
+                                    2026.</span>
+                                <span class="content-en">Event photos and certificate at LotusHack Hackathon
+                                    2026.</span>
+                            </p>
+                        </article>
                     </div>
+                </div>
+                <!-- ═══ END SLIDE 1 ═══ -->
 
-                    <div class="achievement-spotlight-proof">
-                        <img src="https://i.ibb.co/PvqKmQbC/image.png"
-                            alt="LotusHack Hackathon 2026 certificate for Lazy Note" loading="lazy" decoding="async">
-                        <p class="achievement-proof-caption">
-                            <span class="content-vi">Gi&#7845;y ch&#7913;ng nh&#7853;n v&#224; minh ch&#7913;ng
-                                x&#7871;p h&#7841;ng c&#7911;a Lazy Note t&#7841;i LotusHack Hackathon 2026.</span>
-                            <span class="content-en">Certificate and placement proof for Lazy Note at LotusHack
-                                Hackathon 2026.</span>
-                        </p>
-                    </div>
-                </article>
+                <!-- Future achievement slides go here:
+                <div class="achv-slide" data-achv-slide>
+                    <div class="achv-showcase"> ... </div>
+                </div>
+                -->
+
             </div>
+
+            <!-- Carousel navigation (shown when there are 2+ slides) -->
+            <div class="achv-carousel-nav" id="achv-carousel-nav" style="display: none;">
+                <button type="button" class="achv-carousel-btn" id="achv-carousel-prev"
+                    aria-label="Previous achievement">&#10094;</button>
+                <span class="achv-carousel-counter" id="achv-carousel-counter">1 / 1</span>
+                <button type="button" class="achv-carousel-btn" id="achv-carousel-next"
+                    aria-label="Next achievement">&#10095;</button>
+            </div>
+
+            <script>
+                /* ── Achievement Carousel + inner image slideshows ── */
+                (function initAchievementCarousel() {
+                    const carousel = document.getElementById('achv-carousel');
+                    if (!carousel) return;
+
+                    const slides = carousel.querySelectorAll('[data-achv-slide]');
+                    const navBar = document.getElementById('achv-carousel-nav');
+                    const counter = document.getElementById('achv-carousel-counter');
+                    const prevBtn = document.getElementById('achv-carousel-prev');
+                    const nextBtn = document.getElementById('achv-carousel-next');
+                    let currentSlide = 0;
+
+                    // Show nav only when there are 2+ slides
+                    if (slides.length > 1 && navBar) {
+                        navBar.style.display = '';
+                    }
+
+                    function showSlide(index) {
+                        slides.forEach(s => s.classList.remove('is-active'));
+                        currentSlide = (index + slides.length) % slides.length;
+                        slides[currentSlide].classList.add('is-active');
+                        if (counter) counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+                    }
+
+                    if (prevBtn) prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+                    if (nextBtn) nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+                    // ── Inner image slideshows (per achievement slide) ──
+                    slides.forEach(slide => {
+                        const container = slide.querySelector('[data-achv-slideshow]');
+                        if (!container) return;
+
+                        const images = container.querySelectorAll('.achv-img');
+                        const dotsContainer = slide.querySelector('[data-achv-dots]');
+                        const prevNavBtn = container.querySelector('[data-achv-prev]');
+                        const nextNavBtn = container.querySelector('[data-achv-next]');
+                        let currentImg = 0;
+
+                        // Build dots
+                        if (dotsContainer) {
+                            images.forEach((_, i) => {
+                                const dot = document.createElement('button');
+                                dot.type = 'button';
+                                dot.className = 'achv-dot' + (i === 0 ? ' is-active' : '');
+                                dot.setAttribute('aria-label', `Show image ${i + 1}`);
+                                dot.addEventListener('click', () => goToImg(i));
+                                dotsContainer.appendChild(dot);
+                            });
+                        }
+
+                        function updateImages() {
+                            images.forEach((img, i) => {
+                                if (i === currentImg) {
+                                    img.style.display = 'block';
+                                } else {
+                                    img.style.display = 'none';
+                                    // Stop iframe video when navigating away
+                                    if (img.tagName === 'IFRAME') {
+                                        const src = img.getAttribute('src');
+                                        img.setAttribute('src', '');
+                                        img.setAttribute('src', src);
+                                    }
+                                }
+                            });
+                            if (dotsContainer) {
+                                const dots = dotsContainer.querySelectorAll('.achv-dot');
+                                dots.forEach((d, i) => d.classList.toggle('is-active', i === currentImg));
+                            }
+                        }
+
+                        function goToImg(index) {
+                            currentImg = (index + images.length) % images.length;
+                            updateImages();
+                        }
+
+                        if (prevNavBtn) prevNavBtn.addEventListener('click', () => goToImg(currentImg - 1));
+                        if (nextNavBtn) nextNavBtn.addEventListener('click', () => goToImg(currentImg + 1));
+                    });
+                })();
+            </script>
         </section>
 
         <section class="console-block hidden-section">
