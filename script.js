@@ -504,81 +504,146 @@ function initProductPreviewSlideshow() {
 
     root.dataset.bound = '1';
 
-    const slides = [
-        {
-            type: 'video',
-            embedSrc: 'https://www.youtube.com/embed/5lEdb85Zw0w?rel=0&modestbranding=1&playsinline=1',
-            captionVi: 'Product demo video.',
-            captionEn: 'Product demo video.',
-            title: 'Lazy Note product demo video',
-            altVi: 'Lazy Note product demo video',
-            altEn: 'Lazy Note product demo video'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/TB0CFqgr/gallery.jpg',
-            captionVi: 'Landing page.',
-            captionEn: 'Landing page.',
-            altVi: 'Lazy Note landing page preview',
-            altEn: 'Lazy Note landing page preview'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/Lh5fPjgB/gallery.jpg',
-            captionVi: 'Note creation with custom AI\'s writing tone/persona (customizable later on).',
-            captionEn: 'Note creation with custom AI\'s writing tone/persona (customizable later on).',
-            altVi: 'Lazy Note note creation preview',
-            altEn: 'Lazy Note note creation preview'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/v4ckWj5J/gallery-1.jpg',
-            captionVi: 'AI-suggested headings or do your own! Drag & Drop them to reorganize to your liking! (customizable later on)',
-            captionEn: 'AI-suggested headings or do your own! Drag & Drop them to reorganize to your liking! (customizable later on)',
-            altVi: 'Lazy Note heading organization preview',
-            altEn: 'Lazy Note heading organization preview'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/sdyVHHFM/gallery.jpg',
-            captionVi: 'New freshly made note.',
-            captionEn: 'New freshly made note.',
-            altVi: 'Lazy Note new note preview',
-            altEn: 'Lazy Note new note preview'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/TMHBvkDD/gallery-1.jpg',
-            captionVi: 'AI Auto-highlight important stuff for you with just one click! Our note editor also support most AI\'s LaTeX and Markdowns!',
-            captionEn: 'AI Auto-highlight important stuff for you with just one click! Our note editor also support most AI\'s LaTeX and Markdowns!',
-            altVi: 'Lazy Note auto highlight preview',
-            altEn: 'Lazy Note auto highlight preview'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/k6szTpwT/gallery.jpg',
-            captionVi: 'Store your notes in your own private vault! (Cloud-sync available for logged-in users)',
-            captionEn: 'Store your notes in your own private vault! (Cloud-sync available for logged-in users)',
-            altVi: 'Lazy Note private vault preview',
-            altEn: 'Lazy Note private vault preview'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/M5fDFh76/gallery.jpg',
-            captionVi: 'Log-in to sync your notes to our cloud server, or stay anonymous and only save your notes in your browser\'s localStorage.',
-            captionEn: 'Log-in to sync your notes to our cloud server, or stay anonymous and only save your notes in your browser\'s localStorage.',
-            altVi: 'Lazy Note login sync preview',
-            altEn: 'Lazy Note login sync preview'
-        },
-        {
-            type: 'image',
-            src: 'https://i.ibb.co/G3N329cz/gallery.jpg',
-            captionVi: 'Dark mode theme (can toggle in Account Center)',
-            captionEn: 'Dark mode theme (can toggle in Account Center)',
-            altVi: 'Lazy Note dark mode preview',
-            altEn: 'Lazy Note dark mode preview'
-        }
-    ];
+    const slidePresets = {
+        lazyNote: [
+            {
+                type: 'video',
+                embedSrc: 'https://www.youtube.com/embed/5lEdb85Zw0w?rel=0&modestbranding=1&playsinline=1',
+                captionVi: 'Product demo video.',
+                captionEn: 'Product demo video.',
+                title: 'Lazy Note product demo video',
+                altVi: 'Lazy Note product demo video',
+                altEn: 'Lazy Note product demo video'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/TB0CFqgr/gallery.jpg',
+                captionVi: 'Landing page.',
+                captionEn: 'Landing page.',
+                altVi: 'Lazy Note landing page preview',
+                altEn: 'Lazy Note landing page preview'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/Lh5fPjgB/gallery.jpg',
+                captionVi: 'Note creation with custom AI\'s writing tone/persona (customizable later on).',
+                captionEn: 'Note creation with custom AI\'s writing tone/persona (customizable later on).',
+                altVi: 'Lazy Note note creation preview',
+                altEn: 'Lazy Note note creation preview'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/v4ckWj5J/gallery-1.jpg',
+                captionVi: 'AI-suggested headings or do your own! Drag & Drop them to reorganize to your liking! (customizable later on)',
+                captionEn: 'AI-suggested headings or do your own! Drag & Drop them to reorganize to your liking! (customizable later on)',
+                altVi: 'Lazy Note heading organization preview',
+                altEn: 'Lazy Note heading organization preview'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/sdyVHHFM/gallery.jpg',
+                captionVi: 'New freshly made note.',
+                captionEn: 'New freshly made note.',
+                altVi: 'Lazy Note new note preview',
+                altEn: 'Lazy Note new note preview'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/TMHBvkDD/gallery-1.jpg',
+                captionVi: 'AI Auto-highlight important stuff for you with just one click! Our note editor also support most AI\'s LaTeX and Markdowns!',
+                captionEn: 'AI Auto-highlight important stuff for you with just one click! Our note editor also support most AI\'s LaTeX and Markdowns!',
+                altVi: 'Lazy Note auto highlight preview',
+                altEn: 'Lazy Note auto highlight preview'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/k6szTpwT/gallery.jpg',
+                captionVi: 'Store your notes in your own private vault! (Cloud-sync available for logged-in users)',
+                captionEn: 'Store your notes in your own private vault! (Cloud-sync available for logged-in users)',
+                altVi: 'Lazy Note private vault preview',
+                altEn: 'Lazy Note private vault preview'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/M5fDFh76/gallery.jpg',
+                captionVi: 'Log-in to sync your notes to our cloud server, or stay anonymous and only save your notes in your browser\'s localStorage.',
+                captionEn: 'Log-in to sync your notes to our cloud server, or stay anonymous and only save your notes in your browser\'s localStorage.',
+                altVi: 'Lazy Note login sync preview',
+                altEn: 'Lazy Note login sync preview'
+            },
+            {
+                type: 'image',
+                src: 'https://i.ibb.co/G3N329cz/gallery.jpg',
+                captionVi: 'Dark mode theme (can toggle in Account Center)',
+                captionEn: 'Dark mode theme (can toggle in Account Center)',
+                altVi: 'Lazy Note dark mode preview',
+                altEn: 'Lazy Note dark mode preview'
+            }
+        ],
+        playweaver: [
+            {
+                type: 'video',
+                embedSrc: 'https://www.youtube.com/embed/y-FgiJwzyMM?rel=0&modestbranding=1&playsinline=1',
+                captionVi: 'Short PlayWeaver demo video.',
+                captionEn: 'Short PlayWeaver demo video.',
+                title: 'PlayWeaver short demo video',
+                altVi: 'PlayWeaver short demo video',
+                altEn: 'PlayWeaver short demo video'
+            },
+            {
+                type: 'video',
+                embedSrc: 'https://www.youtube.com/embed/qRDpVFFkwbc?rel=0&modestbranding=1&playsinline=1',
+                captionVi: 'Full PlayWeaver demo video.',
+                captionEn: 'Full PlayWeaver demo video.',
+                title: 'PlayWeaver full demo video',
+                altVi: 'PlayWeaver full demo video',
+                altEn: 'PlayWeaver full demo video'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/034/datas/gallery.jpg',
+                captionVi: 'Landing page.',
+                captionEn: 'Landing page.',
+                altVi: 'PlayWeaver landing page preview',
+                altEn: 'PlayWeaver landing page preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/038/datas/gallery.jpg',
+                captionVi: 'AI-assisted game concept generator.',
+                captionEn: 'AI-assisted game concept generator.',
+                altVi: 'PlayWeaver AI-assisted game concept generator preview',
+                altEn: 'PlayWeaver AI-assisted game concept generator preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/051/datas/gallery.jpg',
+                captionVi: 'Editor page with AI assistant, mindmap, and prototype preview.',
+                captionEn: 'Editor page with AI assistant, mindmap, and prototype preview.',
+                altVi: 'PlayWeaver editor page preview',
+                altEn: 'PlayWeaver editor page preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/503/959/datas/gallery.jpg',
+                captionVi: 'Flappy Boy prototype generated in PlayWeaver.',
+                captionEn: 'Flappy Boy prototype generated in PlayWeaver.',
+                altVi: 'PlayWeaver Flappy Boy prototype preview',
+                altEn: 'PlayWeaver Flappy Boy prototype preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/057/datas/gallery.jpg',
+                captionVi: 'Autosave keeps prototype work safe.',
+                captionEn: 'Autosave keeps prototype work safe.',
+                altVi: 'PlayWeaver autosave preview',
+                altEn: 'PlayWeaver autosave preview'
+            }
+        ]
+    };
+
+    const requestedPreset = root.dataset.productPreview && root.dataset.productPreview.trim();
+    const slides = slidePresets[requestedPreset] || slidePresets.lazyNote;
 
     let currentIndex = 0;
     let dotButtons = [];
@@ -733,14 +798,15 @@ const fileSystem = {
         { type: 'file', name: 'readme.txt', link: '#', desc: 'hellu :3' }
     ],
     "GAME PROJECTS": [
-        { type: 'file', name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL' }
+        { type: 'file', name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL', icon: 'game' },
     ],
     "APP PROJECTS": [
-        { type: 'file', name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION' }
+        { type: 'file', name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION', icon: 'app' }
     ],
     "AI PROJECTS": [
         { type: 'file', name: 'Lazy Note', icon: 'aiNotebook', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK', ribbon: 'WINNER' },
-        { type: 'file', name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT' }
+        { type: 'file', name: 'PlayWeaver', icon: 'ai', link: 'pages/projects/playweaver.html', tag: 'AI GAME PROTOTYPER', ribbon: 'WINNER' },
+        { type: 'file', name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT', icon: 'ai' }
     ]
 };
 
