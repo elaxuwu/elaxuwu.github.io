@@ -470,6 +470,7 @@
                     align-items: center;
                     gap: 16px;
                     margin-top: 24px;
+                    flex-wrap: wrap;
                 }
 
                 .achv-carousel-btn {
@@ -499,6 +500,58 @@
                     letter-spacing: 0.1em;
                     font-weight: 600;
                     font-variant-numeric: tabular-nums;
+                }
+
+                .achv-carousel-dots {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                }
+
+                .achv-carousel-dot {
+                    width: 28px;
+                    height: 6px;
+                    border: 0;
+                    border-radius: 999px;
+                    padding: 0;
+                    background: var(--glass-border-strong);
+                    cursor: pointer;
+                    transition: width 0.2s ease, background 0.2s ease, transform 0.2s ease;
+                }
+
+                .achv-carousel-dot:hover,
+                .achv-carousel-dot:focus-visible {
+                    background: var(--text-muted);
+                    transform: translateY(-1px);
+                }
+
+                .achv-carousel-dot.is-active {
+                    width: 42px;
+                    background: var(--accent);
+                }
+
+                .achv-autoslide-meter {
+                    flex-basis: 100%;
+                    width: min(460px, 100%);
+                    max-width: 460px;
+                    height: 4px;
+                    margin: 0 auto;
+                    border-radius: 999px;
+                    background: var(--glass-border);
+                    overflow: hidden;
+                }
+
+                .achv-autoslide-fill {
+                    width: 0%;
+                    height: 100%;
+                    border-radius: inherit;
+                    background: linear-gradient(90deg, var(--accent), var(--accent2));
+                    transition: width 0.08s linear, opacity 0.2s ease;
+                }
+
+                .achv-carousel-nav.is-paused .achv-autoslide-fill {
+                    opacity: 0.45;
                 }
             </style>
 
@@ -599,11 +652,78 @@
                 </div>
                 <!-- ═══ END SLIDE 1 ═══ -->
 
-                <!-- Future achievement slides go here:
+                <!-- ═══ SLIDE 2 — PlayWeaver ═══ -->
                 <div class="achv-slide" data-achv-slide>
-                    <div class="achv-showcase"> ... </div>
+                    <div class="achv-showcase">
+                        <article class="achv-summary">
+                            <div class="achievement-kicker">LOVHACK SEASON 2</div>
+                            <h2>
+                                <span class="content-vi">PlayWeaver Awards</span>
+                                <span class="content-en">PlayWeaver Awards</span>
+                            </h2>
+                            <p>
+                                <span class="content-vi">PlayWeaver placed 04/127 overall at LovHack Season 2 in 2026 and won the DevSwarm Builder Opportunity Track, recognized for turning raw game ideas into playable AI-generated prototypes.</span>
+                                <span class="content-en">PlayWeaver placed 04/127 overall at LovHack Season 2 in 2026 and won the DevSwarm Builder Opportunity Track, recognized for turning raw game ideas into playable AI-generated prototypes.</span>
+                            </p>
+
+                            <div class="achv-metrics">
+                                <div class="achv-metric">
+                                    <strong>04/127</strong>
+                                    <span class="content-vi">Overall placement</span>
+                                    <span class="content-en">Overall placement</span>
+                                </div>
+                                <div class="achv-metric">
+                                    <strong>Winner</strong>
+                                    <span class="content-vi">DevSwarm Builder Opportunity Track</span>
+                                    <span class="content-en">DevSwarm Builder Opportunity Track</span>
+                                </div>
+                                <div class="achv-metric">
+                                    <strong>2026</strong>
+                                    <span class="content-vi">LovHack Season 2</span>
+                                    <span class="content-en">LovHack Season 2</span>
+                                </div>
+                            </div>
+
+                            <div class="achv-actions">
+                                <a href="pages/projects/playweaver.html" class="launch-btn award-inline-btn">
+                                    <span class="content-vi">XEM DỰ ÁN</span>
+                                    <span class="content-en">VIEW PROJECT</span>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="achv-proof">
+                            <div class="achv-slideshow-container" data-achv-slideshow>
+                                <img class="achv-img"
+                                    src="https://placehold.co/1280x720/111827/e5e7eb?text=PlayWeaver+Award+Placeholder+1"
+                                    alt="PlayWeaver award placeholder image 1"
+                                    style="width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover;"
+                                    loading="lazy" decoding="async">
+                                <img class="achv-img"
+                                    src="https://placehold.co/1280x720/0f766e/ecfeff?text=PlayWeaver+Award+Placeholder+2"
+                                    alt="PlayWeaver award placeholder image 2"
+                                    style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;"
+                                    loading="lazy" decoding="async">
+                                <img class="achv-img"
+                                    src="https://placehold.co/1280x720/7c2d12/ffedd5?text=PlayWeaver+Award+Placeholder+3"
+                                    alt="PlayWeaver award placeholder image 3"
+                                    style="width: 100%; display: none; aspect-ratio: 16/9; object-fit: cover;"
+                                    loading="lazy" decoding="async">
+
+                                <button type="button" class="achv-nav-btn achv-nav-btn--prev"
+                                    aria-label="Previous image" data-achv-prev>&#10094;</button>
+                                <button type="button" class="achv-nav-btn achv-nav-btn--next" aria-label="Next image"
+                                    data-achv-next>&#10095;</button>
+                            </div>
+                            <div class="achv-indicators" data-achv-dots></div>
+                            <p class="achv-proof-caption">
+                                <span class="content-vi">Placeholder proof images for the future PlayWeaver award section.</span>
+                                <span class="content-en">Placeholder proof images for the future PlayWeaver award section.</span>
+                            </p>
+                        </article>
+                    </div>
                 </div>
-                -->
+                <!-- ═══ END SLIDE 2 ═══ -->
 
             </div>
 
@@ -611,9 +731,14 @@
             <div class="achv-carousel-nav" id="achv-carousel-nav" style="display: none;">
                 <button type="button" class="achv-carousel-btn" id="achv-carousel-prev"
                     aria-label="Previous achievement">&#10094;</button>
+                <div class="achv-carousel-dots" id="achv-carousel-dots" aria-label="Achievement card navigation">
+                </div>
                 <span class="achv-carousel-counter" id="achv-carousel-counter">1 / 1</span>
                 <button type="button" class="achv-carousel-btn" id="achv-carousel-next"
                     aria-label="Next achievement">&#10095;</button>
+                <div class="achv-autoslide-meter" aria-hidden="true">
+                    <div class="achv-autoslide-fill" id="achv-autoslide-fill"></div>
+                </div>
             </div>
 
             <script>
@@ -627,11 +752,39 @@
                     const counter = document.getElementById('achv-carousel-counter');
                     const prevBtn = document.getElementById('achv-carousel-prev');
                     const nextBtn = document.getElementById('achv-carousel-next');
+                    const carouselDotsEl = document.getElementById('achv-carousel-dots');
+                    const autoFill = document.getElementById('achv-autoslide-fill');
+                    const autoDelay = 6500;
                     let currentSlide = 0;
+                    let autoTimer = null;
+                    let progressTimer = null;
+                    let slideStartedAt = 0;
+                    let isPaused = false;
+                    let carouselDots = [];
 
                     // Show nav only when there are 2+ slides
                     if (slides.length > 1 && navBar) {
                         navBar.style.display = '';
+                    }
+
+                    function setAutoProgress(percent) {
+                        if (!autoFill) return;
+                        autoFill.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+                    }
+
+                    function clearAutoSlide() {
+                        if (autoTimer) window.clearTimeout(autoTimer);
+                        if (progressTimer) window.clearInterval(progressTimer);
+                        autoTimer = null;
+                        progressTimer = null;
+                    }
+
+                    function updateCarouselDots() {
+                        carouselDots.forEach((dot, index) => {
+                            const active = index === currentSlide;
+                            dot.classList.toggle('is-active', active);
+                            dot.setAttribute('aria-current', active ? 'true' : 'false');
+                        });
                     }
 
                     function showSlide(index) {
@@ -639,10 +792,78 @@
                         currentSlide = (index + slides.length) % slides.length;
                         slides[currentSlide].classList.add('is-active');
                         if (counter) counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+                        updateCarouselDots();
                     }
 
-                    if (prevBtn) prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-                    if (nextBtn) nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+                    function startAutoSlide() {
+                        if (slides.length <= 1 || isPaused) return;
+                        clearAutoSlide();
+                        slideStartedAt = Date.now();
+                        setAutoProgress(0);
+
+                        progressTimer = window.setInterval(() => {
+                            const elapsed = Date.now() - slideStartedAt;
+                            setAutoProgress((elapsed / autoDelay) * 100);
+                        }, 80);
+
+                        autoTimer = window.setTimeout(() => {
+                            showSlide(currentSlide + 1);
+                            startAutoSlide();
+                        }, autoDelay);
+                    }
+
+                    function pauseAutoSlide() {
+                        if (isPaused) return;
+                        isPaused = true;
+                        clearAutoSlide();
+                        if (navBar) navBar.classList.add('is-paused');
+                    }
+
+                    function resumeAutoSlide() {
+                        if (!isPaused) return;
+                        isPaused = false;
+                        if (navBar) navBar.classList.remove('is-paused');
+                        startAutoSlide();
+                    }
+
+                    if (carouselDotsEl) {
+                        carouselDotsEl.innerHTML = '';
+                        carouselDots = Array.from(slides).map((_, index) => {
+                            const dot = document.createElement('button');
+                            dot.type = 'button';
+                            dot.className = 'achv-carousel-dot' + (index === 0 ? ' is-active' : '');
+                            dot.setAttribute('aria-label', `Show achievement ${index + 1}`);
+                            dot.addEventListener('click', () => {
+                                showSlide(index);
+                                setAutoProgress(0);
+                                pauseAutoSlide();
+                            });
+                            carouselDotsEl.appendChild(dot);
+                            return dot;
+                        });
+                    }
+
+                    if (prevBtn) prevBtn.addEventListener('click', () => {
+                        showSlide(currentSlide - 1);
+                        setAutoProgress(0);
+                        pauseAutoSlide();
+                    });
+
+                    if (nextBtn) nextBtn.addEventListener('click', () => {
+                        showSlide(currentSlide + 1);
+                        setAutoProgress(0);
+                        pauseAutoSlide();
+                    });
+
+                    carousel.addEventListener('click', pauseAutoSlide);
+                    document.addEventListener('click', (event) => {
+                        const target = event.target;
+                        if (carousel.contains(target) || (navBar && navBar.contains(target))) return;
+                        resumeAutoSlide();
+                    });
+
+                    showSlide(0);
+                    startAutoSlide();
 
                     // ── Inner image slideshows (per achievement slide) ──
                     slides.forEach(slide => {

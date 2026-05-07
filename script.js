@@ -584,59 +584,59 @@ function initProductPreviewSlideshow() {
             {
                 type: 'video',
                 embedSrc: 'https://www.youtube.com/embed/y-FgiJwzyMM?rel=0&modestbranding=1&playsinline=1',
-                captionVi: 'Short PlayWeaver demo video.',
+                captionVi: 'Video demo ngắn của PlayWeaver.',
                 captionEn: 'Short PlayWeaver demo video.',
                 title: 'PlayWeaver short demo video',
-                altVi: 'PlayWeaver short demo video',
+                altVi: 'Video demo ngắn của PlayWeaver',
                 altEn: 'PlayWeaver short demo video'
             },
             {
                 type: 'video',
                 embedSrc: 'https://www.youtube.com/embed/qRDpVFFkwbc?rel=0&modestbranding=1&playsinline=1',
-                captionVi: 'Full PlayWeaver demo video.',
+                captionVi: 'Video demo đầy đủ của PlayWeaver.',
                 captionEn: 'Full PlayWeaver demo video.',
                 title: 'PlayWeaver full demo video',
-                altVi: 'PlayWeaver full demo video',
+                altVi: 'Video demo đầy đủ của PlayWeaver',
                 altEn: 'PlayWeaver full demo video'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/034/datas/gallery.jpg',
-                captionVi: 'Landing page.',
+                captionVi: 'Trang landing.',
                 captionEn: 'Landing page.',
-                altVi: 'PlayWeaver landing page preview',
+                altVi: 'Ảnh xem trước trang landing của PlayWeaver',
                 altEn: 'PlayWeaver landing page preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/038/datas/gallery.jpg',
-                captionVi: 'AI-assisted game concept generator.',
+                captionVi: 'Bộ tạo concept game có AI hỗ trợ.',
                 captionEn: 'AI-assisted game concept generator.',
-                altVi: 'PlayWeaver AI-assisted game concept generator preview',
+                altVi: 'Ảnh xem trước bộ tạo concept game có AI hỗ trợ của PlayWeaver',
                 altEn: 'PlayWeaver AI-assisted game concept generator preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/051/datas/gallery.jpg',
-                captionVi: 'Editor page with AI assistant, mindmap, and prototype preview.',
+                captionVi: 'Trang editor với AI assistant, mindmap và khung xem trước prototype.',
                 captionEn: 'Editor page with AI assistant, mindmap, and prototype preview.',
-                altVi: 'PlayWeaver editor page preview',
+                altVi: 'Ảnh xem trước trang editor của PlayWeaver',
                 altEn: 'PlayWeaver editor page preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/503/959/datas/gallery.jpg',
-                captionVi: 'Flappy Boy prototype generated in PlayWeaver.',
+                captionVi: 'Prototype Flappy Boy được tạo trong PlayWeaver.',
                 captionEn: 'Flappy Boy prototype generated in PlayWeaver.',
-                altVi: 'PlayWeaver Flappy Boy prototype preview',
+                altVi: 'Ảnh xem trước prototype Flappy Boy của PlayWeaver',
                 altEn: 'PlayWeaver Flappy Boy prototype preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/500/057/datas/gallery.jpg',
-                captionVi: 'Autosave keeps prototype work safe.',
+                captionVi: 'Autosave giúp prototype không bị mất.',
                 captionEn: 'Autosave keeps prototype work safe.',
-                altVi: 'PlayWeaver autosave preview',
+                altVi: 'Ảnh xem trước autosave của PlayWeaver',
                 altEn: 'PlayWeaver autosave preview'
             }
         ]
