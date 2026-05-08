@@ -644,58 +644,58 @@ function initProductPreviewSlideshow() {
             {
                 type: 'video',
                 embedSrc: 'https://www.youtube.com/embed/vK-qdlXqPTA?rel=0&modestbranding=1&playsinline=1',
-                captionVi: 'ClinicScribe demo video.',
+                captionVi: 'Video demo ClinicScribe.',
                 captionEn: 'ClinicScribe demo video.',
                 title: 'ClinicScribe demo video',
-                altVi: 'ClinicScribe demo video',
+                altVi: 'Video demo ClinicScribe',
                 altEn: 'ClinicScribe demo video'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/910/datas/gallery.jpg',
-                captionVi: 'Landing page.',
+                captionVi: 'Trang landing.',
                 captionEn: 'Landing page.',
-                altVi: 'ClinicScribe landing page preview',
+                altVi: 'Ảnh xem trước trang landing của ClinicScribe',
                 altEn: 'ClinicScribe landing page preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/911/datas/gallery.jpg',
-                captionVi: 'AI-generated note from recorded conversation(s).',
+                captionVi: 'Ghi chú do AI tạo từ cuộc trò chuyện đã ghi âm.',
                 captionEn: 'AI-generated note from recorded conversation(s).',
-                altVi: 'ClinicScribe AI-generated note preview',
+                altVi: 'Ảnh xem trước ghi chú do AI tạo trong ClinicScribe',
                 altEn: 'ClinicScribe AI-generated note preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/575/600/datas/gallery.jpg',
-                captionVi: "Patient's profile.",
+                captionVi: 'Hồ sơ bệnh nhân.',
                 captionEn: "Patient's profile.",
-                altVi: 'ClinicScribe patient profile preview',
+                altVi: 'Ảnh xem trước hồ sơ bệnh nhân trong ClinicScribe',
                 altEn: 'ClinicScribe patient profile preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/923/datas/gallery.jpg',
-                captionVi: "Save encounters under each patient's profile.",
+                captionVi: 'Lưu các lần khám dưới từng hồ sơ bệnh nhân.',
                 captionEn: "Save encounters under each patient's profile.",
-                altVi: 'ClinicScribe saved encounters preview',
+                altVi: 'Ảnh xem trước lưu lần khám trong ClinicScribe',
                 altEn: 'ClinicScribe saved encounters preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/929/datas/gallery.jpg',
-                captionVi: "AI assistant for assisting with questions. It can also edit the note's content for you!",
+                captionVi: 'Trợ lý AI hỗ trợ trả lời câu hỏi và có thể chỉnh sửa nội dung ghi chú cho bạn!',
                 captionEn: "AI assistant for assisting with questions. It can also edit the note's content for you!",
-                altVi: 'ClinicScribe AI assistant preview',
+                altVi: 'Ảnh xem trước trợ lý AI của ClinicScribe',
                 altEn: 'ClinicScribe AI assistant preview'
             },
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/930/datas/gallery.jpg',
-                captionVi: "Don't understand a language? Not a problem! Note translation support across 15 languages!",
+                captionVi: 'Không hiểu một ngôn ngữ? Không sao! Hỗ trợ dịch ghi chú qua 15 ngôn ngữ!',
                 captionEn: "Don't understand a language? Not a problem! Note translation support across 15 languages!",
-                altVi: 'ClinicScribe translation support preview',
+                altVi: 'Ảnh xem trước tính năng dịch của ClinicScribe',
                 altEn: 'ClinicScribe translation support preview'
             }
         ]
