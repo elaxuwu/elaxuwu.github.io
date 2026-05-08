@@ -639,6 +639,65 @@ function initProductPreviewSlideshow() {
                 altVi: 'Ảnh xem trước autosave của PlayWeaver',
                 altEn: 'PlayWeaver autosave preview'
             }
+        ],
+        clinicscribe: [
+            {
+                type: 'video',
+                embedSrc: 'https://www.youtube.com/embed/vK-qdlXqPTA?rel=0&modestbranding=1&playsinline=1',
+                captionVi: 'ClinicScribe demo video.',
+                captionEn: 'ClinicScribe demo video.',
+                title: 'ClinicScribe demo video',
+                altVi: 'ClinicScribe demo video',
+                altEn: 'ClinicScribe demo video'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/910/datas/gallery.jpg',
+                captionVi: 'Landing page.',
+                captionEn: 'Landing page.',
+                altVi: 'ClinicScribe landing page preview',
+                altEn: 'ClinicScribe landing page preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/911/datas/gallery.jpg',
+                captionVi: 'AI-generated note from recorded conversation(s).',
+                captionEn: 'AI-generated note from recorded conversation(s).',
+                altVi: 'ClinicScribe AI-generated note preview',
+                altEn: 'ClinicScribe AI-generated note preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/575/600/datas/gallery.jpg',
+                captionVi: "Patient's profile.",
+                captionEn: "Patient's profile.",
+                altVi: 'ClinicScribe patient profile preview',
+                altEn: 'ClinicScribe patient profile preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/923/datas/gallery.jpg',
+                captionVi: "Save encounters under each patient's profile.",
+                captionEn: "Save encounters under each patient's profile.",
+                altVi: 'ClinicScribe saved encounters preview',
+                altEn: 'ClinicScribe saved encounters preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/929/datas/gallery.jpg',
+                captionVi: "AI assistant for assisting with questions. It can also edit the note's content for you!",
+                captionEn: "AI assistant for assisting with questions. It can also edit the note's content for you!",
+                altVi: 'ClinicScribe AI assistant preview',
+                altEn: 'ClinicScribe AI assistant preview'
+            },
+            {
+                type: 'image',
+                src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/930/datas/gallery.jpg',
+                captionVi: "Don't understand a language? Not a problem! Note translation support across 15 languages!",
+                captionEn: "Don't understand a language? Not a problem! Note translation support across 15 languages!",
+                altVi: 'ClinicScribe translation support preview',
+                altEn: 'ClinicScribe translation support preview'
+            }
         ]
     };
 
@@ -776,6 +835,7 @@ const ICONS = {
     app: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
     ai: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m-4.5 4.5L12 12l4.5 4.5"/></svg>`,
     aiNotebook: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2.2"/><path d="M8 3.5v17"/><path d="M10.25 7.5h5.25"/><path d="M10.25 10.75h5.25"/><path d="M10.25 14h3.5"/></svg>`,
+    clinicScribe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 4.25h7v-1a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1z"/><path d="M7.5 4.25h9l.35 1.75H20a1.8 1.8 0 0 1 1.8 1.8v10.1a3.85 3.85 0 0 1-3.85 3.85H6.05a3.85 3.85 0 0 1-3.85-3.85V7.8A1.8 1.8 0 0 1 4 6h3.15l.35-1.75z"/><path d="M12 8.1v3.8"/><path d="M10.1 10h3.8"/><path d="M8 14h8"/><path d="M4.2 17.4h3.7l.9-1.7 1 3.1 1.45-5.05 1.35 6.15 2.1-2.95 1.25 1.15h3.85"/></svg>`,
     file: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
 };
 
@@ -806,6 +866,7 @@ const fileSystem = {
     "AI PROJECTS": [
         { type: 'file', name: 'Lazy Note', icon: 'aiNotebook', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK', ribbon: 'WINNER' },
         { type: 'file', name: 'PlayWeaver', icon: 'ai', link: 'pages/projects/playweaver.html', tag: 'AI GAME PROTOTYPER', ribbon: 'WINNER' },
+        { type: 'file', name: 'ClinicScribe', icon: 'clinicScribe', link: 'pages/projects/clinicscribe.html', tag: 'AI CLINICAL SCRIBE' },
         { type: 'file', name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT', icon: 'ai' }
     ]
 };

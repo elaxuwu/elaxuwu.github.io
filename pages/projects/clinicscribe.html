@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('theme-preference');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
+    <title>ClinicScribe</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="lang-en" data-nav-back="../../index.html" data-nav-status="AI Project"
+    data-footer-line1="[Clinical Note Engine Active]" data-footer-line2="Architected by Elax - 2026">
+
+    <canvas id="matrix-bg"></canvas>
+    <div class="aurora-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+    </div>
+    <div class="grain-overlay"></div>
+    <div id="cursor-glow"></div>
+    <div class="crt-vignette"></div>
+
+    <div class="scanlines"></div>
+
+    <nav class="system-nav"></nav>
+
+    <main class="terminal-container container">
+        <section style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="color: var(--text); letter-spacing: 2px; text-transform: uppercase;">
+                <span class="content-vi">ClinicScribe</span>
+                <span class="content-en">ClinicScribe</span>
+            </h1>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">
+                <span class="content-vi">Clinical notes faster, clearer, and ready for review.</span>
+                <span class="content-en">Clinical notes faster, clearer, and ready for review.</span>
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+                <a href="https://clinicscribe.pages.dev/" target="_blank" rel="noopener noreferrer"
+                    class="launch-btn award-inline-btn">
+                    <span class="content-vi">🚀 LAUNCH LIVE APP</span>
+                    <span class="content-en">🚀 LAUNCH LIVE APP</span>
+                </a>
+                <a href="https://devpost.com/software/clinicscribe?ref_content=user-portfolio&amp;ref_feature=in_progress"
+                    target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
+                    <span class="content-vi">🏆 VIEW DEVPOST SUBMISSION</span>
+                    <span class="content-en">🏆 VIEW DEVPOST SUBMISSION</span>
+                </a>
+                <a href="https://github.com/elaxuwu/ClinicScribe" target="_blank" rel="noopener noreferrer"
+                    class="launch-btn award-inline-btn">
+                    <span class="content-vi">💻 VIEW GITHUB REPO</span>
+                    <span class="content-en">💻 VIEW GITHUB REPO</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <div class="contact-terminal">
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">MY ROLE:</span>
+                        <span class="content-en">MY ROLE:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">Project Lead, Full-Stack Architecture &amp; Full-Stack Developer</span>
+                        <span class="content-en">Project Lead, Full-Stack Architecture &amp; Full-Stack Developer</span>
+                    </span>
+                </div>
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">STACK:</span>
+                        <span class="content-en">STACK:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">Cloudflare Pages, featherless.ai, Ollama Cloud, OpenAI, qwen
+                            (qwen3-32b, qwen3.5), Upstash Redis, Supabase, CSS3, HTML5, JavaScript, React,
+                            Tailwind, TypeScript, Vite</span>
+                        <span class="content-en">Cloudflare Pages, featherless.ai, Ollama Cloud, OpenAI, qwen
+                            (qwen3-32b, qwen3.5), Upstash Redis, Supabase, CSS3, HTML5, JavaScript, React,
+                            Tailwind, TypeScript, Vite</span>
+                    </span>
+                </div>
+                <div class="contact-row status-blink">
+                    <span class="label">
+                        <span class="content-vi">STATUS:</span>
+                        <span class="content-en">STATUS:</span>
+                    </span>
+                    <span class="value" style="color: #4ade80;">
+                        <span class="content-vi">ACTIVE</span>
+                        <span class="content-en">ACTIVE</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <h2
+                style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">PRODUCT PREVIEWS</span>
+                <span class="content-en">PRODUCT PREVIEWS</span>
+            </h2>
+
+            <div class="product-preview-shell" data-product-preview="clinicscribe" tabindex="0">
+                <div class="product-preview-stage">
+                    <button type="button" class="product-preview-nav product-preview-nav-prev" data-product-preview-prev
+                        aria-label="Show previous product preview">
+                        <span aria-hidden="true">&lt;</span>
+                    </button>
+
+                    <div class="product-preview-frame">
+                        <div class="product-preview-media">
+                            <img class="product-preview-image" data-product-preview-image
+                                src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/572/910/datas/gallery.jpg"
+                                alt="ClinicScribe landing page preview" hidden loading="lazy" decoding="async">
+                            <iframe class="product-preview-video" data-product-preview-video
+                                src="https://www.youtube.com/embed/vK-qdlXqPTA?rel=0&amp;modestbranding=1&amp;playsinline=1"
+                                title="ClinicScribe demo video" loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <button type="button" class="product-preview-nav product-preview-nav-next" data-product-preview-next
+                        aria-label="Show next product preview">
+                        <span aria-hidden="true">&gt;</span>
+                    </button>
+                </div>
+
+                <div class="product-preview-dots" data-product-preview-dots aria-label="Product preview navigation">
+                </div>
+
+                <div class="product-preview-caption" aria-live="polite">
+                    <p class="product-preview-caption-copy">
+                        <span class="content-vi" data-product-preview-caption-vi>ClinicScribe demo video.</span>
+                        <span class="content-en" data-product-preview-caption-en>ClinicScribe demo video.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">OVERVIEW</span>
+                <span class="content-en">OVERVIEW</span>
+            </h2>
+            <div style="margin-top: 15px;">
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[?] The Problem</span>
+                    <span class="content-en">[?] The Problem</span>
+                </h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">
+                    <span class="content-vi">Clinic visits move fast, but documentation can keep going long after the
+                        patient leaves. Clinicians need a way to stay present in the room without turning notes into
+                        after-hours work.</span>
+                    <span class="content-en">Clinic visits move fast, but documentation can keep going long after the
+                        patient leaves. Clinicians need a way to stay present in the room without turning notes into
+                        after-hours work.</span>
+                </p>
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[!] The Solution</span>
+                    <span class="content-en">[!] The Solution</span>
+                </h3>
+                <p style="color: var(--text-muted);">
+                    <span class="content-vi">ClinicScribe records doctor-patient conversations, transcribes the audio,
+                        and converts the transcript into structured clinical documentation that is easy to review,
+                        translate, edit, save, and search later.</span>
+                    <span class="content-en">ClinicScribe records doctor-patient conversations, transcribes the audio,
+                        and converts the transcript into structured clinical documentation that is easy to review,
+                        translate, edit, save, and search later.</span>
+                </p>
+                <br>
+                <p style="color:var(--text-muted);">
+                    <span class="content-vi"><strong>NOTE:</strong> The source code is public at github.com/elaxuwu/ClinicScribe.</span>
+                    <span class="content-en"><strong>NOTE:</strong> The source code is public at github.com/elaxuwu/ClinicScribe.</span>
+                </p>
+            </div>
+        </section>
+
+        <section style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); margin-bottom: 15px;">
+                <span class="content-vi">CORE FEATURES</span>
+                <span class="content-en">CORE FEATURES</span>
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">FEAT_01</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Audio to Clinical Notes</span>
+                        <span class="content-en">Audio to Clinical Notes</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">Records visits, sends audio through diarized transcription, and turns
+                            the transcript into SOAP notes, summaries, follow-up plans, and red flags.</span>
+                        <span class="content-en">Records visits, sends audio through diarized transcription, and turns
+                            the transcript into SOAP notes, summaries, follow-up plans, and red flags.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">FEAT_02</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Patient Dashboard</span>
+                        <span class="content-en">Patient Dashboard</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">Saves patient encounter records and supports filtering by name,
+                            Patient ID, gender, age range, diagnosis, and visit date.</span>
+                        <span class="content-en">Saves patient encounter records and supports filtering by name,
+                            Patient ID, gender, age range, diagnosis, and visit date.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">FEAT_03</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">AI Note Assistant</span>
+                        <span class="content-en">AI Note Assistant</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">Lets clinicians ask questions about a generated note and request
+                            edits through a chat interface.</span>
+                        <span class="content-en">Lets clinicians ask questions about a generated note and request
+                            edits through a chat interface.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">FEAT_04</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">15-Language Translation</span>
+                        <span class="content-en">15-Language Translation</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">Translates clinical notes for multilingual review and patient-friendly
+                            discharge support.</span>
+                        <span class="content-en">Translates clinical notes for multilingual review and patient-friendly
+                            discharge support.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">FEAT_05</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Guest to Account Sync</span>
+                        <span class="content-en">Guest to Account Sync</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">Lets users try the workflow quickly in guest mode and keep their work
+                            if they sign in later.</span>
+                        <span class="content-en">Lets users try the workflow quickly in guest mode and keep their work
+                            if they sign in later.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">FEAT_06</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Structured AI Guardrails</span>
+                        <span class="content-en">Structured AI Guardrails</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">Normalizes model responses into predictable JSON so the UI can stay
+                            consistent and avoid unsupported medical facts.</span>
+                        <span class="content-en">Normalizes model responses into predictable JSON so the UI can stay
+                            consistent and avoid unsupported medical facts.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">BUILD NOTES</span>
+                <span class="content-en">BUILD NOTES</span>
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 18px;">
+                <div class="skill-box">
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Challenge</span>
+                        <span class="content-en">Challenge</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">AI output can be messy, so the hardest part was keeping medical note
+                            data structured, useful, and predictable.</span>
+                        <span class="content-en">AI output can be messy, so the hardest part was keeping medical note
+                            data structured, useful, and predictable.</span>
+                    </p>
+                </div>
+                <div class="skill-box">
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Proud Of</span>
+                        <span class="content-en">Proud Of</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">ClinicScribe feels like a real workflow: record, generate, edit, save,
+                            filter, translate, and revisit previous encounters.</span>
+                        <span class="content-en">ClinicScribe feels like a real workflow: record, generate, edit, save,
+                            filter, translate, and revisit previous encounters.</span>
+                    </p>
+                </div>
+                <div class="skill-box">
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Next</span>
+                        <span class="content-en">Next</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="content-vi">Better templates, PDF and EHR-friendly exports, stronger audit tools,
+                            real-time transcription, and clinic-level dashboards.</span>
+                        <span class="content-en">Better templates, PDF and EHR-friendly exports, stronger audit tools,
+                            real-time transcription, and clinic-level dashboards.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block">
+            <h2
+                style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">
+                <span class="content-vi">TECH STACK SUMMARY</span>
+                <span class="content-en">TECH STACK SUMMARY</span>
+            </h2>
+            <div
+                style="overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 12px; background: var(--panel-overlay);">
+                <table style="width: 100%; border-collapse: collapse; min-width: 680px;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--glass-border); background: var(--accent-soft);">
+                            <th style="text-align: left; padding: 12px; color: var(--text);">CATEGORY</th>
+                            <th style="text-align: left; padding: 12px; color: var(--text);">USED COMPONENTS</th>
+                            <th style="text-align: left; padding: 12px; color: var(--text);">PURPOSE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">AI Used</td>
+                            <td style="padding: 12px; color: var(--text-muted);">featherless.ai, Qwen/Qwen3-32B,
+                                Ollama Cloud Qwen3.5, OpenAI, gpt-4o-transcribe-diarize</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Transcription, note generation,
+                                translation, patient detail extraction, and chat-based note editing.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Frontend</td>
+                            <td style="padding: 12px; color: var(--text-muted);">React, TypeScript, Vite, Tailwind,
+                                HTML5, CSS3, JavaScript</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Recording flow, note review,
+                                dashboard filters, guest mode, and UI interactions.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Backend</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Cloudflare Pages Functions</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Authentication, transcription, note
+                                generation, translation, note editing, and saved note APIs.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Database &amp; Sessions</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Supabase, Upstash Redis</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Signed-in accounts, patient encounter
+                                records, temporary audio and note data, guest sessions, and rate limiting.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Deployment</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Cloudflare Pages</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Public live app deployment and
+                                serverless routing.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="system-footer"></footer>
+
+    <script src="../../components.js"></script>
+    <script src="../../script.js"></script>
+</body>
+
+</html>
