@@ -698,6 +698,32 @@ function initProductPreviewSlideshow() {
                 altVi: 'Ảnh xem trước tính năng dịch của ClinicScribe',
                 altEn: 'ClinicScribe translation support preview'
             }
+        ],
+        soccerDrone: [
+            {
+                type: 'image',
+                src: 'https://placehold.co/1600x900/0b1220/8ec5ff?text=Soccer+Drone+Preview+01',
+                captionVi: 'Placeholder hero render or field photo.',
+                captionEn: 'Placeholder hero render or field photo.',
+                altVi: 'Soccer Drone placeholder hero render',
+                altEn: 'Soccer Drone placeholder hero render'
+            },
+            {
+                type: 'image',
+                src: 'https://placehold.co/1600x900/0f172a/c084fc?text=Soccer+Drone+Preview+02',
+                captionVi: 'Placeholder frame, electronics, or tuning screenshot.',
+                captionEn: 'Placeholder frame, electronics, or tuning screenshot.',
+                altVi: 'Soccer Drone placeholder electronics preview',
+                altEn: 'Soccer Drone placeholder electronics preview'
+            },
+            {
+                type: 'image',
+                src: 'https://placehold.co/1600x900/111827/fbbf24?text=Soccer+Drone+Preview+03',
+                captionVi: 'Placeholder match footage or field testing scene.',
+                captionEn: 'Placeholder match footage or field testing scene.',
+                altVi: 'Soccer Drone placeholder field test preview',
+                altEn: 'Soccer Drone placeholder field test preview'
+            }
         ]
     };
 
@@ -834,6 +860,7 @@ const ICONS = {
     game: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="5"/><path d="M7 12h4m-2-2v4"/><circle cx="17" cy="11" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/></svg>`,
     app: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
     ai: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v4m-4.5 4.5L12 12l4.5 4.5"/></svg>`,
+    robotics: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.25"/><circle cx="17" cy="7" r="2.25"/><circle cx="7" cy="17" r="2.25"/><circle cx="17" cy="17" r="2.25"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.2"/><path d="M8.7 8.7 10 10"/><path d="M15.3 8.7 14 10"/><path d="M8.7 15.3 10 14"/><path d="M15.3 15.3 14 14"/></svg>`,
     aiNotebook: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2.2"/><path d="M8 3.5v17"/><path d="M10.25 7.5h5.25"/><path d="M10.25 10.75h5.25"/><path d="M10.25 14h3.5"/></svg>`,
     clinicScribe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 4.25h7v-1a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1z"/><path d="M7.5 4.25h9l.35 1.75H20a1.8 1.8 0 0 1 1.8 1.8v10.1a3.85 3.85 0 0 1-3.85 3.85H6.05a3.85 3.85 0 0 1-3.85-3.85V7.8A1.8 1.8 0 0 1 4 6h3.15l.35-1.75z"/><path d="M12 8.1v3.8"/><path d="M10.1 10h3.8"/><path d="M8 14h8"/><path d="M4.2 17.4h3.7l.9-1.7 1 3.1 1.45-5.05 1.35 6.15 2.1-2.95 1.25 1.15h3.85"/></svg>`,
     ailax: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2v2"/><circle cx="12" cy="2.7" r=".75" fill="currentColor" stroke="none"/><rect x="4.2" y="6" width="15.6" height="12.3" rx="3.2"/><path d="M8 18.3 6.6 21l3.25-2.2"/><path d="M8.2 11.1h.02"/><path d="M15.8 11.1h.02"/><path d="M9 14.3c1.8 1 4.2 1 6 0"/><circle cx="7.8" cy="11.1" r="1.1"/><circle cx="16.2" cy="11.1" r="1.1"/><path d="M9.1 8.15 12 9.7l2.9-1.55"/><path d="M12 9.7v2.45"/><path d="M19.8 9.35h1.65"/><path d="M2.55 9.35H4.2"/><path d="M18.9 5.15l.55-1.35.55 1.35 1.35.55-1.35.55-.55 1.35-.55-1.35-1.35-.55 1.35-.55z"/></svg>`,
@@ -856,6 +883,7 @@ const fileSystem = {
         { type: 'folder', name: 'GAME PROJECTS' },
         { type: 'folder', name: 'APP PROJECTS' },
         { type: 'folder', name: 'AI PROJECTS' },
+        { type: 'folder', name: 'ROBOTICS PROJECTS' },
         { type: 'file', name: 'readme.txt', link: '#', desc: 'hellu :3' }
     ],
     "GAME PROJECTS": [
@@ -869,6 +897,9 @@ const fileSystem = {
         { type: 'file', name: 'PlayWeaver', icon: 'ai', link: 'pages/projects/playweaver.html', tag: 'AI GAME PROTOTYPER', ribbon: 'WINNER' },
         { type: 'file', name: 'ClinicScribe', icon: 'clinicScribe', link: 'pages/projects/clinicscribe.html', tag: 'AI CLINICAL SCRIBE' },
         { type: 'file', name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT', icon: 'ailax' }
+    ],
+    "ROBOTICS PROJECTS": [
+        { type: 'file', name: 'Soccer Drone', link: 'pages/projects/soccer_drone.html', tag: 'FPV ROBOTICS', icon: 'robotics', ribbon: 'WINNER' }
     ]
 };
 

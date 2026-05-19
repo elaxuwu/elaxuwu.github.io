@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('theme-preference');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
+    <title>Soccer Drone</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .drone-summary-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+            gap: 24px;
+        }
+
+        .drone-summary-copy,
+        .drone-summary-metrics,
+        .drone-eco-card,
+        .drone-part-card,
+        .drone-timeline-step,
+        .drone-note-panel {
+            background: linear-gradient(180deg, rgba(var(--panel-rgb), 0.42), rgba(var(--panel-rgb), 0.22));
+            border: 1px solid var(--glass-border-strong);
+            border-radius: calc(var(--radius-card) + 4px);
+            box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.45);
+        }
+
+        .drone-summary-copy {
+            padding: 32px;
+        }
+
+        .drone-summary-copy h2 {
+            margin: 0;
+            font-size: clamp(2.2rem, 5vw, 3.1rem);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+        }
+
+        .drone-summary-copy p {
+            margin: 18px 0 0;
+            color: var(--text-muted);
+            max-width: 54ch;
+            line-height: 1.7;
+        }
+
+        .drone-summary-metrics {
+            padding: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            align-content: start;
+        }
+
+        .drone-metric-card {
+            background: rgba(var(--panel-rgb), 0.34);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 18px;
+            min-height: 132px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .drone-metric-card strong {
+            color: var(--text);
+            font-size: clamp(1.75rem, 4vw, 2.35rem);
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+
+        .drone-metric-card span {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .drone-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .drone-pill {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--glass-border);
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: rgba(var(--panel-rgb), 0.26);
+            color: var(--text-dim);
+            font-size: 0.82rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .drone-eco-grid,
+        .drone-parts-grid,
+        .drone-notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .drone-eco-card,
+        .drone-part-card,
+        .drone-note-panel {
+            padding: 22px;
+        }
+
+        .drone-eco-card h3,
+        .drone-part-card h3,
+        .drone-note-panel h3 {
+            margin: 0 0 10px;
+            color: var(--text);
+        }
+
+        .drone-eco-card p,
+        .drone-part-card p,
+        .drone-note-panel p {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .drone-part-code {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .drone-part-spec {
+            display: block;
+            margin-top: 8px;
+            color: var(--text-dim);
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .drone-timeline {
+            display: grid;
+            gap: 14px;
+        }
+
+        .drone-timeline-step {
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 74px 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .drone-timeline-badge {
+            width: 74px;
+            height: 74px;
+            border-radius: 20px;
+            background: rgba(59, 130, 246, 0.16);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            color: #93c5fd;
+            display: grid;
+            place-items: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .drone-timeline-step h3 {
+            margin: 0 0 8px;
+            color: var(--text);
+        }
+
+        .drone-timeline-step p {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .drone-note-panel ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .drone-note-panel li+li {
+            margin-top: 10px;
+        }
+
+        @media (max-width: 900px) {
+            .drone-summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .drone-summary-copy {
+                padding: 24px;
+            }
+
+            .drone-summary-metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .drone-timeline-step {
+                grid-template-columns: 1fr;
+            }
+
+            .drone-timeline-badge {
+                width: 62px;
+                height: 62px;
+                border-radius: 16px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .drone-summary-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="lang-en" data-nav-back="../../index.html" data-nav-status="Robotics Project"
+    data-footer-line1="[FPV Soccer Unit Online]" data-footer-line2="Built with The Cookies - 2026">
+
+    <canvas id="matrix-bg"></canvas>
+    <div class="aurora-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+    </div>
+    <div class="grain-overlay"></div>
+    <div id="cursor-glow"></div>
+    <div class="crt-vignette"></div>
+
+    <div class="scanlines"></div>
+
+    <nav class="system-nav"></nav>
+
+    <main class="terminal-container container">
+        <section style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="color: var(--text); letter-spacing: 2px; text-transform: uppercase;">
+                <span class="content-vi">Soccer Drone</span>
+                <span class="content-en">Soccer Drone</span>
+            </h1>
+            <p style="color: var(--text-dim); margin-bottom: 20px; max-width: 760px; margin-inline: auto;">
+                <span class="content-vi">Drone bong da nho gon do nhom The Cookies lap rap, su dung vo bao ve in 3D
+                    bang nhua nylon tai che, dieu khien ELRS va tune bay bang Betaflight.</span>
+                <span class="content-en">A compact soccer drone built by Team The Cookies with a 3D-printed recycled
+                    nylon shell, ELRS control, and Betaflight flight tuning.</span>
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+                <a href="#snapshot" class="launch-btn award-inline-btn">
+                    <span class="content-vi">🛰️ SYSTEM SNAPSHOT</span>
+                    <span class="content-en">🛰️ SYSTEM SNAPSHOT</span>
+                </a>
+                <a href="#parts" class="launch-btn award-inline-btn">
+                    <span class="content-vi">🧩 PARTS LIST</span>
+                    <span class="content-en">🧩 PARTS LIST</span>
+                </a>
+                <a href="#build-log" class="launch-btn award-inline-btn">
+                    <span class="content-vi">🛠️ BUILD PROCESS</span>
+                    <span class="content-en">🛠️ BUILD PROCESS</span>
+                </a>
+                <a href="#field-notes" class="launch-btn award-inline-btn">
+                    <span class="content-vi">📝 FIELD NOTES</span>
+                    <span class="content-en">📝 FIELD NOTES</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <div class="contact-terminal">
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">TEAM:</span>
+                        <span class="content-en">TEAM:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">The Cookies</span>
+                        <span class="content-en">The Cookies</span>
+                    </span>
+                </div>
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">VAI TRO:</span>
+                        <span class="content-en">MY ROLE:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">Team Leader, Flight Tuning Engineer (Betaflight)</span>
+                        <span class="content-en">Team Leader, Flight Tuning Engineer (Betaflight)</span>
+                    </span>
+                </div>
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">FOCUS:</span>
+                        <span class="content-en">FOCUS:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">Huong bay, do nhay, do can bang, va on dinh sau khi lap rap</span>
+                        <span class="content-en">Flight direction, sensitivity, balance, and post-assembly stability
+                            tuning</span>
+                    </span>
+                </div>
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">STACK:</span>
+                        <span class="content-en">STACK:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">SpeedyBee F405 AIO V2, LANNRC 1404 Plus 4600KV, ELRS 2.4GHz, 3D
+                            printed frame, Tattu 850mAh 3S, Radiomaster, Betaflight</span>
+                        <span class="content-en">SpeedyBee F405 AIO V2, LANNRC 1404 Plus 4600KV, ELRS 2.4GHz, 3D
+                            printed frame, Tattu 850mAh 3S, Radiomaster, Betaflight</span>
+                    </span>
+                </div>
+                <div class="contact-row status-blink">
+                    <span class="label">
+                        <span class="content-vi">TRANG THAI:</span>
+                        <span class="content-en">STATUS:</span>
+                    </span>
+                    <span class="value" style="color: #4ade80;">
+                        <span class="content-vi">PROTOTYPE BUILT & TUNED</span>
+                        <span class="content-en">PROTOTYPE BUILT & TUNED</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block" id="snapshot" style="margin-bottom: 3rem;">
+            <div class="cmd-line">🛰️ Project Snapshot</div>
+            <div class="drone-summary-grid">
+                <article class="drone-summary-copy">
+                    <div class="achievement-kicker">TEAM THE COOKIES</div>
+                    <h2>
+                        <span class="content-vi">Compact FPV Soccer Drone</span>
+                        <span class="content-en">Compact FPV Soccer Drone</span>
+                    </h2>
+                    <p>
+                        <span class="content-vi">Day la du an drone bong da nhom em lam de ket hop lap rap phan cung,
+                            in 3D, va tune bay. Drone duoc thiet ke nho gon, co vong bao ve ben ngoai, de dieu khien
+                            hon trong khong gian hep va giam hu hong khi va cham.</span>
+                        <span class="content-en">This project combines hardware assembly, 3D printing, and flight
+                            tuning into a compact soccer drone. The design focuses on a protected outer shell,
+                            beginner-friendly control, and a small footprint that can survive closer contact than a
+                            bare racing quad.</span>
+                    </p>
+                    <div class="drone-pill-row">
+                        <span class="drone-pill">3D Printed Frame</span>
+                        <span class="drone-pill">Recycled Nylon</span>
+                        <span class="drone-pill">ELRS 2.4GHz</span>
+                        <span class="drone-pill">Betaflight Tuned</span>
+                        <span class="drone-pill">Team Build</span>
+                    </div>
+                </article>
+
+                <div class="drone-summary-metrics">
+                    <article class="drone-metric-card">
+                        <strong>20 cm</strong>
+                        <span class="content-vi">Duong kinh khung drone</span>
+                        <span class="content-en">Frame diameter</span>
+                    </article>
+                    <article class="drone-metric-card">
+                        <strong>200 g</strong>
+                        <span class="content-vi">Nang tam uoc tinh, khong tinh pin</span>
+                        <span class="content-en">Approx. payload target, excluding battery</span>
+                    </article>
+                    <article class="drone-metric-card">
+                        <strong>5-6 min</strong>
+                        <span class="content-vi">Thoi gian hoat dong moi lan bay</span>
+                        <span class="content-en">Flight time per run</span>
+                    </article>
+                    <article class="drone-metric-card">
+                        <strong>~25 min</strong>
+                        <span class="content-vi">Thoi gian sac lai pin</span>
+                        <span class="content-en">Approx. recharge time</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">TONG QUAN</span>
+                <span class="content-en">OVERVIEW</span>
+            </h2>
+            <div style="margin-top: 15px;">
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[?] Van de</span>
+                    <span class="content-en">[?] The Problem</span>
+                </h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">
+                    <span class="content-vi">Drone nho de choi theo kieu bong da can vua nhe, vua ben, vua de xac dinh
+                        dau duoi khi bay. Voi mot nhom hoc sinh, bai toan khong chi la lap cho bay duoc, ma con phai
+                        giu chi phi hop ly va de sua khi co va cham.</span>
+                    <span class="content-en">A small soccer-style drone needs to be light, durable, and easy to orient
+                        in flight. For a student team, the challenge was not just making it fly, but also keeping the
+                        build affordable, repairable, and safer during contact.</span>
+                </p>
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[!] Giai phap</span>
+                    <span class="content-en">[!] The Solution</span>
+                </h3>
+                <p style="color: var(--text-muted);">
+                    <span class="content-vi">Nhom em dung SpeedyBee F405 AIO V2 lam trung tam dieu khien, dong co
+                        LANNRC 1404 Plus, ket noi ELRS 2.4GHz, khung chinh in 3D, va mot vong bao ve bong da ben
+                        ngoai. Drone duoc gan led dinh huong, dung pin Tattu 3S, va duoc tune bang Betaflight de can
+                        bang huong bay, do nhay, va do on dinh.</span>
+                    <span class="content-en">We built around the SpeedyBee F405 AIO V2, LANNRC 1404 Plus motors, ELRS
+                        2.4GHz control, a 3D-printed inner frame, and a protective outer soccer shell. The drone uses
+                        orientation LEDs, a Tattu 3S battery, and Betaflight tuning to improve direction control,
+                        response, and overall balance.</span>
+                </p>
+            </div>
+        </section>
+
+        <section style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); margin-bottom: 15px;">
+                <span class="content-vi">CORE HIGHLIGHTS</span>
+                <span class="content-en">CORE HIGHLIGHTS</span>
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">HL_01</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Vo bao ve bong da in 3D</span>
+                        <span class="content-en">3D-Printed Soccer Shell</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem;">
+                        <span class="content-vi">Vong bao ve ben ngoai giup bao boc khung chinh va han che hu hong khi
+                            drone va cham vao vat can hoac mat dat.</span>
+                        <span class="content-en">The outer soccer shell protects the inner frame and reduces damage
+                            during contact with obstacles, the ground, or other objects.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">HL_02</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Nhan dang dau duoi bang led</span>
+                        <span class="content-en">LED-Based Orientation</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem;">
+                        <span class="content-vi">Led do dat o duoi drone va led xanh la dat o dau drone de de nhin
+                            huong bay hon trong luc dieu khien.</span>
+                        <span class="content-en">Red LEDs at the rear and green LEDs at the front make the drone easier
+                            to orient while flying.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">HL_03</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Betaflight tuning</span>
+                        <span class="content-en">Betaflight Tuning</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem;">
+                        <span class="content-vi">Phan tune tap trung vao huong, do nhay, va do can bang de drone bay on
+                            dinh hon sau khi lap rap xong.</span>
+                        <span class="content-en">Tuning focused on direction behavior, sensitivity, and balance so the
+                            quad would feel more stable after assembly.</span>
+                    </p>
+                </div>
+
+                <div class="skill-box highlight" style="border: 1px solid var(--glass-border-strong);">
+                    <span class="code-num">HL_04</span>
+                    <h3 style="margin-bottom: 10px;">
+                        <span class="content-vi">Kich thuoc gon cho team hoc sinh</span>
+                        <span class="content-en">Compact Student-Friendly Build</span>
+                    </h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem;">
+                        <span class="content-vi">Duong kinh 20cm giup tong the gon hon, de van chuyen, de sua, va hop
+                            voi mot du an nhom co gioi han ve ngan sach.</span>
+                        <span class="content-en">A 20 cm frame keeps the system easier to transport, repair, and manage
+                            within a student budget.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">SUSTAINABILITY ANGLE</span>
+                <span class="content-en">SUSTAINABILITY ANGLE</span>
+            </h2>
+            <div class="drone-eco-grid">
+                <article class="drone-eco-card">
+                    <h3>
+                        <span class="content-vi">Tai che tu rac thai nhua</span>
+                        <span class="content-en">Built from Recycled Plastic Waste</span>
+                    </h3>
+                    <p>
+                        <span class="content-vi">Khung in 3D duoc dinh huong theo y tuong nhua nylon tai che, co the
+                            den tu luoi danh ca cu va phe lieu cong nghiep thay vi nhua moi.</span>
+                        <span class="content-en">The 3D-printed frame follows a recycled nylon approach, using waste
+                            streams such as old fishing nets and industrial plastic instead of fresh virgin plastic.</span>
+                    </p>
+                </article>
+                <article class="drone-eco-card">
+                    <h3>
+                        <span class="content-vi">Giam nang luong va phat thai</span>
+                        <span class="content-en">Lower Energy and Emissions</span>
+                    </h3>
+                    <p>
+                        <span class="content-vi">Theo huong trinh bay cua nhom, nhua tai che co the giam tieu thu nang
+                            luong va phat thai khi nha kinh so voi quy trinh tao nhua nguyen sinh.</span>
+                        <span class="content-en">The recycled-material approach aims to reduce energy use and greenhouse
+                            emissions compared with producing fully virgin plastic parts.</span>
+                    </p>
+                </article>
+                <article class="drone-eco-card">
+                    <h3>
+                        <span class="content-vi">De lam lai sau hu hong</span>
+                        <span class="content-en">Repairable and Recyclable Again</span>
+                    </h3>
+                    <p>
+                        <span class="content-vi">Neu khung hong, vat lieu co the duoc nghien nho va tai su dung de in
+                            ra san pham moi, giup han che khai thac tai nguyen dau mo.</span>
+                        <span class="content-en">If parts break, the material can be reprocessed and reused again,
+                            reducing waste and dependence on new petroleum-based plastic.</span>
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="console-block" id="parts" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">🧩 PARTS LOADOUT</span>
+                <span class="content-en">🧩 PARTS LOADOUT</span>
+            </h2>
+            <div class="drone-parts-grid">
+                <article class="drone-part-card">
+                    <span class="drone-part-code">CORE_01</span>
+                    <h3>SpeedyBee F405 AIO V2</h3>
+                    <p>
+                        <span class="content-vi">Bo dieu khien trung tam cho drone, xu ly bay va ket noi cac thanh
+                            phan chinh.</span>
+                        <span class="content-en">The central flight core for control logic and electronic integration.</span>
+                    </p>
+                    <span class="drone-part-spec">Flight Controller / AIO</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">CORE_02</span>
+                    <h3>LANNRC 1404 Plus</h3>
+                    <p>
+                        <span class="content-vi">Dong co brushless 4600KV 2-4S tao luc day cho bo khung nho gon.</span>
+                        <span class="content-en">4600KV 2-4S brushless motors providing thrust for the compact airframe.</span>
+                    </p>
+                    <span class="drone-part-spec">Motor / 4600KV</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">LINK_01</span>
+                    <h3>ELRS 2.4GHz Receiver</h3>
+                    <p>
+                        <span class="content-vi">Bo thu tin hieu dieu khien tu tay cam Radiomaster.</span>
+                        <span class="content-en">Receives low-latency control input from the Radiomaster transmitter.</span>
+                    </p>
+                    <span class="drone-part-spec">Control Link</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">FRAME_01</span>
+                    <h3>3D-Printed Main Frame</h3>
+                    <p>
+                        <span class="content-vi">Khung chinh giu flight core, dong co, pin, va he thong day noi.</span>
+                        <span class="content-en">The main printed structure that holds the core electronics, motors,
+                            battery, and wiring.</span>
+                    </p>
+                    <span class="drone-part-spec">Inner Chassis</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">FRAME_02</span>
+                    <h3>3D-Printed Outer Ring</h3>
+                    <p>
+                        <span class="content-vi">Vong soccer ben ngoai bao ve khung chinh va giup va cham an toan
+                            hon.</span>
+                        <span class="content-en">The outer soccer shell that protects the drone and softens contact.</span>
+                    </p>
+                    <span class="drone-part-spec">Protective Shell</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">DRIVE_01</span>
+                    <h3>2 Pairs of 2.5&quot; Props</h3>
+                    <p>
+                        <span class="content-vi">Bo canh thuan nghich duoc dung sau khi team gap van de voi canh 3
+                            inch qua lon.</span>
+                        <span class="content-en">Counter-rotating prop pairs used after larger 3-inch props proved too
+                            large for the frame.</span>
+                    </p>
+                    <span class="drone-part-spec">CW / CCW Props</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">POWER_01</span>
+                    <h3>Tattu LiPo Battery</h3>
+                    <p>
+                        <span class="content-vi">Pin 850mAh, 3S, 75C, 11.1V cap nguon cho moi lan bay ngan.</span>
+                        <span class="content-en">850mAh, 3S, 75C, 11.1V battery pack powering short test and match
+                            sessions.</span>
+                    </p>
+                    <span class="drone-part-spec">850mAh / 3S / 75C</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">POWER_02</span>
+                    <h3>Renunong LiPo Charger</h3>
+                    <p>
+                        <span class="content-vi">Bo sac pin di kem voi nguon adapter 12V 5A de nap lai he thong.</span>
+                        <span class="content-en">LiPo charging system paired with a 12V 5A adapter for battery recharge.</span>
+                    </p>
+                    <span class="drone-part-spec">Charger + 12V 5A Adapter</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">CTRL_01</span>
+                    <h3>Radiomaster ELRS 2.4GHz</h3>
+                    <p>
+                        <span class="content-vi">Tay dieu khien chinh cua drone trong qua trinh thu bay va tinh chinh.</span>
+                        <span class="content-en">The main radio transmitter used for testing, flight control, and tuning.</span>
+                    </p>
+                    <span class="drone-part-spec">Handheld Controller</span>
+                </article>
+
+                <article class="drone-part-card">
+                    <span class="drone-part-code">VIS_01</span>
+                    <h3>Orientation LEDs</h3>
+                    <p>
+                        <span class="content-vi">Led do o duoi, led xanh la o dau de nhin huong drone ro hon khi bay.</span>
+                        <span class="content-en">Red at the rear and green at the front for fast orientation cues in
+                            flight.</span>
+                    </p>
+                    <span class="drone-part-spec">Front / Rear Guidance</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="console-block" id="build-log" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">🛠️ BUILD PROCESS</span>
+                <span class="content-en">🛠️ BUILD PROCESS</span>
+            </h2>
+            <div class="drone-timeline">
+                <article class="drone-timeline-step">
+                    <div class="drone-timeline-badge">01</div>
+                    <div>
+                        <h3>
+                            <span class="content-vi">Chon khung va in 3D</span>
+                            <span class="content-en">Find a Suitable Frame and 3D Print It</span>
+                        </h3>
+                        <p>
+                            <span class="content-vi">Buoc dau la tim kieu khung phu hop tren mang, sau do in khung
+                                chinh va bo khung bao ve ben ngoai.</span>
+                            <span class="content-en">The build started by researching a suitable frame online, then 3D
+                                printing both the inner structure and the outer protective shell.</span>
+                        </p>
+                    </div>
+                </article>
+
+                <article class="drone-timeline-step">
+                    <div class="drone-timeline-badge">02</div>
+                    <div>
+                        <h3>
+                            <span class="content-vi">Lap mach va bo tri thanh phan</span>
+                            <span class="content-en">Layout the Electronics and Solder the Core</span>
+                        </h3>
+                        <p>
+                            <span class="content-vi">Sau do team set up vi tri cho motor, pin, led, va ang ten, roi
+                                han day va co dinh len khung chinh.</span>
+                            <span class="content-en">Next came positioning the motors, battery, LEDs, and antenna,
+                                followed by soldering and mounting the electronics onto the main frame.</span>
+                        </p>
+                    </div>
+                </article>
+
+                <article class="drone-timeline-step">
+                    <div class="drone-timeline-badge">03</div>
+                    <div>
+                        <h3>
+                            <span class="content-vi">Gan vo bao ve ben ngoai</span>
+                            <span class="content-en">Install the Outer Soccer Shell</span>
+                        </h3>
+                        <p>
+                            <span class="content-vi">Khung chinh duoc dua vao ben trong vong bao ve va co dinh bang day
+                                rut de giam rung va giu on dinh tong the.</span>
+                            <span class="content-en">The inner frame was placed inside the outer shell and secured with
+                                zip ties to keep the structure together during testing.</span>
+                        </p>
+                    </div>
+                </article>
+
+                <article class="drone-timeline-step">
+                    <div class="drone-timeline-badge">04</div>
+                    <div>
+                        <h3>
+                            <span class="content-vi">Tune bay bang Betaflight</span>
+                            <span class="content-en">Tune Flight Behavior in Betaflight</span>
+                        </h3>
+                        <p>
+                            <span class="content-vi">Khau cuoi cung la tinh chinh huong bay, do nhay, va do can bang
+                                de drone hoat dong on hon truoc khi mang di test.</span>
+                            <span class="content-en">The last phase was Betaflight tuning, especially direction,
+                                sensitivity, and balance, so the drone would behave more predictably during test
+                                flights.</span>
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="console-block" id="field-notes" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">📝 FIELD NOTES</span>
+                <span class="content-en">📝 FIELD NOTES</span>
+            </h2>
+            <div class="drone-notes-grid">
+                <article class="drone-note-panel">
+                    <h3>
+                        <span class="content-vi">My Contributions</span>
+                        <span class="content-en">My Contributions</span>
+                    </h3>
+                    <ul>
+                        <li>
+                            <span class="content-vi">Dan nhom trong viec phan cong va giu huong phat trien cho du an.</span>
+                            <span class="content-en">Led the team and helped keep the project direction organized.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Phu trach tune drone bang Betaflight ve huong, do nhay, va do can bang.</span>
+                            <span class="content-en">Owned Betaflight tuning for direction, sensitivity, and balance.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Ho tro kiem tra lai hanh vi bay sau khi lap rap de co the test an toan hon.</span>
+                            <span class="content-en">Helped verify flight behavior after assembly so testing could be
+                                done more safely.</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="drone-note-panel">
+                    <h3>
+                        <span class="content-vi">Thuan Loi</span>
+                        <span class="content-en">Advantages</span>
+                    </h3>
+                    <ul>
+                        <li>
+                            <span class="content-vi">Co nguoi quen trong cong ty drone nen duoc chi dan them ve kien
+                                thuc va cach lam drone.</span>
+                            <span class="content-en">We had guidance from someone familiar with the drone industry, so
+                                the team could learn the basics faster.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Ap luc ngan sach nhe hon nho co quy chung va cach quan ly chi tieu
+                                ro rang.</span>
+                            <span class="content-en">Budget pressure was easier to manage because the team pooled funds
+                                and tracked spending together.</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="drone-note-panel">
+                    <h3>
+                        <span class="content-vi">Kho Khan</span>
+                        <span class="content-en">Challenges</span>
+                    </h3>
+                    <ul>
+                        <li>
+                            <span class="content-vi">Dat nham khung va canh tren mang nen mat them thoi gian doi va doi
+                                phuong an.</span>
+                            <span class="content-en">Wrong frame and prop purchases online cost the team extra time.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Vit motor khong chac nen co luc bay bi sut, phai thao ra va han
+                                lai.</span>
+                            <span class="content-en">Loose motor mounting created failures that had to be repaired and
+                                reworked.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Canh 3 inch qua lon, cham vao khung va gay, nen phai doi canh phu
+                                hop hon.</span>
+                            <span class="content-en">Early 3-inch props were too large, struck the frame, and broke, so
+                                the setup had to be corrected.</span>
+                        </li>
+                        <li>
+                            <span class="content-vi">Cho lam drone xa va lich thi day nen thieu thoi gian di lai cung
+                                nhu tap bay.</span>
+                            <span class="content-en">Travel distance and exam schedules limited both workshop time and
+                                flight practice.</span>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="console-block">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">
+                <span class="content-vi">TECH STACK SUMMARY</span>
+                <span class="content-en">TECH STACK SUMMARY</span>
+            </h2>
+            <div style="overflow-x: auto; border: 1px solid var(--glass-border); border-radius: 12px; background: var(--panel-overlay);">
+                <table style="width: 100%; border-collapse: collapse; min-width: 680px;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--glass-border); background: var(--accent-soft);">
+                            <th style="text-align: left; padding: 12px; color: var(--text);">CATEGORY</th>
+                            <th style="text-align: left; padding: 12px; color: var(--text);">
+                                <span class="content-vi">USED COMPONENTS</span>
+                                <span class="content-en">USED COMPONENTS</span>
+                            </th>
+                            <th style="text-align: left; padding: 12px; color: var(--text);">
+                                <span class="content-vi">PURPOSE</span>
+                                <span class="content-en">PURPOSE</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Flight Core</td>
+                            <td style="padding: 12px; color: var(--text-muted);">SpeedyBee F405 AIO V2</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Bo dieu khien bay va trung tam ket noi he thong.</span>
+                                <span class="content-en">Main flight control and system integration board.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Propulsion</td>
+                            <td style="padding: 12px; color: var(--text-muted);">LANNRC 1404 Plus 4600KV, 2.5&quot; prop set</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Tao luc day cho bo khung nho gon.</span>
+                                <span class="content-en">Provides thrust for the compact protected airframe.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Control Link</td>
+                            <td style="padding: 12px; color: var(--text-muted);">ELRS 2.4GHz receiver, Radiomaster ELRS 2.4GHz</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Ket noi dieu khien giua nguoi lai va drone.</span>
+                                <span class="content-en">Maintains the command link between pilot and drone.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Structure</td>
+                            <td style="padding: 12px; color: var(--text-muted);">3D-printed main frame, 3D-printed soccer shell</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Giu phan cung ben trong va tao lop bao ve va cham.</span>
+                                <span class="content-en">Supports the hardware and adds impact protection.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Power</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Tattu 850mAh 3S 75C, Renunong charger, 12V 5A adapter</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Cap nguon cho drone va nap lai pin giua cac lan test.</span>
+                                <span class="content-en">Supplies flight power and enables quick recharge between tests.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">Calibration</td>
+                            <td style="padding: 12px; color: var(--text-muted);">Betaflight, LED orientation setup</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Tinh chinh huong, do nhay, do can bang va kha nang nhan dien
+                                    huong bay.</span>
+                                <span class="content-en">Tunes direction, sensitivity, balance, and front/rear flight
+                                    orientation.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="system-footer"></footer>
+
+    <script src="../../components.js"></script>
+    <script src="../../script.js"></script>
+</body>
+
+</html>
