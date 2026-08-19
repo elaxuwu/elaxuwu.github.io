@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('theme-preference');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
+    <title>RecycleCheck AI</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body class="lang-en" data-nav-back="../../index.html" data-nav-status="AI Project"
+    data-footer-line1="[Vision AI Pipeline Active]" data-footer-line2="Architected by Elax - 2026">
+
+    <canvas id="matrix-bg"></canvas>
+    <div class="aurora-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+    </div>
+    <div class="grain-overlay"></div>
+    <div id="cursor-glow"></div>
+    <div class="crt-vignette"></div>
+
+    <div class="scanlines"></div>
+
+    <nav class="system-nav"></nav>
+
+    <main class="terminal-container container">
+        <section style="text-align: center; margin-bottom: 3rem;">
+            <h1 style="color: var(--text); letter-spacing: 2px; text-transform: uppercase;">
+                <span class="content-vi">RecycleCheck AI</span>
+                <span class="content-en">RecycleCheck AI</span>
+            </h1>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">
+                <span class="content-vi">Chấm dứt việc đoán mò khi tái chế. Phân loại rác đa vật thể bằng Vision AI &amp; PWA tương tác.</span>
+                <span class="content-en">Ending recycling guesswork. Multi-object Vision AI waste-sorting &amp; gamified PWA.</span>
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+                <a href="https://recyclecheck-ai.pages.dev/" target="_blank" rel="noopener noreferrer"
+                    class="launch-btn award-inline-btn">
+                    <span class="content-vi">🚀 KHỞI CHẠY ỨNG DỤNG</span>
+                    <span class="content-en">🚀 LAUNCH LIVE APP</span>
+                </a>
+                <a href="https://devpost.com/software/recyclecheck-ai" target="_blank" rel="noopener noreferrer"
+                    class="launch-btn award-inline-btn">
+                    <span class="content-vi">📄 XEM BÀI DEVPOST</span>
+                    <span class="content-en">📄 VIEW DEVPOST SUBMISSION</span>
+                </a>
+                <a href="https://github.com/elaxuwu/Trash-Scanner" target="_blank" rel="noopener noreferrer"
+                    class="launch-btn award-inline-btn">
+                    <span class="content-vi">💻 XEM GITHUB REPO</span>
+                    <span class="content-en">💻 VIEW GITHUB REPO</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <div class="contact-terminal">
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">VAI TRÒ:</span>
+                        <span class="content-en">MY ROLE:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">Tác giả Solo &amp; Kiến trúc sư Full-Stack</span>
+                        <span class="content-en">Solo Creator &amp; Full-Stack Architect</span>
+                    </span>
+                </div>
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">CÔNG NGHỆ:</span>
+                        <span class="content-en">STACK:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">HTML5, CSS3, JavaScript, Tailwind CSS, Phosphor Icons, HTML5 Canvas API, Multimodal Vision LLM (Gemini / OpenAI), Chart.js, Canvas Confetti, PWA</span>
+                        <span class="content-en">HTML5, CSS3, JavaScript, Tailwind CSS, Phosphor Icons, HTML5 Canvas API, Multimodal Vision LLM (Gemini / OpenAI), Chart.js, Canvas Confetti, PWA</span>
+                    </span>
+                </div>
+                <div class="contact-row status-blink">
+                    <span class="label">
+                        <span class="content-vi">TRẠNG THÁI:</span>
+                        <span class="content-en">STATUS:</span>
+                    </span>
+                    <span class="value" style="color: #4ade80;">
+                        <span class="content-vi">ĐÃ TRIỂN KHAI / HOẠT ĐỘNG</span>
+                        <span class="content-en">ACTIVE / DEPLOYED</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">XEM TRƯỚC SẢN PHẨM</span>
+                <span class="content-en">PRODUCT PREVIEWS</span>
+            </h2>
+
+            <div class="product-preview-shell" data-product-preview="recyclecheck" tabindex="0">
+                <div class="product-preview-stage">
+                    <button type="button" class="product-preview-nav product-preview-nav-prev" data-product-preview-prev
+                        aria-label="Show previous product preview">
+                        <span aria-hidden="true">&lt;</span>
+                    </button>
+
+                    <div class="product-preview-frame">
+                        <div class="product-preview-media">
+                            <img class="product-preview-image" data-product-preview-image
+                                src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/817/588/datas/gallery.jpg"
+                                alt="RecycleCheck AI scan preview" loading="lazy" decoding="async">
+                            <iframe class="product-preview-video" data-product-preview-video hidden
+                                src="" title="RecycleCheck AI video preview" loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <button type="button" class="product-preview-nav product-preview-nav-next" data-product-preview-next
+                        aria-label="Show next product preview">
+                        <span aria-hidden="true">&gt;</span>
+                    </button>
+                </div>
+
+                <div class="product-preview-dots" data-product-preview-dots aria-label="Product preview navigation">
+                </div>
+
+                <div class="product-preview-caption" aria-live="polite">
+                    <p class="product-preview-caption-copy">
+                        <span class="content-vi" data-product-preview-caption-vi>Kết quả quét phân tích nâng cao với Vision AI và phân đoạn từng vật thể.</span>
+                        <span class="content-en" data-product-preview-caption-en>Advanced scan result with Vision AI and multi-object segmentation.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">TỔNG QUAN DỰ ÁN</span>
+                <span class="content-en">PROJECT OVERVIEW</span>
+            </h2>
+            <div style="margin-top: 15px;">
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[?] Vấn đề ("Wishcycling")</span>
+                    <span class="content-en">[?] The Problem ("Wishcycling")</span>
+                </h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">
+                    <span class="content-vi">Người tiêu dùng thường bối rối trước các thùng rác phân loại màu sắc khi cầm các loại rác hỗn hợp. Sự do dự này dẫn đến hiện tượng "wishcycling" — vứt bừa vào thùng tái chế với hy vọng có thể tái chế được, gây ô nhiễm toàn bộ lô rác có thể tái chế tại các nhà máy xử lý.</span>
+                    <span class="content-en">Consumers frequently face confusion standing before color-coded recycling bins holding mixed trash. This hesitation leads to "wishcycling" — throwing items into recycling bins hoping they belong, ultimately contaminating sorting batches at recycling facilities.</span>
+                </p>
+
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[!] Giải pháp RecycleCheck AI</span>
+                    <span class="content-en">[!] The Solution: RecycleCheck AI</span>
+                </h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">
+                    <span class="content-vi">Chỉ cần chụp 1 bức ảnh rác hỗn hợp, hệ thống Vision AI phân đoạn và cô lập từng vật thể trong khung hình, trích xuất điểm tin cậy, cắt ảnh trực tiếp bằng HTML5 Canvas, phân tích cấu tạo vật liệu và cung cấp hướng dẫn xử lý từng bước. Ứng dụng tích hợp hệ thống điểm Eco-Scores, huy hiệu thành tích và câu đố cá nhân hóa.</span>
+                    <span class="content-en">By snapping a single photo of mixed trash, multimodal Vision AI isolates multiple items within the frame, displays independent confidence scores, performs client-side canvas cropping, provides exact material breakdowns, and gives clear disposal steps with gamified Eco-Scores and quizzes.</span>
+                </p>
+
+                <p style="color: var(--text-muted);">
+                    <span class="content-vi"><strong>MÃ NGUỒN:</strong> Được công khai tại <a href="https://github.com/elaxuwu/Trash-Scanner" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">github.com/elaxuwu/Trash-Scanner</a>.</span>
+                    <span class="content-en"><strong>SOURCE CODE:</strong> Available publicly at <a href="https://github.com/elaxuwu/Trash-Scanner" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">github.com/elaxuwu/Trash-Scanner</a>.</span>
+                </p>
+            </div>
+        </section>
+
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">TÍNH NĂNG NỔI BẬT</span>
+                <span class="content-en">KEY FEATURES</span>
+            </h2>
+            <div class="brutal-grid" style="margin-top: 20px;">
+                <div class="skill-box highlight">
+                    <span class="code-num">01</span>
+                    <h3 class="content-vi">Phân đoạn đa vật thể bằng Vision AI</h3>
+                    <h3 class="content-en">Multi-Object Vision AI Isolation</h3>
+                    <p class="content-vi">Nhận diện đồng thời nhiều loại rác trong cùng một bức ảnh, trả về tọa độ bounding box chuẩn hóa <code>[ymin, xmin, ymax, xmax]</code> và điểm tin cậy độc lập.</p>
+                    <p class="content-en">Simultaneously detects multiple trash items in one frame, outputting normalized bounding boxes <code>[ymin, xmin, ymax, xmax]</code> with independent confidence scores.</p>
+                </div>
+                <div class="skill-box">
+                    <span class="code-num">02</span>
+                    <h3 class="content-vi">Cắt ảnh Client-Side bằng Canvas API</h3>
+                    <h3 class="content-en">Client-Side HTML5 Canvas Slicing</h3>
+                    <p class="content-vi">Sử dụng phương thức 9 tham số <code>canvas.drawImage()</code> để cắt, scale và căn giữa từng vật thể được phát hiện mà không gây méo hình hay lộ nền thừa.</p>
+                    <p class="content-en">Applies the 9-argument <code>canvas.drawImage()</code> method to accurately slice, scale, and center each detected item without distortion or background bleed.</p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num">03</span>
+                    <h3 class="content-vi">Gamification &amp; Eco-Scores</h3>
+                    <h3 class="content-en">Gamification &amp; Eco-Scores</h3>
+                    <p class="content-vi">Theo dõi xu hướng tái chế bằng Chart.js, thưởng hiệu ứng pháo hoa Canvas Confetti khi đạt cột mốc, mở khóa thành tích và cấp độ người bảo vệ môi trường.</p>
+                    <p class="content-en">Tracks recycling trends with Chart.js, triggers Canvas Confetti milestone rewards, and unlocks eco-defender achievement tiers.</p>
+                </div>
+                <div class="skill-box">
+                    <span class="code-num">04</span>
+                    <h3 class="content-vi">RecycleDex &amp; Quiz Cá nhân hóa</h3>
+                    <h3 class="content-en">RecycleDex &amp; Personalized Quiz</h3>
+                    <p class="content-vi">Bộ từ điển tra cứu vật liệu tương tác lấy cảm hứng từ Pokédex kết hợp các câu đố kiến thức sinh ra tự động từ lịch sử quét rác của người dùng.</p>
+                    <p class="content-en">Pokédex-inspired interactive material directory paired with dynamic quizzes generated from the user's specific scanning history.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">KIẾN TRÚC KỸ THUẬT</span>
+                <span class="content-en">TECHNICAL ARCHITECTURE</span>
+            </h2>
+            <div style="overflow-x: auto; margin-top: 20px;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--accent); color: var(--text);">
+                            <th style="padding: 12px;">
+                                <span class="content-vi">Tầng kiến trúc</span>
+                                <span class="content-en">Layer</span>
+                            </th>
+                            <th style="padding: 12px;">
+                                <span class="content-vi">Công nghệ</span>
+                                <span class="content-en">Technologies</span>
+                            </th>
+                            <th style="padding: 12px;">
+                                <span class="content-vi">Vai trò &amp; Nhiệm vụ</span>
+                                <span class="content-en">Role &amp; Responsibility</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Giao diện (Frontend)</span>
+                                <span class="content-en">Frontend &amp; UI</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">HTML5, CSS3, Vanilla JavaScript, Tailwind CSS, Phosphor Icons</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Giao diện mobile-first siêu nhẹ, hỗ trợ PWA cài đặt trực tiếp trên điện thoại mà không cần app store.</span>
+                                <span class="content-en">Ultra-lightweight mobile-first UI with PWA installability without app store friction.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Bộ máy AI (Vision LLM)</span>
+                                <span class="content-en">AI Vision Engine</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">Multimodal Vision LLM (Gemini / OpenAI API)</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Prompt tối ưu hóa giảm ~50% token trùng lặp, trả về JSON tọa độ, phân loại rác và hướng dẫn xử lý.</span>
+                                <span class="content-en">Optimized prompt cutting ~50% token duplication, returning structured JSON with bounding boxes and disposal plans.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Xử lý hình ảnh</span>
+                                <span class="content-en">Image Processing</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">HTML5 Canvas 2D API</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Cắt ảnh vật thể trực tiếp trên client bằng tọa độ chuẩn hóa, tối ưu tốc độ hiển thị tức thì.</span>
+                                <span class="content-en">Client-side bounding box slicing and aspect-ratio preservation with zero backend image rendering latency.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Dữ liệu &amp; Gamification</span>
+                                <span class="content-en">Gamification &amp; Data</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">Chart.js, Canvas Confetti, LocalStorage / IndexedDB</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Lưu trữ lịch sử phân loại, vẽ biểu đồ thói quen tái chế, kiểm tra câu đố và cấp huy hiệu thành tích.</span>
+                                <span class="content-en">Persists scan history, visualizes recycling habits, runs quiz verification, and grants badges.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Triển khai</span>
+                                <span class="content-en">Deployment</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">Cloudflare Pages (pages.dev)</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Triển khai web app tĩnh tốc độ cao với HTTPS và Service Worker PWA.</span>
+                                <span class="content-en">High-performance static web hosting with HTTPS and PWA Service Worker.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">CÁC CUỘC THI ĐÃ NỘP BÀI</span>
+                <span class="content-en">HACKATHON SUBMISSIONS</span>
+            </h2>
+            <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Youth Code x AI</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">VoltHacks</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Build the Future with AI</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Hyperbloom Summer Hackathon</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Web Champ</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">AI YES: Int'l Youth AI Competition</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">NeuralSprint</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="system-footer"></footer>
+
+    <script src="../../components.js"></script>
+    <script src="../../script.js"></script>
+</body>
+
+</html>

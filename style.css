@@ -1592,6 +1592,20 @@ h3 {
     object-fit: cover;
 }
 
+[data-product-preview="recyclecheck"] .product-preview-media {
+    aspect-ratio: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-product-preview="recyclecheck"] .product-preview-image {
+    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    max-height: 80vh;
+}
+
 .product-preview-video {
     border: 0;
 }
