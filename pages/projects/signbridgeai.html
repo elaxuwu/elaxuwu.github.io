@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('theme-preference');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
+    <title>SignBridge AI</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        :root {
+            --accent: #00e5ff;
+            --accent-glow: rgba(0, 229, 255, 0.25);
+            --accent2: #06b6d4;
+            --accent2-glow: rgba(6, 182, 212, 0.2);
+        }
+
+        .cyan-glow-box {
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .cyan-chip {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid rgba(0, 229, 255, 0.35);
+            color: #00e5ff;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cyan-chip::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #00e5ff;
+            box-shadow: 0 0 8px #00e5ff;
+        }
+
+        .hero-action-cyan {
+            background: rgba(0, 229, 255, 0.12) !important;
+            border-color: rgba(0, 229, 255, 0.5) !important;
+            color: #00e5ff !important;
+            box-shadow: 0 0 16px rgba(0, 229, 255, 0.2) !important;
+        }
+
+        .hero-action-cyan:hover {
+            background: #00e5ff !important;
+            color: #050505 !important;
+            box-shadow: 0 0 24px rgba(0, 229, 255, 0.5) !important;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body class="lang-en" data-nav-back="../../index.html" data-nav-status="AI Project"
+    data-footer-line1="[Computer Vision Sign Engine Active]" data-footer-line2="Architected by Elax - 2026">
+
+    <canvas id="matrix-bg"></canvas>
+    <div class="aurora-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+    </div>
+    <div class="grain-overlay"></div>
+    <div id="cursor-glow"></div>
+    <div class="crt-vignette"></div>
+
+    <div class="scanlines"></div>
+
+    <nav class="system-nav"></nav>
+
+    <main class="terminal-container container">
+        <!-- ═══ HERO SECTION ═══ -->
+        <section style="text-align: center; margin-bottom: 3rem;">
+            <div style="margin-bottom: 12px;">
+                <span class="cyan-chip">AI RISER VIETNAM x LOTUSHACKS</span>
+            </div>
+            <h1 style="color: var(--text); letter-spacing: 2px; text-transform: uppercase;">
+                <span class="content-vi">SignBridge AI</span>
+                <span class="content-en">SignBridge AI</span>
+            </h1>
+            <p style="color: var(--text-dim); margin-bottom: 24px; max-width: 720px; margin-left: auto; margin-right: auto;">
+                <span class="content-vi">Cầu nối giao tiếp hai chiều thời gian thực cho người khiếm thính bằng Computer Vision &amp; Multimodal AI.</span>
+                <span class="content-en">Real-time two-way communication bridge for the deaf &amp; mute community powered by Computer Vision &amp; Multimodal AI.</span>
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+                <a href="https://signbridgeai.pages.dev/" target="_blank" rel="noopener noreferrer"
+                    class="launch-btn award-inline-btn hero-action-cyan">
+                    <span class="content-vi">🚀 KHỞI CHẠY ỨNG DỤNG TRỰC TIẾP</span>
+                    <span class="content-en">🚀 LAUNCH LIVE WEB APP</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ═══ METADATA TERMINAL ═══ -->
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <div class="contact-terminal cyan-glow-box">
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">VAI TRÒ:</span>
+                        <span class="content-en">MY ROLE:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">Tác giả Solo &amp; Kỹ sư AI</span>
+                        <span class="content-en">Solo Developer &amp; AI Engineer</span>
+                    </span>
+                </div>
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">CÔNG NGHỆ:</span>
+                        <span class="content-en">STACK:</span>
+                    </span>
+                    <span class="value">
+                        <span class="content-vi">Google AI Studio, Gemini Multimodal API, MediaPipe Hand Tracking, Web Speech API (TTS), Cloudflare Pages, HTML5/CSS3/JS</span>
+                        <span class="content-en">Google AI Studio, Gemini Multimodal API, MediaPipe Hand Tracking, Web Speech API (TTS), Cloudflare Pages, HTML5/CSS3/JS</span>
+                    </span>
+                </div>
+                <div class="contact-row">
+                    <span class="label">
+                        <span class="content-vi">SỰ KIỆN:</span>
+                        <span class="content-en">HACKATHON:</span>
+                    </span>
+                    <span class="value" style="color: #00e5ff;">
+                        <span>AI Riser Vietnam x LotusHacks</span>
+                    </span>
+                </div>
+                <div class="contact-row status-blink">
+                    <span class="label">
+                        <span class="content-vi">TRẠNG THÁI:</span>
+                        <span class="content-en">STATUS:</span>
+                    </span>
+                    <span class="value" style="color: #00e5ff;">
+                        <span class="content-vi">ĐANG HOẠT ĐỘNG / ĐÃ TRIỂN KHAI</span>
+                        <span class="content-en">ACTIVE / DEPLOYED</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PRODUCT PREVIEW ═══ -->
+        <section class="console-block" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
+                <span class="content-vi">XEM TRƯỚC SẢN PHẨM</span>
+                <span class="content-en">PRODUCT PREVIEWS</span>
+            </h2>
+
+            <div class="product-preview-shell" data-product-preview="signbridgeai" tabindex="0">
+                <div class="product-preview-stage">
+                    <button type="button" class="product-preview-nav product-preview-nav-prev" data-product-preview-prev
+                        aria-label="Show previous product preview">
+                        <span aria-hidden="true">&lt;</span>
+                    </button>
+
+                    <div class="product-preview-frame">
+                        <div class="product-preview-media">
+                            <img class="product-preview-image" data-product-preview-image
+                                src="../../images/signbridgeai/Screenshot 2026-09-25 203504.png"
+                                alt="SignBridge AI live camera interface" loading="lazy" decoding="async">
+                            <iframe class="product-preview-video" data-product-preview-video hidden
+                                src="" title="SignBridge AI video preview" loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <button type="button" class="product-preview-nav product-preview-nav-next" data-product-preview-next
+                        aria-label="Show next product preview">
+                        <span aria-hidden="true">&gt;</span>
+                    </button>
+                </div>
+
+                <div class="product-preview-dots" data-product-preview-dots aria-label="Product preview navigation">
+                </div>
+
+                <div class="product-preview-caption" aria-live="polite">
+                    <p class="product-preview-caption-copy">
+                        <span class="content-vi" data-product-preview-caption-vi>Giao diện chính của SignBridge AI: Camera nhận diện cử chỉ VSL/ASL thời gian thực (60 fps, 12ms), đọc to bằng giọng nói và từ điển thủ ngữ tích hợp.</span>
+                        <span class="content-en" data-product-preview-caption-en>SignBridge AI main interface: Real-time VSL/ASL hand gesture recognition camera (60 fps, 12ms), voice synthesis readout, and integrated sign dictionary.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PROJECT OVERVIEW ═══ -->
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">TỔNG QUAN DỰ ÁN</span>
+                <span class="content-en">PROJECT OVERVIEW</span>
+            </h2>
+            <div style="margin-top: 15px;">
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[?] Vấn đề: Rào cản ngôn ngữ của cộng đồng người khiếm thính</span>
+                    <span class="content-en">[?] The Problem: Communication Barrier for the Deaf &amp; Mute</span>
+                </h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.7;">
+                    <span class="content-vi">Trong đời sống thường nhật, hơn 70 triệu người khiếm thính trên toàn cầu gặp trở ngại to lớn khi giao tiếp với người bình thường. Rất ít người nghe biết và hiểu ngôn ngữ ký hiệu (VSL hoặc ASL). Sự bất đồng ngôn ngữ này tạo nên bức tường cô lập tại trường học, bệnh viện, nơi làm việc và đặc biệt nguy hiểm trong các tình huống khẩn cấp cần trợ giúp tức thì.</span>
+                    <span class="content-en">Across the globe, over 70 million deaf and hard-of-hearing individuals encounter major obstacles communicating with hearing peers. Very few hearing people know Sign Language (VSL or ASL). This communication breakdown creates isolating friction in classrooms, hospitals, workplaces, and during critical emergencies where instant understanding saves lives.</span>
+                </p>
+
+                <h3 style="color: var(--accent);">
+                    <span class="content-vi">[!] Giải pháp: SignBridge AI — Cầu nối thông minh hai chiều</span>
+                    <span class="content-en">[!] The Solution: SignBridge AI — Two-Way Intelligent Bridge</span>
+                </h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px; line-height: 1.7;">
+                    <span class="content-vi">SignBridge AI được xây dựng tại hackathon <em>AI Riser Vietnam x LotusHacks</em> bằng công nghệ từ Google AI Studio. Ứng dụng biến bất kỳ webcam máy tính hay camera điện thoại thành người phiên dịch cá nhân thời gian thực: quét chuyển động bàn tay, dịch ngôn ngữ ký hiệu (hỗ trợ cả VSL - Ngôn ngữ ký hiệu Việt Nam và ASL - Ngôn ngữ ký hiệu Mỹ), và đọc to thành âm thanh thông qua Web Speech API để người bình thường nghe và hiểu ngay lập tức.</span>
+                    <span class="content-en">Built during the <em>AI Riser Vietnam x LotusHacks</em> hackathon using Google AI Studio technologies, SignBridge AI turns standard webcams and phone cameras into an instant personal sign interpreter: tracking hand movements, translating sign language (supporting both Vietnamese Sign Language - VSL and American Sign Language - ASL), and reading results aloud via the Web Speech API so hearing listeners understand immediately.</span>
+                </p>
+
+                <p style="color: var(--text-muted);">
+                    <span class="content-vi"><strong>ỨNG DỤNG TRỰC TIẾP:</strong> Trải nghiệm tại <a href="https://signbridgeai.pages.dev/" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">signbridgeai.pages.dev</a>.</span>
+                    <span class="content-en"><strong>LIVE APPLICATION:</strong> Experience it at <a href="https://signbridgeai.pages.dev/" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">signbridgeai.pages.dev</a>.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- ═══ KEY FEATURES ═══ -->
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">TÍNH NĂNG NỔI BẬT</span>
+                <span class="content-en">KEY FEATURES</span>
+            </h2>
+            <div class="brutal-grid" style="margin-top: 20px;">
+                <div class="skill-box highlight">
+                    <span class="code-num" style="color: #00e5ff;">01</span>
+                    <h3 class="content-vi">Nhận diện thủ ngữ thời gian thực</h3>
+                    <h3 class="content-en">Real-Time Sign Recognition</h3>
+                    <p class="content-vi">Camera luồng video đạt tốc độ 60 FPS với độ trễ phản hồi chỉ 12ms. Nhận diện các cử chỉ tay và chữ cái của cả hai hệ thống VSL (Thủ ngữ Việt Nam) và ASL (Thủ ngữ Mỹ).</p>
+                    <p class="content-en">Camera video stream runs at 60 FPS with an ultra-low 12ms response latency. Recognizes hand gestures and alphabet letters across both VSL (Vietnamese) and ASL (American) systems.</p>
+                </div>
+                <div class="skill-box">
+                    <span class="code-num" style="color: #00e5ff;">02</span>
+                    <h3 class="content-vi">Cầu nối hai chiều: Thủ ngữ &harr; Giọng nói</h3>
+                    <h3 class="content-en">Two-Way Sign &harr; Voice Bridge</h3>
+                    <p class="content-vi">Chuyển đổi cử chỉ ký hiệu thành giọng nói đọc to cho người nghe (Sign Mode) và chuyển lời nói thành văn bản hiển thị trên màn hình cho người khiếm thính (Voice Mode).</p>
+                    <p class="content-en">Converts hand signs into clear spoken speech for hearing listeners (Sign Mode) and transcribes spoken voice into real-time on-screen text for deaf users (Voice Mode).</p>
+                </div>
+                <div class="skill-box highlight">
+                    <span class="code-num" style="color: #00e5ff;">03</span>
+                    <h3 class="content-vi">Từ điển thủ ngữ tương tác VSL/ASL</h3>
+                    <h3 class="content-en">Interactive VSL/ASL Sign Dictionary</h3>
+                    <p class="content-vi">Bộ từ điển tích hợp ngay trên màn hình gồm các mục giao tiếp thường dùng (Xin chào, Cảm ơn, Không đồng ý, bảng chữ cái A, B, C...) giúp người mới dễ dàng tra cứu và đối chiếu cử chỉ.</p>
+                    <p class="content-en">Integrated on-screen dictionary covering essential communication phrases (Hello, Thank you, Disagree, alphabet letters A, B, C...) enabling instant lookup and visual guidance.</p>
+                </div>
+                <div class="skill-box">
+                    <span class="code-num" style="color: #00e5ff;">04</span>
+                    <h3 class="content-vi">Nút khẩn cấp SOS một chạm</h3>
+                    <h3 class="content-en">One-Touch Emergency SOS</h3>
+                    <p class="content-vi">Tính năng "Cần trợ giúp SOS" phát cảnh báo âm thanh và hình ảnh khẩn cấp khi người dùng khiếm thính rơi vào tình huống nguy hiểm cần sự trợ giúp từ những người xung quanh.</p>
+                    <p class="content-en">Dedicated "SOS Emergency Help" button triggering urgent audiovisual alerts to instantly signal distress and request assistance from bystanders in critical situations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ TECHNICAL ARCHITECTURE ═══ -->
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">KIẾN TRÚC KỸ THUẬT</span>
+                <span class="content-en">TECHNICAL ARCHITECTURE</span>
+            </h2>
+            <div style="overflow-x: auto; margin-top: 20px;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--accent); color: var(--text);">
+                            <th style="padding: 12px;">
+                                <span class="content-vi">Tầng kiến trúc</span>
+                                <span class="content-en">Layer</span>
+                            </th>
+                            <th style="padding: 12px;">
+                                <span class="content-vi">Công nghệ</span>
+                                <span class="content-en">Technologies</span>
+                            </th>
+                            <th style="padding: 12px;">
+                                <span class="content-vi">Vai trò &amp; Nhiệm vụ</span>
+                                <span class="content-en">Role &amp; Responsibility</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Giao diện &amp; Video Feed</span>
+                                <span class="content-en">Frontend &amp; Video Feed</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">HTML5 Canvas, WebRTC MediaStream, CSS3, Vanilla JavaScript</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Xử lý luồng webcam trực tiếp ở tốc độ 60 FPS, hỗ trợ xoay camera, lật hình và giao diện tối giản thân thiện.</span>
+                                <span class="content-en">Captures live camera feed at 60 FPS with camera switching, horizontal flipping, and an accessible high-contrast UI.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Bộ máy AI Thị giác</span>
+                                <span class="content-en">Multimodal AI Vision</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">Google AI Studio, Gemini Multimodal API, MediaPipe Hands</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Phát hiện tọa độ bàn tay, phân tích cử chỉ động và tĩnh, khớp với cơ sở dữ liệu ký hiệu VSL &amp; ASL với độ trễ thấp 12ms.</span>
+                                <span class="content-en">Detects hand landmark coordinates, analyzes dynamic/static gestures, and matches against VSL &amp; ASL sign datasets with 12ms latency.</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--glass-border);">
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Tổng hợp &amp; Xử lý âm thanh</span>
+                                <span class="content-en">Audio &amp; Speech Synthesis</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">Web Speech API (SpeechSynthesis &amp; SpeechRecognition)</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Phát âm thanh text-to-speech tức thời khi nhận diện thủ ngữ, đồng thời nhận diện giọng nói khi chuyển sang chế độ người nghe.</span>
+                                <span class="content-en">Performs instant client-side text-to-speech upon gesture recognition and speech recognition for the hearing user mode.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; color: var(--accent); font-weight: 600;">
+                                <span class="content-vi">Hạ tầng &amp; Triển khai</span>
+                                <span class="content-en">Deployment &amp; Edge</span>
+                            </td>
+                            <td style="padding: 12px; color: var(--text-muted);">Cloudflare Pages (signbridgeai.pages.dev)</td>
+                            <td style="padding: 12px; color: var(--text-muted);">
+                                <span class="content-vi">Triển khai Edge tĩnh tốc độ cao, hỗ trợ HTTPS bắt buộc để kích hoạt quyền truy cập Camera/Microphone trên mọi trình duyệt.</span>
+                                <span class="content-en">High-performance static Edge deployment with strict HTTPS enforcement required for Camera and Microphone web permissions.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ═══ HACKATHON & RECOGNITION ═══ -->
+        <section class="glass-panel" style="margin-bottom: 3rem;">
+            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+                <span class="content-vi">THÔNG TIN SỰ KIỆN &amp; TỔ CHỨC</span>
+                <span class="content-en">HACKATHON CONTEXT</span>
+            </h2>
+            <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px; border-color: rgba(0, 229, 255, 0.4); color: #00e5ff;">AI Riser Vietnam x LotusHacks</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Google AI Studio</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Assistive Technology</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">AI for Social Good</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Computer Vision</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">Vietnamese Sign Language (VSL)</span>
+                <span class="icon-tag" style="font-size: 0.85rem; padding: 6px 14px;">American Sign Language (ASL)</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="system-footer"></footer>
+
+    <script src="../../components.js"></script>
+    <script src="../../script.js"></script>
+</body>
+
+</html>

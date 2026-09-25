@@ -1592,14 +1592,16 @@ h3 {
     object-fit: cover;
 }
 
-[data-product-preview="recyclecheck"] .product-preview-media {
+[data-product-preview="recyclecheck"] .product-preview-media,
+[data-product-preview="signbridgeai"] .product-preview-media {
     aspect-ratio: auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-[data-product-preview="recyclecheck"] .product-preview-image {
+[data-product-preview="recyclecheck"] .product-preview-image,
+[data-product-preview="signbridgeai"] .product-preview-image {
     object-fit: contain;
     width: auto;
     max-width: 100%;

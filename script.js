@@ -766,6 +766,16 @@ function initProductPreviewSlideshow() {
                 altVi: 'Ảnh RecycleDex của RecycleCheck AI',
                 altEn: 'RecycleCheck AI RecycleDex preview'
             }
+        ],
+        signbridgeai: [
+            {
+                type: 'image',
+                src: '../../images/signbridgeai/Screenshot 2026-09-25 203504.png',
+                captionVi: 'Giao diện chính của SignBridge AI: Camera nhận diện cử chỉ VSL/ASL thời gian thực, chuyển ngữ thành giọng nói và từ điển thủ ngữ tích hợp.',
+                captionEn: 'SignBridge AI main interface: Real-time VSL/ASL hand gesture recognition camera, voice synthesis, and integrated sign dictionary.',
+                altVi: 'Giao diện SignBridge AI nhận diện thủ ngữ',
+                altEn: 'SignBridge AI hand gesture recognition interface'
+            }
         ]
     };
 
@@ -907,6 +917,7 @@ const ICONS = {
     clinicScribe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 4.25h7v-1a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1z"/><path d="M7.5 4.25h9l.35 1.75H20a1.8 1.8 0 0 1 1.8 1.8v10.1a3.85 3.85 0 0 1-3.85 3.85H6.05a3.85 3.85 0 0 1-3.85-3.85V7.8A1.8 1.8 0 0 1 4 6h3.15l.35-1.75z"/><path d="M12 8.1v3.8"/><path d="M10.1 10h3.8"/><path d="M8 14h8"/><path d="M4.2 17.4h3.7l.9-1.7 1 3.1 1.45-5.05 1.35 6.15 2.1-2.95 1.25 1.15h3.85"/></svg>`,
     ailax: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2v2"/><circle cx="12" cy="2.7" r=".75" fill="currentColor" stroke="none"/><rect x="4.2" y="6" width="15.6" height="12.3" rx="3.2"/><path d="M8 18.3 6.6 21l3.25-2.2"/><path d="M8.2 11.1h.02"/><path d="M15.8 11.1h.02"/><path d="M9 14.3c1.8 1 4.2 1 6 0"/><circle cx="7.8" cy="11.1" r="1.1"/><circle cx="16.2" cy="11.1" r="1.1"/><path d="M9.1 8.15 12 9.7l2.9-1.55"/><path d="M12 9.7v2.45"/><path d="M19.8 9.35h1.65"/><path d="M2.55 9.35H4.2"/><path d="M18.9 5.15l.55-1.35.55 1.35 1.35.55-1.35.55-.55 1.35-.55-1.35-1.35-.55 1.35-.55z"/></svg>`,
     recycle: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
+    signBridge: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/><path d="M18 11v4"/></svg>`,
     file: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
 };
 
@@ -935,12 +946,14 @@ const fileSystem = {
         { type: 'file', name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL', icon: 'game' }
     ],
     "APP PROJECTS": [
-        { type: 'file', name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION', icon: 'app' }
+        { type: 'file', name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION', icon: 'app' },
+        { type: 'file', name: 'Windows License Checker', link: 'https://github.com/elaxuwu/Windows-License-Checker---Windows-Crack-Checker', tag: 'WINDOWS UTILITY', icon: 'app' }
     ],
     "AI PROJECTS": [
         { type: 'file', name: 'Lazy Note', icon: 'aiNotebook', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK', ribbon: 'WINNER' },
         { type: 'file', name: 'PlayWeaver', icon: 'ai', link: 'pages/projects/playweaver.html', tag: 'AI GAME PROTOTYPER', ribbon: 'WINNER' },
         { type: 'file', name: 'ClinicScribe', icon: 'clinicScribe', link: 'pages/projects/clinicscribe.html', tag: 'AI CLINICAL SCRIBE', ribbon: 'WINNER' },
+        { type: 'file', name: 'SignBridge AI', icon: 'signBridge', link: 'pages/projects/signbridgeai.html', tag: 'AI SIGN TRANSLATOR' },
         { type: 'file', name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT', icon: 'ailax' },
         { type: 'file', name: 'RecycleCheck AI', link: 'pages/projects/recyclecheck.html', tag: 'AI RECYCLING SCANNER', icon: 'recycle' }
     ],
