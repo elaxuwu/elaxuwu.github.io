@@ -776,6 +776,40 @@ function initProductPreviewSlideshow() {
                 altVi: 'Giao diện SignBridge AI nhận diện thủ ngữ',
                 altEn: 'SignBridge AI hand gesture recognition interface'
             }
+        ],
+        huntForTheMoon: [
+            {
+                type: 'image',
+                src: 'https://placehold.co/1600x900/181204/fbbf24?text=Hunt+For+The+Moon+Target+System',
+                captionVi: 'Hệ thống bia di chuyển "Săn Trăng": Bố trí ray trượt, puly kéo cáp và tấm bia chủ đề Trung Thu.',
+                captionEn: '"Hunt for the Moon" Moving Target System: Linear rail setup, pulley-cord drive, and Mid-Autumn target board.',
+                altVi: 'Tổng quan hệ thống bia chuyển động Săn Trăng',
+                altEn: 'Hunt for the Moon moving target system overview'
+            },
+            {
+                type: 'image',
+                src: 'https://placehold.co/1600x900/0c192c/38bdf8?text=Arduino+Uno+%2B+L298N+Hardware+Rig',
+                captionVi: 'Cụm điều khiển: Vi điều khiển Arduino Uno kết nối mạch cầu H L298N và động cơ DC giảm tốc JGA25 280RPM.',
+                captionEn: 'Control Rig: Arduino Uno microcontroller paired with L298N H-Bridge and JGA25 280RPM DC gear motor.',
+                altVi: 'Mạch điều khiển Arduino Uno và L298N',
+                altEn: 'Arduino Uno and L298N motor driver electronics rig'
+            },
+            {
+                type: 'image',
+                src: 'https://placehold.co/1600x900/1e1528/c084fc?text=Joystick+Module+%26+Endstop+Limit+Switches',
+                captionVi: 'Module Joystick điều khiển thủ công và công tắc hành trình (Endstop) bảo vệ giới hạn hai đầu hành trình.',
+                captionEn: 'Analog Joystick input module for manual control and dual limit switches for boundary overrun safety.',
+                altVi: 'Cụm Joystick và công tắc hành trình',
+                altEn: 'Joystick module and boundary limit switches'
+            },
+            {
+                type: 'image',
+                src: 'https://placehold.co/1600x900/06281e/34d399?text=VinSchool+Booth+Interactive+Exhibition',
+                captionVi: 'Gian hàng hội chợ Trung Thu tại VinSchool: Trải nghiệm bắn bia tương tác thu hút đông đảo học sinh tham gia.',
+                captionEn: 'VinSchool Mid-Autumn Festival Booth: Interactive target shooting gameplay engaging students.',
+                altVi: 'Gian hàng Trung Thu tương tác tại VinSchool',
+                altEn: 'Interactive Mid-Autumn festival booth exhibition at VinSchool'
+            }
         ]
     };
 
@@ -918,6 +952,7 @@ const ICONS = {
     ailax: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2v2"/><circle cx="12" cy="2.7" r=".75" fill="currentColor" stroke="none"/><rect x="4.2" y="6" width="15.6" height="12.3" rx="3.2"/><path d="M8 18.3 6.6 21l3.25-2.2"/><path d="M8.2 11.1h.02"/><path d="M15.8 11.1h.02"/><path d="M9 14.3c1.8 1 4.2 1 6 0"/><circle cx="7.8" cy="11.1" r="1.1"/><circle cx="16.2" cy="11.1" r="1.1"/><path d="M9.1 8.15 12 9.7l2.9-1.55"/><path d="M12 9.7v2.45"/><path d="M19.8 9.35h1.65"/><path d="M2.55 9.35H4.2"/><path d="M18.9 5.15l.55-1.35.55 1.35 1.35.55-1.35.55-.55 1.35-.55-1.35-1.35-.55 1.35-.55z"/></svg>`,
     recycle: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
     signBridge: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/><path d="M18 11v4"/></svg>`,
+    huntMoon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><circle cx="12" cy="12" r="2.5"/><path d="M12 5.5v2m0 9v2m-6.5-5.5h2m9 0h2"/></svg>`,
     file: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
 };
 
@@ -958,7 +993,8 @@ const fileSystem = {
         { type: 'file', name: 'RecycleCheck AI', link: 'pages/projects/recyclecheck.html', tag: 'AI RECYCLING SCANNER', icon: 'recycle' }
     ],
     "ROBOTICS PROJECTS": [
-        { type: 'file', name: 'Soccer Drone', link: 'pages/projects/soccer_drone.html', tag: 'FPV ROBOTICS', icon: 'robotics', ribbon: 'WINNER' }
+        { type: 'file', name: 'Soccer Drone', link: 'pages/projects/soccer_drone.html', tag: 'FPV ROBOTICS', icon: 'robotics', ribbon: 'WINNER' },
+        { type: 'file', name: 'Hunt for the Moon', link: 'pages/projects/hunt_for_the_moon.html', tag: 'ARDUINO MECHATRONICS', icon: 'huntMoon' }
     ]
 };
 
