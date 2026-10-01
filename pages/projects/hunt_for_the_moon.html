@@ -1,637 +1,716 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script>
+
         (function () {
+
             try {
+
                 var savedTheme = localStorage.getItem('theme-preference');
+
                 document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+
             } catch (error) {
+
                 document.documentElement.setAttribute('data-theme', 'dark');
+
             }
+
         }());
+
     </script>
+
     <title>Hunt for the Moon - Săn Trăng</title>
-    <link rel="stylesheet" href="../../style.css">
-    <style>
-        :root {
-            --moon-gold: #f59e0b;
-            --moon-gold-glow: rgba(245, 158, 11, 0.28);
-            --moon-amber: #d97706;
-            --moon-cyan: #06b6d4;
-        }
 
-        .moon-hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            font-weight: 600;
-            background: rgba(245, 158, 11, 0.12);
-            border: 1px solid rgba(245, 158, 11, 0.35);
-            color: var(--moon-gold);
-            margin-bottom: 16px;
-        }
+    <link rel="stylesheet" href="../../style.css?v=purple-3">
 
-        .moon-summary-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-            gap: 24px;
-        }
+    <meta name="description" content="Hunt for the Moon - Săn Trăng · A project by Elax."><link rel="icon" href="../../assets/favicon.png" type="image/png"></head>
 
-        @media (max-width: 900px) {
-            .moon-summary-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .moon-summary-copy,
-        .moon-summary-metrics,
-        .moon-card,
-        .moon-spec-card {
-            background: linear-gradient(180deg, rgba(var(--panel-rgb), 0.42), rgba(var(--panel-rgb), 0.22));
-            border: 1px solid var(--glass-border-strong);
-            border-radius: calc(var(--radius-card) + 4px);
-            box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.45);
-        }
-
-        .moon-summary-copy {
-            padding: 32px;
-        }
-
-        .moon-summary-copy h2 {
-            margin: 0;
-            font-size: clamp(2rem, 4.5vw, 2.9rem);
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            background: linear-gradient(to right, #f59e0b, #fbbf24, #f97316);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .moon-summary-copy p {
-            margin: 18px 0 0;
-            color: var(--text-muted);
-            max-width: 54ch;
-            line-height: 1.7;
-        }
-
-        .moon-summary-metrics {
-            padding: 18px;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        @media (max-width: 560px) {
-            .moon-summary-metrics {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .moon-metric-card {
-            background: rgba(var(--panel-rgb), 0.34);
-            border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            padding: 18px;
-            min-height: 124px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .moon-metric-card strong {
-            color: var(--moon-gold);
-            font-size: clamp(1.6rem, 3.5vw, 2.1rem);
-            line-height: 1;
-            letter-spacing: -0.03em;
-        }
-
-        .moon-metric-card span {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.45;
-        }
-
-        .moon-pill-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 22px;
-        }
-
-        .moon-pill {
-            display: inline-flex;
-            align-items: center;
-            border: 1px solid rgba(245, 158, 11, 0.28);
-            border-radius: 999px;
-            padding: 7px 13px;
-            background: rgba(245, 158, 11, 0.08);
-            color: #fde68a;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-
-        .moon-features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 18px;
-            margin-top: 18px;
-        }
-
-        .moon-card {
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .moon-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--moon-gold), transparent);
-            opacity: 0.45;
-        }
-
-        .moon-card h3 {
-            margin: 0 0 12px;
-            color: var(--text);
-            font-size: 1.15rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .moon-card p {
-            margin: 0;
-            color: var(--text-muted);
-            line-height: 1.65;
-            font-size: 0.95rem;
-        }
-
-        .moon-tag-code {
-            display: inline-block;
-            margin-bottom: 8px;
-            color: var(--moon-gold);
-            font-size: 0.78rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .moon-code-panel {
-            background: rgba(10, 10, 15, 0.75);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 16px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 0.86rem;
-            color: #e2e8f0;
-            overflow-x: auto;
-            margin-top: 14px;
-            line-height: 1.55;
-        }
-
-        .moon-code-panel .kw { color: #f43f5e; font-weight: 600; }
-        .moon-code-panel .fn { color: #38bdf8; }
-        .moon-code-panel .num { color: #fbbf24; }
-        .moon-code-panel .cm { color: #64748b; font-style: italic; }
-
-        .moon-table-wrap {
-            overflow-x: auto;
-            border-radius: calc(var(--radius-card) + 2px);
-            border: 1px solid var(--glass-border-strong);
-            background: rgba(var(--panel-rgb), 0.25);
-            margin-top: 18px;
-        }
-
-        .moon-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.92rem;
-        }
-
-        .moon-table th {
-            padding: 14px 18px;
-            background: rgba(var(--panel-rgb), 0.5);
-            color: var(--text);
-            font-weight: 600;
-            border-bottom: 1px solid var(--glass-border-strong);
-            letter-spacing: 0.04em;
-        }
-
-        .moon-table td {
-            padding: 14px 18px;
-            border-bottom: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .moon-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .moon-table tr:hover td {
-            background: rgba(245, 158, 11, 0.04);
-        }
-    </style>
-</head>
-
-<body class="lang-en" data-nav-back="../../index.html" data-nav-status="Robotics Project"
-    data-footer-line1="[Interactive Mechatronics Active]" data-footer-line2="Architected by Elax - 2026">
-
-    <canvas id="matrix-bg"></canvas>
-    <div class="aurora-bg">
-        <div class="aurora-orb orb-1"></div>
-        <div class="aurora-orb orb-2"></div>
-        <div class="aurora-orb orb-3"></div>
-    </div>
-    <div class="grain-overlay"></div>
-    <div id="cursor-glow"></div>
-    <div class="crt-vignette"></div>
-
-    <div class="scanlines"></div>
+<body class="lang-en project-page" data-nav-back="../../index.html" data-nav-status="Robotics Project" data-footer-line1="[Interactive Mechatronics Active]" data-footer-line2="Architected by Elax - 2026">
 
     <nav class="system-nav"></nav>
 
-    <main class="terminal-container container">
+    <main class="terminal-container container" id="main">
+
         <!-- ── HERO / TITLE SECTION ── -->
-        <section style="text-align: center; margin-bottom: 3rem;">
-            <div class="moon-hero-badge">
-                <span class="content-vi">🌕 DỰ ÁN CƠ ĐIỆN TỬ TƯƠNG TÁC</span>
-                <span class="content-en">🌕 INTERACTIVE MECHATRONICS HARDWARE</span>
-            </div>
-            <h1 style="color: var(--text); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;">
-                <span class="content-vi">Săn Trăng (Hunt for the Moon)</span>
-                <span class="content-en">Hunt for the Moon</span>
-            </h1>
-            <p style="color: var(--text-dim); max-width: 720px; margin: 0 auto 24px; line-height: 1.6;">
-                <span class="content-vi">Hệ thống bia di chuyển tương tác cơ điện tử dành cho gian hàng Trung Thu tại trường VinSchool. Tích hợp Arduino Uno, động cơ DC JGA25 280RPM + Driver L298N, cơ cấu puly kéo cáp và thuật toán đổi hướng ngẫu nhiên.</span>
-                <span class="content-en">Interactive mechatronic moving target system engineered for the VinSchool Mid-Autumn Festival carnival booth. Powered by Arduino Uno, JGA25 280RPM DC gear motor, L298N H-Bridge driver, pulley-cord kinematics, and smart pseudo-random trajectory logic.</span>
-            </p>
-            <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
-                <a href="https://github.com/elaxuwu/vinschool_trungthu_2026" target="_blank" rel="noopener noreferrer"
-                    class="launch-btn award-inline-btn" style="background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;">
-                    <span class="content-vi">💻 XEM GITHUB REPO</span>
-                    <span class="content-en">💻 VIEW GITHUB REPO</span>
-                </a>
-            </div>
-        </section>
 
-        <!-- ── TERMINAL STATUS BLOCK ── -->
-        <section class="console-block" style="margin-bottom: 3rem;">
-            <div class="contact-terminal">
-                <div class="contact-row">
-                    <span class="label">
-                        <span class="content-vi">VAI TRÒ:</span>
-                        <span class="content-en">MY ROLE:</span>
-                    </span>
-                    <span class="value">
-                        <span class="content-vi">Trưởng nhóm Kỹ thuật Công nghệ (Phần cứng, Cơ khí &amp; Lập trình Nhúng Arduino)</span>
-                        <span class="content-en">Technical Lead (Hardware Architecture, Mechanical Drive &amp; Arduino Embedded Firmware)</span>
-                    </span>
-                </div>
-                <div class="contact-row">
-                    <span class="label">
-                        <span class="content-vi">CÔNG NGHỆ:</span>
-                        <span class="content-en">STACK:</span>
-                    </span>
-                    <span class="value">
-                        <span class="content-vi">Arduino Uno (C/C++), JGA25 280RPM DC Gear Motor, L298N Dual H-Bridge Driver, 2-Axis Analog Joystick, Limit Switches (Endstops), Pulley &amp; Cord Transmission, 12V DC Regulated Power</span>
-                        <span class="content-en">Arduino Uno (C/C++), JGA25 280RPM DC Gear Motor, L298N Dual H-Bridge Driver, 2-Axis Analog Joystick, Limit Switches (Endstops), Pulley &amp; Cord Transmission, 12V DC Regulated Power</span>
-                    </span>
-                </div>
-                <div class="contact-row status-blink">
-                    <span class="label">
-                        <span class="content-vi">TRẠNG THÁI:</span>
-                        <span class="content-en">STATUS:</span>
-                    </span>
-                    <span class="value" style="color: #fbbf24;">
-                        <span class="content-vi">HOÀN THÀNH &amp; ĐÃ TRÌNH DIỄN TẠI HỘI CHỢ TRUNG THU VINSCHOOL</span>
-                        <span class="content-en">DEPLOYED &amp; OPERATED LIVE AT VINSCHOOL MID-AUTUMN FESTIVAL</span>
-                    </span>
-                </div>
-            </div>
-        </section>
+        <nav class="case-index" aria-label="On this page"><a href="#section-3"><span class="content-vi">HÌNH ẢNH &amp; TƯ LIỆU DỰ ÁN</span>
 
-        <!-- ── PROJECT SNAPSHOT & KEY METRICS ── -->
-        <section class="console-block" id="snapshot" style="margin-bottom: 3rem;">
-            <div class="cmd-line">🛰️ Project Snapshot &amp; Highlights</div>
-            <div class="moon-summary-grid">
-                <article class="moon-summary-copy">
-                    <div class="moon-tag-code">VINSCHOOL MID-AUTUMN CARNIVAL 2026</div>
-                    <h2>
-                        <span class="content-vi">Cơ Chế Bia Di Chuyển "Săn Trăng"</span>
-                        <span class="content-en">"Hunt for the Moon" Moving Target Rig</span>
-                    </h2>
-                    <p>
-                        <span class="content-vi">"Săn Trăng" là trò chơi tương tác vật lý trung tâm tại gian hàng lớp em nhân dịp Tết Trung Thu ở trường VinSchool. Thay vì bắn vào bia cố định nhàm chán, người chơi phải thử thách tài thiện xạ với một tấm bia hình mặt trăng di chuyển liên tục trên ray trượt theo cả chế độ điều khiển tay và thuật toán tự hành ngẫu nhiên.</span>
-                        <span class="content-en">"Hunt for the Moon" served as the centerpiece interactive carnival game for our class booth at the VinSchool Mid-Autumn Festival. Rather than shooting static targets, players put their marksmanship to the test against a moving moon target gliding along a linear rail driven by dual manual joystick and unpredictable auto-random movement algorithms.</span>
-                    </p>
-                    <div class="moon-pill-row">
-                        <span class="moon-pill">Arduino Uno</span>
-                        <span class="moon-pill">Motor JGA25 280RPM</span>
-                        <span class="moon-pill">L298N H-Bridge</span>
-                        <span class="moon-pill">Analog Joystick</span>
-                        <span class="moon-pill">Endstop Safety</span>
-                        <span class="moon-pill">Pulley-Cord Drive</span>
-                    </div>
-                </article>
-
-                <div class="moon-summary-metrics">
-                    <article class="moon-metric-card">
-                        <strong>280 RPM</strong>
-                        <span class="content-vi">Tốc độ quay tối đa động cơ JGA25 với lực kéo momen xoắn cao</span>
-                        <span class="content-en">Max motor speed with high-torque gearbox for swift target sweeps</span>
-                    </article>
-                    <article class="moon-metric-card">
-                        <strong>Dual Mode</strong>
-                        <span class="content-vi">Chế độ điều khiển tay (Joystick) &amp; Tự động ngẫu nhiên (Smart Auto)</span>
-                        <span class="content-en">Manual joystick operation &amp; smart algorithmic pseudo-random motion</span>
-                    </article>
-                    <article class="moon-metric-card">
-                        <strong>2 Endstops</strong>
-                        <span class="content-vi">Công tắc hành trình 2 đầu ray ngắt motor bảo vệ chống kẹt cáp</span>
-                        <span class="content-en">Limit switches on both extremities preventing cable overrun</span>
-                    </article>
-                    <article class="moon-metric-card">
-                        <strong>100% DIY</strong>
-                        <span class="content-vi">Gia công cơ cấu dây dù, ròng rọc puly &amp; lập trình vi điều khiển</span>
-                        <span class="content-en">Custom mechanical transmission assembly &amp; embedded C++ firmware</span>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── PRODUCT PREVIEWS / MEDIA STAGE ── -->
-        <section class="console-block" style="margin-bottom: 3rem;">
-            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 18px;">
-                <span class="content-vi">HÌNH ẢNH &amp; TƯ LIỆU DỰ ÁN</span>
                 <span class="content-en">PROJECT MEDIA &amp; PREVIEWS</span>
+
+            </a><a href="#snapshot"><span class="content-en">Project overview</span><span class="content-vi">Tổng quan dự án</span></a><a href="#section-4"><span class="content-vi">CHI TIẾT KỸ THUẬT &amp; NGUYÊN LÝ HOẠT ĐỘNG</span>
+
+                <span class="content-en">TECHNICAL ARCHITECTURE &amp; SUBSYSTEMS</span>
+
+            </a><a href="#section-5"><span class="content-en">Control algorithm (C++ / Arduino)</span><span class="content-vi">Thuật toán điều khiển (C++ / Arduino)</span></a><a href="#section-6"><span class="content-vi">BẢNG DANH MỤC THIẾT BỊ &amp; LINH KIỆN (BOM)</span>
+
+                <span class="content-en">BILL OF MATERIALS &amp; SPECIFICATIONS (BOM)</span>
+
+            </a><a href="#section-7"><span class="content-vi">HIỆU QUẢ TẠI GIAN HÀNG &amp; BÀI HỌC KINH NGHIỆM</span>
+
+                <span class="content-en">BOOTH ENGAGEMENT &amp; KEY TAKEAWAYS</span>
+
+            </a></nav><section class="project-hero">
+
+            <div class="case-intro"><div class="moon-hero-badge">
+
+                <span class="content-vi">DỰ ÁN CƠ ĐIỆN TỬ TƯƠNG TÁC</span>
+
+                <span class="content-en">INTERACTIVE MECHATRONICS HARDWARE</span>
+
+            </div>
+
+            <h1>
+
+                <span class="content-vi">Săn Trăng (Hunt for the Moon)</span>
+
+                <span class="content-en">Hunt for the Moon</span>
+
+            </h1>
+
+            <p>
+
+                <span class="content-vi">Hệ thống bia di chuyển tương tác cơ điện tử dành cho gian hàng Trung Thu tại trường VinSchool. Tích hợp Arduino Uno, động cơ DC JGA25 280RPM + Driver L298N, cơ cấu puly kéo cáp và thuật toán đổi hướng ngẫu nhiên.</span>
+
+                <span class="content-en">Interactive mechatronic moving target system engineered for the VinSchool Mid-Autumn Festival carnival booth. Powered by Arduino Uno, JGA25 280RPM DC gear motor, L298N H-Bridge driver, pulley-cord kinematics, and smart pseudo-random trajectory logic.</span>
+
+            </p>
+
+            <div class="content-flex hero-action-row">
+
+                <a href="https://github.com/elaxuwu/vinschool_trungthu_2026" target="_blank" rel="noopener noreferrer" class="launch-btn award-inline-btn">
+
+                    <span class="content-vi">XEM GITHUB REPO</span>
+
+                    <span class="content-en">VIEW GITHUB REPO</span>
+
+                </a>
+
+            </div>
+
+        </div><div class="case-visual case-studio"><img src="../../assets/projects/../brand/elaxion-banner.webp" alt="Hunt for the Moon - Săn Trăng project visual" width="1200" height="750" decoding="async" fetchpriority="high"></div></section>
+
+        <section class="console-block page-section" id="section-3">
+
+            <h2>
+
+                <span class="content-vi">HÌNH ẢNH &amp; TƯ LIỆU DỰ ÁN</span>
+
+                <span class="content-en">PROJECT MEDIA &amp; PREVIEWS</span>
+
             </h2>
 
             <div class="product-preview-shell" data-product-preview="huntForTheMoon" tabindex="0">
+
                 <div class="product-preview-stage">
-                    <button type="button" class="product-preview-nav product-preview-nav-prev" data-product-preview-prev
-                        aria-label="Show previous product preview">
+
+                    <button type="button" class="product-preview-nav product-preview-nav-prev" data-product-preview-prev aria-label="Show previous product preview">
+
                         <span aria-hidden="true">&lt;</span>
+
                     </button>
 
                     <div class="product-preview-frame">
+
                         <div class="product-preview-media">
-                            <img class="product-preview-image" data-product-preview-image
-                                src="https://placehold.co/1600x900/181204/fbbf24?text=Hunt+For+The+Moon+Target+System"
-                                alt="Hunt for the Moon system overview" loading="lazy" decoding="async">
-                            <iframe class="product-preview-video" data-product-preview-video hidden
-                                title="Hunt for the Moon preview video"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
+
+                            <div class="media-placeholder product-preview-image"><span class="placeholder-mark" aria-hidden="true">↗</span><span class="placeholder-label"><span class="content-en">Images coming soon</span><span class="content-vi">Hình ảnh sẽ được bổ sung</span></span></div><iframe class="product-preview-video" data-product-preview-video hidden title="Hunt for the Moon preview video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
                         </div>
+
                     </div>
 
-                    <button type="button" class="product-preview-nav product-preview-nav-next" data-product-preview-next
-                        aria-label="Show next product preview">
+                    <button type="button" class="product-preview-nav product-preview-nav-next" data-product-preview-next aria-label="Show next product preview">
+
                         <span aria-hidden="true">&gt;</span>
+
                     </button>
+
                 </div>
 
                 <div class="product-preview-dots" data-product-preview-dots aria-label="Product preview pagination"></div>
 
                 <p class="product-preview-caption" data-product-preview-caption>
+
                     Hệ thống bia di chuyển "Săn Trăng": Bố trí ray trượt, puly kéo cáp và tấm bia chủ đề Trung Thu.
+
                 </p>
+
             </div>
+
         </section>
 
+        <!-- ── TERMINAL STATUS BLOCK ── -->
+
+        <section class="console-block page-section">
+
+            <div class="contact-terminal">
+
+                <div class="contact-row">
+
+                    <span class="label">
+
+                        <span class="content-vi">Vai trò:</span>
+
+                        <span class="content-en">MY ROLE:</span>
+
+                    </span>
+
+                    <span class="value">
+
+                        <span class="content-vi">Trưởng nhóm Kỹ thuật Công nghệ (Phần cứng, Cơ khí &amp; Lập trình Nhúng Arduino)</span>
+
+                        <span class="content-en">Technical Lead (Hardware Architecture, Mechanical Drive &amp; Arduino Embedded Firmware)</span>
+
+                    </span>
+
+                </div>
+
+                <div class="contact-row">
+
+                    <span class="label">
+
+                        <span class="content-vi">Công nghệ:</span>
+
+                        <span class="content-en">STACK:</span>
+
+                    </span>
+
+                    <span class="value">
+
+                        <span class="content-vi">Arduino Uno (C/C++), JGA25 280RPM DC Gear Motor, L298N Dual H-Bridge Driver, 2-Axis Analog Joystick, Limit Switches (Endstops), Pulley &amp; Cord Transmission, 12V DC Regulated Power</span>
+
+                        <span class="content-en">Arduino Uno (C/C++), JGA25 280RPM DC Gear Motor, L298N Dual H-Bridge Driver, 2-Axis Analog Joystick, Limit Switches (Endstops), Pulley &amp; Cord Transmission, 12V DC Regulated Power</span>
+
+                    </span>
+
+                </div>
+
+                <div class="contact-row status-blink">
+
+                    <span class="label">
+
+                        <span class="content-vi">Trạng thái:</span>
+
+                        <span class="content-en">STATUS:</span>
+
+                    </span>
+
+                    <span class="value">
+
+                        <span class="content-vi">HOÀN THÀNH &amp; ĐÃ TRÌNH DIỄN TẠI HỘI CHỢ TRUNG THU VINSCHOOL</span>
+
+                        <span class="content-en">DEPLOYED &amp; OPERATED LIVE AT VINSCHOOL MID-AUTUMN FESTIVAL</span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ── PROJECT SNAPSHOT & KEY METRICS ── -->
+
+        <section class="console-block page-section" id="snapshot">
+
+            <h2 class="cmd-line"><span class="content-en">Project overview</span><span class="content-vi">Tổng quan dự án</span></h2>
+
+            <div class="moon-summary-grid">
+
+                <article class="moon-summary-copy">
+
+                    <div class="moon-tag-code">VINSCHOOL MID-AUTUMN CARNIVAL 2026</div>
+
+                    <h2>
+
+                        <span class="content-vi">Cơ Chế Bia Di Chuyển "Săn Trăng"</span>
+
+                        <span class="content-en">"Hunt for the Moon" Moving Target Rig</span>
+
+                    </h2>
+
+                    <p>
+
+                        <span class="content-vi">"Săn Trăng" là trò chơi tương tác vật lý trung tâm tại gian hàng lớp em nhân dịp Tết Trung Thu ở trường VinSchool. Thay vì bắn vào bia cố định nhàm chán, người chơi phải thử thách tài thiện xạ với một tấm bia hình mặt trăng di chuyển liên tục trên ray trượt theo cả chế độ điều khiển tay và thuật toán tự hành ngẫu nhiên.</span>
+
+                        <span class="content-en">"Hunt for the Moon" served as the centerpiece interactive carnival game for our class booth at the VinSchool Mid-Autumn Festival. Rather than shooting static targets, players put their marksmanship to the test against a moving moon target gliding along a linear rail driven by dual manual joystick and unpredictable auto-random movement algorithms.</span>
+
+                    </p>
+
+                    <div class="moon-pill-row">
+
+                        <span class="moon-pill">Arduino Uno</span>
+
+                        <span class="moon-pill">Motor JGA25 280RPM</span>
+
+                        <span class="moon-pill">L298N H-Bridge</span>
+
+                        <span class="moon-pill">Analog Joystick</span>
+
+                        <span class="moon-pill">Endstop Safety</span>
+
+                        <span class="moon-pill">Pulley-Cord Drive</span>
+
+                    </div>
+
+                </article>
+
+                <div class="moon-summary-metrics">
+
+                    <article class="moon-metric-card">
+
+                        <strong>280 RPM</strong>
+
+                        <span class="content-vi">Tốc độ quay tối đa động cơ JGA25 với lực kéo momen xoắn cao</span>
+
+                        <span class="content-en">Max motor speed with high-torque gearbox for swift target sweeps</span>
+
+                    </article>
+
+                    <article class="moon-metric-card">
+
+                        <strong>Dual Mode</strong>
+
+                        <span class="content-vi">Chế độ điều khiển tay (Joystick) &amp; Tự động ngẫu nhiên (Smart Auto)</span>
+
+                        <span class="content-en">Manual joystick operation &amp; smart algorithmic pseudo-random motion</span>
+
+                    </article>
+
+                    <article class="moon-metric-card">
+
+                        <strong>2 Endstops</strong>
+
+                        <span class="content-vi">Công tắc hành trình 2 đầu ray ngắt motor bảo vệ chống kẹt cáp</span>
+
+                        <span class="content-en">Limit switches on both extremities preventing cable overrun</span>
+
+                    </article>
+
+                    <article class="moon-metric-card">
+
+                        <strong>100% DIY</strong>
+
+                        <span class="content-vi">Gia công cơ cấu dây dù, ròng rọc puly &amp; lập trình vi điều khiển</span>
+
+                        <span class="content-en">Custom mechanical transmission assembly &amp; embedded C++ firmware</span>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ── PRODUCT PREVIEWS / MEDIA STAGE ── -->
+
         <!-- ── CORE ENGINEERING ARCHITECTURE ── -->
-        <section class="glass-panel" style="margin-bottom: 3rem;">
-            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+
+        <section class="glass-panel page-section" id="section-4">
+
+            <h2>
+
                 <span class="content-vi">CHI TIẾT KỸ THUẬT &amp; NGUYÊN LÝ HOẠT ĐỘNG</span>
+
                 <span class="content-en">TECHNICAL ARCHITECTURE &amp; SUBSYSTEMS</span>
+
             </h2>
 
             <div class="moon-features-grid">
+
                 <!-- Subsystem 1: Mechanical Drive -->
+
                 <article class="moon-card">
+
                     <span class="moon-tag-code">01 // KINEMATICS &amp; MECHANICS</span>
+
                     <h3>
-                        <span class="content-vi">⚙️ Hệ Truyền Động Puly &amp; Cáp Dây Dù</span>
-                        <span class="content-en">⚙️ Pulley &amp; Cord Transmission Drive</span>
+
+                        <span class="content-vi">⚙ Hệ Truyền Động Puly &amp; Cáp Dây Dù</span>
+
+                        <span class="content-en">⚙ Pulley &amp; Cord Transmission Drive</span>
+
                     </h3>
+
                     <p>
+
                         <span class="content-vi">Tấm bia ngắm được gắn trên một con trượt di chuyển dọc theo ray dẫn hướng ngang. Động cơ DC JGA25 dẫn động bánh puly chủ động ở một đầu, kết hợp puly chuyển hướng ở đầu đối diện. Dây dù siêu bền được căng vòng qua hai puly để kéo giá đỡ bia di chuyển tịnh tiến êm ái, giảm thiểu tối đa ma sát và hiện tượng rung lắc khi đảo chiều nhanh.</span>
+
                         <span class="content-en">The target plate is mounted onto a custom carriage riding on a linear rail. The JGA25 DC gear motor drives the active timing pulley at one end, paired with a tensioned idler pulley on the other. High-strength paracord forms a closed loop, pulling the carriage back and forth smoothly with minimal friction and backlash during abrupt direction reversals.</span>
+
                     </p>
+
                 </article>
 
                 <!-- Subsystem 2: Power & Motor Driver -->
+
                 <article class="moon-card">
+
                     <span class="moon-tag-code">02 // POWER &amp; MOTOR CONTROL</span>
+
                     <h3>
+
                         <span class="content-vi">⚡ Động Cơ JGA25 &amp; Mạch Cầu H L298N</span>
+
                         <span class="content-en">⚡ JGA25 Gear Motor &amp; L298N H-Bridge</span>
+
                     </h3>
+
                     <p>
+
                         <span class="content-vi">Sử dụng động cơ DC giảm tốc kim loại JGA25 định mức 280RPM cho tỷ số truyền tối ưu giữa tốc độ di chuyển và lực kéo (torque). Mạch công suất L298N cho phép điều khiển đảo chiều quay của động cơ bằng tín hiệu mức logic (IN1, IN2) và điều chỉnh tốc độ mượt mà bằng băm xung PWM (chân ENA) trực tiếp từ vi điều khiển Arduino Uno.</span>
+
                         <span class="content-en">Utilizes a JGA25 all-metal gear DC motor rated at 280 RPM to achieve the optimal balance between high linear velocity and driving torque. The L298N dual H-bridge motor driver handles bidirectional rotation via logic control pins (IN1, IN2) and smooth velocity control through Arduino PWM modulation on the ENA enable pin.</span>
+
                     </p>
+
                 </article>
 
                 <!-- Subsystem 3: Dual Mode Control -->
+
                 <article class="moon-card">
+
                     <span class="moon-tag-code">03 // DUAL-MODE CONTROL LOGIC</span>
+
                     <h3>
-                        <span class="content-vi">🎮 Chế Độ Manual (Joystick) &amp; Smart Auto</span>
-                        <span class="content-en">🎮 Manual Joystick &amp; Smart Auto Modes</span>
+
+                        <span class="content-vi">Chế Độ Manual (Joystick) &amp; Smart Auto</span>
+
+                        <span class="content-en">Manual Joystick &amp; Smart Auto Modes</span>
+
                     </h3>
+
                     <p>
+
                         <span class="content-vi">Hệ thống hỗ trợ 2 chế độ linh hoạt: Chế độ <strong>Manual</strong> cho phép người vận hành sử dụng cần Joystick 2 trục để chủ động né đạn bắn; Chế độ <strong>Auto</strong> kích hoạt thuật toán sinh số giả ngẫu nhiên biến thiên tốc độ, thời gian trễ và chu kỳ đảo chiều bất ngờ, tạo ra độ khó cuốn hút và thử thách cao cho người chơi tại gian hàng.</span>
+
                         <span class="content-en">Features two operating modes: <strong>Manual Mode</strong> empowers an operator to evade incoming shots using a 2-axis analog joystick; <strong>Smart Auto Mode</strong> engages a pseudo-random trajectory algorithm that constantly jitters velocity, delay intervals, and directional shifts to create an exhilarating, unpredictable arcade challenge.</span>
+
                     </p>
+
                 </article>
 
                 <!-- Subsystem 4: Endstop Safety -->
+
                 <article class="moon-card">
+
                     <span class="moon-tag-code">04 // HARDWARE SAFETY &amp; LIMITS</span>
+
                     <h3>
-                        <span class="content-vi">🛡️ Công Tắc Hành Trình Chống Quá Hành Trình</span>
-                        <span class="content-en">🛡️ Boundary Limit Switches (Endstops)</span>
+
+                        <span class="content-vi">Công Tắc Hành Trình Chống Quá Hành Trình</span>
+
+                        <span class="content-en">Boundary Limit Switches (Endstops)</span>
+
                     </h3>
+
                     <p>
+
                         <span class="content-vi">Tại hai điểm giới hạn tận cùng của ray dẫn hướng, hai công tắc hành trình (Endstop limit switches) được bố trí để phản hồi vị trí biên. Khi gá bia chạm tới công tắc, vi điều khiển lập tức khóa chiều quay hiện tại, hãm động cơ và chỉ cho phép chuyển động theo hướng ngược lại, ngăn chặn tuyệt đối tình trạng kẹt dây, tuột cáp hoặc quá tải động cơ.</span>
+
                         <span class="content-en">Physical micro-switches positioned at both mechanical rail endpoints act as safety endstops. Once the target carriage triggers a boundary switch, the Arduino instantly cuts PWM drive in that direction and enforces a reverse-only rotation, eliminating any risk of cable jams, derailment, or motor stall burnouts.</span>
+
                     </p>
+
                 </article>
+
             </div>
+
         </section>
 
         <!-- ── CODE ARCHITECTURE & LOGIC SNIPPET ── -->
-        <section class="console-block" style="margin-bottom: 3rem;">
-            <div class="cmd-line">💻 Embedded Control Algorithm (C++ / Arduino)</div>
-            <p style="color: var(--text-muted); margin-top: 10px; line-height: 1.6;">
+
+        <section class="console-block page-section" id="section-5">
+
+            <h2 class="cmd-line"><span class="content-en">Control algorithm (C++ / Arduino)</span><span class="content-vi">Thuật toán điều khiển (C++ / Arduino)</span></h2>
+
+            <p>
+
                 <span class="content-vi">Dưới đây là cấu trúc logic điều khiển cốt lõi được lập trình trên Arduino Uno: Xử lý tín hiệu analog từ Joystick, giám sát liên tục trạng thái công tắc hành trình và tạo chuyển động ngẫu nhiên trong chế độ Auto.</span>
+
                 <span class="content-en">Below is the core architectural logic deployed onto the Arduino Uno: Reading ADC signals from the joystick, continuously monitoring limit switch safety flags, and synthesizing unpredictable motion in Auto mode.</span>
+
             </p>
 
             <div class="moon-code-panel">
+
 <span class="cm">// --- HUNT FOR THE MOON // EMBEDDED CONTROLLER CORE LOGIC ---</span>
+
 <span class="kw">#define</span> PIN_ENA <span class="num">9</span>   <span class="cm">// PWM Speed Control</span>
+
 <span class="kw">#define</span> PIN_IN1 <span class="num">8</span>   <span class="cm">// Direction 1</span>
+
 <span class="kw">#define</span> PIN_IN2 <span class="num">7</span>   <span class="cm">// Direction 2</span>
+
 <span class="kw">#define</span> LIMIT_LEFT  <span class="num">2</span> <span class="cm">// Left Endstop (Interrupt/Digital)</span>
+
 <span class="kw">#define</span> LIMIT_RIGHT <span class="num">3</span> <span class="cm">// Right Endstop (Interrupt/Digital)</span>
+
 <span class="kw">#define</span> PIN_JOYSTICK_X <span class="num">A0</span>
 
 <span class="kw">void</span> <span class="fn">driveMotor</span>(<span class="kw">int</span> speed, <span class="kw">bool</span> forward) {
+
     <span class="cm">// Boundary check with physical limit switches</span>
-    <span class="kw">if</span> (forward && <span class="fn">digitalRead</span>(LIMIT_RIGHT) == LOW) { speed = <span class="num">0</span>; }
-    <span class="kw">if</span> (!forward && <span class="fn">digitalRead</span>(LIMIT_LEFT) == LOW)  { speed = <span class="num">0</span>; }
+
+    <span class="kw">if</span> (forward &amp;&amp; <span class="fn">digitalRead</span>(LIMIT_RIGHT) == LOW) { speed = <span class="num">0</span>; }
+
+    <span class="kw">if</span> (!forward &amp;&amp; <span class="fn">digitalRead</span>(LIMIT_LEFT) == LOW)  { speed = <span class="num">0</span>; }
 
     <span class="fn">digitalWrite</span>(PIN_IN1, forward ? HIGH : LOW);
+
     <span class="fn">digitalWrite</span>(PIN_IN2, forward ? LOW : HIGH);
+
     <span class="fn">analogWrite</span>(PIN_ENA, <span class="fn">constrain</span>(speed, <span class="num">0</span>, <span class="num">255</span>));
+
 }
 
 <span class="kw">void</span> <span class="fn">runAutoAlgorithm</span>() {
+
     <span class="kw">int</span> randomSpeed = <span class="fn">random</span>(<span class="num">120</span>, <span class="num">255</span>);       <span class="cm">// Varying speed profile</span>
+
     <span class="kw">int</span> randomDuration = <span class="fn">random</span>(<span class="num">350</span>, <span class="num">1600</span>);   <span class="cm">// Jitter step duration</span>
+
     <span class="kw">bool</span> direction = <span class="fn">random</span>(<span class="num">0</span>, <span class="num">2</span>);            <span class="cm">// Unpredictable direction flip</span>
 
     <span class="fn">driveMotor</span>(randomSpeed, direction);
+
     <span class="fn">delay</span>(randomDuration);
+
 }
+
             </div>
+
         </section>
 
         <!-- ── BILL OF MATERIALS (BOM) & SPECIFICATIONS ── -->
-        <section class="glass-panel" style="margin-bottom: 3rem;">
-            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+
+        <section class="glass-panel page-section" id="section-6">
+
+            <h2>
+
                 <span class="content-vi">BẢNG DANH MỤC THIẾT BỊ &amp; LINH KIỆN (BOM)</span>
+
                 <span class="content-en">BILL OF MATERIALS &amp; SPECIFICATIONS (BOM)</span>
+
             </h2>
 
-            <div class="moon-table-wrap">
+            <details class="technical-disclosure"><summary><span><span class="content-en">View full technical details</span><span class="content-vi">Xem chi tiết kỹ thuật</span></span></summary><div class="moon-table-wrap">
+
                 <table class="moon-table">
+
                     <thead>
+
                         <tr>
+
                             <th>
+
                                 <span class="content-vi">Hạng mục</span>
+
                                 <span class="content-en">Component</span>
+
                             </th>
+
                             <th>
+
                                 <span class="content-vi">Thông số kỹ thuật</span>
+
                                 <span class="content-en">Specification</span>
+
                             </th>
+
                             <th>
+
                                 <span class="content-vi">Chức năng trong hệ thống</span>
+
                                 <span class="content-en">Functional Role</span>
+
                             </th>
+
                         </tr>
+
                     </thead>
+
                     <tbody>
+
                         <tr>
-                            <td style="color: var(--moon-gold); font-weight: 600;">Arduino Uno R3</td>
+
+                            <td>Arduino Uno R3</td>
+
                             <td>ATmega328P, 16MHz, 5V Logic</td>
+
                             <td>
+
                                 <span class="content-vi">Bộ vi điều khiển xử lý trung tâm, đọc ADC từ Joystick, tính toán thuật toán Auto và xuất PWM điều khiển.</span>
+
                                 <span class="content-en">Central processing unit executing joystick sampling, random algorithm calculation, and PWM signal generation.</span>
+
                             </td>
+
                         </tr>
+
                         <tr>
-                            <td style="color: var(--moon-gold); font-weight: 600;">Motor DC JGA25</td>
+
+                            <td>Motor DC JGA25</td>
+
                             <td>JGA25 280RPM, hộp số kim loại, 12V DC</td>
+
                             <td>
+
                                 <span class="content-vi">Động cơ kéo giá trượt với mô-men xoắn cao, đáp ứng khả năng gia tốc và đảo chiều tức thì.</span>
+
                                 <span class="content-en">High-torque geared DC motor providing swift linear acceleration and instant direction changes.</span>
+
                             </td>
+
                         </tr>
+
                         <tr>
-                            <td style="color: var(--moon-gold); font-weight: 600;">Driver L298N</td>
+
+                            <td>Driver L298N</td>
+
                             <td>Dual Full-Bridge Driver IC, Max 2A/channel</td>
+
                             <td>
+
                                 <span class="content-vi">Mạch cầu H công suất cao điều khiển chiều quay và tốc độ động cơ DC độc lập với nguồn vi điều khiển.</span>
+
                                 <span class="content-en">Dual H-bridge driver delivering isolated high-current power for bidirectional motor control.</span>
+
                             </td>
+
                         </tr>
+
                         <tr>
-                            <td style="color: var(--moon-gold); font-weight: 600;">Module Joystick</td>
+
+                            <td>Module Joystick</td>
+
                             <td>Analog 2-Axis Potentiometer + Pushbutton</td>
+
                             <td>
+
                                 <span class="content-vi">Thiết bị điều khiển thủ công cho phép người vận hành điều khiển bia lạng lách theo ý muốn.</span>
+
                                 <span class="content-en">Analog user interface enabling manual human-controlled target evasion during exhibition.</span>
+
                             </td>
+
                         </tr>
+
                         <tr>
-                            <td style="color: var(--moon-gold); font-weight: 600;">Endstop Limit Switches</td>
+
+                            <td>Endstop Limit Switches</td>
+
                             <td>Microswitch 3-pin (NO/NC/COM)</td>
+
                             <td>
+
                                 <span class="content-vi">Công tắc hành trình an toàn ở 2 đầu ray giới hạn hành trình, chống kẹt cáp và bảo vệ quá tải.</span>
+
                                 <span class="content-en">Physical boundary limit switches providing instant hardware cut-off against over-travel.</span>
+
                             </td>
+
                         </tr>
+
                         <tr>
-                            <td style="color: var(--moon-gold); font-weight: 600;">Cơ cấu Ray &amp; Dây dù</td>
+
+                            <td>Cơ cấu Ray &amp; Dây dù</td>
+
                             <td>Pulley bánh đai + Dây dù chịu lực cao</td>
+
                             <td>
+
                                 <span class="content-vi">Hệ thống cơ học chuyển động quay thành chuyển động tịnh tiến êm ái, bền bỉ và dễ bảo trì.</span>
+
                                 <span class="content-en">Mechanical pulley-cord linear drive translating rotary torque into smooth lateral motion.</span>
+
                             </td>
+
                         </tr>
+
                     </tbody>
+
                 </table>
+
             </div>
-        </section>
+
+        </details></section>
 
         <!-- ── CARNIVAL BOOTH HIGHLIGHTS & CONCLUSION ── -->
-        <section class="glass-panel" style="margin-bottom: 3rem;">
-            <h2 style="color: var(--text); border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">
+
+        <section class="glass-panel page-section" id="section-7">
+
+            <h2>
+
                 <span class="content-vi">HIỆU QUẢ TẠI GIAN HÀNG &amp; BÀI HỌC KINH NGHIỆM</span>
+
                 <span class="content-en">BOOTH ENGAGEMENT &amp; KEY TAKEAWAYS</span>
+
             </h2>
 
-            <div style="margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+            <div class="content-grid">
+
                 <div>
-                    <h3 style="color: var(--moon-gold); margin-top: 0;">
-                        <span class="content-vi">🎯 Sức Hút Tại Gian Hàng</span>
-                        <span class="content-en">🎯 Carnival Engagement</span>
+
+                    <h3>
+
+                        <span class="content-vi">Sức Hút Tại Gian Hàng</span>
+
+                        <span class="content-en">Carnival Engagement</span>
+
                     </h3>
-                    <p style="color: var(--text-muted); line-height: 1.65;">
+
+                    <p>
+
                         <span class="content-vi">Trong suốt thời gian diễn ra Hội chợ Trung Thu tại VinSchool, gian hàng "Săn Trăng" luôn là một trong những điểm nóng thu hút đông đảo bạn bè và thầy cô tham gia trải nghiệm. Sự kết hợp giữa cơ học chuyển động thực tế và thử thách ngẫu nhiên đã mang lại tiếng cười và tinh thần hào hứng cho tất cả người chơi.</span>
+
                         <span class="content-en">Throughout the VinSchool Mid-Autumn carnival, the "Hunt for the Moon" target shooting booth remained one of the most crowded and energetic attractions. The tactile physical mechanics paired with unpredictable auto-motion generated endless excitement and friendly competition among students and teachers.</span>
+
                     </p>
+
                 </div>
+
                 <div>
-                    <h3 style="color: var(--moon-cyan); margin-top: 0;">
-                        <span class="content-vi">💡 Bài Học Kỹ Thuật Thực Tế</span>
-                        <span class="content-en">💡 Real-World Engineering Insights</span>
+
+                    <h3>
+
+                        <span class="content-vi">Bài Học Kỹ Thuật Thực Tế</span>
+
+                        <span class="content-en">Real-World Engineering Insights</span>
+
                     </h3>
-                    <p style="color: var(--text-muted); line-height: 1.65;">
+
+                    <p>
+
                         <span class="content-vi">Dự án đã mang lại cho em những trải nghiệm thực chiến vô cùng quý báu về thiết kế hệ thống cơ điện tử (Mechatronics): Từ việc tính toán mô-men xoắn chọn động cơ, cân chỉnh độ căng dây puly tránh trượt tải, cách ly nguồn tránh sụt áp vi điều khiển, cho đến việc thiết kế logic bảo vệ bằng công tắc hành trình để hệ thống có thể hoạt động bền bỉ liên tục nhiều giờ liền.</span>
+
                         <span class="content-en">This build provided invaluable hands-on mechatronics engineering experience: From sizing motor torque and tuning cord tension to prevent pulley slippage, to isolating motor power rails from the microcontroller to prevent brownouts, and implementing endstop safety logic for rock-solid continuous operation over hours of non-stop booth gameplay.</span>
+
                     </p>
+
                 </div>
+
             </div>
+
         </section>
+
     </main>
 
     <footer class="system-footer"></footer>
 
-    <script src="../../components.js"></script>
-    <script src="../../script.js"></script>
-</body>
+    <script src="../../components.js?v=purple-3"></script>
+
+    <script src="../../script.js?v=purple-3"></script>
+
+<script type="module" src="../../assets/motion.js?v=purple-3"></script></body>
 
 </html>

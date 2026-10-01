@@ -1,156 +1,230 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script>
+
         (function () {
+
             try {
+
                 var savedTheme = localStorage.getItem('theme-preference');
+
                 document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+
             } catch (error) {
+
                 document.documentElement.setAttribute('data-theme', 'dark');
+
             }
+
         }());
+
     </script>
-    <title>ZALO_AUTO_SENDER.EXE</title>
-    <link rel="stylesheet" href="../../style.css">
-</head>
-<body class="lang-en"
-      data-nav-back="../../index.html"
-      data-nav-status="Product"
-      data-footer-line1="[End of Page]"
-      data-footer-line2="Developed by Elax - 2026">
 
-    <canvas id="matrix-bg"></canvas>
-    <div class="aurora-bg">
-        <div class="aurora-orb orb-1"></div>
-        <div class="aurora-orb orb-2"></div>
-        <div class="aurora-orb orb-3"></div>
-    </div>
-    <div class="grain-overlay"></div>
-    <div id="cursor-glow"></div>
-    <div class="crt-vignette"></div>
+    <title>Zalo Auto Sender · Elax</title>
 
-    <div class="scanlines"></div>
+    <link rel="stylesheet" href="../../style.css?v=purple-3">
+
+<meta name="description" content="ZALO_AUTO_SENDER.EXE · A project by Elax."><link rel="icon" href="../../assets/favicon.png" type="image/png"></head>
+
+<body class="lang-en project-page" data-nav-back="../../index.html" data-nav-status="Product" data-footer-line1="[End of Page]" data-footer-line2="Developed by Elax - 2026">
 
     <nav class="system-nav"></nav>
 
-    <main class="terminal-container">
-        <section class="console-block hero">
-            <div class="cmd-line">>> EXECUTE zalo_sender_info.exe</div>
-            <h1 class="glitch-text" data-text="ZALO AUTO SENDER">
-                ZALO AUTO SENDER
-            </h1>
-            
-            <div class="slogan-box">
-                <span style="color: var(--accent);">TYPE:</span>&nbsp;
-                <span class="content-vi">Phần mềm tự động hóa & Marketing</span>
-                <span class="content-en">Automation & Marketing Tool</span>
-            </div>
-        </section>
+    <main class="terminal-container" id="main">
 
-        <section class="console-block hidden-section">
-            <div class="project-brutal-card" style="border: none;">
-                <div class="project-body" style="flex-wrap: wrap-reverse;">
-                    
-                    <div class="project-desc" style="flex: 1 1 400px; padding-left: 0;">
-                        <h3 style="color: var(--text); border-bottom: 1px solid var(--text); padding-bottom: 10px; margin-bottom: 15px;">
-                            SYSTEM_DESCRIPTION
-                        </h3>
-                        <p class="content-vi" style="margin-bottom: 20px;">
+        <section class="console-block hero project-hero">
+
+            <div class="case-intro"><div class="cmd-line"><span class="content-en">Automation project</span><span class="content-vi">Dự án tự động hóa</span></div>
+
+            <h1 class="glitch-text">Zalo Auto Sender</h1>
+
+            <div class="slogan-box">
+
+                <span>Project type:</span>
+
+                <span class="content-vi">Phần mềm tự động hóa &amp; Marketing</span>
+
+                <span class="content-en">Automation &amp; Marketing Tool</span>
+
+            </div>
+
+        </div><div class="case-visual case-studio"><img src="../../assets/projects/../brand/elax-avatar.webp" alt="Zalo Auto Sender · Elax project visual" width="1200" height="750" decoding="async" fetchpriority="high"></div></section>
+
+        <nav class="case-index" aria-label="On this page"><a href="#section-2"><span class="content-en">Download</span><span class="content-vi">Tải xuống</span></a><a href="#section-3"><span class="content-en">Release history</span><span class="content-vi">Lịch sử cập nhật</span></a></nav><section class="console-block hidden-section page-section">
+
+            <div class="project-brutal-card">
+
+                <div class="project-body">
+
+                    <div class="project-desc">
+
+                        <h3>Overview</h3>
+
+                        <p class="content-vi">
+
                             Một giải pháp phần mềm tối ưu được xây dựng trên nền tảng WPF (Windows Presentation Foundation). Ứng dụng cho phép người dùng gửi tin nhắn hàng loạt được cá nhân hóa đến danh sách khách hàng trên Zalo một cách tự động, giúp tiết kiệm thời gian và nâng cao hiệu suất chăm sóc khách hàng.
+
                         </p>
-                        <p class="content-en" style="margin-bottom: 20px;">
+
+                        <p class="content-en">
+
                             An optimized software solution built on the WPF (Windows Presentation Foundation) platform. The application allows users to automatically send personalized bulk messages to customer lists on Zalo, saving time and improving customer service efficiency.
+
                         </p>
 
                         <div class="feature-list">
-                            <p style="color: var(--accent); margin-bottom: 5px;">>> KEY_FEATURES:</p>
-                            <ul style="list-style: none; padding-left: 10px; font-size: 0.9rem;">
-                                <li>> Import Data (Excel/CSV)</li>
-                                <li>> Custom Message Templates</li>
-                                <li>> Smart Delay (Anti-Spam)</li>
-                                <li>> Zalo OA Integration (New)</li>
-                                <li>> Real-time Progress Tracking</li>
+
+                            <p>Key features</p>
+
+                            <ul>
+
+                                <li>&gt; Import Data (Excel/CSV)</li>
+
+                                <li>&gt; Custom Message Templates</li>
+
+                                <li>&gt; Smart Delay (Anti-Spam)</li>
+
+                                <li>&gt; Zalo OA Integration (New)</li>
+
+                                <li>&gt; Real-time Progress Tracking</li>
+
                             </ul>
+
                         </div>
+
                     </div>
 
-                    <div class="project-img-wrapper" style="flex: 1 1 400px; border: 1px solid var(--text); padding: 5px;">
-                        <img src="https://i.ibb.co/1Y2WTDt4/build-professional-wpf-desktop-app-and-automation-tools.jpg" alt="Zalo Auto Sender Interface" style="width: 100%; display: block;">
-                        <span style="font-size: 0.7rem; color: var(--accent); display: block; text-align: right; margin-top: 5px;">FIG 1.0: USER_INTERFACE</span>
+                    <div class="project-img-wrapper">
+
+                        <img src="https://i.ibb.co/1Y2WTDt4/build-professional-wpf-desktop-app-and-automation-tools.jpg" alt="Zalo Auto Sender Interface" loading="lazy" decoding="async">
+
+                        <span>FIG 1.0: USER_INTERFACE</span>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
-        <section class="console-block hidden-section">
-            <div class="cmd-line">>> INITIATE DOWNLOAD_SEQUENCE</div>
-            <div style="border: 2px dashed var(--accent); padding: 30px; text-align: center; background: var(--danger-soft);">
-                <h3 style="margin-bottom: 15px;">VERSION 2.4 (LATEST)</h3>
-                <p class="content-vi" style="margin-bottom: 20px;">Dung lượng: ~68MB | Yêu cầu: Windows 10/11</p>
-                <p class="content-en" style="margin-bottom: 20px;">Size: ~68MB | Requirement: Windows 10/11</p>
-                
-                <a href="https://drive.google.com/file/d/1l5dp9TyCbgBs3dkBJ9ygFZUxT9yh5QH4/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="launch-btn" style="display: inline-block; min-width: 250px; background: var(--text); color: var(--bg);">
-                    [ DOWNLOAD_NOW ]
-                </a>
+        <section class="console-block hidden-section page-section" id="section-2">
+
+            <h2 class="cmd-line"><span class="content-en">Download</span><span class="content-vi">Tải xuống</span></h2>
+
+            <div>
+
+                <h3>VERSION 2.4 (LATEST)</h3>
+
+                <p class="content-vi">Dung lượng: ~68MB | Yêu cầu: Windows 10/11</p>
+
+                <p class="content-en">Size: ~68MB | Requirement: Windows 10/11</p>
+
+                <a href="https://drive.google.com/file/d/1l5dp9TyCbgBs3dkBJ9ygFZUxT9yh5QH4/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="launch-btn">Download</a>
+
             </div>
+
         </section>
 
-        <section class="console-block hidden-section">
-            <div class="cmd-line">>> CAT changelog.log</div>
+        <section class="console-block hidden-section page-section" id="section-3">
+
+            <h2 class="cmd-line"><span class="content-en">Release history</span><span class="content-vi">Lịch sử cập nhật</span></h2>
+
             <div class="log-container">
+
                 <div class="log-header">
+
                     <span>DATE</span>
+
                     <span>VERSION</span>
+
                     <span>CHANGES</span>
+
                 </div>
-                
+
                 <div class="log-entry new-log">
+
                     <span class="log-date">2026-01-17</span>
+
                     <span class="log-ver">v2.4</span>
+
                     <span class="log-msg">
+
                         <span class="tag-new">[LATEST]</span>
-                        <span class="content-vi">Nâng cấp hệ thống lõi & Sửa một số lỗi nhỏ.</span>
-                        <span class="content-en">Core system upgrade & Minor bug fixes.</span>
+
+                        <span class="content-vi">Nâng cấp hệ thống lõi &amp; Sửa một số lỗi nhỏ.</span>
+
+                        <span class="content-en">Core system upgrade &amp; Minor bug fixes.</span>
+
                     </span>
+
                 </div>
 
                 <div class="log-entry">
+
                     <span class="log-date">2026-01-17</span>
+
                     <span class="log-ver">v2.3</span>
+
                     <span class="log-msg">
+
                         <span class="tag-new">[UPDATE]</span>
+
                         <span class="content-vi">Cập nhật module Zalo OA. Tối ưu hóa hiệu suất gửi tin.</span>
+
                         <span class="content-en">Updated Zalo OA module. Optimized message sending performance.</span>
+
                     </span>
+
                 </div>
 
                 <div class="log-entry">
+
                     <span class="log-date">2026-01-11</span>
+
                     <span class="log-ver">v1.0.0</span>
+
                     <span class="log-msg">
+
                         <span class="tag-new">[INIT]</span>
+
                         <span class="content-vi">Phát hành phiên bản đầu tiên. Các tính năng cơ bản đã hoạt động ổn định.</span>
+
                         <span class="content-en">Initial Release. Basic features are stable and operational.</span>
+
                     </span>
+
                 </div>
-                
-                <div class="log-entry" style="opacity: 0.5;">
+
+                <div class="log-entry">
+
                     <span class="log-date">--/--/--</span>
+
                     <span class="log-ver">v?.?.?</span>
+
                     <span class="log-msg">...WAITING FOR UPDATES...<span class="cursor">_</span></span>
+
                 </div>
+
             </div>
+
         </section>
 
     </main>
 
     <footer class="system-footer"></footer>
 
-    <script src="../../components.js"></script>
-    <script src="../../script.js"></script>
-</body>
+    <script src="../../components.js?v=purple-3"></script>
+
+    <script src="../../script.js?v=purple-3"></script>
+
+<script type="module" src="../../assets/motion.js?v=purple-3"></script></body>
 
 </html>

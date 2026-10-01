@@ -1,96 +1,24 @@
-/**
- * components.js
- * Injects shared nav and footer HTML into every page.
- *
- * Customise each page by adding data-* attributes to <body>:
- *   data-nav-logo     - logo text shown in the nav (home page only)
- *   data-nav-status   - status badge text
- *   data-nav-back     - relative URL for the "back" link (sub-pages only)
- *   data-footer-line1 - first info line in the footer
- *   data-footer-line2 - second info line in the footer
- */
 (function () {
-    var body = document.body;
-    var d = body.dataset;
-
-    var navLogo = d.navLogo || 'ELAX';
-    var navStatus = d.navStatus || 'Online';
-    var navBack = d.navBack || '';
-    var footerLine1 = d.footerLine1 || '[Secure Connection]';
-    var footerLine2 = d.footerLine2 || 'Built by Elax - 2026';
-
-    // -- Navigation ────────────────────────────────────────────────────────
-    var nav = document.querySelector('nav.system-nav');
+    const body = document.body;
+    const home = body.dataset.navBack || 'index.html';
+    const base = home.replace('index.html', '');
+    const isHome = body.classList.contains('portfolio-home');
+    const text = (en, vi) => `<span class="content-en">${en}</span><span class="content-vi">${vi}</span>`;
+    const nav = document.querySelector('.system-nav');
     if (nav) {
-        var logoEl;
-        if (navBack) {
-            logoEl = document.createElement('a');
-            logoEl.href = navBack;
-            logoEl.className = 'logo';
-            logoEl.style.textDecoration = 'none';
-            logoEl.style.color = 'var(--text)';
-            logoEl.textContent = '← Back';
-        } else {
-            logoEl = document.createElement('div');
-            logoEl.className = 'logo';
-            logoEl.textContent = navLogo;
-        }
-
-        var statusSpan = document.createElement('span');
-        statusSpan.className = 'system-status';
-        statusSpan.textContent = navStatus;
-
-        var langBtn = document.createElement('button');
-        langBtn.id = 'lang-toggle';
-        langBtn.className = 'cmd-btn';
-        langBtn.type = 'button';
-        langBtn.textContent = 'MODE: EN';
-
-        var themeBtn = document.createElement('button');
-        themeBtn.id = 'theme-toggle';
-        themeBtn.className = 'cmd-btn theme-toggle';
-        themeBtn.type = 'button';
-        themeBtn.setAttribute('aria-label', 'Toggle color theme');
-
-        var controls = document.createElement('div');
-        controls.className = 'nav-controls';
-        controls.appendChild(statusSpan);
-        controls.appendChild(langBtn);
-        controls.appendChild(themeBtn);
-
-        nav.appendChild(logoEl);
-        nav.appendChild(controls);
+        nav.setAttribute('aria-label', 'Main navigation');
+        nav.innerHTML = `<a class="brand-identity" href="${isHome ? '#intro' : home}" aria-label="Elax home"><img src="${base}assets/brand/elax-avatar.webp" alt="Elax personal brand" width="42" height="42"><span>Elax</span></a>
+            <div class="nav-links" id="nav-links">
+                <a href="${isHome ? '' : home}#work">${text('Games', 'Game')}</a>
+                <a href="${isHome ? '' : home}#projects">${text('Projects', 'Dự án')}</a>
+                <a href="${isHome ? '' : home}#recognition">${text('Achievements', 'Thành tích')}</a>
+                <a href="${isHome ? '' : home}#about">${text('About', 'Về mình')}</a>
+            </div>
+            <div class="nav-controls"><button id="lang-toggle" type="button" aria-label="Switch to Vietnamese">EN <span aria-hidden="true">/ VI</span></button><button id="theme-toggle" type="button" aria-label="Switch to light mode"><span aria-hidden="true">◐</span></button><details class="display-prefs"><summary aria-label="Animation settings">⋯</summary><label>${text('Animations','Chuyển động')}<select id="motion-preference"><option value="on">On</option><option value="system">System</option><option value="off">Off</option></select></label></details><button id="nav-menu" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><span></span><span></span></button></div>`;
     }
-
-    // ── Footer ────────────────────────────────────────────────────────────
-    var footer = document.querySelector('footer.system-footer');
-    if (footer) {
-        var sysTime = document.createElement('span');
-        sysTime.id = 'sys-time';
-        sysTime.textContent = 'TIME: --:--:--';
-
-        var sep = document.createElement('span');
-        sep.className = 'separator';
-        sep.textContent = '|';
-
-        var sysBat = document.createElement('span');
-        sysBat.id = 'sys-battery';
-        sysBat.textContent = 'BATTERY: DETECTING...';
-
-        var sysBar = document.createElement('div');
-        sysBar.className = 'sys-info-bar';
-        sysBar.appendChild(sysTime);
-        sysBar.appendChild(sep);
-        sysBar.appendChild(sysBat);
-
-        var p1 = document.createElement('p');
-        p1.textContent = footerLine1;
-
-        var p2 = document.createElement('p');
-        p2.textContent = footerLine2;
-
-        footer.appendChild(sysBar);
-        footer.appendChild(p1);
-        footer.appendChild(p2);
-    }
+    const skip = document.createElement('a'); skip.className = 'skip-link'; skip.href = '#main';
+    skip.innerHTML = text('Skip to content', 'Đến nội dung'); body.prepend(skip);
+    const main = document.querySelector('main'); if (main) main.id = 'main';
+    const footer = document.querySelector('.system-footer');
+    if (footer) footer.innerHTML = `<p>${body.dataset.footerLine2 || 'Đỗ Ngọc Thiên Bảo (Elax) · 2026'}</p><a href="#main">${text('Back to top', 'Về đầu trang')} ↑</a>`;
 }());
