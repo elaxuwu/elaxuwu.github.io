@@ -20,5 +20,5 @@
     skip.innerHTML = text('Skip to content', 'Đến nội dung'); body.prepend(skip);
     const main = document.querySelector('main'); if (main) main.id = 'main';
     const footer = document.querySelector('.system-footer');
-    if (footer) footer.innerHTML = `<p>${body.dataset.footerLine2 || 'Đỗ Ngọc Thiên Bảo (Elax) · 2026'}</p><a href="#main">${text('Back to top', 'Về đầu trang')} ↑</a>`;
+    if (footer) footer.innerHTML = `<p>${body.dataset.footerLine2 || 'Đỗ Ngọc Thiên Bảo (Elax) | 2026'}</p><a href="#main">${text('Back to top', 'Về đầu trang')} ↑</a>`;
 }());

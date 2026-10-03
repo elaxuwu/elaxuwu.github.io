@@ -54,7 +54,7 @@ const PROJECT_DESCRIPTIONS = {
     'ClinicScribe': ['AI clinical notes', 'Ghi chép hồ sơ khám bệnh bằng AI'],
     'SignBridge AI': ['Sign language ↔ voice', 'Chuyển đổi giữa thủ ngữ và giọng nói'],
     'RecycleCheck AI': ['AI waste sorting', 'Phân loại rác bằng AI'],
-    'Soccer Drone': ['FPV drone · Team The Cookies', 'Drone FPV · Nhóm The Cookies'],
+    'Soccer Drone': ['FPV drone / Team The Cookies', 'Drone FPV / Nhóm The Cookies'],
     'Hunt for the Moon': ['Interactive moving target', 'Bia di chuyển cho trò chơi bắn mục tiêu'],
     'Zalo Auto Sender': ['Windows messaging automation', 'Tự động gửi tin nhắn trên Windows'],
     'Windows License Checker': ['Windows license utility', 'Công cụ kiểm tra bản quyền Windows'],
@@ -88,7 +88,7 @@ function renderFiles(folderName, page = 0) {
     grid.replaceChildren();
     items.slice(projectPage * size, (projectPage + 1) * size).forEach(item => {
         const a = document.createElement('a'); a.className = 'project-card'; a.href = item.link;
-        a.setAttribute('aria-label', `${item.name} · ${item.tag}`); a.title = `${item.name} · ${item.tag}`;
+        a.setAttribute('aria-label', `${item.name}, ${item.tag}`); a.title = `${item.name}, ${item.tag}`;
         if (/^https?:/.test(item.link)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
         const media = PROJECT_MEDIA[item.name], description = PROJECT_DESCRIPTIONS[item.name];
         a.innerHTML = `<div class="project-media"><img src="assets/${media[0]}" alt="${item.name} project visual" width="720" height="405" loading="lazy"></div><div class="project-card-info"><img class="project-icon" src="assets/${media[1]}" alt="" width="36" height="36"><div><h3>${item.name}</h3><p>${bilingual(...description)}</p></div><span class="card-arrow" aria-hidden="true">↗</span></div>${item.ribbon ? '<span class="project-award">'+bilingual('Award winner','Đạt giải')+'</span>' : ''}`;
@@ -464,8 +464,8 @@ function initProductPreviewSlideshow() {
             {
                 type: 'image',
                 src: 'https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/004/817/592/datas/gallery.jpg',
-                captionVi: 'RecycleDex — từ điển tra cứu vật liệu lấy cảm hứng từ Pokédex.',
-                captionEn: 'RecycleDex — waste & material index inspired by Pokédex.',
+                captionVi: 'RecycleDex: từ điển tra cứu vật liệu lấy cảm hứng từ Pokédex.',
+                captionEn: 'RecycleDex: waste & material index inspired by Pokédex.',
                 altVi: 'Ảnh RecycleDex của RecycleCheck AI',
                 altEn: 'RecycleCheck AI RecycleDex preview'
             }
