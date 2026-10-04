@@ -118,6 +118,15 @@ function initMotion() {
     document.addEventListener('awardopen', () => animateContent('#award-dialog .dialog-top,#award-dialog-content'), options);
     document.addEventListener('motionchange', compose, options);
     document.addEventListener('languagechange', () => ScrollTrigger.refresh(), options);
+    document.addEventListener('cosmoschange', e => {
+        if (e.detail?.active) {
+            lenis?.stop();
+        } else {
+            lenis?.start();
+            ScrollTrigger.refresh();
+            setTimeout(() => ScrollTrigger.refresh(), 460);
+        }
+    }, options);
 
     document.querySelectorAll('[data-tilt]').forEach(card => {
         const rx = gsap.quickTo(card, 'rotationX', { duration: .65, ease: 'power3.out' });
