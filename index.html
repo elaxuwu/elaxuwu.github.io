@@ -417,30 +417,27 @@
     </div>
     <nav class="cosmos-dock" id="cosmos-dock" aria-label="Orbital navigation">
         <button type="button" class="cosmos-dock-trigger" id="cosmos-dock-trigger" aria-expanded="false" aria-controls="cosmos-dock-drawer" aria-label="Toggle orbital navigation menu">
-            <span class="cosmos-dock-trigger-dot" id="cosmos-dock-trigger-dot" aria-hidden="true"></span>
             <span class="cosmos-dock-trigger-text" id="cosmos-dock-trigger-text">
-                <span class="content-en">Planets (13)</span>
-                <span class="content-vi">Thiên thể (13)</span>
+                <span class="content-en">Explore projects</span>
+                <span class="content-vi">Khám phá dự án</span>
             </span>
-            <span class="cosmos-dock-trigger-arrow" aria-hidden="true">▲</span>
+            <span class="cosmos-dock-count">13</span>
+            <span class="cosmos-dock-trigger-arrow" aria-hidden="true">⌃</span>
         </button>
 
-        <div class="cosmos-dock-drawer" id="cosmos-dock-drawer">
+        <div class="cosmos-dock-drawer" id="cosmos-dock-drawer" inert>
             <div class="cosmos-dock-header">
                 <div class="cosmos-dock-status" id="cosmos-dock-status">
-                    <span class="content-en"><span>Planetary Orbits</span></span>
-                    <span class="content-vi"><span>Quỹ đạo thiên thể</span></span>
+                    <span class="content-en">Games, tools & experiments</span>
+                    <span class="content-vi">Game, công cụ & thử nghiệm</span>
                 </div>
                 <div class="cosmos-dock-actions">
-                    <button type="button" class="cosmos-dock-reset" id="cosmos-dock-reset" title="Reset camera overview">
-                        <span aria-hidden="true">↺</span>
-                        <span class="content-en">Overview</span>
-                        <span class="content-vi">Toàn cảnh</span>
-                    </button>
-                    <button type="button" class="cosmos-dock-close" id="cosmos-dock-close" aria-label="Minimize orbit menu">▼</button>
+                    <button type="button" class="cosmos-dock-step" id="cosmos-dock-prev" aria-label="Previous projects">←</button>
+                    <button type="button" class="cosmos-dock-step" id="cosmos-dock-next" aria-label="Next projects">→</button>
+                    <button type="button" class="cosmos-dock-close" id="cosmos-dock-close" aria-label="Close project index">×</button>
                 </div>
             </div>
-            <div class="cosmos-dock-scroll" id="cosmos-hud-chips" role="toolbar" aria-label="Planetary targets"></div>
+            <div class="cosmos-dock-scroll" id="cosmos-hud-chips" role="group" aria-label="Projects"></div>
         </div>
     </nav>
 </aside>

@@ -314,48 +314,39 @@ body.cosmos-active .cosmos-overlay { opacity:1; visibility:visible; }
 .cosmos-card h3 { font-size:20px; margin:6px 0 8px; }
 .cosmos-card p { font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:18px; }
 .cosmos-card-actions { display:flex; gap:14px; align-items:center; }
-/* Expandable Cosmos Dock */
-.cosmos-dock { position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:25; pointer-events:auto; display:flex; flex-direction:column; align-items:center; max-width:920px; width:min(920px,94vw); }
-.cosmos-dock-trigger { display:inline-flex; align-items:center; gap:8px; height:34px; padding:0 14px; border-radius:999px; background:rgba(18,14,26,.78); border:1px solid rgba(255,255,255,.12); box-shadow:0 8px 24px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); color:var(--text); font-size:11px; font-weight:500; cursor:pointer; transition:transform .22s var(--ease),border-color .22s ease,opacity .2s ease,background .22s ease; user-select:none; z-index:2; }
-html[data-theme='light'] .cosmos-dock-trigger { background:rgba(238,235,245,.88); border-color:rgba(0,0,0,.12); box-shadow:0 8px 24px rgba(70,50,110,.2); }
-.cosmos-dock-trigger:hover { transform:translateY(-2px); border-color:var(--accent); background:rgba(28,22,40,.92); }
-.cosmos-dock-trigger-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 6px var(--accent); display:inline-block; transition:background-color .2s ease,box-shadow .2s ease; }
-.cosmos-dock-trigger-text { display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
-.cosmos-dock-active-name { font-weight:600; color:#fff; }
-html[data-theme='light'] .cosmos-dock-active-name { color:var(--text); }
-.cosmos-dock-trigger-arrow { font-size:7px; opacity:.6; transition:transform .25s ease; }
-.cosmos-dock-drawer { width:100%; background:rgba(16,12,24,.92); border:1px solid rgba(255,255,255,.1); border-radius:14px; box-shadow:0 20px 48px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); padding:8px 12px 10px; display:flex; flex-direction:column; gap:8px; position:absolute; bottom:0; opacity:0; visibility:hidden; pointer-events:none; transform:translateY(14px) scale(.97); transition:opacity .2s ease,transform .25s cubic-bezier(.16,1,.3,1),visibility .25s; transition-delay:.05s; }
-html[data-theme='light'] .cosmos-dock-drawer { background:rgba(240,236,248,.95); border-color:rgba(112,82,181,.2); box-shadow:0 20px 48px rgba(60,40,100,.25); }
-.cosmos-dock:hover .cosmos-dock-drawer,.cosmos-dock:focus-within .cosmos-dock-drawer,.cosmos-dock.is-expanded .cosmos-dock-drawer { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0) scale(1); transition-delay:0s; }
-.cosmos-dock:hover .cosmos-dock-trigger,.cosmos-dock:focus-within .cosmos-dock-trigger,.cosmos-dock.is-expanded .cosmos-dock-trigger { opacity:0; pointer-events:none; transform:translateY(6px); }
-.cosmos-dock:hover .cosmos-dock-trigger-arrow,.cosmos-dock.is-expanded .cosmos-dock-trigger-arrow { transform:rotate(180deg); }
-.cosmos-dock-header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:5px; border-bottom:1px solid rgba(255,255,255,.06); }
-html[data-theme='light'] .cosmos-dock-header { border-bottom-color:rgba(0,0,0,.06); }
-.cosmos-dock-status { font-size:11px; font-weight:500; color:var(--text-muted); display:flex; align-items:center; gap:6px; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.cosmos-dock-status span:first-child { font-weight:600; color:var(--text); }
-.cosmos-dock-status-tag { font-size:9px; color:var(--text-muted); opacity:.7; text-transform:uppercase; letter-spacing:.05em; }
-.cosmos-dock-actions { display:flex; align-items:center; gap:6px; flex-shrink:0; }
-.cosmos-dock-reset { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:6px; background:transparent; border:1px solid rgba(255,255,255,.08); color:var(--text-muted); font-size:10px; font-weight:500; cursor:pointer; transition:var(--transition); }
-html[data-theme='light'] .cosmos-dock-reset { border-color:rgba(0,0,0,.1); }
-.cosmos-dock-reset:hover,.cosmos-dock-reset.active { background:var(--accent-soft); border-color:var(--accent); color:var(--text); }
-.cosmos-dock-close { width:20px; height:20px; border-radius:5px; background:transparent; border:0; color:var(--text-muted); display:grid; place-items:center; font-size:9px; cursor:pointer; transition:var(--transition); }
-.cosmos-dock-close:hover { color:var(--text); background:rgba(255,255,255,.08); }
-.cosmos-dock-scroll { display:flex; gap:6px; overflow-x:auto; scrollbar-width:thin; scrollbar-color:rgba(170,152,245,.25) transparent; padding:2px 0 2px; scroll-behavior:smooth; }
-.cosmos-dock-scroll::-webkit-scrollbar { height:3px; }
-.cosmos-dock-scroll::-webkit-scrollbar-thumb { background:rgba(170,152,245,.25); border-radius:3px; }
-.cosmos-chip { display:inline-flex; align-items:center; gap:7px; padding:5px 10px; border-radius:7px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); color:var(--text); white-space:nowrap; cursor:pointer; transition:transform .16s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease; flex-shrink:0; }
-html[data-theme='light'] .cosmos-chip { background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.06); }
-.cosmos-chip-orb { width:6px; height:6px; border-radius:50%; display:inline-block; box-shadow:0 0 6px currentColor; flex-shrink:0; transition:transform .18s ease; }
-.cosmos-chip-name { font-size:11px; font-weight:500; color:var(--text); line-height:1; }
-.cosmos-chip-tag { font-size:8.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.04em; opacity:.75; line-height:1; }
-.cosmos-chip:hover,.cosmos-chip.is-hovered { transform:translateY(-1px); border-color:var(--chip-accent,var(--accent)); background:rgba(255,255,255,.08); box-shadow:0 2px 10px -2px var(--chip-accent,rgba(170,152,245,.3)); }
-.cosmos-chip:hover .cosmos-chip-orb,.cosmos-chip.is-hovered .cosmos-chip-orb { transform:scale(1.3); }
-.cosmos-chip.active { background:var(--accent-soft); border-color:var(--chip-accent,var(--accent)); box-shadow:0 0 12px -2px var(--chip-accent,var(--accent)); }
+/* Project previews provide context before visitors choose a planet. */
+.cosmos-dock { position:fixed; left:24px; bottom:calc(24px + env(safe-area-inset-bottom)); z-index:25; pointer-events:auto; }
+.cosmos-dock-trigger { display:flex; align-items:center; gap:14px; min-height:44px; padding:0 16px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); font-size:13px; cursor:pointer; }
+.cosmos-dock-count { color:var(--text-muted); font-size:11px; }
+.cosmos-dock-trigger-arrow { margin-left:6px; transition:transform .22s var(--ease); }
+.cosmos-dock.is-expanded .cosmos-dock-trigger-arrow { transform:rotate(180deg); }
+.cosmos-dock-drawer { position:absolute; left:0; bottom:calc(100% + 12px); width:min(960px,calc(100vw - 48px)); padding:16px 20px 20px; border:1px solid var(--line); border-radius:8px; background:var(--bg); opacity:0; visibility:hidden; pointer-events:none; transform:translateY(8px); transition:opacity .18s ease,transform .22s var(--ease),visibility .22s; }
+.cosmos-dock.is-expanded .cosmos-dock-drawer { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); }
+.cosmos-dock-header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; }
+.cosmos-dock-status { font-family:var(--font-display); font-size:16px; color:var(--text); }
+.cosmos-dock-actions { display:flex; gap:4px; }
+.cosmos-dock-close,.cosmos-dock-step { width:44px; height:44px; display:grid; place-items:center; border:0; border-radius:4px; background:transparent; color:var(--text-muted); font-size:20px; cursor:pointer; }
+.cosmos-dock-close { margin-left:12px; }
+.cosmos-dock-close:hover,.cosmos-dock-step:hover { background:var(--surface); color:var(--text); }
+.cosmos-dock-scroll { display:grid; grid-auto-flow:column; grid-auto-columns:calc((100% - 48px)/3); gap:24px; overflow-x:auto; overscroll-behavior:contain; scroll-snap-type:x mandatory; scrollbar-width:none; }
+.cosmos-dock-scroll::-webkit-scrollbar { display:none; }
+.cosmos-chip { position:relative; display:flex; flex-direction:column; align-items:stretch; gap:12px; padding:0 0 10px; border:0; border-radius:0; background:transparent; text-align:left; color:var(--text); scroll-snap-align:start; cursor:pointer; }
+.cosmos-project-preview { width:100%; height:112px; object-fit:cover; border-radius:3px; opacity:.85; transition:opacity .15s ease; }
+.cosmos-project-copy { display:flex; flex-direction:column; gap:7px; }
+.cosmos-chip-name { font-family:var(--font-display); font-size:17px; font-weight:500; line-height:1.3; }
+.cosmos-project-description { font-size:12px; color:var(--text-muted); line-height:1.6; }
+.cosmos-chip:hover .cosmos-project-preview,.cosmos-chip.is-hovered .cosmos-project-preview { opacity:1; }
+.cosmos-chip.active::after { content:''; position:absolute; bottom:0; left:0; width:32px; height:2px; background:var(--chip-accent); }
+.cosmos-chip:focus-visible { outline:2px solid var(--text-muted); outline-offset:-2px; }
 @media(max-width:767px) {
-    .cosmos-overlay { padding:10px; }
-    .cosmos-card { right:50%; top:auto; bottom:74px; transform:translateX(50%); width:94vw; padding:16px; max-height:60dvh; overflow-y:auto; }
-    @keyframes cosmosCardIn { from { opacity:0; transform:translateX(50%) translateY(20px); } to { opacity:1; transform:translateX(50%) translateY(0); } }
-    .cosmos-dock { bottom:12px; width:calc(100vw - 20px); }
-    .cosmos-dock-drawer { padding:6px 10px 8px; }
+    .cosmos-overlay { padding:12px; }
+    .cosmos-card { right:50%; top:auto; bottom:calc(90px + env(safe-area-inset-bottom)); transform:translateX(50%); width:calc(100vw - 24px); padding:16px; max-height:calc(100dvh - 190px); overflow-y:auto; }
+    @keyframes cosmosCardIn { from { opacity:0; transform:translateX(50%) translateY(12px); } to { opacity:1; transform:translateX(50%) translateY(0); } }
+    .cosmos-dock { left:12px; bottom:calc(12px + env(safe-area-inset-bottom)); }
+    .cosmos-dock-drawer { width:calc(100vw - 24px); padding:12px 16px 16px; }
+    .cosmos-dock-status { font-size:14px; }
+    .cosmos-dock-close { margin-left:0; }
+    .cosmos-dock-scroll { grid-auto-columns:85%; gap:20px; }
+    .cosmos-project-preview { height:112px; }
 }
 

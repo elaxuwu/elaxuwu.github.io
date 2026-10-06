@@ -850,35 +850,20 @@ function createField() {
         chips.forEach(c => {
             const isHov = Boolean(id && c.dataset.id === id);
             c.classList.toggle('is-hovered', isHov);
-            if (isHov && !c.classList.contains('active')) {
-                c.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            }
         });
     }
 
     function selectProject(proj) {
         const card = document.getElementById('cosmos-card');
         const chips = document.querySelectorAll('.cosmos-chip');
-        const triggerText = document.getElementById('cosmos-dock-trigger-text');
-        const triggerDot = document.getElementById('cosmos-dock-trigger-dot');
-        const statusText = document.getElementById('cosmos-dock-status');
-        const resetBtn = document.getElementById('cosmos-dock-reset');
 
         if (!proj) {
             selectedOrb = null;
             if (card) card.hidden = true;
-            chips.forEach(c => c.classList.remove('active'));
-            if (triggerText) {
-                triggerText.innerHTML = '<span class="content-en">Planets (13)</span><span class="content-vi">Thiên thể (13)</span>';
-            }
-            if (triggerDot) {
-                triggerDot.style.backgroundColor = '';
-                triggerDot.style.boxShadow = '';
-            }
-            if (statusText) {
-                statusText.innerHTML = '<span class="content-en"><span>Planetary Orbits</span></span><span class="content-vi"><span>Quỹ đạo thiên thể</span></span>';
-            }
-            if (resetBtn) resetBtn.classList.remove('active');
+            chips.forEach(c => {
+                c.classList.remove('active');
+                c.setAttribute('aria-pressed', 'false');
+            });
             return;
         }
 
@@ -889,21 +874,12 @@ function createField() {
         chips.forEach(c => {
             const isActive = c.dataset.id === proj.id;
             c.classList.toggle('active', isActive);
-            if (isActive) c.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            c.setAttribute('aria-pressed', String(isActive));
+            if (isActive && document.getElementById('cosmos-dock')?.classList.contains('is-expanded')) {
+                c.scrollIntoView({ behavior: reduced() ? 'instant' : 'smooth', block: 'nearest' });
+            }
         });
 
-        const hex = '#' + proj.color.toString(16).padStart(6, '0');
-        if (triggerText) {
-            triggerText.innerHTML = `<span class="cosmos-dock-active-name">${proj.name}</span>`;
-        }
-        if (triggerDot) {
-            triggerDot.style.backgroundColor = hex;
-            triggerDot.style.boxShadow = `0 0 8px ${hex}`;
-        }
-        if (statusText) {
-            statusText.innerHTML = `<span>${proj.name}</span> <span class="cosmos-dock-status-tag">${proj.tag}</span>`;
-        }
-        if (resetBtn) resetBtn.classList.add('active');
 
         if (card) {
             const img = document.getElementById('cosmos-card-img');
@@ -949,12 +925,28 @@ function createField() {
         if (!container || container.dataset.built === '1') return;
         container.dataset.built = '1';
 
-        container.innerHTML = CELESTIAL_PROJECTS.map(proj => {
+        const captions = [
+            ['A survival game where light can kill you.', 'Game sinh tồn nơi ánh sáng có thể giết bạn.'],
+            ['Eat other balls to grow. Built in one hour.', 'Ăn bóng để lớn lên. Làm trong một giờ.'],
+            ['Slice flying fruit in your browser.', 'Chém trái cây ngay trong trình duyệt.'],
+            ['Turn recordings and videos into notes and mind maps.', 'Biến ghi âm và video thành ghi chú, sơ đồ tư duy.'],
+            ['Describe a game. AI builds a playable prototype.', 'Mô tả game để AI tạo bản chơi thử.'],
+            ['Turn doctor–patient conversations into medical notes.', 'Chuyển hội thoại khám bệnh thành ghi chép y khoa.'],
+            ['Translate sign language in real time.', 'Dịch ngôn ngữ ký hiệu theo thời gian thực.'],
+            ['Scan an item to find out how to recycle it.', 'Quét đồ vật để biết cách phân loại tái chế.'],
+            ['A personal AI assistant for desktop tasks.', 'Trợ lý AI cá nhân cho tác vụ máy tính.'],
+            ['A flying robot with a protective spherical cage.', 'Robot bay với lồng cầu bảo vệ.'],
+            ['An Arduino-powered moving target for shooting games.', 'Bia di chuyển dùng Arduino cho trò chơi bắn súng.'],
+            ['Schedule and automate Zalo messages on Windows.', 'Lên lịch và tự động gửi tin Zalo trên Windows.'],
+            ['Check whether Windows is properly activated.', 'Kiểm tra tình trạng kích hoạt Windows.']
+        ];
+        container.innerHTML = CELESTIAL_PROJECTS.map((proj, index) => {
             const hex = '#' + proj.color.toString(16).padStart(6, '0');
-            return `<button type="button" class="cosmos-chip" data-id="${proj.id}" style="--chip-accent: ${hex};" title="${proj.name}">
-                <span class="cosmos-chip-orb" style="background-color: ${hex}; color: ${hex};"></span>
-                <span class="cosmos-chip-name">${proj.name}</span>
-                <span class="cosmos-chip-tag">${proj.tag}</span>
+            const image = index === 0 ? 'images/lightequaldie/coverimage.png' : index === 1 ? 'images/ballseatballs/coverimage.png' : proj.image;
+            const preview = image.startsWith('assets/brand/') ? '' : '<img class="cosmos-project-preview" src="' + image + '" alt="" loading="lazy">';
+            return `<button type="button" class="cosmos-chip" data-id="${proj.id}" style="--chip-accent: ${hex};" aria-pressed="false">
+                ${preview}
+                <span class="cosmos-project-copy"><span class="cosmos-chip-name">${proj.name}</span><span class="cosmos-project-description"><span class="content-en">${captions[index][0]}</span><span class="content-vi">${captions[index][1]}</span></span></span>
             </button>`;
         }).join('');
 
@@ -968,6 +960,12 @@ function createField() {
             btn.addEventListener('mouseleave', () => {
                 if (hoveredBody && hoveredBody.project?.id === id) hoveredBody = null;
             });
+            btn.addEventListener('focus', () => {
+                if (foundBody) hoveredBody = foundBody.hit.userData;
+            });
+            btn.addEventListener('blur', () => {
+                if (hoveredBody && hoveredBody.project?.id === id) hoveredBody = null;
+            });
 
             btn.addEventListener('click', () => {
                 const proj = CELESTIAL_PROJECTS.find(p => p.id === id);
@@ -977,19 +975,22 @@ function createField() {
                     } else {
                         selectProject(proj);
                     }
+                    setDockExpanded(false);
                 }
             });
         });
 
-        const resetBtn = document.getElementById('cosmos-dock-reset');
-        if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                selectProject(null);
-                targetOrbitTheta = 0.35;
-                targetOrbitPhi = 1.15;
-                targetOrbitRadius = 26;
-            });
-        }
+        const previous = document.getElementById('cosmos-dock-prev');
+        const next = document.getElementById('cosmos-dock-next');
+        const syncPaging = () => {
+            previous.disabled = container.scrollLeft <= 1;
+            next.disabled = container.scrollLeft + container.clientWidth >= container.scrollWidth - 1;
+        };
+        previous.addEventListener('click', () => container.scrollBy({ left: -container.clientWidth, behavior: reduced() ? 'instant' : 'smooth' }));
+        next.addEventListener('click', () => container.scrollBy({ left: container.clientWidth, behavior: reduced() ? 'instant' : 'smooth' }));
+        container.addEventListener('scroll', syncPaging, { passive: true });
+        window.addEventListener('resize', syncPaging, options);
+        requestAnimationFrame(syncPaging);
 
         const dockEl = document.getElementById('cosmos-dock');
         const triggerBtn = document.getElementById('cosmos-dock-trigger');
@@ -997,16 +998,38 @@ function createField() {
 
         if (triggerBtn && dockEl) {
             triggerBtn.addEventListener('click', () => {
-                dockEl.classList.toggle('is-expanded');
-                triggerBtn.setAttribute('aria-expanded', dockEl.classList.contains('is-expanded') ? 'true' : 'false');
+                setDockExpanded(!dockEl.classList.contains('is-expanded'));
             });
         }
         if (closeBtn && dockEl) {
             closeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                dockEl.classList.remove('is-expanded');
-                if (triggerBtn) triggerBtn.setAttribute('aria-expanded', 'false');
+                setDockExpanded(false);
             });
+        }
+        document.addEventListener('pointerdown', event => {
+            if (dockEl?.classList.contains('is-expanded') && !dockEl.contains(event.target)) {
+                setDockExpanded(false, false);
+            }
+        }, options);
+    }
+
+    function setDockExpanded(expanded, restoreFocus = true) {
+        const dock = document.getElementById('cosmos-dock');
+        const trigger = document.getElementById('cosmos-dock-trigger');
+        const drawer = document.getElementById('cosmos-dock-drawer');
+        if (!dock || !trigger || !drawer) return;
+        const focusInside = drawer.contains(document.activeElement);
+        dock.classList.toggle('is-expanded', expanded);
+        trigger.setAttribute('aria-expanded', String(expanded));
+        drawer.inert = !expanded;
+        if (expanded) {
+            const target = drawer.querySelector('.cosmos-chip.active') || drawer.querySelector('.cosmos-chip');
+            target?.scrollIntoView({ behavior: 'instant', block: 'nearest' });
+        } else {
+            hoveredBody = null;
+            syncDockHover(null);
+            if (restoreFocus && focusInside) trigger.focus({ preventScroll: true });
         }
     }
 
@@ -1056,8 +1079,7 @@ function createField() {
             }
             selectProject(null);
             syncDockHover(null);
-            const dockEl = document.getElementById('cosmos-dock');
-            if (dockEl) dockEl.classList.remove('is-expanded');
+            setDockExpanded(false, false);
             currentRotX = camera.rotation.x;
             currentRotY = camera.rotation.y;
             currentRotZ = camera.rotation.z;
@@ -1168,7 +1190,9 @@ function createField() {
 
     window.addEventListener('keydown', event => {
         if (event.key === 'Escape' && cosmosMode) {
-            if (selectedOrb) {
+            if (document.getElementById('cosmos-dock')?.classList.contains('is-expanded')) {
+                setDockExpanded(false);
+            } else if (selectedOrb) {
                 selectProject(null);
             } else {
                 toggleCosmosMode(false);
