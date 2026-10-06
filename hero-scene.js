@@ -845,14 +845,40 @@ function createField() {
     let pointerStartX = 0, pointerStartY = 0;
     let dragDistance = 0;
 
+    function syncDockHover(id) {
+        const chips = document.querySelectorAll('.cosmos-chip');
+        chips.forEach(c => {
+            const isHov = Boolean(id && c.dataset.id === id);
+            c.classList.toggle('is-hovered', isHov);
+            if (isHov && !c.classList.contains('active')) {
+                c.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        });
+    }
+
     function selectProject(proj) {
         const card = document.getElementById('cosmos-card');
         const chips = document.querySelectorAll('.cosmos-chip');
+        const triggerText = document.getElementById('cosmos-dock-trigger-text');
+        const triggerDot = document.getElementById('cosmos-dock-trigger-dot');
+        const statusText = document.getElementById('cosmos-dock-status');
+        const resetBtn = document.getElementById('cosmos-dock-reset');
 
         if (!proj) {
             selectedOrb = null;
             if (card) card.hidden = true;
             chips.forEach(c => c.classList.remove('active'));
+            if (triggerText) {
+                triggerText.innerHTML = '<span class="content-en">Planets (13)</span><span class="content-vi">Thiên thể (13)</span>';
+            }
+            if (triggerDot) {
+                triggerDot.style.backgroundColor = '';
+                triggerDot.style.boxShadow = '';
+            }
+            if (statusText) {
+                statusText.innerHTML = '<span class="content-en"><span>Planetary Orbits</span></span><span class="content-vi"><span>Quỹ đạo thiên thể</span></span>';
+            }
+            if (resetBtn) resetBtn.classList.remove('active');
             return;
         }
 
@@ -865,6 +891,19 @@ function createField() {
             c.classList.toggle('active', isActive);
             if (isActive) c.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         });
+
+        const hex = '#' + proj.color.toString(16).padStart(6, '0');
+        if (triggerText) {
+            triggerText.innerHTML = `<span class="cosmos-dock-active-name">${proj.name}</span>`;
+        }
+        if (triggerDot) {
+            triggerDot.style.backgroundColor = hex;
+            triggerDot.style.boxShadow = `0 0 8px ${hex}`;
+        }
+        if (statusText) {
+            statusText.innerHTML = `<span>${proj.name}</span> <span class="cosmos-dock-status-tag">${proj.tag}</span>`;
+        }
+        if (resetBtn) resetBtn.classList.add('active');
 
         if (card) {
             const img = document.getElementById('cosmos-card-img');
@@ -912,12 +951,25 @@ function createField() {
 
         container.innerHTML = CELESTIAL_PROJECTS.map(proj => {
             const hex = '#' + proj.color.toString(16).padStart(6, '0');
-            return `<button type="button" class="cosmos-chip" data-id="${proj.id}"><span class="cosmos-chip-orb" style="background-color: ${hex}; color: ${hex};"></span><span>${proj.name}</span></button>`;
+            return `<button type="button" class="cosmos-chip" data-id="${proj.id}" style="--chip-accent: ${hex};" title="${proj.name}">
+                <span class="cosmos-chip-orb" style="background-color: ${hex}; color: ${hex};"></span>
+                <span class="cosmos-chip-name">${proj.name}</span>
+                <span class="cosmos-chip-tag">${proj.tag}</span>
+            </button>`;
         }).join('');
 
         container.querySelectorAll('.cosmos-chip').forEach(btn => {
+            const id = btn.dataset.id;
+            const foundBody = celestialBodies.find(b => b.data.id === id);
+
+            btn.addEventListener('mouseenter', () => {
+                if (foundBody) hoveredBody = foundBody.hit.userData;
+            });
+            btn.addEventListener('mouseleave', () => {
+                if (hoveredBody && hoveredBody.project?.id === id) hoveredBody = null;
+            });
+
             btn.addEventListener('click', () => {
-                const id = btn.dataset.id;
                 const proj = CELESTIAL_PROJECTS.find(p => p.id === id);
                 if (proj) {
                     if (selectedOrb && selectedOrb.data.id === id) {
@@ -928,6 +980,34 @@ function createField() {
                 }
             });
         });
+
+        const resetBtn = document.getElementById('cosmos-dock-reset');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                selectProject(null);
+                targetOrbitTheta = 0.35;
+                targetOrbitPhi = 1.15;
+                targetOrbitRadius = 26;
+            });
+        }
+
+        const dockEl = document.getElementById('cosmos-dock');
+        const triggerBtn = document.getElementById('cosmos-dock-trigger');
+        const closeBtn = document.getElementById('cosmos-dock-close');
+
+        if (triggerBtn && dockEl) {
+            triggerBtn.addEventListener('click', () => {
+                dockEl.classList.toggle('is-expanded');
+                triggerBtn.setAttribute('aria-expanded', dockEl.classList.contains('is-expanded') ? 'true' : 'false');
+            });
+        }
+        if (closeBtn && dockEl) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dockEl.classList.remove('is-expanded');
+                if (triggerBtn) triggerBtn.setAttribute('aria-expanded', 'false');
+            });
+        }
     }
 
     function toggleCosmosMode(active) {
@@ -975,6 +1055,9 @@ function createField() {
                 toggleBtn.innerHTML = '<span aria-hidden="true">🪐</span> <span class="cosmos-btn-text"><span class="content-en">Cosmos</span><span class="content-vi">Vũ trụ</span></span>';
             }
             selectProject(null);
+            syncDockHover(null);
+            const dockEl = document.getElementById('cosmos-dock');
+            if (dockEl) dockEl.classList.remove('is-expanded');
             currentRotX = camera.rotation.x;
             currentRotY = camera.rotation.y;
             currentRotZ = camera.rotation.z;
@@ -1026,16 +1109,19 @@ function createField() {
                 if (foundUserData !== hoveredBody) {
                     hoveredBody = foundUserData;
                     canvas.style.cursor = 'pointer';
+                    syncDockHover(foundUserData.project ? foundUserData.project.id : null);
                 }
             } else {
                 if (hoveredBody) {
                     hoveredBody = null;
+                    syncDockHover(null);
                 }
                 canvas.style.cursor = isPointerDown ? 'grabbing' : 'grab';
             }
         } else {
             if (hoveredBody) {
                 hoveredBody = null;
+                syncDockHover(null);
             }
             canvas.style.cursor = isPointerDown ? 'grabbing' : 'grab';
         }
@@ -1066,6 +1152,7 @@ function createField() {
         targetPointerX = 0;
         targetPointerY = 0;
         hoveredBody = null;
+        syncDockHover(null);
     }, options);
 
     // DOM UI bindings
