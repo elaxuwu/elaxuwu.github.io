@@ -381,130 +381,136 @@ function createField() {
         side: THREE.DoubleSide
     }));
 
-    const orbitTrackMeshes = orbitTrackRadii.map(rad => {
-        const trackGeo = track(new THREE.RingGeometry(rad - 0.022, rad + 0.022, 120));
-        const trackMesh = new THREE.Mesh(trackGeo, orbitTrackMat);
-        trackMesh.rotation.x = Math.PI / 2;
-        trackMesh.scale.set(0.2, 0.2, 1);
-        orbitsGroup.add(trackMesh);
-        return trackMesh;
-    });
-
-    // Celestial Bodies Construction
+    let orbitTrackMeshes = [];
     const celestialBodies = [];
     const hitMeshes = [];
 
-    CELESTIAL_PROJECTS.forEach(proj => {
-        const bodyGroup = new THREE.Group();
-        bodyGroup.scale.set(0, 0, 0);
-        orbitsGroup.add(bodyGroup);
+    // ponytail: build once on demand; preserve every geometry and animation.
+    function buildOrbits() {
+        if (celestialBodies.length) return;
+        orbitTrackMeshes = orbitTrackRadii.map(rad => {
+            const trackGeo = track(new THREE.RingGeometry(rad - 0.022, rad + 0.022, 120));
+            const trackMesh = new THREE.Mesh(trackGeo, orbitTrackMat);
+            trackMesh.rotation.x = Math.PI / 2;
+            trackMesh.scale.set(0.2, 0.2, 1);
+            orbitsGroup.add(trackMesh);
+            return trackMesh;
+        });
 
-        let geo;
-        if (proj.geometryType === 'octahedron') {
-            geo = track(new THREE.OctahedronGeometry(proj.radius, 0));
-        } else if (proj.geometryType === 'dodecahedron') {
-            geo = track(new THREE.DodecahedronGeometry(proj.radius, 0));
-        } else if (proj.geometryType === 'icosahedron') {
-            geo = track(new THREE.IcosahedronGeometry(proj.radius, 0));
-        } else if (proj.geometryType === 'probe') {
-            geo = track(new THREE.SphereGeometry(proj.radius * 0.75, 14, 14));
-        } else if (proj.geometryType === 'satellite') {
-            geo = track(new THREE.BoxGeometry(proj.radius * 1.1, proj.radius * 1.1, proj.radius * 1.1));
-        } else {
-            geo = track(new THREE.SphereGeometry(proj.radius, 20, 20));
-        }
+        // Celestial Bodies Construction
+        CELESTIAL_PROJECTS.forEach(proj => {
+            const bodyGroup = new THREE.Group();
+            bodyGroup.scale.set(0, 0, 0);
+            orbitsGroup.add(bodyGroup);
 
-        const coreMat = track(new THREE.MeshBasicMaterial({ color: proj.color, transparent: true, opacity: 0 }));
-        const coreMesh = new THREE.Mesh(geo, coreMat);
-        bodyGroup.add(coreMesh);
+            let geo;
+            if (proj.geometryType === 'octahedron') {
+                geo = track(new THREE.OctahedronGeometry(proj.radius, 0));
+            } else if (proj.geometryType === 'dodecahedron') {
+                geo = track(new THREE.DodecahedronGeometry(proj.radius, 0));
+            } else if (proj.geometryType === 'icosahedron') {
+                geo = track(new THREE.IcosahedronGeometry(proj.radius, 0));
+            } else if (proj.geometryType === 'probe') {
+                geo = track(new THREE.SphereGeometry(proj.radius * 0.75, 14, 14));
+            } else if (proj.geometryType === 'satellite') {
+                geo = track(new THREE.BoxGeometry(proj.radius * 1.1, proj.radius * 1.1, proj.radius * 1.1));
+            } else {
+                geo = track(new THREE.SphereGeometry(proj.radius, 20, 20));
+            }
 
-        // Futuristic wireframe shell
-        const wireGeo = track(geo.clone());
-        wireGeo.scale(1.24, 1.24, 1.24);
-        const wireMat = track(new THREE.MeshBasicMaterial({
-            color: proj.color,
-            wireframe: true,
-            transparent: true,
-            opacity: 0
-        }));
-        const wireMesh = new THREE.Mesh(wireGeo, wireMat);
-        bodyGroup.add(wireMesh);
+            const coreMat = track(new THREE.MeshBasicMaterial({ color: proj.color, transparent: true, opacity: 0 }));
+            const coreMesh = new THREE.Mesh(geo, coreMat);
+            bodyGroup.add(coreMesh);
 
-        // Custom planetary accessories
-        let accessoryMesh = null;
-        let accBaseOpacity = 0.45;
-        if (proj.ringRadius) {
-            accBaseOpacity = 0.45;
-            const accGeo = track(new THREE.RingGeometry(proj.ringRadius * 0.74, proj.ringRadius, 40));
-            const accMat = track(new THREE.MeshBasicMaterial({
+            // Futuristic wireframe shell
+            const wireGeo = track(geo.clone());
+            wireGeo.scale(1.24, 1.24, 1.24);
+            const wireMat = track(new THREE.MeshBasicMaterial({
                 color: proj.color,
-                transparent: true,
-                opacity: 0,
-                side: THREE.DoubleSide
-            }));
-            accessoryMesh = new THREE.Mesh(accGeo, accMat);
-            accessoryMesh.rotation.x = Math.PI * 0.38;
-            bodyGroup.add(accessoryMesh);
-        } else if (proj.geometryType === 'probe') {
-            accBaseOpacity = 0.55;
-            const probeCageGeo = track(new THREE.IcosahedronGeometry(proj.radius * 1.35, 1));
-            const probeCageMat = track(new THREE.MeshBasicMaterial({
-                color: 0xffffff,
                 wireframe: true,
                 transparent: true,
                 opacity: 0
             }));
-            const probeCage = new THREE.Mesh(probeCageGeo, probeCageMat);
-            bodyGroup.add(probeCage);
-            accessoryMesh = probeCage;
-        } else if (proj.geometryType === 'satellite') {
-            accBaseOpacity = 0.8;
-            const panelGeo = track(new THREE.BoxGeometry(proj.radius * 2.6, 0.02, proj.radius * 0.7));
-            const panelMat = track(new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0 }));
-            const panelMesh = new THREE.Mesh(panelGeo, panelMat);
-            bodyGroup.add(panelMesh);
-            accessoryMesh = panelMesh;
-        }
+            const wireMesh = new THREE.Mesh(wireGeo, wireMat);
+            bodyGroup.add(wireMesh);
 
-        // Holographic Target Lock Reticle (billboarded, indicates hover without scaling planet)
-        const reticleRadius = Math.max(proj.radius * 1.55, proj.ringRadius ? proj.ringRadius * 1.25 : 0.72);
-        const reticleGeo = track(new THREE.RingGeometry(reticleRadius - 0.024, reticleRadius + 0.024, 40));
-        const reticleMat = track(new THREE.MeshBasicMaterial({
-            color: proj.color,
-            side: THREE.DoubleSide,
-            transparent: true,
-            opacity: 0,
-            depthWrite: false
-        }));
-        const reticleMesh = new THREE.Mesh(reticleGeo, reticleMat);
-        bodyGroup.add(reticleMesh);
+            // Custom planetary accessories
+            let accessoryMesh = null;
+            let accBaseOpacity = 0.45;
+            if (proj.ringRadius) {
+                accBaseOpacity = 0.45;
+                const accGeo = track(new THREE.RingGeometry(proj.ringRadius * 0.74, proj.ringRadius, 40));
+                const accMat = track(new THREE.MeshBasicMaterial({
+                    color: proj.color,
+                    transparent: true,
+                    opacity: 0,
+                    side: THREE.DoubleSide
+                }));
+                accessoryMesh = new THREE.Mesh(accGeo, accMat);
+                accessoryMesh.rotation.x = Math.PI * 0.38;
+                bodyGroup.add(accessoryMesh);
+            } else if (proj.geometryType === 'probe') {
+                accBaseOpacity = 0.55;
+                const probeCageGeo = track(new THREE.IcosahedronGeometry(proj.radius * 1.35, 1));
+                const probeCageMat = track(new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0
+                }));
+                const probeCage = new THREE.Mesh(probeCageGeo, probeCageMat);
+                bodyGroup.add(probeCage);
+                accessoryMesh = probeCage;
+            } else if (proj.geometryType === 'satellite') {
+                accBaseOpacity = 0.8;
+                const panelGeo = track(new THREE.BoxGeometry(proj.radius * 2.6, 0.02, proj.radius * 0.7));
+                const panelMat = track(new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0 }));
+                const panelMesh = new THREE.Mesh(panelGeo, panelMat);
+                bodyGroup.add(panelMesh);
+                accessoryMesh = panelMesh;
+            }
 
-        // Invisible generous raycast hit sphere
-        const hitGeo = track(new THREE.SphereGeometry(Math.max(proj.radius * 2.4, 1.05), 10, 10));
-        const hitMat = track(new THREE.MeshBasicMaterial({ visible: false }));
-        const hitMesh = new THREE.Mesh(hitGeo, hitMat);
-        hitMesh.userData = {
-            project: proj,
-            group: bodyGroup,
-            core: coreMesh,
-            wire: wireMesh,
-            accessory: accessoryMesh
-        };
-        bodyGroup.add(hitMesh);
-        hitMeshes.push(hitMesh);
+            // Holographic Target Lock Reticle (billboarded, indicates hover without scaling planet)
+            const reticleRadius = Math.max(proj.radius * 1.55, proj.ringRadius ? proj.ringRadius * 1.25 : 0.72);
+            const reticleGeo = track(new THREE.RingGeometry(reticleRadius - 0.024, reticleRadius + 0.024, 40));
+            const reticleMat = track(new THREE.MeshBasicMaterial({
+                color: proj.color,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0,
+                depthWrite: false
+            }));
+            const reticleMesh = new THREE.Mesh(reticleGeo, reticleMat);
+            bodyGroup.add(reticleMesh);
 
-        celestialBodies.push({
-            data: proj,
-            group: bodyGroup,
-            core: coreMesh,
-            wire: wireMesh,
-            accessory: accessoryMesh,
-            reticle: reticleMesh,
-            accBaseOpacity,
-            hoverWeight: 0,
-            hit: hitMesh
+            // Invisible generous raycast hit sphere
+            const hitGeo = track(new THREE.SphereGeometry(Math.max(proj.radius * 2.4, 1.05), 10, 10));
+            const hitMat = track(new THREE.MeshBasicMaterial({ visible: false }));
+            const hitMesh = new THREE.Mesh(hitGeo, hitMat);
+            hitMesh.userData = {
+                project: proj,
+                group: bodyGroup,
+                core: coreMesh,
+                wire: wireMesh,
+                accessory: accessoryMesh
+            };
+            bodyGroup.add(hitMesh);
+            hitMeshes.push(hitMesh);
+
+            celestialBodies.push({
+                data: proj,
+                group: bodyGroup,
+                core: coreMesh,
+                wire: wireMesh,
+                accessory: accessoryMesh,
+                reticle: reticleMesh,
+                accBaseOpacity,
+                hoverWeight: 0,
+                hit: hitMesh
+            });
         });
-    });
+
+    }
 
     // Flight Waypoints along scroll corridor
     const waypoints = [
@@ -1044,6 +1050,7 @@ function createField() {
         const toggleBtn = document.getElementById('cosmos-toggle');
 
         if (cosmosMode) {
+            buildOrbits();
             document.body.classList.add('cosmos-active');
             if (overlay) {
                 overlay.hidden = false;

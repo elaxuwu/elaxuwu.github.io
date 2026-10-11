@@ -1,4 +1,3 @@
-@import url('assets/fonts/portfolio.css');
 
 :root {
     color-scheme:dark; --bg:#141218; --surface:#201c28; --surface-raised:#2a2435;
@@ -83,7 +82,7 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .game-card:hover .game-visual img { transform:scale(1.045); }
 .light-visual img { object-fit:cover; }
 .ball-visual img { object-position:center 48%; }
-.game-feature-label { position:absolute; left:16px; top:16px; padding:7px 11px; background:var(--accent); color:#fff; border:1px solid #ffffff66; border-radius:6px; box-shadow:0 5px 16px #0008; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+.game-feature-label { position:absolute; left:16px; top:16px; padding:7px 11px; background:var(--accent); color:var(--accent-ink); border:1px solid #ffffff66; border-radius:6px; box-shadow:0 5px 16px #0008; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
 .game-caption { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:15px 0 0; }
 .game-caption p { font-size:11px; color:var(--text-muted); margin-top:6px; }
 .game-featured h3 { font-size:27px; } .game-secondary h3 { font-size:18px; }
@@ -105,7 +104,7 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .project-icon { width:28px; height:28px; object-fit:contain; border-radius:4px; }
 .project-card h3 { font-size:15px; line-height:1.25; }.project-card p { font-size:9px; line-height:1.5; color:var(--text-muted); margin-top:5px; }
 .card-arrow { color:var(--accent); font-size:17px; }
-.project-award { position:absolute; top:10px; left:10px; background:var(--accent); color:#fff; border:1px solid #ffffff66; border-radius:6px; padding:6px 9px; box-shadow:0 5px 16px #0008; font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; }
+.project-award { position:absolute; top:10px; left:10px; background:var(--accent); color:var(--accent-ink); border:1px solid #ffffff66; border-radius:6px; padding:6px 9px; box-shadow:0 5px 16px #0008; font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; }
 .project-pagination { display:flex; justify-content:space-between; align-items:center; margin-top:18px; font-size:10px; color:var(--text-muted); }
 .project-pagination>div { display:flex; gap:14px; align-items:center; }
 .project-pagination button { display:grid; place-items:center; width:32px; height:32px; border:1px solid var(--line); border-radius:6px; background:transparent; color:var(--text); }
@@ -310,7 +309,7 @@ body.cosmos-active .cosmos-overlay { opacity:1; visibility:visible; }
 .cosmos-card-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
 .cosmos-card-meta { display:flex; align-items:center; gap:8px; }
 .cosmos-card-tag { font-size:9px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
-.cosmos-card-badge { font-size:9px; font-weight:700; padding:2px 7px; border-radius:4px; background:var(--accent); color:#fff; }
+.cosmos-card-badge { font-size:9px; font-weight:700; padding:2px 7px; border-radius:4px; background:var(--accent); color:var(--accent-ink); }
 .cosmos-card h3 { font-size:20px; margin:6px 0 8px; }
 .cosmos-card p { font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:18px; }
 .cosmos-card-actions { display:flex; gap:14px; align-items:center; }

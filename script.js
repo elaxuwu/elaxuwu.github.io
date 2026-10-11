@@ -20,7 +20,7 @@ function applyLanguage(language) {
     try { sessionStorage.setItem('portfolio-language', vi ? 'vi' : 'en'); } catch (_) {}
     const button = document.getElementById('lang-toggle');
     button.innerHTML = vi ? 'VI <span aria-hidden="true">/ EN</span>' : 'EN <span aria-hidden="true">/ VI</span>';
-    button.setAttribute('aria-label', vi ? 'Switch to English' : 'Switch to Vietnamese');
+    button.setAttribute('aria-label', vi ? 'VI / EN: Switch to English' : 'EN / VI: Switch to Vietnamese');
     document.getElementById('nav-menu').setAttribute('aria-label', vi ? 'Mở menu điều hướng' : 'Open navigation');
     document.querySelector('.display-prefs > summary').setAttribute('aria-label', vi ? 'Cài đặt chuyển động' : 'Animation settings');
     updateThemeToggle(); renderFiles(currentPath, projectPage); renderAchievement(activeAchievement);
@@ -75,6 +75,25 @@ const PROJECT_MEDIA = {
     'Windows License Checker': ['brand/elax-avatar.webp','projects/icon-app.svg'],
     'AILAX': ['brand/elax-avatar.webp','projects/icon-ailax.svg']
 };
+const RESPONSIVE_MEDIA = {
+    "projects/fruit-ninja.jpg": "assets/responsive/fruit-ninja-320.webp 320w, assets/responsive/fruit-ninja-640.webp 640w, assets/projects/fruit-ninja.jpg 1280w",
+    "projects/portrait.webp": "assets/responsive/portrait-240.webp 240w, assets/responsive/portrait-400.webp 400w, assets/projects/portrait.webp 661w",
+    "brand/elaxion-banner.webp": "assets/responsive/elaxion-banner-320.webp 320w, assets/responsive/elaxion-banner-640.webp 640w, assets/brand/elaxion-banner.webp 1500w",
+    "brand/elax-avatar.webp": "assets/responsive/elax-avatar-64.webp 64w, assets/responsive/elax-avatar-96.webp 96w, assets/responsive/elax-avatar-144.webp 144w, assets/brand/elax-avatar.webp 900w",
+    "projects/clinicscribe-logo.webp": "assets/responsive/clinicscribe-logo-64.webp 64w, assets/responsive/clinicscribe-logo-96.webp 96w, assets/projects/clinicscribe-logo.webp 512w",
+    "projects/recyclecheck-logo.webp": "assets/responsive/recyclecheck-logo-64.webp 64w, assets/projects/recyclecheck-logo.webp 900w",
+    "projects/lazy-note.webp": "assets/responsive/lazy-note-320.webp 320w, assets/projects/lazy-note.webp 806w",
+    "projects/playweaver.webp": "assets/responsive/playweaver-320.webp 320w, assets/projects/playweaver.webp 806w",
+    "projects/clinicscribe.webp": "assets/responsive/clinicscribe-320.webp 320w, assets/projects/clinicscribe.webp 806w",
+    "projects/signbridgeai.webp": "assets/responsive/signbridgeai-320.webp 320w, assets/responsive/signbridgeai-640.webp 640w, assets/projects/signbridgeai.webp 1300w",
+    "projects/recyclecheck.webp": "assets/projects/recyclecheck.webp 258w",
+    "projects/soccer-drone.webp": "assets/projects/soccer-drone.webp 405w"
+};
+function responsiveMediaAttributes(source, sizes) {
+    const srcset = RESPONSIVE_MEDIA[source];
+    return srcset ? ` srcset="${srcset}" sizes="${sizes}" decoding="async"` : ' decoding="async"';
+}
+
 function projectItems(folder) {
     return folder === 'ROOT' ? Object.entries(fileSystem).filter(([key]) => key !== 'ROOT').flatMap(([,items]) => items) : fileSystem[folder] || [];
 }
@@ -88,10 +107,10 @@ function renderFiles(folderName, page = 0) {
     grid.replaceChildren();
     items.slice(projectPage * size, (projectPage + 1) * size).forEach(item => {
         const a = document.createElement('a'); a.className = 'project-card'; a.href = item.link;
-        a.setAttribute('aria-label', `${item.name}, ${item.tag}`); a.title = `${item.name}, ${item.tag}`;
+        a.title = `${item.name}, ${item.tag}`;
         if (/^https?:/.test(item.link)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
         const media = PROJECT_MEDIA[item.name], description = PROJECT_DESCRIPTIONS[item.name];
-        a.innerHTML = `<div class="project-media"><img src="assets/${media[0]}" alt="${item.name} project visual" width="720" height="405" loading="lazy"></div><div class="project-card-info"><img class="project-icon" src="assets/${media[1]}" alt="" width="36" height="36"><div><h3>${item.name}</h3><p>${bilingual(...description)}</p></div><span class="card-arrow" aria-hidden="true">↗</span></div>${item.ribbon ? '<span class="project-award">'+bilingual('Award winner','Đạt giải')+'</span>' : ''}`;
+        a.innerHTML = `<div class="project-media"><img src="assets/${media[0]}" alt="${item.name} project visual" width="720" height="405" loading="lazy"${responsiveMediaAttributes(media[0], "(max-width: 1050px) calc(45vw - 8px), (min-width: 1378px) 298px, calc(22.5vw - 12px)")}></div><div class="project-card-info"><img class="project-icon" src="assets/${media[1]}" alt="" width="36" height="36"${responsiveMediaAttributes(media[1], "(max-width: 767px) 22px, 28px")}><div><h3>${item.name}</h3><p>${bilingual(...description)}</p></div><span class="card-arrow" aria-hidden="true">↗</span></div>${item.ribbon ? '<span class="project-award">'+bilingual('Award winner','Đạt giải')+'</span>' : ''}`;
         grid.appendChild(a);
     });
     document.getElementById('item-count').textContent = `${items.length} ${isVietnamese() ? 'dự án' : 'projects'}`;
@@ -115,7 +134,7 @@ function renderAchievement(index) {
     const image = source.querySelector('.proof-cover');
     const rank = ['1st','3rd','04 / 127','Most Creative Idea'][index];
     const viRank = ['Hạng 1','Hạng 3','04 / 127','Ý tưởng sáng tạo nhất'][index];
-    view.innerHTML = `<div class="achievement-copy"><p class="achievement-event">${template.dataset.event}</p><h3>${bilingual(rank,viRank)}</h3><p class="achievement-description">${description}</p><div class="achievement-actions"><a class="plain-link" href="${projectLink}">${bilingual('Project details','Chi tiết dự án')} ↗</a><button type="button" class="plain-link" id="award-open">${bilingual('Photos & details','Ảnh & thông tin')} ↗</button></div></div><div class="achievement-photo">${image ? `<img src="${image.getAttribute('src')}" alt="${image.alt}" width="600" height="450" loading="lazy">` : `<img src="assets/projects/${index===2?'playweaver.webp':'clinicscribe-logo.webp'}" alt="${template.dataset.project}" width="600" height="450"><span>${bilingual('Award photos pending','Chưa có ảnh giải thưởng')}</span>`}</div>`;
+    view.innerHTML = `<div class="achievement-copy"><p class="achievement-event">${template.dataset.event}</p><h3>${bilingual(rank,viRank)}</h3><p class="achievement-description">${description}</p><div class="achievement-actions"><a class="plain-link" href="${projectLink}">${bilingual('Project details','Chi tiết dự án')} ↗</a><button type="button" class="plain-link" id="award-open">${bilingual('Photos & details','Ảnh & thông tin')} ↗</button></div></div><div class="achievement-photo">${image ? `<img src="${image.getAttribute('src')}" alt="${image.alt}" width="600" height="450" loading="lazy" srcset="${image.getAttribute('srcset') || image.getAttribute('src')}" sizes="(max-width: 767px) calc(45vw - 9px), (max-width: 1050px) calc(45vw - 136px), (min-width: 1378px) 458px, calc(45vw - 162.5px)" decoding="async">` : `<img src="assets/projects/${index===2?'playweaver.webp':'clinicscribe-logo.webp'}" alt="${template.dataset.project}" width="600" height="450"><span>${bilingual('Award photos pending','Chưa có ảnh giải thưởng')}</span>`}</div>`;
     document.querySelectorAll('.achievement-tab').forEach(button => {
         const selected = Number(button.dataset.achievement) === index;
         button.classList.toggle('active',selected); button.setAttribute('aria-pressed',String(selected));
@@ -174,7 +193,7 @@ document.addEventListener('error', event => {
     if (!(image instanceof HTMLImageElement) || image.hasAttribute('data-product-preview-image')) return;
     if(image.dataset.fallbackApplied)return;image.dataset.fallbackApplied='1';
     if (image.closest('.project-card') || image.closest('.achievement-photo')) {
-        image.src = 'assets/brand/elaxion-banner.webp'; return;
+        image.removeAttribute('srcset'); image.removeAttribute('sizes'); image.src = 'assets/brand/elaxion-banner.webp'; return;
     }
     const placeholder=document.createElement('div');placeholder.className='media-placeholder';
     placeholder.innerHTML=`<span>${bilingual('Image unavailable','Không tải được ảnh')}</span>`;

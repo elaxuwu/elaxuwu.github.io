@@ -12,6 +12,22 @@ const filters=['ROOT','GAME PROJECTS','AI PROJECTS','APP PROJECTS','ROBOTICS PRO
 const document={body:{classList:{contains:()=>vietnamese}},documentElement:{dataset:{}},addEventListener(){},dispatchEvent(){},createElement:element,getElementById:id=>ids[id],querySelectorAll:()=>filters};
 const context=vm.createContext({document,Event:class{},matchMedia:q=>({matches:q.includes('max-width')?mobile:true})});
 vm.runInContext(source,context);
+function checkResponsiveImages(html, base){
+    for(const match of html.matchAll(/srcset="([^"]+)"/g)){
+        let lastWidth=0;
+        for(const candidate of match[1].split(',')){
+            const [url,descriptor]=candidate.trim().split(/\s+/);
+            if(/^https?:/.test(url))continue;
+            assert(fs.existsSync(path.resolve(base,url)),url);
+            if(descriptor){
+                assert.match(descriptor,/^\d+w$/);
+                const width=parseInt(descriptor,10);
+                assert(width>lastWidth,'Responsive widths must increase');
+                lastWidth=width;
+            }
+        }
+    }
+}
 for(const phone of [false,true]){
     mobile=phone;
     const size=phone?2:4;
@@ -30,6 +46,7 @@ for(const phone of [false,true]){
                 assert(card.href&&card.href!=='#');
                 assert.match(card.innerHTML,/content-en/);assert.match(card.innerHTML,/content-vi/);assert.match(card.innerHTML,/project-icon/);
                 for(const match of card.innerHTML.matchAll(/src="([^"]+)"/g))assert(fs.existsSync(path.join(root,match[1])),match[1]);
+                checkResponsiveImages(card.innerHTML,root);
                 if(!card.href.startsWith('http'))assert(fs.existsSync(path.join(root,card.href)),card.href);
             }
         }
@@ -47,6 +64,8 @@ document.documentElement.dataset.motionPreference='on';assert.equal(context.moti
 function files(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(path.join(dir,e.name)):[path.join(dir,e.name)]);}
 for(const file of [path.join(root,'index.html'),...files(path.join(root,'pages')).filter(p=>p.endsWith('.html'))]){
     const html=fs.readFileSync(file,'utf8');
+    checkResponsiveImages(html,path.dirname(file));
+    assert.match(html,/rel="stylesheet" href="[^"<>]*assets\/dist\/portfolio\.[a-f0-9]{12}\.css"/);
     assert.match(html,/<html lang="en">/);
     if(!file.includes('gradesReport'))assert(!html.includes('gradesReport/'));
     for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
@@ -61,5 +80,7 @@ assert.equal((home.match(/<template[^>]+id="achievement-\d"/g)||[]).length,4);
 for(const fact of ['30/217','04/127','MOST CREATIVE IDEA'])assert(home.includes(fact),fact);
 for(const phrase of ['playground','A few proud moments','world-canvas','scene-light','scene-pause'])assert(!home.includes(phrase),phrase);
 assert(!fs.readFileSync(path.join(root,'components.js'),'utf8').includes('✳'));
+assert(!fs.readFileSync(path.join(root,'style.css'),'utf8').includes('@import'));
+assert.match(fs.readFileSync(path.join(root,'robots.txt'),'utf8'),/^User-agent: \*\nAllow: \/\nDisallow: \/pages\/gradesReport\//);
 assert.match(fs.readFileSync(path.join(root,'pages/gradesReport/report_Grade11_Semester1.html'),'utf8'),/name="robots" content="noindex, nofollow"/);
 console.log('Passed: all 13 projects across desktop/mobile pages, bilingual cards, motion preferences, local assets, 4 complete awards, and URL-only academic report.');

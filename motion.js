@@ -10,10 +10,22 @@ function initMotion() {
     const reduced = () => window.motionIsReduced?.() ?? matchMedia('(prefers-reduced-motion: reduce)').matches;
     const controller = new AbortController();
     const options = { signal: controller.signal };
+    const tickScroll = time => lenis?.raf(time * 1000);
+
+    let refreshFrame = 0;
+    let maxScroll = 0;
+    const updateScrollBounds = () => { maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight); };
+    ScrollTrigger.addEventListener('refresh', updateScrollBounds);
+    // ponytail: coalesce content/language changes into one measurement per frame.
+    function scheduleRefresh() {
+        if (refreshFrame) return;
+        refreshFrame = requestAnimationFrame(() => { refreshFrame = 0; ScrollTrigger.refresh(); });
+    }
 
     function initSmoothScroll() {
         if (reduced()) {
             if (lenis) {
+                gsap.ticker.remove(tickScroll);
                 lenis.destroy();
                 lenis = null;
             }
@@ -32,30 +44,29 @@ function initMotion() {
             lenis.on('scroll', e => {
                 ScrollTrigger.update();
                 if (window.cosmicFlight) {
-                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
                     const progress = maxScroll > 0 ? Math.max(0, Math.min(1, e.scroll / maxScroll)) : 0;
                     window.cosmicFlight.setProgress(progress, e.velocity);
                 }
             });
-            gsap.ticker.add(time => {
-                lenis?.raf(time * 1000);
-            });
+            gsap.ticker.add(tickScroll);
             gsap.ticker.lagSmoothing(0);
 
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', e => {
-                    const href = anchor.getAttribute('href');
-                    if (href && href !== '#') {
-                        const target = document.querySelector(href);
-                        if (target && lenis) {
-                            e.preventDefault();
-                            lenis.scrollTo(target, { offset: -24, duration: 1.1 });
-                        }
-                    }
-                }, options);
-            });
         }
     }
+
+    // Bind once, even when smooth scrolling is turned off and on again.
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', e => {
+            const href = anchor.getAttribute('href');
+            if (href && href !== '#') {
+                const target = document.querySelector(href);
+                if (target && lenis) {
+                    e.preventDefault();
+                    lenis.scrollTo(target, { offset: -24, duration: 1.1 });
+                }
+            }
+        }, options);
+    });
 
     function compose() {
         initSmoothScroll();
@@ -102,7 +113,7 @@ function initMotion() {
                 });
             }
         }, document.body);
-        ScrollTrigger.refresh();
+        scheduleRefresh();
     }
 
     function animateContent(selector) {
@@ -110,21 +121,25 @@ function initMotion() {
         if (!targets.length) return;
         gsap.killTweensOf(targets);
         gsap.fromTo(targets, { opacity: 0, y: reduced() ? 0 : 16 }, { opacity: 1, y: 0, stagger: reduced() ? 0 : .04, duration: reduced() ? .12 : .38, ease: 'power3.out', clearProps: 'transform,opacity' });
-        ScrollTrigger.refresh();
+        scheduleRefresh();
     }
 
     document.addEventListener('projectchange', () => animateContent('#file-grid .project-card'), options);
     document.addEventListener('achievementchange', () => animateContent('.achievement-copy,.achievement-photo'), options);
     document.addEventListener('awardopen', () => animateContent('#award-dialog .dialog-top,#award-dialog-content'), options);
     document.addEventListener('motionchange', compose, options);
-    document.addEventListener('languagechange', () => ScrollTrigger.refresh(), options);
+    document.addEventListener('languagechange', scheduleRefresh, options);
+    document.fonts.ready.then(() => { if (!controller.signal.aborted) scheduleRefresh(); });
+    document.addEventListener('load', event => {
+        if (event.target instanceof HTMLImageElement) scheduleRefresh();
+    }, { ...options, capture: true });
     document.addEventListener('cosmoschange', e => {
         if (e.detail?.active) {
             lenis?.stop();
         } else {
             lenis?.start();
-            ScrollTrigger.refresh();
-            setTimeout(() => ScrollTrigger.refresh(), 460);
+            scheduleRefresh();
+            setTimeout(scheduleRefresh, 460);
         }
     }, options);
 
@@ -144,6 +159,9 @@ function initMotion() {
     window.addEventListener('pagehide', event => {
         if (event.persisted) return;
         controller.abort();
+        cancelAnimationFrame(refreshFrame);
+        ScrollTrigger.removeEventListener('refresh', updateScrollBounds);
+        gsap.ticker.remove(tickScroll);
         lenis?.destroy();
         context?.revert();
         gsap.killTweensOf('#file-grid .project-card,.achievement-copy,.achievement-photo,#award-dialog .dialog-top,#award-dialog-content,[data-tilt]');

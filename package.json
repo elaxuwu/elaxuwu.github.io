@@ -2,8 +2,8 @@
   "name": "elax-portfolio",
   "private": true,
   "scripts": {
-    "build": "esbuild ./hero-scene.js ./motion.js --bundle --format=esm --minify --tsconfig-raw={} --outdir=assets",
-    "check": "node tests/check-site.cjs"
+    "build": "node build.cjs",
+    "check": "node tests/check-site.cjs && node tests/check-motion.cjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",
