@@ -1,7 +1,7 @@
 (function () {
     const body = document.body;
     const home = body.dataset.navBack || 'index.html';
-    const base = home.replace('index.html', '');
+    const base = home.replace(/index\.html(?:#.*)?$/, '');
     const isHome = body.classList.contains('portfolio-home');
     const text = (en, vi) => `<span class="content-en">${en}</span><span class="content-vi">${vi}</span>`;
     const nav = document.querySelector('.system-nav');

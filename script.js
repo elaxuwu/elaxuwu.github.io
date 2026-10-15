@@ -58,11 +58,13 @@ const PROJECT_DESCRIPTIONS = {
     'Hunt for the Moon': ['Interactive moving target', 'Bia di chuyển cho trò chơi bắn mục tiêu'],
     'Zalo Auto Sender': ['Windows messaging automation', 'Tự động gửi tin nhắn trên Windows'],
     'Windows License Checker': ['Windows license utility', 'Công cụ kiểm tra bản quyền Windows'],
-    'AILAX': ['Personal AI agent', 'Trợ lý AI cá nhân']
+    'AILAX': ['Personal AI agent', 'Trợ lý AI cá nhân'],
+    'Project Seth': ['Level design & lighting prototype.', 'Bản thử nghiệm thiết kế màn chơi và ánh sáng.'],
+    'Prison Cell': ['First 3D modeling study in Blender.', 'Dự án dựng hình 3D đầu tay trên Blender.']
 };
 const PROJECT_MEDIA = {
-    'Light = Die': ['brand/elaxion-banner.webp','projects/icon-game.svg'],
-    'Ball Eat Balls': ['brand/elaxion-logo.webp','projects/icon-game.svg'],
+    'Light = Die': ['responsive/light-equal-die-800.webp','projects/icon-game.svg'],
+    'Ball Eat Balls': ['responsive/ball-eat-balls-640.webp','projects/icon-game.svg'],
     'Fruit Ninja': ['projects/fruit-ninja.jpg','social/unity.svg'],
     'Lazy Note': ['projects/lazy-note.webp','projects/icon-aiNotebook.svg'],
     'PlayWeaver': ['projects/playweaver.webp','projects/icon-ai.svg'],
@@ -73,9 +75,13 @@ const PROJECT_MEDIA = {
     'Hunt for the Moon': ['brand/elaxion-banner.webp','projects/icon-huntMoon.svg'],
     'Zalo Auto Sender': ['brand/elax-avatar.webp','projects/icon-app.svg'],
     'Windows License Checker': ['brand/elax-avatar.webp','projects/icon-app.svg'],
-    'AILAX': ['brand/elax-avatar.webp','projects/icon-ailax.svg']
+    'AILAX': ['brand/elax-avatar.webp','projects/icon-ailax.svg'],
+    'Project Seth': ['projects/project-seth.jpg','projects/icon-game.svg'],
+    'Prison Cell': ['projects/prison-cell.jpg','projects/icon-game.svg']
 };
 const RESPONSIVE_MEDIA = {
+    "responsive/light-equal-die-800.webp": "assets/responsive/light-equal-die-480.webp 480w, assets/responsive/light-equal-die-800.webp 800w, assets/responsive/light-equal-die-1280.webp 1280w, assets/responsive/light-equal-die-full.webp 1914w",
+    "responsive/ball-eat-balls-640.webp": "assets/responsive/ball-eat-balls-320.webp 320w, assets/responsive/ball-eat-balls-640.webp 640w, assets/responsive/ball-eat-balls-960.webp 960w, assets/responsive/ball-eat-balls-full.webp 1919w",
     "projects/fruit-ninja.jpg": "assets/responsive/fruit-ninja-320.webp 320w, assets/responsive/fruit-ninja-640.webp 640w, assets/projects/fruit-ninja.jpg 1280w",
     "projects/portrait.webp": "assets/responsive/portrait-240.webp 240w, assets/responsive/portrait-400.webp 400w, assets/projects/portrait.webp 661w",
     "brand/elaxion-banner.webp": "assets/responsive/elaxion-banner-320.webp 320w, assets/responsive/elaxion-banner-640.webp 640w, assets/brand/elaxion-banner.webp 1500w",
@@ -532,6 +538,74 @@ function initProductPreviewSlideshow() {
                 altVi: 'Gian hàng Trung Thu tương tác tại VinSchool',
                 altEn: 'Interactive Mid-Autumn festival booth exhibition at VinSchool'
             }
+        ],
+        projectSeth: [
+            {
+                type: 'image',
+                src: '../../images/project_seth/Screenshot 2026-10-15 100937.png',
+                captionVi: 'Đại điện ngục tối và hồ nham thạch: Bố cục không gian pháo đài ngầm, hệ thống lồng treo và ánh sáng thể tích tương phản cao.',
+                captionEn: 'Infernal Citadel & Lava Pools: Subterranean fortress layout, suspended cages, and high-contrast volumetric ambient lighting.',
+                altVi: 'Toàn cảnh pháo đài Project Seth với hồ dung nham',
+                altEn: 'Project Seth citadel panorama with lava pools'
+            },
+            {
+                type: 'image',
+                src: '../../images/project_seth/Screenshot 2026-10-15 100949.png',
+                captionVi: 'Cầu đá và đuốc than: Chi tiết vòm cổng dẫn vào sảnh chính pháo đài.',
+                captionEn: 'Stone Bridge & Braziers: Architectural entryway arch leading into the citadel core.',
+                altVi: 'Cầu đá và vòm cổng Project Seth',
+                altEn: 'Stone bridge and entryway in Project Seth'
+            },
+            {
+                type: 'image',
+                src: '../../images/project_seth/Screenshot 2026-10-15 101158.png',
+                captionVi: 'Khe nứt phát sáng: Cổng vào hang động với ánh sáng đỏ huyền bí đục sâu vào vách đá basalt.',
+                captionEn: 'Glowing Cavern Rift: Monolithic portal entrance radiating intense crimson light carved into basalt rock.',
+                altVi: 'Cổng hang động phát sáng màu đỏ',
+                altEn: 'Glowing red cavern entrance'
+            },
+            {
+                type: 'image',
+                src: '../../images/project_seth/Screenshot 2026-10-15 101217.png',
+                captionVi: 'Đường dẫn đến Cổng Đỏ: Hàng cột đá cổ, bậc thang và hồ dung nham tiền cảnh.',
+                captionEn: 'Approach to the Red Rift: Colonnade pillars, stone steps, and molten foreground terrain.',
+                altVi: 'Hàng cột đá dẫn đến cổng phát sáng',
+                altEn: 'Colonnade pillars leading to glowing portal'
+            },
+            {
+                type: 'image',
+                src: '../../images/project_seth/Screenshot 2026-10-15 101241.png',
+                captionVi: 'Hành lang nội thất đền thờ: Vòm đá gothic, họa tiết hoa văn chạm sàn và nguồn sáng ấm từ các giá đuốc.',
+                captionEn: 'Temple Corridor Interior: Gothic stone arches, patterned masonry floor paving, and warm amber brazier illumination.',
+                altVi: 'Hành lang đá bên trong đền thờ Project Seth',
+                altEn: 'Temple stone corridor interior in Project Seth'
+            },
+            {
+                type: 'image',
+                src: '../../images/project_seth/Screenshot 2026-10-15 101329.png',
+                captionVi: 'Góc nhìn chiều sâu hành lang: Đổ bóng thời gian thực và cấu trúc modular kitbash trên vách tường.',
+                captionEn: 'Corridor Depth Perspective: Real-time shadow casting and modular kitbashed masonry walls.',
+                altVi: 'Chiều sâu hành lang và ánh sáng đổ bóng',
+                altEn: 'Corridor perspective with dynamic shadows'
+            },
+            {
+                type: 'image',
+                src: '../../images/project_seth/Screenshot 2026-10-15 101336.png',
+                captionVi: 'Kiểm tra tỷ lệ và không gian: Dummy nhân vật đặt làm mốc đối chiếu quy mô kiến trúc.',
+                captionEn: 'Scale & Spatial Calibration: Character dummy reference used for environmental proportions.',
+                altVi: 'Kiểm tra tỷ lệ nhân vật trong không gian',
+                altEn: 'Scale check with character dummy'
+            }
+        ],
+        prisonCell: [
+            {
+                type: 'image',
+                src: '../../images/prison_cell.jpg',
+                captionVi: 'Khung nhìn Blender 3D: Giường treo xích trợ lực, mảng tường gạch tróc vữa và bóng đổ tương phản xiên qua song sắt.',
+                captionEn: 'Blender 3D Viewport: Suspended cot with tension chains, peeling plaster wall, and dramatic chiaroscuro window bar shadows.',
+                altVi: 'Khung nhìn dựng hình phòng giam trong Blender',
+                altEn: 'Blender 3D prison cell viewport render'
+            }
         ]
     };
 
@@ -666,7 +740,9 @@ const fileSystem = {
     "GAME PROJECTS": [
         { type: 'file', name: 'Light = Die', link: 'https://elaxuwu.itch.io/light-equal-die', tag: 'UNITY 3D', icon: 'game' },
         { type: 'file', name: 'Ball Eat Balls', link: 'https://elaxuwu.itch.io/ball-eat-balls', tag: 'UNITY WEBGL', icon: 'game' },
-        { type: 'file', name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL', icon: 'game' }
+        { type: 'file', name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL', icon: 'game' },
+        { type: 'file', name: 'Project Seth', link: 'pages/projects/project_seth.html', tag: 'ROBLOX STUDIO', icon: 'game' },
+        { type: 'file', name: 'Prison Cell', link: 'pages/projects/prison_cell.html', tag: 'BLENDER 3D', icon: 'game' }
     ],
     "APP PROJECTS": [
         { type: 'file', name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION', icon: 'app' },

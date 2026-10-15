@@ -31,7 +31,7 @@ function checkResponsiveImages(html, base){
 for(const phone of [false,true]){
     mobile=phone;
     const size=phone?2:4;
-    for(const [category,total] of [['ROOT',13],['GAME PROJECTS',3],['AI PROJECTS',6],['APP PROJECTS',2],['ROBOTICS PROJECTS',2]]){
+    for(const [category,total] of [['ROOT',15],['GAME PROJECTS',5],['AI PROJECTS',6],['APP PROJECTS',2],['ROBOTICS PROJECTS',2]]){
         const pages=Math.ceil(total/size),destinations=[];
         for(let page=0;page<pages;page++){
             context.renderFiles(category,page);
@@ -55,7 +55,7 @@ for(const phone of [false,true]){
         context.renderFiles(category,999);assert.equal(ids['project-page-count'].textContent,`${pages} / ${pages}`);
     }
 }
-vietnamese=true;context.renderFiles('GAME PROJECTS');assert.equal(ids['item-count'].textContent,'3 dự án');
+vietnamese=true;context.renderFiles('GAME PROJECTS');assert.equal(ids['item-count'].textContent,'5 dự án');
 assert.match(ids['file-grid'].children[0].innerHTML,/Light = Die/);assert.match(ids['file-grid'].children[1].innerHTML,/one hour/);
 assert.equal(context.motionIsReduced(),false,'User requested full animation as the default');
 document.documentElement.dataset.motionPreference='system';assert.equal(context.motionIsReduced(),true);
@@ -83,4 +83,4 @@ assert(!fs.readFileSync(path.join(root,'components.js'),'utf8').includes('✳'))
 assert(!fs.readFileSync(path.join(root,'style.css'),'utf8').includes('@import'));
 assert.match(fs.readFileSync(path.join(root,'robots.txt'),'utf8'),/^User-agent: \*\nAllow: \/\nDisallow: \/pages\/gradesReport\//);
 assert.match(fs.readFileSync(path.join(root,'pages/gradesReport/report_Grade11_Semester1.html'),'utf8'),/name="robots" content="noindex, nofollow"/);
-console.log('Passed: all 13 projects across desktop/mobile pages, bilingual cards, motion preferences, local assets, 4 complete awards, and URL-only academic report.');
+console.log('Passed: all 15 projects across desktop/mobile pages, bilingual cards, motion preferences, local assets, 4 complete awards, and URL-only academic report.');

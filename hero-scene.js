@@ -19,7 +19,7 @@ const CELESTIAL_PROJECTS = [
         radius: 0.52,
         ringRadius: 0.9,
         link: 'https://elaxuwu.itch.io/light-equal-die',
-        image: 'assets/brand/elaxion-banner.webp',
+        image: 'assets/responsive/light-equal-die-800.webp',
         descEn: 'My strongest game project so far. Atmospheric 3D survival game where light is both a weapon and a mortal hazard.',
         descVi: 'Dự án game tốt nhất của mình hiện tại. Trò chơi sinh tồn 3D nơi ánh sáng vừa là vũ khí vừa là hiểm họa.'
     },
@@ -38,7 +38,7 @@ const CELESTIAL_PROJECTS = [
         radius: 0.38,
         ringRadius: 0.65,
         link: 'https://elaxuwu.itch.io/ball-eat-balls',
-        image: 'assets/brand/elaxion-logo.webp',
+        image: 'assets/responsive/ball-eat-balls-640.webp',
         descEn: 'A fast-paced multiplayer-inspired game challenge crafted in one hour using Unity WebGL.',
         descVi: 'Game thử thách nhịp độ nhanh lấy cảm hứng từ game ăn bóng, hoàn thành trong một giờ trên Unity WebGL.'
     },
