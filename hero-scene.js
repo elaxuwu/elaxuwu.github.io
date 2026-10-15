@@ -61,6 +61,47 @@ const CELESTIAL_PROJECTS = [
         descVi: 'Dự án chém hoa quả kinh điển tái hiện hiệu ứng chém vật lý và hạt hiệu ứng trên Unity WebGL.'
     },
     {
+        id: 'project-seth',
+        name: 'Project Seth',
+        category: 'GAME PROJECTS',
+        tag: 'ROBLOX STUDIO',
+        orbitIndex: 2,
+        orbitRadius: 10.2,
+        orbitSpeed: 0.11,
+        baseAngle: 0.6,
+        inclination: -0.16,
+        color: 0xf97316,
+        geometryType: 'dodecahedron',
+        radius: 0.4,
+        ringRadius: 0.72,
+        link: 'pages/projects/project_seth.html',
+        image: 'assets/projects/project-seth.jpg',
+        descEn: 'Atmospheric citadel level design and dynamic lighting study built in Roblox Studio.',
+        descVi: 'Thiết kế màn chơi pháo đài khí quyển và nghiên cứu ánh sáng động trên Roblox Studio.',
+        captionEn: 'Atmospheric citadel level design and dynamic lighting.',
+        captionVi: 'Thiết kế pháo đài khí quyển và ánh sáng động.'
+    },
+    {
+        id: 'prison-cell',
+        name: 'Prison Cell',
+        category: 'GAME PROJECTS',
+        tag: 'BLENDER 3D',
+        orbitIndex: 2,
+        orbitRadius: 7.4,
+        orbitSpeed: 0.15,
+        baseAngle: 3.0,
+        inclination: 0.2,
+        color: 0x94a3b8,
+        geometryType: 'octahedron',
+        radius: 0.36,
+        link: 'pages/projects/prison_cell.html',
+        image: 'assets/projects/prison-cell.jpg',
+        descEn: 'First 3D modeling study in Blender exploring tension chains, wall textures, and window bar lighting.',
+        descVi: 'Dự án dựng hình 3D đầu tay trên Blender nghiên cứu dây xích, chất liệu gạch và ánh sáng thanh sắt.',
+        captionEn: '3D modeling study of a prison cell in Blender.',
+        captionVi: 'Nghiên cứu dựng hình 3D phòng giam trên Blender.'
+    },
+    {
         id: 'lazy-note',
         name: 'Lazy Note',
         category: 'AI PROJECTS',
@@ -935,6 +976,8 @@ function createField() {
             ['A survival game where light can kill you.', 'Game sinh tồn nơi ánh sáng có thể giết bạn.'],
             ['Eat other balls to grow. Built in one hour.', 'Ăn bóng để lớn lên. Làm trong một giờ.'],
             ['Slice flying fruit in your browser.', 'Chém trái cây ngay trong trình duyệt.'],
+            ['Atmospheric citadel level design and dynamic lighting.', 'Thiết kế pháo đài khí quyển và ánh sáng động.'],
+            ['3D modeling study of a prison cell in Blender.', 'Nghiên cứu dựng hình 3D phòng giam trên Blender.'],
             ['Turn recordings and videos into notes and mind maps.', 'Biến ghi âm và video thành ghi chú, sơ đồ tư duy.'],
             ['Describe a game. AI builds a playable prototype.', 'Mô tả game để AI tạo bản chơi thử.'],
             ['Turn doctor–patient conversations into medical notes.', 'Chuyển hội thoại khám bệnh thành ghi chép y khoa.'],
@@ -950,9 +993,11 @@ function createField() {
             const hex = '#' + proj.color.toString(16).padStart(6, '0');
             const image = index === 0 ? 'images/lightequaldie/coverimage.png' : index === 1 ? 'images/ballseatballs/coverimage.png' : proj.image;
             const preview = image.startsWith('assets/brand/') ? '' : '<img class="cosmos-project-preview" src="' + image + '" alt="" loading="lazy">';
+            const capEn = (captions[index] && captions[index][0]) || proj.descEn;
+            const capVi = (captions[index] && captions[index][1]) || proj.descVi;
             return `<button type="button" class="cosmos-chip" data-id="${proj.id}" style="--chip-accent: ${hex};" aria-pressed="false">
                 ${preview}
-                <span class="cosmos-project-copy"><span class="cosmos-chip-name">${proj.name}</span><span class="cosmos-project-description"><span class="content-en">${captions[index][0]}</span><span class="content-vi">${captions[index][1]}</span></span></span>
+                <span class="cosmos-project-copy"><span class="cosmos-chip-name">${proj.name}</span><span class="cosmos-project-description"><span class="content-en">${capEn}</span><span class="content-vi">${capVi}</span></span></span>
             </button>`;
         }).join('');
 
