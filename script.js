@@ -93,7 +93,7 @@ const RESPONSIVE_MEDIA = {
     "projects/clinicscribe.webp": "assets/responsive/clinicscribe-320.webp 320w, assets/projects/clinicscribe.webp 806w",
     "projects/signbridgeai.webp": "assets/responsive/signbridgeai-320.webp 320w, assets/responsive/signbridgeai-640.webp 640w, assets/projects/signbridgeai.webp 1300w",
     "projects/recyclecheck.webp": "assets/projects/recyclecheck.webp 258w",
-    "projects/soccer-drone.webp": "assets/projects/soccer-drone.webp 405w"
+    "projects/soccer-drone.webp": "assets/projects/soccer-drone.webp 400w"
 };
 function responsiveMediaAttributes(source, sizes) {
     const srcset = RESPONSIVE_MEDIA[source];
