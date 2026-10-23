@@ -72,7 +72,7 @@ const PROJECT_MEDIA = {
     'SignBridge AI': ['projects/signbridgeai.webp','projects/icon-signBridge.svg'],
     'RecycleCheck AI': ['projects/recyclecheck.webp','projects/recyclecheck-logo.webp'],
     'Soccer Drone': ['projects/soccer-drone.webp','projects/icon-robotics.svg'],
-    'Hunt for the Moon': ['brand/elaxion-banner.webp','projects/icon-huntMoon.svg'],
+    'Hunt for the Moon': ['../images/vinschooltrungthu2026/MVIMG_20260925_161143.jpg','projects/icon-huntMoon.svg'],
     'Zalo Auto Sender': ['brand/elax-avatar.webp','projects/icon-app.svg'],
     'Windows License Checker': ['brand/elax-avatar.webp','projects/icon-app.svg'],
     'AILAX': ['brand/elax-avatar.webp','projects/icon-ailax.svg'],
@@ -101,7 +101,7 @@ function responsiveMediaAttributes(source, sizes) {
 }
 
 function projectItems(folder) {
-    return folder === 'ROOT' ? Object.entries(fileSystem).filter(([key]) => key !== 'ROOT').flatMap(([,items]) => items) : fileSystem[folder] || [];
+    return folder === 'ROOT' ? Object.values(fileSystem).flat() : fileSystem[folder] || [];
 }
 function renderFiles(folderName, page = 0) {
     const grid = document.getElementById('file-grid'); if (!grid) return;
@@ -507,36 +507,68 @@ function initProductPreviewSlideshow() {
         ],
         huntForTheMoon: [
             {
-                type: 'image',
-                src: 'https://placehold.co/1600x900/181204/fbbf24?text=Hunt+For+The+Moon+Target+System',
-                captionVi: 'Hệ thống bia di chuyển "Săn Trăng": Bố trí ray trượt, puly kéo cáp và tấm bia chủ đề Trung Thu.',
-                captionEn: '"Hunt for the Moon" Moving Target System: Linear rail setup, pulley-cord drive, and Mid-Autumn target board.',
-                altVi: 'Tổng quan hệ thống bia chuyển động Săn Trăng',
-                altEn: 'Hunt for the Moon moving target system overview'
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/MVIMG_20260925_161143.jpg",
+                captionVi: "Học sinh tham gia trò chơi bắn bia Săn Trăng tại hội chợ Trung Thu VinSchool.",
+                captionEn: "Students playing Hunt for the Moon at the VinSchool Mid-Autumn Festival.",
+                altVi: "Học sinh ngắm bắn bia mặt trăng tại gian hàng",
+                altEn: "Students aiming at the moon target at the booth"
             },
             {
-                type: 'image',
-                src: 'https://placehold.co/1600x900/0c192c/38bdf8?text=Arduino+Uno+%2B+L298N+Hardware+Rig',
-                captionVi: 'Cụm điều khiển: Vi điều khiển Arduino Uno kết nối mạch cầu H L298N và động cơ DC giảm tốc JGA25 280RPM.',
-                captionEn: 'Control Rig: Arduino Uno microcontroller paired with L298N H-Bridge and JGA25 280RPM DC gear motor.',
-                altVi: 'Mạch điều khiển Arduino Uno và L298N',
-                altEn: 'Arduino Uno and L298N motor driver electronics rig'
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/MVIMG_20260925_161040.jpg",
+                captionVi: "Toàn cảnh gian hàng Săn Trăng với khung trò chơi trang trí chủ đề Trung Thu.",
+                captionEn: "The Hunt for the Moon booth with its Mid-Autumn themed game frame.",
+                altVi: "Khung trò chơi Săn Trăng tại gian hàng Trung Thu",
+                altEn: "Hunt for the Moon game frame at the Mid-Autumn booth"
             },
             {
-                type: 'image',
-                src: 'https://placehold.co/1600x900/1e1528/c084fc?text=Joystick+Module+%26+Endstop+Limit+Switches',
-                captionVi: 'Module Joystick điều khiển thủ công và công tắc hành trình (Endstop) bảo vệ giới hạn hai đầu hành trình.',
-                captionEn: 'Analog Joystick input module for manual control and dual limit switches for boundary overrun safety.',
-                altVi: 'Cụm Joystick và công tắc hành trình',
-                altEn: 'Joystick module and boundary limit switches'
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/MVIMG_20260925_161139.jpg",
+                captionVi: "Trải nghiệm bắn bia di chuyển với các học sinh tập trung quanh gian hàng.",
+                captionEn: "Moving target gameplay with students gathered around the booth.",
+                altVi: "Học sinh trải nghiệm trò chơi bắn bia di chuyển",
+                altEn: "Students trying the moving target shooting game"
             },
             {
-                type: 'image',
-                src: 'https://placehold.co/1600x900/06281e/34d399?text=VinSchool+Booth+Interactive+Exhibition',
-                captionVi: 'Gian hàng hội chợ Trung Thu tại VinSchool: Trải nghiệm bắn bia tương tác thu hút đông đảo học sinh tham gia.',
-                captionEn: 'VinSchool Mid-Autumn Festival Booth: Interactive target shooting gameplay engaging students.',
-                altVi: 'Gian hàng Trung Thu tương tác tại VinSchool',
-                altEn: 'Interactive Mid-Autumn festival booth exhibition at VinSchool'
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/MVIMG_20260925_161027.jpg",
+                captionVi: "Cận cảnh mạch điều khiển và dây nối trên bàn vận hành gian hàng.",
+                captionEn: "A close-up of the controller electronics and wiring on the booth table.",
+                altVi: "Mạch điều khiển và dây nối của hệ thống Săn Trăng",
+                altEn: "Hunt for the Moon controller electronics and wiring"
+            },
+            {
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/IMG_20261023_171749.jpg",
+                captionVi: "Các thành viên bên cạnh bia mặt trăng và khung trò chơi.",
+                captionEn: "Team members beside the moon target and game frame.",
+                altVi: "Các thành viên bên cạnh bia mặt trăng",
+                altEn: "Team members beside the moon target"
+            },
+            {
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/IMG_20261023_171807.jpg",
+                captionVi: "Các thành viên vận hành trò chơi tại gian hàng Trung Thu.",
+                captionEn: "Team members operating the game at the Mid-Autumn booth.",
+                altVi: "Các thành viên vận hành gian hàng Săn Trăng",
+                altEn: "Team members operating the Hunt for the Moon booth"
+            },
+            {
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/IMG_20261023_171800.jpg",
+                captionVi: "Ảnh tập thể tại gian hàng Săn Trăng trong nhà thi đấu VinSchool.",
+                captionEn: "A group photo at the Hunt for the Moon booth in the VinSchool gym.",
+                altVi: "Ảnh tập thể tại gian hàng Săn Trăng",
+                altEn: "Group photo at the Hunt for the Moon booth"
+            },
+            {
+                type: "image",
+                src: "../../images/vinschooltrungthu2026/IMG_20261023_171745.jpg",
+                captionVi: "Ảnh kỷ niệm cùng tập thể tại hội chợ Trung Thu VinSchool.",
+                captionEn: "A group keepsake photo from the VinSchool Mid-Autumn Festival.",
+                altVi: "Ảnh tập thể tại hội chợ Trung Thu VinSchool",
+                altEn: "Group photo at the VinSchool Mid-Autumn Festival"
             }
         ],
         projectSeth: [
@@ -730,34 +762,27 @@ function initProductPreviewSlideshow() {
 }
 
 const fileSystem = {
-    "ROOT": [
-        { type: 'folder', name: 'GAME PROJECTS' },
-        { type: 'folder', name: 'APP PROJECTS' },
-        { type: 'folder', name: 'AI PROJECTS' },
-        { type: 'folder', name: 'ROBOTICS PROJECTS' },
-        { type: 'file', name: 'readme.txt', link: '#', desc: 'hellu :3' }
-    ],
     "GAME PROJECTS": [
-        { type: 'file', name: 'Light = Die', link: 'https://elaxuwu.itch.io/light-equal-die', tag: 'UNITY 3D', icon: 'game' },
-        { type: 'file', name: 'Ball Eat Balls', link: 'https://elaxuwu.itch.io/ball-eat-balls', tag: 'UNITY WEBGL', icon: 'game' },
-        { type: 'file', name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL', icon: 'game' },
-        { type: 'file', name: 'Project Seth', link: 'pages/projects/project_seth.html', tag: 'ROBLOX STUDIO', icon: 'game' },
-        { type: 'file', name: 'Prison Cell', link: 'pages/projects/prison_cell.html', tag: 'BLENDER 3D', icon: 'game' }
+        { name: 'Light = Die', link: 'https://elaxuwu.itch.io/light-equal-die', tag: 'UNITY 3D' },
+        { name: 'Ball Eat Balls', link: 'https://elaxuwu.itch.io/ball-eat-balls', tag: 'UNITY WEBGL' },
+        { name: 'Fruit Ninja', link: 'https://elaxuwu.github.io/TemuFruitNinja/', tag: 'UNITY WEBGL' },
+        { name: 'Project Seth', link: 'pages/projects/project_seth.html', tag: 'ROBLOX STUDIO' },
+        { name: 'Prison Cell', link: 'pages/projects/prison_cell.html', tag: 'BLENDER 3D' }
     ],
     "APP PROJECTS": [
-        { type: 'file', name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION', icon: 'app' },
-        { type: 'file', name: 'Windows License Checker', link: 'https://github.com/elaxuwu/Windows-License-Checker---Windows-Crack-Checker', tag: 'WINDOWS UTILITY', icon: 'app' }
+        { name: 'Zalo Auto Sender', link: 'pages/projects/zalo_auto_sender_page.html', tag: 'WPF/C# AUTOMATION' },
+        { name: 'Windows License Checker', link: 'https://github.com/elaxuwu/Windows-License-Checker---Windows-Crack-Checker', tag: 'WINDOWS UTILITY' }
     ],
     "AI PROJECTS": [
-        { type: 'file', name: 'Lazy Note', icon: 'aiNotebook', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK', ribbon: 'WINNER' },
-        { type: 'file', name: 'PlayWeaver', icon: 'ai', link: 'pages/projects/playweaver.html', tag: 'AI GAME PROTOTYPER', ribbon: 'WINNER' },
-        { type: 'file', name: 'ClinicScribe', icon: 'clinicScribe', link: 'pages/projects/clinicscribe.html', tag: 'AI CLINICAL SCRIBE', ribbon: 'WINNER' },
-        { type: 'file', name: 'SignBridge AI', icon: 'signBridge', link: 'pages/projects/signbridgeai.html', tag: 'AI SIGN TRANSLATOR' },
-        { type: 'file', name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT', icon: 'ailax' },
-        { type: 'file', name: 'RecycleCheck AI', link: 'pages/projects/recyclecheck.html', tag: 'AI RECYCLING SCANNER', icon: 'recycle' }
+        { name: 'Lazy Note', link: 'pages/projects/lazy_note.html', tag: 'ADVANCED AI NOTEBOOK', ribbon: 'WINNER' },
+        { name: 'PlayWeaver', link: 'pages/projects/playweaver.html', tag: 'AI GAME PROTOTYPER', ribbon: 'WINNER' },
+        { name: 'ClinicScribe', link: 'pages/projects/clinicscribe.html', tag: 'AI CLINICAL SCRIBE', ribbon: 'WINNER' },
+        { name: 'SignBridge AI', link: 'pages/projects/signbridgeai.html', tag: 'AI SIGN TRANSLATOR' },
+        { name: 'AILAX', link: 'https://github.com/elaxuwu/AILAX', tag: 'PERSONAL AI AGENT' },
+        { name: 'RecycleCheck AI', link: 'pages/projects/recyclecheck.html', tag: 'AI RECYCLING SCANNER' }
     ],
     "ROBOTICS PROJECTS": [
-        { type: 'file', name: 'Soccer Drone', link: 'pages/projects/soccer_drone.html', tag: 'FPV ROBOTICS', icon: 'robotics', ribbon: 'WINNER' },
-        { type: 'file', name: 'Hunt for the Moon', link: 'pages/projects/hunt_for_the_moon.html', tag: 'ARDUINO MECHATRONICS', icon: 'huntMoon' }
+        { name: 'Soccer Drone', link: 'pages/projects/soccer_drone.html', tag: 'FPV ROBOTICS', ribbon: 'WINNER' },
+        { name: 'Hunt for the Moon', link: 'pages/projects/hunt_for_the_moon.html', tag: 'ARDUINO MECHATRONICS' }
     ]
 };

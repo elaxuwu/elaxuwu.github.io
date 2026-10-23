@@ -87,7 +87,6 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .game-caption p { font-size:11px; color:var(--text-muted); margin-top:6px; }
 .game-featured h3 { font-size:27px; } .game-secondary h3 { font-size:18px; }
 .game-platform { color:var(--text-muted); font-size:10px; display:flex; align-items:center; gap:18px; white-space:nowrap; }
-.artwork-note { margin-top:8px; font-size:9px; color:var(--text-dim); }
 .game-tech { display:block; margin-top:4px; font-size:9px; color:var(--accent); }
 .project-browser { min-width:0; }
 .project-filters { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px; }
@@ -152,7 +151,6 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .award-detail>div { display:grid; grid-template-columns:1fr 1fr; gap:35px; }
 .award-detail h2 { font-size:24px; margin:12px 0 18px; }.award-detail p { font-size:12px; color:var(--text-muted); }
 .achievement-kicker { font-size:10px; color:var(--text-muted); }.achv-metrics { display:flex; gap:20px; margin:25px 0; }.achv-metric { flex:1; font-size:10px; }
-.achv-metric-value { display:block; font-size:23px; color:var(--accent); }.achv-metric-label { display:block; color:var(--text-muted); font-size:10px; }
 .achv-actions { margin-top:25px; }.award-dialog .proof-cover { display:none; }.proof-gallery summary { cursor:pointer; font-size:12px; margin-bottom:18px; }
 .proof-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }.proof-grid img,.proof-grid iframe { width:100%; aspect-ratio:4/3; background:var(--surface); border-radius:6px; }.proof-grid img { object-fit:cover; }
 .achv-proof-caption { margin-top:18px; font-size:10px!important; }
@@ -177,8 +175,8 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .drone-summary-copy,.moon-summary-copy { padding:28px; border-radius:24px; background:var(--surface); }
 .drone-summary-copy h2,.moon-summary-copy h2 { font-size:2rem; margin:15px 0 20px; }
 .drone-summary-metrics,.moon-summary-metrics,.moon-features-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
-.award-title { grid-area:title; } .award-showcase h2 { font-size:2.2rem; } .award-desc { grid-area:desc; } .award-metrics { grid-area:metrics; display:flex; flex-wrap:wrap; gap:25px; } .award-metric { flex:1 1 80px; } .award-actions { grid-area:actions; display:flex; gap:12px; flex-wrap:wrap; } .award-slideshow { grid-area:slideshow; min-width:0; }
-.award-slideshow-container,.achv-slideshow-container { position:relative; overflow:hidden; border-radius:16px; background:var(--surface-raised); } .award-slide { width:100%; aspect-ratio:16/10; object-fit:cover; }
+ .award-showcase h2 { font-size:2.2rem; }  .award-metrics { grid-area:metrics; display:flex; flex-wrap:wrap; gap:25px; } .award-metric { flex:1 1 80px; } .award-actions { grid-area:actions; display:flex; gap:12px; flex-wrap:wrap; } .award-slideshow { grid-area:slideshow; min-width:0; }
+.award-slideshow-container { position:relative; overflow:hidden; border-radius:16px; background:var(--surface-raised); } .award-slide { width:100%; aspect-ratio:16/10; object-fit:cover; }
 .award-nav-btn { position:absolute; top:50%; transform:translateY(-50%); border:0; width:36px; height:36px; border-radius:50%; background:var(--bg); color:var(--text); } .award-nav-btn.prev { left:10px; } .award-nav-btn.next { right:10px; }
 .award-indicators { display:flex; justify-content:center; gap:6px; margin-top:15px; } .award-dot { width:24px; height:24px; padding:0; border:7px solid var(--surface); border-radius:50%; background:var(--line); cursor:pointer; }
 .product-preview-stage { position:relative; padding:0 55px; } .product-preview-frame { padding:7px; border-radius:24px; background:var(--surface-raised); }
@@ -187,10 +185,9 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .product-preview-dots { display:flex; justify-content:center; gap:6px; margin-top:22px; } .product-preview-dot { width:24px; height:24px; border-radius:50%; background:var(--line); border:7px solid var(--bg); padding:0; } .product-preview-dot.is-active { background:var(--accent); }
 .product-preview-caption { padding:18px 55px 0; font-size:.9rem; } .product-preview-media img { opacity:1; transition:opacity .2s var(--ease); } .is-transitioning .product-preview-media img { opacity:.8; }
 .table-wrap { overflow-x:auto; border-radius:16px; background:var(--surface); } table { width:100%; border-collapse:collapse; text-align:left; font-size:.88rem; } th { color:var(--text); font-weight:500; background:var(--surface-raised); } th,td { padding:18px 22px; vertical-align:top; } td { color:var(--text-muted); border-bottom:1px solid var(--line); } td a { text-decoration:underline; text-underline-offset:3px; }
-.drone-snapshot-grid,.moon-snapshot-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:20px; } .drone-snapshot-main,.moon-snapshot-main { padding:28px; border-radius:24px; background:var(--surface); }
-.drone-metric-grid,.moon-metric-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; } .drone-metric-card,.moon-metric-card { border-radius:16px; padding:25px; background:var(--surface); } .drone-metric-value,.moon-metric-value { color:var(--accent); font-size:2rem; line-height:1.2; font-variant-numeric:tabular-nums; } .drone-metric-label,.moon-metric-label,.drone-eyebrow,.moon-eyebrow { color:var(--text-muted); font-size:.8rem; margin-top:10px; }
+ .drone-metric-card,.moon-metric-card { border-radius:16px; padding:25px; background:var(--surface); }
 .drone-pill-row,.moon-pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:25px; }
-.drone-eco-grid,.drone-note-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; } .drone-eco-card,.drone-note-panel,.moon-card { border-radius:16px; padding:26px; background:var(--surface); }
+.drone-eco-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; } .drone-eco-card,.drone-note-panel,.moon-card { border-radius:16px; padding:26px; background:var(--surface); }
 .drone-notes-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
 .award-proof-caption { color:var(--text-muted); font-size:.8rem; margin-top:15px; }
 .award-summary { min-width:0; }
@@ -200,7 +197,6 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .drone-banner-media { width:100%; aspect-ratio:21/9; object-fit:cover; border-radius:var(--radius-card); border:1px solid var(--glass-border-strong); margin-bottom:24px; box-shadow:0 16px 40px rgba(0,0,0,0.25); display:block; }
 .drone-build-banner { object-position:center 25%; }
 .drone-overview-media { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--radius-card); border:1px solid var(--glass-border-strong); display:block; }
-.moon-subsystem-grid,.moon-impact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
 pre { max-width:100%; overflow-x:auto; border-radius:16px; padding:28px; background:var(--surface); color:var(--text); font:.83rem/1.8 var(--font-mono); tab-size:4; } code { font-family:var(--font-mono); } .kw,.fn { color:var(--accent); } .cm { color:var(--text-muted); } .num { color:var(--text); }
 .log-header,.log-entry { display:grid; grid-template-columns:120px 80px 1fr; gap:20px; padding:20px 0; } .log-header { font-size:.76rem; color:var(--text-muted); } .log-entry { border-top:1px solid var(--line); font-size:.9rem; } .tag-new { font-size:.75rem; color:var(--accent); }
 .social-page .project-hero { padding-bottom:35px; } .social-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; padding:30px 0 55px; }
@@ -209,7 +205,6 @@ pre { max-width:100%; overflow-x:auto; border-radius:16px; padding:28px; backgro
 .back-link { display:inline-block; margin:10px 0 35px; color:var(--text-muted); }
 .academic-page .page-section h3 { margin:25px 0 15px; } .report-header,.report-row { display:grid; grid-template-columns:2fr 1fr 1fr 25px; gap:15px; padding:18px 20px; } .report-header { font-size:.8rem; color:var(--text-muted); } .report-row { border-top:1px solid var(--line); cursor:pointer; } .report-row:hover { background:var(--surface); } .report-row.active { color:var(--accent); }
 .detail-row { max-height:0; overflow:hidden; } .detail-grid { padding:22px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; background:var(--surface); } .d-item { font-size:.85rem; color:var(--text-muted); } .d-item strong { color:var(--text); } .note-box { padding:25px; background:var(--surface); border-radius:16px; margin-top:18px; } .text-highlight { color:var(--accent); } .report-private-note { margin:30px 0; color:var(--text-muted); }
-.reveal.is-visible { animation:arrive .7s var(--ease) both; } @keyframes arrive { from { opacity:.2; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
 
 /* Detail pages use the same personal identity, with a visual before the long read. */
 .project-page .project-hero,.social-page .project-hero { display:grid; grid-template-columns:1fr 1fr; gap:45px; align-items:center; padding:40px 0; }
@@ -241,7 +236,7 @@ html[data-theme='light'] .contact-socials img,html[data-theme='light'] .plain-li
     .project-results { grid-template-columns:repeat(2,minmax(0,1fr)); }.project-media { aspect-ratio:2.3; }
     .achievements-layout { grid-template-columns:230px minmax(0,1fr); gap:22px; }.achievement-view { gap:20px; }.achievement-copy h3 { font-size:27px; }.achievement-description { font-size:10px; }
     .achievement-photo { aspect-ratio:1; }.about-section { gap:30px; }.award-detail>div { gap:25px; }
-    .drone-eco-grid,.drone-note-grid,.drone-notes-grid { grid-template-columns:1fr; }
+    .drone-eco-grid,.drone-notes-grid { grid-template-columns:1fr; }
 }
 @media(max-width:767px) {
     body { font-size:14px; }.system-nav { height:74px; width:90%; gap:14px; }.brand-identity { gap:10px; font-size:17px; }.brand-identity img { width:34px; height:34px; }
@@ -257,7 +252,7 @@ html[data-theme='light'] .contact-socials img,html[data-theme='light'] .plain-li
     .studio-card { width:108px; left:0; bottom:0; padding:3px; border-radius:7px; }.studio-card img { border-radius:4px; }#hero-field { opacity:.62; }
     .home-section { padding:36px 0; }.section-top { gap:15px; margin-bottom:20px; }.section-top h2 { font-size:29px; }.section-note { font-size:9px; max-width:18ch; text-align:right; }
     .games-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; gap:22px 15px; }.game-featured { grid-column:1/-1; grid-row:auto; }.game-featured .game-visual { height:210px; }.game-secondary .game-visual { height:115px; }
-    .game-caption { gap:10px; padding-top:12px; align-items:start; }.game-featured h3 { font-size:23px; }.game-secondary h3 { font-size:16px; }.game-caption p { font-size:10px; margin-top:6px; }.game-secondary .game-caption>span { display:none; }.game-platform { font-size:9px; gap:10px; margin-top:6px; }.artwork-note { font-size:8px; }
+    .game-caption { gap:10px; padding-top:12px; align-items:start; }.game-featured h3 { font-size:23px; }.game-secondary h3 { font-size:16px; }.game-caption p { font-size:10px; margin-top:6px; }.game-secondary .game-caption>span { display:none; }.game-platform { font-size:9px; gap:10px; margin-top:6px; }
     .project-filters { gap:4px; }.explorer-cat { padding:7px 10px; font-size:10px; }.project-results { grid-template-columns:1fr 1fr; gap:12px; min-height:180px; }.project-media { aspect-ratio:1.6; }
     .project-card-info { grid-template-columns:22px minmax(0,1fr); gap:8px; padding:12px 9px; }.project-icon { width:22px; height:22px; }.project-card h3 { font-size:13px; }.project-card p { font-size:9px; line-height:1.55; }.project-card .card-arrow { display:none; }.project-award { font-size:8px; top:7px; left:7px; }
     .achievements-layout { grid-template-columns:1fr; gap:24px; }.achievement-tabs { grid-template-columns:1fr 1fr; gap:5px; }.achievement-tab { grid-template-columns:24px 1fr; gap:9px; padding:11px 9px; }.achievement-tab>img { width:24px; height:24px; }.achievement-tab>span>strong { font-size:9px; }.achievement-tab>span>span { font-size:8px; }.achievement-tab>span:last-child { display:none; }
@@ -265,10 +260,10 @@ html[data-theme='light'] .contact-socials img,html[data-theme='light'] .plain-li
     .achievement-actions { gap:12px; margin-top:14px; }.achievement-actions .plain-link { font-size:9px; }
     .about-section { grid-template-columns:1fr; gap:25px; }.about-head h2 { font-size:29px; margin-bottom:18px; }.about-head p { font-size:12px; max-width:none; }.skills-list { gap:0 20px; }.skill-detail summary { font-size:11px; padding:13px 0; }.skill-detail p { font-size:10px; }
     .contact-section { display:block; padding:30px 0; }.contact-section h2 { font-size:24px; }.contact-email { font-size:14px; gap:8px; }.contact-socials { margin-top:25px; grid-template-columns:1fr 1fr; gap:15px 20px; }.system-footer { font-size:8px; gap:20px; padding:18px 0 25px; }
-    .award-dialog { padding:22px; width:94%; max-height:92dvh; }.dialog-top h2 { font-size:19px; }.award-detail>div { grid-template-columns:1fr; gap:25px; }.award-detail h2 { font-size:22px; }.proof-grid { grid-template-columns:1fr; }.proof-grid img { aspect-ratio:auto; max-height:600px; }.achv-metric-value { font-size:19px; }.achv-metric-label { font-size:9px; }
+    .award-dialog { padding:22px; width:94%; max-height:92dvh; }.dialog-top h2 { font-size:19px; }.award-detail>div { grid-template-columns:1fr; gap:25px; }.award-detail h2 { font-size:22px; }.proof-grid { grid-template-columns:1fr; }.proof-grid img { aspect-ratio:auto; max-height:600px; }
     .project-page .project-hero,.social-page .project-hero { grid-template-columns:1fr; gap:25px; padding:25px 0 30px; }.project-page .project-hero h1,.social-page .project-hero h1 { font-size:38px; }.project-page .project-hero p,.social-page .project-hero p { font-size:12px; }.case-visual { max-height:230px; }
     .project-page .page-section,.academic-page .page-section { padding:28px 0; }.project-page .page-section>h2 { font-size:24px; }.project-page .page-section p { font-size:12px; }.case-index { font-size:10px; gap:7px 17px; }
-    .content-grid,.project-body,.drone-summary-grid,.moon-summary-grid,.drone-parts-grid,.moon-features-grid,.moon-subsystem-grid,.moon-impact-grid { grid-template-columns:1fr; }
+    .content-grid,.project-body,.drone-summary-grid,.moon-summary-grid,.drone-parts-grid,.moon-features-grid { grid-template-columns:1fr; }
     .contact-row { grid-template-columns:80px 1fr; gap:13px; font-size:11px; }.label { font-size:9px; }.contact-terminal { gap:14px; }.award-showcase { grid-template-columns:1fr; padding:20px; gap:25px; }.award-showcase h2 { font-size:23px; }.award-summary>p { font-size:12px; }.award-actions .launch-btn { white-space:normal; font-size:10px; }
     .product-preview-stage { padding:0; }.product-preview-nav { top:auto; bottom:-54px; transform:none; }.product-preview-nav:active { transform:scale(.96); }.product-preview-dots { padding:0 48px; gap:4px; flex-wrap:wrap; min-height:24px; }.product-preview-caption { padding:20px 0 0; font-size:11px; }
     .drone-part-card { grid-template-columns:75px 1fr; gap:13px; padding:18px; }.drone-part-card img { width:75px; height:75px; }.drone-part-card h3 { font-size:15px; }.drone-summary-copy h2,.moon-summary-copy h2 { font-size:24px; }

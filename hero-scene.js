@@ -6,7 +6,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'light-equal-die',
         name: 'Light = Die',
-        category: 'GAME PROJECTS',
         tag: 'UNITY 3D',
         badge: 'FEATURED',
         orbitIndex: 1,
@@ -26,7 +25,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'ball-eat-balls',
         name: 'Ball Eat Balls',
-        category: 'GAME PROJECTS',
         tag: 'UNITY WEBGL',
         orbitIndex: 2,
         orbitRadius: 8.2,
@@ -45,7 +43,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'fruit-ninja',
         name: 'Fruit Ninja',
-        category: 'GAME PROJECTS',
         tag: 'UNITY WEBGL',
         orbitIndex: 2,
         orbitRadius: 9.4,
@@ -63,7 +60,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'project-seth',
         name: 'Project Seth',
-        category: 'GAME PROJECTS',
         tag: 'ROBLOX STUDIO',
         orbitIndex: 2,
         orbitRadius: 10.2,
@@ -78,13 +74,10 @@ const CELESTIAL_PROJECTS = [
         image: 'assets/projects/project-seth.jpg',
         descEn: 'Atmospheric citadel level design and dynamic lighting study built in Roblox Studio.',
         descVi: 'Thiết kế màn chơi pháo đài khí quyển và nghiên cứu ánh sáng động trên Roblox Studio.',
-        captionEn: 'Atmospheric citadel level design and dynamic lighting.',
-        captionVi: 'Thiết kế pháo đài khí quyển và ánh sáng động.'
     },
     {
         id: 'prison-cell',
         name: 'Prison Cell',
-        category: 'GAME PROJECTS',
         tag: 'BLENDER 3D',
         orbitIndex: 2,
         orbitRadius: 7.4,
@@ -98,13 +91,10 @@ const CELESTIAL_PROJECTS = [
         image: 'assets/projects/prison-cell.jpg',
         descEn: 'First 3D modeling study in Blender exploring tension chains, wall textures, and window bar lighting.',
         descVi: 'Dự án dựng hình 3D đầu tay trên Blender nghiên cứu dây xích, chất liệu gạch và ánh sáng thanh sắt.',
-        captionEn: '3D modeling study of a prison cell in Blender.',
-        captionVi: 'Nghiên cứu dựng hình 3D phòng giam trên Blender.'
     },
     {
         id: 'lazy-note',
         name: 'Lazy Note',
-        category: 'AI PROJECTS',
         tag: 'ADVANCED AI NOTEBOOK',
         badge: 'WINNER',
         orbitIndex: 3,
@@ -124,7 +114,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'playweaver',
         name: 'PlayWeaver',
-        category: 'AI PROJECTS',
         tag: 'AI GAME PROTOTYPER',
         badge: 'WINNER',
         orbitIndex: 3,
@@ -143,7 +132,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'clinicscribe',
         name: 'ClinicScribe',
-        category: 'AI PROJECTS',
         tag: 'AI CLINICAL SCRIBE',
         badge: 'WINNER',
         orbitIndex: 3,
@@ -162,7 +150,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'signbridge-ai',
         name: 'SignBridge AI',
-        category: 'AI PROJECTS',
         tag: 'AI SIGN TRANSLATOR',
         orbitIndex: 3,
         orbitRadius: 14.8,
@@ -180,7 +167,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'recyclecheck-ai',
         name: 'RecycleCheck AI',
-        category: 'AI PROJECTS',
         tag: 'AI RECYCLING SCANNER',
         orbitIndex: 3,
         orbitRadius: 15.6,
@@ -198,7 +184,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'ailax',
         name: 'AILAX',
-        category: 'AI PROJECTS',
         tag: 'PERSONAL AI AGENT',
         orbitIndex: 3,
         orbitRadius: 16.4,
@@ -216,7 +201,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'soccer-drone',
         name: 'Soccer Drone',
-        category: 'ROBOTICS PROJECTS',
         tag: 'FPV ROBOTICS',
         badge: 'WINNER',
         orbitIndex: 4,
@@ -236,7 +220,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'hunt-for-the-moon',
         name: 'Hunt for the Moon',
-        category: 'ROBOTICS PROJECTS',
         tag: 'ARDUINO MECHATRONICS',
         orbitIndex: 4,
         orbitRadius: 18.6,
@@ -255,7 +238,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'zalo-auto-sender',
         name: 'Zalo Auto Sender',
-        category: 'APP PROJECTS',
         tag: 'WPF/C# AUTOMATION',
         orbitIndex: 4,
         orbitRadius: 19.6,
@@ -273,7 +255,6 @@ const CELESTIAL_PROJECTS = [
     {
         id: 'windows-license-checker',
         name: 'Windows License Checker',
-        category: 'APP PROJECTS',
         tag: 'WINDOWS UTILITY',
         orbitIndex: 4,
         orbitRadius: 20.6,
