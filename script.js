@@ -186,6 +186,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click',closeMenu));
     document.addEventListener('keydown',event => {if(event.key==='Escape')closeMenu();});
+    // Open case-study disclosures before existing smooth anchor navigation runs.
+    const revealCaseTarget = hash => {
+        let target;
+        try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch (_) { return; }
+        for (let detail = target?.closest('.case-deep-dive'); detail; detail = detail.parentElement.closest('.case-deep-dive')) detail.open = true;
+    };
+    document.querySelectorAll('.case-secondary a[href^="#"],.case-proof a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => revealCaseTarget(link.hash), { capture: true });
+    });
+    document.querySelectorAll('.case-deep-dive').forEach(detail => detail.addEventListener('toggle', () => window.dispatchEvent(new Event('resize'))));
+    window.addEventListener('hashchange', () => revealCaseTarget(location.hash));
+    revealCaseTarget(location.hash);
     initProductPreviewSlideshow();
     document.querySelectorAll('.report-row').forEach((row,index) => {
         row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-expanded','false');

@@ -762,15 +762,6 @@ function createField() {
 
         currentLookAt.lerp(targetLookAt, camDamping);
 
-        // Origin return check when user scrolls back to top in normal mode
-        if (targetProgress === 0 && currentProgress === 0 && cosmosTransition < 0.002) {
-            if (Math.abs(currentCamZ - 16) < 0.04) {
-                currentCamX = 0; currentCamY = 0; currentCamZ = 16;
-                currentRotX = 0; currentRotY = 0; currentRotZ = 0;
-                currentSingX = 3.6; currentSingY = 0.2; currentSingZ = 0;
-            }
-        }
-
         camera.position.set(currentCamX, currentCamY, currentCamZ);
 
         // Rotation: Seamless transition between waypoint flight euler and orbit lookAt
