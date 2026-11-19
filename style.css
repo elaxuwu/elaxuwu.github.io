@@ -144,6 +144,10 @@ video { display:block; border-radius:10px; } ul,ol { padding-left:20px; } li+li 
 .contact-socials>a { display:flex; align-items:center; gap:10px; font-size:12px; }.contact-socials img { width:20px; height:20px; }
 .contact-socials>a:hover { color:var(--accent); }.contact-socials .all-socials { grid-column:1/-1; color:var(--text-muted); }
 .system-footer { width:min(1240px,90%); margin:0 auto; padding:20px 0 28px; display:flex; justify-content:space-between; align-items:center; gap:20px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--line); }
+.footer-links { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+.footer-links a { color:var(--text-muted); transition:color .2s var(--ease); }
+.footer-links a:hover { color:var(--accent); }
+.about-head .tech-note { color:var(--text-dim); font-size:13px; line-height:1.6; max-width:60ch; margin:14px 0 0; }
 .award-dialog { max-width:1000px; width:90%; max-height:88dvh; border:1px solid var(--line); border-radius:14px; background:var(--bg); color:var(--text); padding:30px; }
 .award-dialog::backdrop { background:#09060ed9; }.dialog-open { overflow:hidden; }
 .dialog-top { display:flex; justify-content:space-between; gap:20px; align-items:center; margin-bottom:30px; }.dialog-top h2 { font-size:24px; }

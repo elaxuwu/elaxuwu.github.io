@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('theme-preference');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }());
+    </script>
+
+    <title>Privacy &amp; data | Elax</title>
+
+    <link rel="stylesheet" href="../assets/dist/portfolio.5a75cbaf22bb.css">
+<link rel="stylesheet" href="../assets/dist/style.a0c0933ec5b2.css">
+
+<meta name="description" content="How this portfolio handles data: no tracking, no marketing cookies, no analytics, and a short list of the preferences stored in your own browser.">
+<link rel="canonical" href="https://elaxuwu.me/pages/privacy">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://elaxuwu.me/pages/privacy">
+<meta property="og:title" content="Privacy &amp; data | Elax">
+<meta property="og:description" content="How this portfolio handles data: no tracking, no marketing cookies, no analytics, and a short list of the preferences stored in your own browser.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="vi_VN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Privacy &amp; data | Elax">
+<meta name="twitter:description" content="How this portfolio handles data: no tracking, no marketing cookies, no analytics, and a short list of the preferences stored in your own browser.">
+<link rel="icon" href="../assets/favicon.png" type="image/png"></head>
+
+<body class="lang-en project-page" data-nav-back="../index.html" data-footer-line2="Privacy policy - 2026">
+
+    <nav class="system-nav"></nav>
+
+    <main class="terminal-container container" id="main">
+<section class="project-hero case-brief"><div class="case-intro"><h1>
+
+                <span class="content-vi">Quyền riêng tư &amp; dữ liệu</span>
+
+                <span class="content-en">Privacy &amp; data</span>
+
+            </h1><p class="case-hook"><span class="content-en">This portfolio is a static website with no accounts, no ads, no analytics and no tracking cookies. This page explains exactly what happens when you visit.</span><span class="content-vi">Trang portfolio này là một website tĩnh: không tài khoản, không quảng cáo, không phân tích và không cookie theo dõi. Trang này giải thích chính xác điều gì xảy ra khi bạn truy cập.</span></p><p class="case-result"><span class="content-en">Last updated: <time datetime="2026-11-19">19 November 2026</time></span><span class="content-vi">Cập nhật lần cuối: <time datetime="2026-11-19">19/11/2026</time></span></p></div></section>
+
+<nav class="case-index" aria-label="On this page"><a href="#summary"><span class="content-en">Short version</span><span class="content-vi">Tóm tắt</span></a><a href="#stored"><span class="content-en">Stored in your browser</span><span class="content-vi">Dữ liệu trong trình duyệt</span></a><a href="#third-party"><span class="content-en">External content</span><span class="content-vi">Nội dung bên ngoài</span></a><a href="#hosting"><span class="content-en">Hosting and logs</span><span class="content-vi">Hosting và log</span></a><a href="#rights"><span class="content-en">Your rights</span><span class="content-vi">Quyền của bạn</span></a></nav>
+
+<section id="summary" class="console-block page-section">
+
+    <h2><span class="content-vi">TÓM TẮT</span><span class="content-en">SHORT VERSION</span></h2>
+
+    <p><span class="content-en">There is no cookie banner on this site because there are no cookies to accept or reject. The only things saved are three small display preferences in your own browser. The only outside requests are the videos and images that make up the project pages.</span><span class="content-vi">Trang này không có hộp thoại cookie vì không có cookie nào cần chấp nhận hay từ chối. Những gì duy nhất được lưu là ba tùy chọn hiển thị nhỏ trong trình duyệt của bạn. Các yêu cầu ra ngoài duy nhất là video và hình ảnh của các trang dự án.</span></p>
+
+</section>
+
+<section id="stored" class="console-block page-section">
+
+    <h2><span class="content-vi">DỮ LIỆU LƯU TRONG TRÌNH DUYỆT CỦA BẠN</span><span class="content-en">WHAT THIS SITE STORES</span></h2>
+
+    <div class="contact-terminal">
+
+        <div class="contact-row">
+
+            <span class="label">
+
+                <span class="content-vi">Giao diện:</span>
+
+                <span class="content-en">Theme:</span>
+
+            </span>
+
+            <span class="value">
+
+                <code>theme-preference</code>
+
+                <span class="content-vi">(localStorage) ghi nhớ bạn chọn giao diện sáng hay tối.</span>
+
+                <span class="content-en">(localStorage) remembers whether you picked the light or dark theme.</span>
+
+            </span>
+
+        </div>
+
+        <div class="contact-row">
+
+            <span class="label">
+
+                <span class="content-vi">Chuyển động:</span>
+
+                <span class="content-en">Animation:</span>
+
+            </span>
+
+            <span class="value">
+
+                <code>motion-preference</code>
+
+                <span class="content-vi">(localStorage) ghi nhớ lựa chọn chuyển động: Bật, Theo thiết bị hoặc Tắt.</span>
+
+                <span class="content-en">(localStorage) remembers your animation setting: On, System or Off.</span>
+
+            </span>
+
+        </div>
+
+        <div class="contact-row">
+
+            <span class="label">
+
+                <span class="content-vi">Ngôn ngữ:</span>
+
+                <span class="content-en">Language:</span>
+
+            </span>
+
+            <span class="value">
+
+                <code>portfolio-language</code>
+
+                <span class="content-vi">(sessionStorage) ghi nhớ bạn chọn tiếng Anh hay tiếng Việt, và chỉ giữ trong phiên trình duyệt hiện tại.</span>
+
+                <span class="content-en">(sessionStorage) remembers whether you picked English or Vietnamese, and lasts for the current browser session only.</span>
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <p><span class="content-en">These three values never leave your device. They are not sent to me, I cannot read them, and clearing site data in your browser removes all three. Nothing here identifies you, and no identifier is attached to your visit.</span><span class="content-vi">Ba giá trị này không bao giờ rời khỏi thiết bị của bạn. Chúng không được gửi cho mình, mình không thể đọc chúng, và xóa dữ liệu trang trong trình duyệt là xóa cả ba. Không có gì ở đây định danh bạn, và không có mã định danh nào được gắn vào lượt truy cập của bạn.</span></p>
+
+</section>
+
+<section id="third-party" class="console-block page-section">
+
+    <h2><span class="content-vi">NỘI DUNG BÊN NGOÀI</span><span class="content-en">EXTERNAL CONTENT</span></h2>
+
+    <p><span class="content-en">Some project pages load media from other companies. When that happens your browser makes a request to their servers, so their servers see the request in the same way any website you visit sees yours.</span><span class="content-vi">Một số trang dự án tải nội dung đa phương tiện từ các công ty khác. Khi đó trình duyệt của bạn gửi một yêu cầu đến máy chủ của họ, nên máy chủ của họ thấy yêu cầu đó giống như bất kỳ website nào bạn truy cập.</span></p>
+
+    <ul class="case-contributions">
+
+        <li><span class="content-en">Video on this site is embedded from YouTube in privacy enhanced mode (<code>youtube-nocookie.com</code>). YouTube does not place cookies for these embeds until you actually press play, and the site you are on is not sent to YouTube.</span><span class="content-vi">Video trên trang này được nhúng từ YouTube ở chế độ tăng cường riêng tư (<code>youtube-nocookie.com</code>). YouTube không đặt cookie cho các khung nhúng này cho đến khi bạn thực sự bấm phát, và trang bạn đang xem không được gửi cho YouTube.</span></li>
+
+        <li><span class="content-en">Project screenshots and event photos are served by external image hosts including imgbb.com and a Devpost asset CDN. Loading an image is enough for those hosts to receive your IP address and browser details.</span><span class="content-vi">Ảnh chụp dự án và ảnh sự kiện được phục vụ bởi các nhóm lưu trữ ảnh bên ngoài như imgbb.com và CDN tài nguyên Devpost. Chỉ cần tải một ảnh là các máy chủ đó đã nhận được địa chỉ IP và thông tin trình duyệt của bạn.</span></li>
+
+        <li><span class="content-en">Buttons that open Devpost, GitHub, itch.io, Discord and other sites open them in a new tab. Those sites have their own privacy policies and their own cookie rules, which this policy does not cover.</span><span class="content-vi">Các nút mở Devpost, GitHub, itch.io, Discord và những trang khác sẽ mở tab mới. Những trang đó có chính sách riêng tư và quy tắc cookie riêng, không nằm trong phạm vi chính sách này.</span></li>
+
+    </ul>
+
+</section>
+
+<section id="hosting" class="console-block page-section">
+
+    <h2><span class="content-vi">HOSTING VÀ LOG TRUY CẬP</span><span class="content-en">HOSTING AND SERVER LOGS</span></h2>
+
+    <p><span class="content-en">This site is hosted on Cloudflare Pages. Cloudflare handles the network request for every visit in order to deliver the page and to protect the site from abuse and attacks. That processing includes your IP address and request time, and it is governed by the Cloudflare privacy policy rather than this one.</span><span class="content-vi">Trang này được host trên Cloudflare Pages. Cloudflare xử lý yêu cầu mạng cho mỗi lượt truy cập để phân phối trang và bảo vệ website khỏi lạm dụng và tấn công. Việc xử lý đó bao gồm địa chỉ IP và thời điểm yêu cầu của bạn, và được điều chỉnh bởi chính sách riêng tư của Cloudflare chứ không phải chính sách này.</span></p>
+
+    <p><span class="content-en">The source code is a public Git repository. Anyone can read the files that make up this website, including this page.</span><span class="content-vi">Mã nguồn nằm trong một kho Git công khai. Bất kỳ ai cũng có thể đọc các tệp tạo nên website này, bao gồm cả trang này.</span></p>
+
+</section>
+
+<section id="rights" class="console-block page-section">
+
+    <h2><span class="content-vi">QUYỀN CỦA BẠN</span><span class="content-en">YOUR RIGHTS</span></h2>
+
+    <p><span class="content-en">If you live in the EEA, the UK, Switzerland or Vietnam, the GDPR and the PDPA give you the right to access, correct, delete or restrict the processing of your personal data, and to complain to a supervisory authority. Because this site does not collect personal data, there is normally nothing for me to export, correct or delete.</span><span class="content-vi">Nếu bạn ở EEA, Anh, Thụy Sĩ hoặc Việt Nam, GDPR và PDPA trao cho bạn quyền truy cập, sửa, xóa hoặc hạn chế xử lý dữ liệu cá nhân, cũng như quyền khiếu nại với cơ quan quản lý. Vì trang này không thu thập dữ liệu cá nhân, thông thường không có gì để mình xuất, sửa hoặc xóa.</span></p>
+
+    <p><span class="content-en">To remove the three preferences listed above, clear site data for this domain in your browser settings, or browse in a private window. If you think a third party has collected data about you, contact that company directly, because I do not hold that data.</span><span class="content-vi">Để xóa ba tùy chọn nêu trên, hãy xóa dữ liệu trang cho tên miền này trong cài đặt trình duyệt, hoặc duyệt bằng cửa sổ riêng tư. Nếu bạn cho rằng bên thứ ba đã thu thập dữ liệu về bạn, hãy liên hệ trực tiếp công ty đó, vì mình không giữ dữ liệu đó.</span></p>
+
+    <p><span class="content-en">Questions about this page are welcome: <a href="mailto:ngocthienbaod@gmail.com">ngocthienbaod@gmail.com</a></span><span class="content-vi">Mình rất sẵn lòng giải đáp thắc mắc về trang này: <a href="mailto:ngocthienbaod@gmail.com">ngocthienbaod@gmail.com</a></span></p>
+
+</section>
+
+    </main>
+
+    <footer class="system-footer"></footer>
+
+    <script src="../assets/dist/components.cb138f87266c.js"></script>
+
+    <script src="../assets/dist/script.e639f4a89be5.js"></script>
+
+<script type="module" src="../assets/dist/motion.84fb29098315.js"></script></body>
+
+</html>

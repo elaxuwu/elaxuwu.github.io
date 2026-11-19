@@ -31,13 +31,16 @@ async function main() {
         return 'url(' + path.basename(url) + ')';
     });
     replacements['portfolio.css'] = emit('portfolio.css', (await esbuild.transform(fonts, { loader: 'css', minify: true })).code);
-    for (const file of [path.join(root, 'index.html'), ...htmlFiles(path.join(root, 'pages'))]) {
+    for (const file of [path.join(root, 'index.html'), path.join(root, '404.html'), ...htmlFiles(path.join(root, 'pages'))]) {
         const prefix = '../'.repeat(path.relative(root, file).split(path.sep).length - 1);
         const html = fs.readFileSync(file, 'utf8').replace(/(src|href)="([^"<>]+)"/g, (match, attr, url) => {
             const clean = url.split('?')[0];
-            if (!/^(?:\.\.\/)*(?:(?:assets\/dist\/)|(?:assets\/fonts\/)|(?:assets\/))?(?:hero-scene|motion|components|script|style|portfolio(?:-\d+)?)(?:\.[a-f0-9]{12})?\.(?:js|css|woff2)$/.test(clean)) return match;
-            const name = path.posix.basename(clean).replace(/\.[a-f0-9]{12}(?=\.)/, '');
-            return replacements[name] ? attr + '="' + prefix + replacements[name] + '"' : match;
+            // The root 404 page is served at any depth, so its assets must stay root absolute.
+            const absolute = clean.startsWith('/');
+            const target = absolute ? clean.slice(1) : clean;
+            if (!/^(?:\.\.\/)*(?:(?:assets\/dist\/)|(?:assets\/fonts\/)|(?:assets\/))?(?:hero-scene|motion|components|script|style|portfolio(?:-\d+)?)(?:\.[a-f0-9]{12})?\.(?:js|css|woff2)$/.test(target)) return match;
+            const name = path.posix.basename(target).replace(/\.[a-f0-9]{12}(?=\.)/, '');
+            return replacements[name] ? attr + '="' + (absolute ? '/' : prefix) + replacements[name] + '"' : match;
         });
         fs.writeFileSync(file, html);
     }

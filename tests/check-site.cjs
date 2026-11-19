@@ -62,7 +62,7 @@ document.documentElement.dataset.motionPreference='system';assert.equal(context.
 document.documentElement.dataset.motionPreference='off';assert.equal(context.motionIsReduced(),true);
 document.documentElement.dataset.motionPreference='on';assert.equal(context.motionIsReduced(),false);
 function files(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(path.join(dir,e.name)):[path.join(dir,e.name)]);}
-for(const file of [path.join(root,'index.html'),...files(path.join(root,'pages')).filter(p=>p.endsWith('.html'))]){
+for(const file of [path.join(root,'index.html'),path.join(root,'404.html'),...files(path.join(root,'pages')).filter(p=>p.endsWith('.html'))]){
     const html=fs.readFileSync(file,'utf8');
     checkResponsiveImages(html,path.dirname(file));
     assert.match(html,/rel="stylesheet" href="[^"<>]*assets\/dist\/portfolio\.[a-f0-9]{12}\.css"/);
@@ -71,7 +71,10 @@ for(const file of [path.join(root,'index.html'),...files(path.join(root,'pages')
     for(const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
         const url=match[1];if(/^(https?:|mailto:|data:)/.test(url))continue;
         const local=decodeURIComponent(url.split(/[?#]/)[0]);
-        if(local)assert(fs.existsSync(path.resolve(path.dirname(file),local)),`${file}: ${url}`);
+        if(!local)continue;
+        // Root absolute paths are resolved from the site root, not from the page folder.
+        const target=local.startsWith('/')?path.join(root,local.slice(1)):path.resolve(path.dirname(file),local);
+        assert(fs.existsSync(target),`${file}: ${url}`);
     }
 }
 for(const file of files(path.join(root,'assets/projects')).filter(p=>p.endsWith('.svg')))assert.match(fs.readFileSync(file,'utf8'),/xmlns="http:\/\/www.w3.org\/2000\/svg"/);
@@ -83,4 +86,36 @@ assert(!fs.readFileSync(path.join(root,'components.js'),'utf8').includes('✳'))
 assert(!fs.readFileSync(path.join(root,'style.css'),'utf8').includes('@import'));
 assert.match(fs.readFileSync(path.join(root,'robots.txt'),'utf8'),/^User-agent: \*\nAllow: \/\nDisallow: \/pages\/gradesReport\//);
 assert.match(fs.readFileSync(path.join(root,'pages/gradesReport/report_Grade11_Semester1.html'),'utf8'),/name="robots" content="noindex, nofollow"/);
-console.log('Passed: all 15 projects across desktop/mobile pages, bilingual cards, motion preferences, local assets, 4 complete awards, and URL-only academic report.');
+// Privacy, sitemap, error page and security headers.
+const robots=fs.readFileSync(path.join(root,'robots.txt'),'utf8');
+assert.match(robots,/^Sitemap: https:\/\/elaxuwu\.me\/sitemap\.xml$/m);
+const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
+const sitemapUrls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
+assert(sitemapUrls.includes('https://elaxuwu.me/'),'Home page must be in the sitemap');
+assert(sitemapUrls.includes('https://elaxuwu.me/pages/privacy'),'Privacy page must be in the sitemap');
+assert(!sitemapUrls.some(url=>url.includes('gradesReport')),'Private academic report must stay out of the sitemap');
+assert(!sitemapUrls.some(url=>url.endsWith('.html')),'Sitemap must use canonical extensionless URLs');
+for(const url of sitemapUrls)assert(url.startsWith('https://elaxuwu.me/'),url);
+// Every public page listed in the sitemap must declare the same canonical URL.
+for(const url of sitemapUrls){
+    const file=path.join(root,url.replace('https://elaxuwu.me/','')||'index.html');
+    const page=fs.existsSync(file+'.html')?file+'.html':file;
+    assert(fs.existsSync(page),`Missing page for sitemap entry ${url}`);
+    assert(fs.readFileSync(page,'utf8').includes(`rel="canonical" href="${url}"`),`${url}: canonical tag mismatch`);
+}
+for(const page of ['index.html','pages/comm_link.html','pages/privacy.html',...files(path.join(root,'pages/projects')).filter(p=>p.endsWith('.html')).map(p=>'pages/projects/'+path.basename(p))]){
+    assert(fs.existsSync(path.join(root,page)),page);
+}
+assert.match(fs.readFileSync(path.join(root,'pages/privacy.html'),'utf8'),/rel="canonical" href="https:\/\/elaxuwu\.me\/pages\/privacy"/);
+assert.match(fs.readFileSync(path.join(root,'404.html'),'utf8'),/name="robots" content="noindex, follow"/);
+assert.match(fs.readFileSync(path.join(root,'404.html'),'utf8'),/href="\/index\.html"/);
+const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');
+for(const header of ['Strict-Transport-Security: max-age=63072000; includeSubDomains','X-Content-Type-Options: nosniff','Referrer-Policy: strict-origin-when-cross-origin','X-Frame-Options: SAMEORIGIN','Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()'])assert(headers.includes(header),header);
+assert(!/^\/\*[\s\S]*?Cache-Control/m.test(headers.split('\n/*\n')[1]||''),'The catch-all rule must not set Cache-Control and clash with the immutable asset rule');
+assert.match(fs.readFileSync(path.join(root,'components.js'),'utf8'),/pages\/privacy\.html/);
+// Every YouTube embed must use the privacy enhanced nocookie host.
+for(const file of [path.join(root,'index.html'),path.join(root,'script.js'),...files(path.join(root,'pages')).filter(p=>p.endsWith('.html'))]){
+    assert(!/youtube\.com\/embed/.test(fs.readFileSync(file,'utf8')),`${file}: raw youtube.com embed found`);
+}
+assert.match(fs.readFileSync(path.join(root,'script.js'),'utf8'),/youtube-nocookie\.com\/embed/);
+console.log('Passed: all 15 projects across desktop/mobile pages, bilingual cards, motion preferences, local assets, 4 complete awards, URL-only academic report, privacy page, sitemap, 404 page, security headers and nocookie video embeds.');

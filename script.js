@@ -248,7 +248,7 @@ function initProductPreviewSlideshow() {
         lazyNote: [
             {
                 type: 'video',
-                embedSrc: 'https://www.youtube.com/embed/5lEdb85Zw0w?rel=0&modestbranding=1&playsinline=1',
+                embedSrc: 'https://www.youtube-nocookie.com/embed/5lEdb85Zw0w?rel=0&modestbranding=1&playsinline=1',
                 captionVi: 'Video giới thiệu sản phẩm.',
                 captionEn: 'Product demo video.',
                 title: 'Lazy Note product demo video',
@@ -323,7 +323,7 @@ function initProductPreviewSlideshow() {
         playweaver: [
             {
                 type: 'video',
-                embedSrc: 'https://www.youtube.com/embed/y-FgiJwzyMM?rel=0&modestbranding=1&playsinline=1',
+                embedSrc: 'https://www.youtube-nocookie.com/embed/y-FgiJwzyMM?rel=0&modestbranding=1&playsinline=1',
                 captionVi: 'Video demo ngắn của PlayWeaver.',
                 captionEn: 'Short PlayWeaver demo video.',
                 title: 'PlayWeaver short demo video',
@@ -332,7 +332,7 @@ function initProductPreviewSlideshow() {
             },
             {
                 type: 'video',
-                embedSrc: 'https://www.youtube.com/embed/qRDpVFFkwbc?rel=0&modestbranding=1&playsinline=1',
+                embedSrc: 'https://www.youtube-nocookie.com/embed/qRDpVFFkwbc?rel=0&modestbranding=1&playsinline=1',
                 captionVi: 'Video demo đầy đủ của PlayWeaver.',
                 captionEn: 'Full PlayWeaver demo video.',
                 title: 'PlayWeaver full demo video',
@@ -383,7 +383,7 @@ function initProductPreviewSlideshow() {
         clinicscribe: [
             {
                 type: 'video',
-                embedSrc: 'https://www.youtube.com/embed/vK-qdlXqPTA?rel=0&modestbranding=1&playsinline=1',
+                embedSrc: 'https://www.youtube-nocookie.com/embed/vK-qdlXqPTA?rel=0&modestbranding=1&playsinline=1',
                 captionVi: 'Video demo ClinicScribe.',
                 captionEn: 'ClinicScribe demo video.',
                 title: 'ClinicScribe demo video',
