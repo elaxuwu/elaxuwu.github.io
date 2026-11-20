@@ -310,8 +310,7 @@ function createField() {
     singularity.add(photonRing);
 
     // Accretion disk rings
-    const ringColor = new THREE.Color(0xa79bea);
-    const ringMaterial = track(new THREE.MeshBasicMaterial({ color: ringColor, transparent: true, opacity: 0.35 }));
+    const ringColor = new THREE.Color(0xa79bea);    const ringMaterial = track(new THREE.MeshBasicMaterial({ color: ringColor, transparent: true, opacity: 0.35 }));
     const ringGeometries = [
         track(new THREE.TorusGeometry(2.4, 0.03, 6, 100)),
         track(new THREE.TorusGeometry(3.3, 0.024, 6, 120)),
@@ -840,10 +839,11 @@ function createField() {
 
     function theme() {
         const light = document.documentElement.dataset.theme === 'light';
-        const primaryColor = light ? 0x7052b5 : 0xa79bea;
-        const dimColor = light ? 0x937fc4 : 0x7660c7;
+        // Unslop: the backdrop is a faint monochrome starfield, not a violet glow.
+        const primaryColor = light ? 0x8d8d99 : 0x8e8e9c;
+        const dimColor = light ? 0xa5a5ae : 0x6b6b78;
 
-        coreMaterial.color.setHex(light ? 0xf0ecf8 : 0x090710);
+        coreMaterial.color.setHex(light ? 0xf0f0f2 : 0x0d0d11);
         photonMaterial.color.setHex(primaryColor);
         ringMaterial.color.setHex(primaryColor);
         lensMaterial.color.setHex(dimColor);
@@ -851,9 +851,9 @@ function createField() {
         starMaterial.color.setHex(primaryColor);
         orbitTrackMat.color.setHex(primaryColor);
 
-        ringMaterial.opacity = light ? 0.22 : 0.35;
-        starMaterial.opacity = light ? 0.48 : 0.72;
-        orbitTrackMat.opacity = light ? 0.24 : 0.16;
+        ringMaterial.opacity = light ? 0.14 : 0.20;
+        starMaterial.opacity = light ? 0.40 : 0.52;
+        orbitTrackMat.opacity = light ? 0.18 : 0.12;
         render();
     }
 

@@ -4,6 +4,14 @@
     const base = home.replace(/index\.html(?:#.*)?$/, '');
     const isHome = body.classList.contains('portfolio-home');
     const text = (en, vi) => `<span class="content-en">${en}</span><span class="content-vi">${vi}</span>`;
+    // One line icon set: 18px grid, 1.5 stroke, no emoji.
+    const icon = (paths, extra = '') => `<svg class="ui-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra}>${paths}</svg>`;
+    const icons = {
+        cosmos: icon('<circle cx="12" cy="12" r="3.2"/><ellipse cx="12" cy="12" rx="10" ry="4.4" transform="rotate(-24 12 12)"/>'),
+        sun: icon('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/>'),
+        moon: icon('<path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/>'),
+        sliders: icon('<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>')
+    };
     const nav = document.querySelector('.system-nav');
     if (nav) {
         nav.setAttribute('aria-label', 'Main navigation');
@@ -14,7 +22,7 @@
                 <a href="${isHome ? '' : home}#about">${text('About', 'Về mình')}</a>
                 <a href="${isHome ? '' : home}#contact">${text('Contact', 'Liên hệ')}</a>
             </div>
-            <div class="nav-controls">${isHome ? `<button id="cosmos-toggle" type="button" aria-label="3D Cosmos Mode" title="3D Cosmos Mode"><span aria-hidden="true">🪐</span> <span class="cosmos-btn-text">${text('Cosmos','Vũ trụ')}</span></button>` : ''}<button id="lang-toggle" type="button" aria-label="EN / VI: Switch to Vietnamese">EN <span aria-hidden="true">/ VI</span></button><button id="theme-toggle" type="button" aria-label="Switch to light mode"><span aria-hidden="true">◐</span></button><details class="display-prefs"><summary aria-label="Animation settings">⋯</summary><label>${text('Animations','Chuyển động')}<select id="motion-preference"><option value="on">On</option><option value="system">System</option><option value="off">Off</option></select></label></details><button id="nav-menu" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><span></span><span></span></button></div>`;
+            <div class="nav-controls">${isHome ? `<button id="cosmos-toggle" type="button" aria-label="3D Cosmos Mode" title="3D Cosmos Mode">${icons.cosmos}<span class="cosmos-btn-text">${text('Cosmos','Vũ trụ')}</span></button>` : ''}<button id="lang-toggle" type="button" aria-label="EN / VI: Switch to Vietnamese">EN <span aria-hidden="true">/ VI</span></button><button id="theme-toggle" type="button" aria-label="Switch to light mode"><span class="icon-light">${icons.sun}</span><span class="icon-dark">${icons.moon}</span></button><details class="display-prefs"><summary aria-label="Animation settings">${icons.sliders}</summary><label>${text('Animations','Chuyển động')}<select id="motion-preference"><option value="on">On</option><option value="system">System</option><option value="off">Off</option></select></label></details><button id="nav-menu" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><span></span><span></span></button></div>`;
     }
     const skip = document.createElement('a'); skip.className = 'skip-link'; skip.href = '#main';
     skip.innerHTML = text('Skip to content', 'Đến nội dung'); body.prepend(skip);

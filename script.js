@@ -7,6 +7,9 @@ function updateThemeToggle() {
     const light = getActiveTheme() === 'light';
     button.setAttribute('aria-label', isVietnamese() ? (light ? 'Bật giao diện tối' : 'Bật giao diện sáng') : (light ? 'Switch to dark mode' : 'Switch to light mode'));
     button.setAttribute('aria-pressed', String(light)); button.title = button.getAttribute('aria-label');
+    // ponytail: one sun/moon pair, the theme picks which one shows.
+    button.querySelector('.icon-light').hidden = light;
+    button.querySelector('.icon-dark').hidden = !light;
 }
 function applyTheme(theme) {
     document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';

@@ -80,7 +80,9 @@ for(const file of [path.join(root,'index.html'),path.join(root,'404.html'),...fi
 for(const file of files(path.join(root,'assets/projects')).filter(p=>p.endsWith('.svg')))assert.match(fs.readFileSync(file,'utf8'),/xmlns="http:\/\/www.w3.org\/2000\/svg"/);
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.equal((home.match(/<template[^>]+id="achievement-\d"/g)||[]).length,4);
-for(const fact of ['30/217','04/127','MOST CREATIVE IDEA'])assert(home.includes(fact),fact);
+// Award facts use one number format: rank, then space, then total.
+for(const fact of ['30 / 217','04 / 127','MOST CREATIVE IDEA'])assert(home.includes(fact),fact);
+for(const fact of ['30/217','04/127'])assert(!home.includes(fact),'mixed number format: '+fact);
 for(const phrase of ['playground','A few proud moments','world-canvas','scene-light','scene-pause'])assert(!home.includes(phrase),phrase);
 assert(!fs.readFileSync(path.join(root,'components.js'),'utf8').includes('✳'));
 assert(!fs.readFileSync(path.join(root,'style.css'),'utf8').includes('@import'));
