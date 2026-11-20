@@ -709,3 +709,70 @@ body.portfolio-home .cosmos-card { padding:24px; }
 body.portfolio-home .cosmos-card-thumb { margin-bottom:16px; }
 body.portfolio-home .cosmos-card h3 { margin-top:8px; }
 body.portfolio-home .cosmos-card p { margin-bottom:20px; }
+
+/* Unslop: phone layout. The hero becomes a real block, the portrait sits
+   next to the studio card instead of floating in an empty band. */
+@media(max-width:767px) {
+    body.portfolio-home .system-nav { width:90%; height:64px; gap:12px; }
+    body.portfolio-home .brand-identity { gap:8px; font-size:16px; }
+    body.portfolio-home .brand-identity img { width:32px; height:32px; }
+    body.portfolio-home .nav-controls { gap:2px; }
+    body.portfolio-home .nav-controls button { padding:7px; }
+    body.portfolio-home .cosmos-btn-text { display:none; }
+    body.portfolio-home .display-prefs { display:none; }
+    body.portfolio-home #lang-toggle { font-size:12px; padding:7px 6px; }
+    body.portfolio-home #theme-toggle { width:34px; height:34px; }
+    body.portfolio-home #nav-menu { width:36px; height:36px; }
+    body.portfolio-home .nav-links { width:min(240px,72vw); right:0; top:60px; gap:0; padding:6px 18px; background:var(--surface-raised); border-radius:12px; box-shadow:0 18px 40px rgba(0,0,0,.45); }
+    body.portfolio-home .nav-links a { padding:13px 0; font-size:15px; border-bottom:1px solid var(--line); }
+    body.portfolio-home .nav-links a:last-child { border-bottom:0; }
+
+    body.portfolio-home:not(.cosmos-active) .intro { padding:28px 0 36px; gap:26px; }
+    body.portfolio-home .intro { gap:26px; }
+    body.portfolio-home:not(.cosmos-active) .intro-role { margin:0 0 14px; font-size:12px; }
+    body.portfolio-home .intro h1 { font-size:clamp(30px,8.6vw,38px); line-height:1.08; letter-spacing:-.028em; }
+    body.portfolio-home .intro-subhead { font-size:15px; line-height:1.55; margin-top:14px; max-width:none; }
+    body.portfolio-home:not(.cosmos-active) .intro-links { margin-top:22px; gap:14px; flex-wrap:wrap; }
+
+    /* Portrait and studio card sit side by side, bottom aligned, no overlap. */
+    body.portfolio-home .intro-visual { display:grid; grid-template-columns:132px minmax(0,1fr); align-items:end; justify-content:stretch; gap:12px; height:auto; margin-top:0; }
+    body.portfolio-home .portrait-card { position:relative; width:100%; inset:auto; transform:none; }
+    body.portfolio-home .studio-card { position:relative; width:100%; left:auto; bottom:auto; transform:none; margin:0; align-self:end; background:var(--surface-raised); }
+    body.portfolio-home .studio-card img { transform:none; width:100%; height:100%; object-fit:cover; }
+    body.portfolio-home .studio-card-image { aspect-ratio:16/9; }
+    body.portfolio-home .portrait-signature { font-size:13px; left:12px; bottom:10px; }
+
+    /* Award strip: a rank column that never wraps, then name and event. */
+    body.portfolio-home .achievement-strip { gap:0; padding:4px 0; }
+    body.portfolio-home .achievement-strip a { grid-template-columns:78px minmax(0,1fr); gap:12px; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); }
+    body.portfolio-home .achievement-strip a:last-child { border-bottom:0; }
+    body.portfolio-home .strip-rank { font-size:16px; white-space:nowrap; }
+    body.portfolio-home .strip-body { display:grid; gap:2px; }
+    body.portfolio-home .strip-body strong { font-size:14px; }
+    body.portfolio-home .strip-meta { font-size:12px; line-height:1.4; }
+
+    /* Section headings: title on its own line, link underneath. */
+    body.portfolio-home .section-top { flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:20px; }
+    body.portfolio-home .section-top h2 { font-size:26px; }
+
+    /* Showcase cards: media on top, copy below, one rhythm. */
+    body.portfolio-home .showcase-card .project-media { aspect-ratio:16/9; }
+    body.portfolio-home .showcase-copy { padding:20px; gap:12px 16px; }
+    body.portfolio-home .showcase-title { gap:10px; }
+    body.portfolio-home .showcase-title h3 { font-size:19px; }
+    body.portfolio-home .showcase-rank { font-size:12px; }
+    body.portfolio-home .showcase-card p { font-size:14px; }
+    body.portfolio-home .showcase-result { font-size:12px; }
+    body.portfolio-home .plain-link { font-size:13px; }
+
+    body.portfolio-home .archive-project { grid-template-columns:52px minmax(0,1fr) 14px; gap:12px; padding:14px 0; }
+    body.portfolio-home .archive-project h5 { font-size:15px; }
+    body.portfolio-home .archive-project p { font-size:13px; }
+    body.portfolio-home .archive-disclosure>summary { padding:16px 20px; font-size:16px; }
+    body.portfolio-home .archive-disclosure>.archive-groups { padding:12px 20px 20px; }
+
+    body.portfolio-home:not(.cosmos-active) .about-section,
+    body.portfolio-home:not(.cosmos-active) .contact-section { padding:28px 20px; }
+    body.portfolio-home .contact-socials { gap:12px 16px; }
+    body.portfolio-home .contact-socials>a { font-size:13px; }
+}
