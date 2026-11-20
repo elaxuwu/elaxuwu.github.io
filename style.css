@@ -586,8 +586,8 @@ body.portfolio-home .intro { grid-template-columns:minmax(0,1.15fr) minmax(0,.85
 body.portfolio-home .intro-copy { max-width:none; }
 body.portfolio-home .intro h1 { font-size:clamp(40px,5.4vw,68px); }
 body.portfolio-home .intro-visual { height:340px; }
-body.portfolio-home .portrait-card { width:236px; transform:none; }
-body.portfolio-home .studio-card { width:168px; transform:none; left:0; box-shadow:none; }
+body.portfolio-home .portrait-card { width:236px; transform:rotate(3deg); }
+body.portfolio-home .studio-card { width:168px; transform:rotate(-7deg); left:-10px; bottom:0; box-shadow:0 15px 35px #0d0a1326; background:#29242f; }
 body.portfolio-home .big-four { grid-template-columns:repeat(12,minmax(0,1fr)); gap:24px; }
 body.portfolio-home .big-four>.showcase-card:nth-child(1) { grid-column:span 7; }
 body.portfolio-home .big-four>.showcase-card:nth-child(2) { grid-column:span 5; }
@@ -598,14 +598,18 @@ body.portfolio-home .showcase-icon { width:32px; height:32px; display:block; }
 body.portfolio-home .showcase-icon .project-icon { width:32px; height:32px; }
 body.portfolio-home .showcase-title { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
 body.portfolio-home .showcase-title h3 { font-size:22px; }
+body.portfolio-home .showcase-rank { font-family:var(--font-mono); font-size:13px; line-height:1; vertical-align:baseline; align-self:baseline; }
 body.portfolio-home .showcase-copy>p,body.portfolio-home .showcase-copy>.plain-link { grid-column:1/-1; }
 body.portfolio-home .showcase-copy>.plain-link { margin-top:8px; }
 body.portfolio-home .achievement-strip { gap:32px; padding:24px 0; }
 body.portfolio-home .achievement-strip a { grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:baseline; }
+body.portfolio-home .strip-body { display:grid; gap:4px; align-content:start; }
 body.portfolio-home .achievement-tab { padding:12px; gap:12px; }
 body.portfolio-home .achievement-tab>span>strong { font-size:14px; }
 body.portfolio-home .achievement-tab>span>span { font-size:13px; }
 body.portfolio-home .contact-section { gap:40px; }
+body.portfolio-home:not(.cosmos-active) .about-section { margin-bottom:24px; }
+body.portfolio-home:not(.cosmos-active) .contact-section { margin-bottom:40px; border-top:0; }
 
 /* 7. Details: nested radius, quiet counts, real focus ring. */
 body.portfolio-home .showcase-card { border-radius:14px; background:var(--surface); border:1px solid var(--line); overflow:hidden; }
@@ -624,8 +628,8 @@ body.portfolio-home .archive-project:hover h5 { color:var(--accent); }
 body.portfolio-home .archive-project { transition:color .18s var(--ease); border-radius:8px; }
 body.portfolio-home .showcase-card:active { transform:scale(.985); }
 
-/* 9. Visuals: the space canvas stays, but quiet and monochrome. */
-body.portfolio-home #hero-field { opacity:.42; }
+/* 9. Visuals: the space canvas stays, the violet singularity keeps its glow. */
+body.portfolio-home #hero-field { opacity:.85; }
 
 /* Unslop: home page, small screens. */
 @media(max-width:1050px) {
@@ -734,12 +738,13 @@ body.portfolio-home .cosmos-card p { margin-bottom:20px; }
     body.portfolio-home .intro-subhead { font-size:15px; line-height:1.55; margin-top:14px; max-width:none; }
     body.portfolio-home:not(.cosmos-active) .intro-links { margin-top:22px; gap:14px; flex-wrap:wrap; }
 
-    /* Portrait and studio card sit side by side, bottom aligned, no overlap. */
-    body.portfolio-home .intro-visual { display:grid; grid-template-columns:132px minmax(0,1fr); align-items:end; justify-content:stretch; gap:12px; height:auto; margin-top:0; }
-    body.portfolio-home .portrait-card { position:relative; width:100%; inset:auto; transform:none; }
-    body.portfolio-home .studio-card { position:relative; width:100%; left:auto; bottom:auto; transform:none; margin:0; align-self:end; background:var(--surface-raised); }
-    body.portfolio-home .studio-card img { transform:none; width:100%; height:100%; object-fit:cover; }
-    body.portfolio-home .studio-card-image { aspect-ratio:16/9; }
+    /* Portrait and studio card overlap as a tilted pair, the studio card
+       tucked into the lower right of the portrait. */
+    body.portfolio-home .intro-visual { position:relative; display:block; height:290px; width:100%; margin-top:0; }
+    body.portfolio-home .portrait-card { position:absolute; width:150px; left:50%; top:0; transform:translateX(-50%) rotate(3deg); }
+    body.portfolio-home .studio-card { position:absolute; width:116px; left:calc(50% + 6px); bottom:34px; transform:rotate(-7deg); margin:0; background:#29242f; box-shadow:0 15px 35px #0d0a1326; }
+    body.portfolio-home .studio-card img { transform:scale(1.7); width:100%; border-radius:6px; }
+    body.portfolio-home .studio-card-image { overflow:hidden; border-radius:6px; }
     body.portfolio-home .portrait-signature { font-size:13px; left:12px; bottom:10px; }
 
     /* Award strip: a rank column that never wraps, then name and event. */
